@@ -1,0 +1,2239 @@
+.segment "BANK_20"
+L_20_8800:	JMP L_20_8812
+L_20_8803:	JMP L_20_9183
+L_20_8806:	JMP L_20_91CE
+L_20_8809:	JMP L_20_927B
+L_20_880C:	JMP L_20_92BD
+L_20_880F:	JMP L_20_9467
+
+L_20_8812:
+	LDA CLOCK
+	ORA #$40
+	STA CLOCK
+@Loop1:
+	LDA $0307
+	BEQ L_20_8825
+	LDA #$01
+	JSR L_CC9A
+	JMP @Loop1
+L_20_8825:
+	JSR L_20_934F
+	JSR L_20_9330
+	LDY #<L_20_94E1
+	LDX #>L_20_94E1
+	JSR L_C481
+	LDA #$40
+	LDX #$0F
+	JSR L_C3AF
+	LDA #$09
+	JSR L_20_9370
+	LDY #$41
+	LDX #$20
+	LDA PLAYER1_TEAM
+	CLC
+	ADC #$40
+	JSR L_CF61
+	LDY #$55
+	LDX #$20
+	LDA PLAYER2_TEAM
+	CLC
+	ADC #$40
+	JSR L_CF61
+	LDA #$01
+	JSR L_CC9A
+	JSR L_20_9183
+	LDA #$F0
+	STA $0208
+	LDA #$00
+	STA $0209
+	LDA $70
+	AND #$80
+	LSR
+	STA $020A
+	LDA $80
+	STA $45
+	LDA $7F
+	LSR $45
+	ROR
+	LSR $45
+	ROR
+	LSR $45
+	ROR
+	SEC
+	SBC #$7E
+	BIT $70
+	BPL @Loop1
+	CLC
+	ADC #$05
+@Loop1:
+	STA $020B
+	LDA $31
+	AND #$DF
+	STA $31
+	LDA #$0F
+	STA $4B
+	LDA #$02
+	JSR L_CC9A
+	LDA #$0F
+	LDX #$01
+	JSR L_D136
+	LDA #$80
+	STA PLAYER1_PLAY_CALL
+	STA PLAYER2_PLAY_CALL
+	LDA #$13
+	STA $1F
+	LDY #<(L_20_8E6C-1)
+	LDA #>(L_20_8E6C-1)
+	LDX #$1B
+	JSR L_CC45
+	LDA $70
+	BPL @Loop2
+	LDA #$13
+	STA $10
+	LDY #<(@Loop26-1)
+	LDA #>(@Loop26-1)
+	LDX #$0C
+	JSR L_CC45
+	JMP @Loop41
+@Loop2:
+	LDA #$13
+	STA $10
+	LDY #<(L_20_8D34-1)
+	LDA #>(L_20_8D34-1)
+	LDX #$0C
+	JSR L_CC45
+	LDA $75
+	AND #$E0
+	BNE @Loop5
+	LDA DOWN
+	CMP FOURTH_DOWN
+	BCC @Loop3
+	JMP @Loop11
+@Loop3:
+	LDA #$01
+	JSR L_CC9A
+	JSR L_20_944C
+	JSR L_20_8E30
+	BCC @Loop4
+	JMP @Loop23
+@Loop4:
+	BVS @Loop3
+	LDA $38
+	BPL @Loop3
+	JMP @Loop11
+@Loop5:
+	JSR L_20_9380
+	LDA $40
+	STA $8E
+	LDA TIMEOUTS
+	CMP PLAYER1_TIMEOUTS
+	BEQ @Loop7
+	JSR L_20_8F02
+	LDA #$01
+	JSR L_20_8EE5
+	JSR L_20_8F9B
+	LDA #$F0
+	STA $0200
+	LDX #$3C
+@Loop6:
+	LDA #$01
+	JSR L_CC9A
+	JSR L_20_944C
+	DEX
+	BNE @Loop6
+	JSR L_20_9019
+	LDA #$08
+	JSR L_CC9A
+	JSR L_20_8F7E
+	LDA #$08
+	JSR L_CC9A
+@Loop7:
+	LDA $8E
+	CMP #$08
+	BCC @Loop9
+	JSR L_20_8F02
+	LDA $8E
+	SEC
+	SBC #$06
+	JSR L_20_8EE5
+	LDX #$1E
+@Loop8:
+	LDA #$01
+	JSR L_CC9A
+	JSR L_20_944C
+	DEX
+	BNE @Loop8
+	JSR L_20_9307
+	LDA $8E
+	JMP @Loop25
+@Loop9:
+	LDA $3B
+	AND #$07
+	CLC
+	ADC #$1E
+	TAX
+@Loop10:
+	LDA #$01
+	JSR L_CC9A
+	JSR L_20_944C
+	DEX
+	BNE @Loop10
+	LDA $8E
+	JMP @Loop23
+@Loop11:
+	JSR L_20_8F02
+@Loop12:
+	LDA #$00
+	STA $E1
+	LDY #<L_20_949A
+	LDX #>L_20_949A
+	LDA #$00
+	JSR L_D68A
+@Loop13:
+	LDA #$01
+	JSR L_CC9A
+	JSR L_20_944C
+	JSR L_D6B4
+	JSR L_D6F9
+	BIT $38
+	BMI @Loop14
+	BVC @Loop13
+	LDA #$00
+	STA $E1
+@Loop14:
+	LDA $E1
+	ASL
+	TAX
+	LDA @Loop15+1,X
+	PHA
+	LDA @Loop15,X
+	PHA
+	RTS
+@Loop15:
+	.WORD @Loop16-1, @Loop17-1, @Loop20-1, @Loop21-1, @Loop22-1
+@Loop16:
+	JSR L_20_8F7E
+	JMP @Loop3
+@Loop17:
+	LDA PLAYER1_TIMEOUTS
+	BEQ @Loop12
+	LDA CLOCK
+	BPL @Loop12
+	JSR L_20_8F9B
+	LDX #$78
+@Loop18:
+	LDA #$01
+	JSR L_CC9A
+	JSR L_20_944C
+	LDA $38
+	AND #$C0
+	BNE @Loop19
+	DEX
+	BNE @Loop18
+@Loop19:
+	JSR L_20_9019
+	JMP @Loop12
+@Loop20:
+	LDA #$08
+	JMP @Loop25
+@Loop21:
+	LDA #$09
+	JMP @Loop25
+@Loop22:
+	JSR L_20_9307
+	LDA $6C
+	STA $6E
+	LDA $02
+	AND #$0F
+	STA $02
+	LDA #$00
+	STA $6F
+	LDA #$10 ; BANK17
+	LDY #<L_17_8009
+	LDX #>L_17_8009
+	JSR L_C454
+	LDX #$02
+	JSR L_CC8F
+	JSR L_D28B
+	JMP L_20_8800
+@Loop23:
+	STA PLAYER1_PLAY_CALL
+	LDA #$1D
+	JSR L_C41F
+	LDY #$63
+	LDX #$20
+	LDA #<L_20_94C8
+	STA $3E
+	LDA #>L_20_94C8
+	STA $3F
+	JSR L_CCFC
+	LDA #$00
+	STA CLOCK
+@Loop24:
+	LDA #$01
+	JSR L_CC9A
+	JSR L_20_944C
+	LDA PLAYER2_PLAY_CALL
+	BMI @Loop24
+	LDX #$1B
+	JSR L_CCDD
+	LDA #$3C
+	JSR L_CC9A
+	JSR L_D194
+	LDA #$F0
+	STA $0208
+	JMP L_20_9330
+@Loop25:
+	STA PLAYER1_PLAY_CALL
+	JSR L_20_9307
+	LDY #$63
+	LDX #$20
+	LDA #<L_20_94C8
+	STA $3E
+	LDA #>L_20_94C8
+	STA $3F
+	JSR L_CCFC
+	LDA #$1D
+	JSR L_C41F
+	LDA #$00
+	STA CLOCK
+	LDY #$76
+	LDX #$20
+	LDA #$01
+	STA $3F
+	LDA #$07
+	STA $3E
+	JSR L_D09B
+	LDA #$3C
+	JSR L_CC9A
+	JSR L_D194
+	LDA #$F0
+	STA $0208
+	JMP L_20_9330
+@Loop26:
+	LDX #$AB
+	TXS
+	LDA $75
+	AND #$E0
+	BNE @Loop29
+@Loop27:
+	LDA #$01
+	JSR L_CC9A
+	JSR L_20_8E30
+	BCC @Loop28
+	JMP @Loop40
+@Loop28:
+	BVS @Loop27
+	LDA $38
+	BPL @Loop27
+	JMP @Loop31
+@Loop29:
+	JSR L_20_93AC
+	LDA $40
+	STA $8E
+	LDA TIMEOUTS
+	CMP PLAYER1_TIMEOUTS
+	BEQ @Loop30
+	JSR L_20_8F40
+	LDA #$01
+	JSR L_20_8EE5
+	JSR L_20_8FDA
+	LDA #$F0
+	STA $0200
+	LDA #$78
+	JSR L_CC9A
+	JSR L_20_9019
+	LDA #$08
+	JSR L_CC9A
+	JSR L_20_8F7E
+	LDA #$08
+	JSR L_CC9A
+@Loop30:
+	LDA $3B
+	AND #$07
+	CLC
+	ADC #$1E
+	JSR L_CC9A
+	LDA $8E
+	JMP @Loop40
+@Loop31:
+	JSR L_20_8F40
+@Loop32:
+	LDA #$00
+	STA $E1
+	LDY #<L_20_94A9
+	LDX #>L_20_94A9
+	LDA #$00
+	JSR L_D68A
+@Loop33:
+	LDA #$01
+	JSR L_CC9A
+	JSR L_D6B4
+	JSR L_D6F9
+	BIT $38
+	BMI @Loop34
+	BVC @Loop33
+	LDA #$00
+	STA $E1
+@Loop34:
+	LDA $E1
+	ASL
+	TAX
+	LDA @Loop35+1,X
+	PHA
+	LDA @Loop35,X
+	PHA
+	RTS
+@Loop35:
+	.WORD @Loop36-1, @Loop37-1
+@Loop36:
+	JSR L_20_8F7E
+	JMP @Loop26
+@Loop37:
+	LDA PLAYER1_TIMEOUTS
+	BEQ @Loop32
+	LDA CLOCK
+	BPL @Loop32
+	JSR L_20_8FDA
+	LDX #$78
+@Loop38:
+	LDA #$01
+	JSR L_CC9A
+	LDA $38
+	AND #$C0
+	BNE @Loop39
+	DEX
+	BNE @Loop38
+@Loop39:
+	JSR L_20_9019
+	JMP @Loop32
+	LDA #$00
+	STA $E1
+	JSR L_20_92F4
+	LDY #$64
+	LDX #$21
+	LDA #$03
+	STA $3E
+	LDA #$61
+	STA $3F
+	JSR L_CCFC
+	LDX #$1B
+	JSR L_CC8F
+	JMP @Loop32
+@Loop40:
+	STA PLAYER1_PLAY_CALL
+	LDA #$1D
+	JSR L_C41F
+	LDY #$63
+	LDX #$20
+	LDA #<L_20_94C8
+	STA $3E
+	LDA #>L_20_94C8
+	STA $3F
+	JSR L_CCFC
+	JMP L_CC50
+@Loop41:
+	LDA $75
+	AND #$0E
+	BNE @Loop44
+	LDA DOWN
+	CMP FOURTH_DOWN
+	BCC @Loop42
+	JMP @Loop50
+@Loop42:
+	LDA #$01
+	JSR L_CC9A
+	JSR L_20_944C
+	JSR L_20_8E4E
+	BCC @Loop43
+	JMP @Loop62
+@Loop43:
+	BVS @Loop42
+	LDA $39
+	BPL @Loop42
+	JMP @Loop50
+@Loop44:
+	JSR L_20_939B
+	LDA $40
+	STA $8F
+	LDA TIMEOUTS
+	CMP PLAYER2_TIMEOUTS
+	BEQ @Loop46
+	JSR L_20_9054
+	LDA #$01
+	JSR L_20_9031
+	JSR L_20_90ED
+	LDA #$F0
+	STA $0200
+	LDX #$3C
+@Loop45:
+	LDA #$01
+	JSR L_CC9A
+	JSR L_20_944C
+	DEX
+	BNE @Loop45
+	JSR L_20_916B
+	LDA #$08
+	JSR L_CC9A
+	JSR L_20_90D0
+	LDA #$08
+	JSR L_CC9A
+@Loop46:
+	LDA $8F
+	CMP #$08
+	BCC @Loop48
+	JSR L_20_9054
+	LDA $8F
+	SEC
+	SBC #$06
+	JSR L_20_9031
+	LDX #$1E
+@Loop47:
+	LDA #$01
+	JSR L_CC9A
+	JSR L_20_944C
+	DEX
+	BNE @Loop47
+	JSR L_20_9307
+	LDA $8F
+	JMP @Loop64
+@Loop48:
+	LDA $3C
+	AND #$07
+	CLC
+	ADC #$1E
+	TAX
+@Loop49:
+	LDA #$01
+	JSR L_CC9A
+	JSR L_20_944C
+	DEX
+	BNE @Loop49
+	LDA $8F
+	JMP @Loop62
+@Loop50:
+	JSR L_20_9054
+@Loop51:
+	JSR L_20_92C2
+	LDA #$00
+	STA $E1
+	LDY #<L_20_94AF
+	LDX #>L_20_94AF
+	LDA #$01
+	JSR L_D68A
+	JSR L_20_92C9
+@Loop52:
+	LDA #$01
+	JSR L_CC9A
+	JSR L_20_944C
+	JSR L_20_92C2
+	JSR L_D6B4
+	JSR L_D6F9
+	JSR L_20_92C9
+	BIT $39
+	BMI @Loop53
+	BVC @Loop52
+	LDA #$00
+	STA $E7
+@Loop53:
+	LDA $E7
+	ASL
+	TAX
+	LDA @Loop54+1,X
+	PHA
+	LDA @Loop54,X
+	PHA
+	RTS
+@Loop54:
+	.WORD @Loop55-1, @Loop56-1, @Loop59-1, @Loop60-1, @Loop61-1
+@Loop55:
+	JSR L_20_90D0
+	JMP @Loop42
+@Loop56:
+	LDA PLAYER2_TIMEOUTS
+	BEQ @Loop51
+	LDA CLOCK
+	BPL @Loop51
+	JSR L_20_90ED
+	LDX #$78
+@Loop57:
+	LDA #$01
+	JSR L_CC9A
+	JSR L_20_944C
+	LDA $39
+	AND #$C0
+	BNE @Loop58
+	DEX
+	BNE @Loop57
+@Loop58:
+	JSR L_20_916B
+	JMP @Loop51
+@Loop59:
+	LDA #$08
+	JMP @Loop64
+@Loop60:
+	LDA #$09
+	JMP @Loop64
+@Loop61:
+	JSR L_20_9307
+	LDA $6D
+	STA $6E
+	LDA $02
+	AND #$0F
+	STA $02
+	LDA #$00
+	STA $6F
+	LDA #$10 ; BANK17
+	LDY #<L_17_8009
+	LDX #>L_17_8009
+	JSR L_C454
+	LDX #$02
+	JSR L_CC8F
+	JSR L_D28B
+	JMP L_20_8800
+@Loop62:
+	STA PLAYER2_PLAY_CALL
+	LDA #$1D
+	JSR L_C41F
+	LDY #$76
+	LDX #$20
+	LDA #<L_20_94C8
+	STA $3E
+	LDA #>L_20_94C8
+	STA $3F
+	JSR L_CCFC
+	LDA #$00
+	STA CLOCK
+@Loop63:
+	LDA #$01
+	JSR L_CC9A
+	JSR L_20_944C
+	LDA PLAYER1_PLAY_CALL
+	BMI @Loop63
+	LDX #$1B
+	JSR L_CCDD
+	LDA #$3C
+	JSR L_CC9A
+	JSR L_D194
+	LDA #$F0
+	STA $0208
+	JMP L_20_9330
+@Loop64:
+	STA PLAYER2_PLAY_CALL
+	JSR L_20_9307
+	LDY #$76
+	LDX #$20
+	LDA #<L_20_94C8
+	STA $3E
+	LDA #>L_20_94C8
+	STA $3F
+	JSR L_CCFC
+	LDA #$1D
+	JSR L_C41F
+	LDA #$00
+	STA CLOCK
+	LDY #$63
+	LDX #$20
+	LDA #$01
+	STA $3F
+	LDA #$07
+	STA $3E
+	JSR L_D09B
+	LDA #$3C
+	JSR L_CC9A
+	JSR L_D194
+	LDA #$F0
+	STA $0208
+	JMP L_20_9330
+
+L_20_8D34:
+	LDX #$AB
+	TXS
+	LDA $75
+	AND #$0E
+	BNE @Loop3
+@Loop1:
+	LDA #$01
+	JSR L_CC9A
+	JSR L_20_8E4E
+	BCC @Loop2
+	JMP @Loop14
+@Loop2:
+	BVS @Loop1
+	LDA $39
+	BPL @Loop1
+	JMP @Loop5
+@Loop3:
+	JSR L_20_9391
+	LDA $40
+	STA $8F
+	LDA TIMEOUTS
+	CMP PLAYER2_TIMEOUTS
+	BEQ @Loop4
+	JSR L_20_9092
+	LDA #$01
+	JSR L_20_9031
+	JSR L_20_912C
+	LDA #$F0
+	STA $0200
+	LDA #$78
+	JSR L_CC9A
+	JSR L_20_916B
+	LDA #$08
+	JSR L_CC9A
+	JSR L_20_90D0
+	LDA #$08
+	JSR L_CC9A
+@Loop4:
+	LDA $3C
+	AND #$07
+	CLC
+	ADC #$1E
+	JSR L_CC9A
+	LDA $8F
+	JMP @Loop14
+@Loop5:
+	JSR L_20_9092
+@Loop6:
+	JSR L_20_92C2
+	LDA #$00
+	STA $E1
+	LDY #<L_20_94A3
+	LDX #>L_20_94A3
+	LDA #$01
+	JSR L_D68A
+	JSR L_20_92C9
+@Loop7:
+	LDA #$01
+	JSR L_CC9A
+	JSR L_20_92C2
+	JSR L_D6B4
+	JSR L_D6F9
+	JSR L_20_92C9
+	BIT $39
+	BMI @Loop8
+	BVC @Loop7
+	LDA #$00
+	STA $E7
+@Loop8:
+	LDA $E7
+	ASL
+	TAX
+	LDA @Loop9+1,X
+	PHA
+	LDA @Loop9,X
+	PHA
+	RTS
+@Loop9:
+	.WORD @Loop10-1, @Loop11-1
+@Loop10:
+	JSR L_20_90D0
+	JMP L_20_8D34
+@Loop11:
+	LDA PLAYER2_TIMEOUTS
+	BEQ @Loop6
+	LDA CLOCK
+	BPL @Loop6
+	JSR L_20_912C
+	LDX #$78
+@Loop12:
+	LDA #$01
+	JSR L_CC9A
+	LDA $39
+	AND #$C0
+	BNE @Loop13
+	DEX
+	BNE @Loop12
+@Loop13:
+	JSR L_20_916B
+	JMP @Loop6
+	JSR L_20_92F4
+	LDY #$72
+	LDX #$21
+	LDA #$03
+	STA $3E
+	LDA #$63
+	STA $3F
+	JSR L_CCFC
+	LDX #$1B
+	JSR L_CC8F
+	JMP @Loop6
+@Loop14:
+	STA PLAYER2_PLAY_CALL
+	LDA #$1D
+	JSR L_C41F
+	LDY #$76
+	LDX #$20
+	LDA #<L_20_94C8
+	STA $3E
+	LDA #>L_20_94C8
+	STA $3F
+	JSR L_CCFC
+	JMP L_CC50
+
+L_20_8E30:
+	LDA $35
+	AND #$0F
+	BEQ @Loop2
+	TAX
+	LDA L_20_94D1,X
+	BMI @Loop3
+	BIT $38
+	BMI @Loop1
+	BVC @Loop2
+	ORA #$04
+@Loop1:
+	SEC
+	RTS
+@Loop2:
+	CLC
+	CLV
+	RTS
+@Loop3:
+	CLC
+	BIT $FFF9
+	RTS
+
+L_20_8E4E:
+	LDA $36
+	AND #$0F
+	BEQ @Loop2
+	TAX
+	LDA L_20_94D1,X
+	BMI @Loop2
+	BIT $39
+	BMI @Loop1
+	BVC @Loop3
+	ORA #$04
+@Loop1:
+	SEC
+	RTS
+@Loop2:
+	CLC
+	CLV
+	RTS
+@Loop3:
+	CLC
+	BIT $FFF9
+	RTS
+
+L_20_8E6C:
+	LDX #$51
+	TXS
+@Loop1:
+	LDA #$01
+	JSR L_CC9A
+	LDA $30
+	AND #$04
+	BEQ @Loop2
+	LDA #$F0
+	JMP @Loop3
+@Loop2:
+	LDA #$D4
+@Loop3:
+	STA $0208
+	LDA $30
+	AND #$03
+	BNE @Loop4
+	LDA $30
+	LSR
+	LSR
+	AND #$07
+	TAX
+	LDA L_20_94B8,X
+	STA $0324
+	STA $0328
+	JSR L_D1FD
+@Loop4:
+	LDA $75
+	AND #$E0
+	BNE @Loop5
+	LDA $78
+	BPL @Loop5
+	LDY #$63
+	LDX #$20
+	JSR L_20_8EC2
+@Loop5:
+	LDA $75
+	AND #$0E
+	BNE @Loop1
+	LDA $79
+	BPL @Loop1
+	LDY #$76
+	LDX #$20
+	JSR L_20_8EC2
+	JMP @Loop1
+
+L_20_8EC2:
+	LDA $30
+	AND #$0F
+	BEQ @Loop2
+	LDA $30
+	AND #$10
+	BEQ @Loop1
+	LDA #<L_20_94C0
+	STA $3E
+	LDA #>L_20_94C0
+	STA $3F
+	JMP L_CCFC
+@Loop1:
+	LDA #$01
+	STA $3F
+	LDA #$06
+	STA $3E
+	JMP L_D09B
+@Loop2:
+	RTS
+
+L_20_8EE5:
+	TAX
+	INX
+	STX $45
+	LDA #$00
+	STA $E1
+@Loop1:
+	LDY #<L_20_949A
+	LDX #>L_20_949A
+	LDA #$00
+	JSR L_D68A
+	LDA #$14
+	JSR L_CC9A
+	INC $E1
+	DEC $45
+	BNE @Loop1
+	RTS
+
+L_20_8F02:
+	LDA #$1E
+	JSR L_C41F
+	LDA #$04
+	JSR L_CC9A
+	JSR L_20_92F4
+	LDA #$80
+	STA PRG_RAM_PROTECT
+	LDA #$A3
+	STA $3E
+	LDA #$20
+	STA $3F
+	LDA #$03
+	STA $40
+	LDA #$60
+	STA $41
+	LDX #$0E
+	LDY #$0C
+	JSR L_D2F1
+	LDA #$C0
+	STA PRG_RAM_PROTECT
+	LDA #$41
+	LDX #$0F
+	JSR L_C3AF
+	JSR L_20_931E
+	LDX #$1B
+	JSR L_CC8F
+	RTS
+
+L_20_8F40:
+	LDA #$1E
+	JSR L_C41F
+	LDA #$04
+	JSR L_CC9A
+	JSR L_20_92F4
+	LDA #$80
+	STA PRG_RAM_PROTECT
+	LDA #$A3
+	STA $3E
+	LDA #$20
+	STA $3F
+	LDA #$03
+	STA $40
+	LDA #$60
+	STA $41
+	LDX #$0C
+	LDY #$08
+	JSR L_D2F1
+	LDA #$C0
+	STA PRG_RAM_PROTECT
+	LDA #$44
+	LDX #$0F
+	JSR L_C3AF
+	JSR L_20_931E
+	LDX #$1B
+	JSR L_CC8F
+	RTS
+
+L_20_8F7E:
+	LDA #$F0
+	STA $0200
+	JSR L_20_92F4
+	LDY #$A3
+	LDX #$20
+	LDA #$03
+	STA $3E
+	LDA #$60
+	STA $3F
+	JSR L_CCFC
+	LDX #$1B
+	JSR L_CC8F
+	RTS
+
+L_20_8F9B:
+	DEC PLAYER1_TIMEOUTS
+	JSR L_20_931E
+	LDA #$00
+	STA CLOCK
+	JSR L_20_92F4
+	LDA #$80
+	STA PRG_RAM_PROTECT
+	LDA #$24
+	STA $3E
+	LDA #$21
+	STA $3F
+	LDA #$03
+	STA $40
+	LDA #$61
+	STA $41
+	LDX #$0D
+	LDY #$07
+	JSR L_D2F1
+	LDA #$C0
+	STA PRG_RAM_PROTECT
+	LDA #$F0
+	STA $0200
+	LDA #$42
+	LDX #$0F
+	JSR L_C3AF
+	LDX #$1B
+	JSR L_CC8F
+	RTS
+
+L_20_8FDA:
+	DEC PLAYER1_TIMEOUTS
+	JSR L_20_931E
+	LDA #$00
+	STA CLOCK
+	JSR L_20_92F4
+	LDA #$80
+	STA PRG_RAM_PROTECT
+	LDA #$24
+	STA $3E
+	LDA #$21
+	STA $3F
+	LDA #$03
+	STA $40
+	LDA #$61
+	STA $41
+	LDX #$0C
+	LDY #$07
+	JSR L_D2F1
+	LDA #$C0
+	STA PRG_RAM_PROTECT
+	LDA #$F0
+	STA $0200
+	LDA #$45
+	LDX #$0F
+	JSR L_C3AF
+	LDX #$1B
+	JSR L_CC8F
+	RTS
+
+L_20_9019:
+	JSR L_20_92F4
+	LDY #$24
+	LDX #$21
+	LDA #$03
+	STA $3E
+	LDA #$61
+	STA $3F
+	JSR L_CCFC
+	LDX #$1B
+	JSR L_CC8F
+	RTS
+
+L_20_9031:
+	TAX
+	INX
+	STX $45
+	LDA #$00
+	STA $E7
+@Loop1:
+	JSR L_20_92C2
+	LDY #<L_20_94AF
+	LDX #>L_20_94AF
+	LDA #$00
+	JSR L_D68A
+	JSR L_20_92C9
+	LDA #$14
+	JSR L_CC9A
+	INC $E7
+	DEC $45
+	BNE @Loop1
+	RTS
+
+L_20_9054:
+	LDA #$1E
+	JSR L_C41F
+	LDA #$04
+	JSR L_CC9A
+	JSR L_20_92F4
+	LDA #$80
+	STA PRG_RAM_PROTECT
+	LDA #$B1
+	STA $3E
+	LDA #$20
+	STA $3F
+	LDA #$03
+	STA $40
+	LDA #$62
+	STA $41
+	LDX #$0E
+	LDY #$0C
+	JSR L_D2F1
+	LDA #$C0
+	STA PRG_RAM_PROTECT
+	LDA #$47
+	LDX #$0F
+	JSR L_C3AF
+	JSR L_20_9327
+	LDX #$1B
+	JSR L_CC8F
+	RTS
+
+L_20_9092:
+	LDA #$1E
+	JSR L_C41F
+	LDA #$04
+	JSR L_CC9A
+	JSR L_20_92F4
+	LDA #$80
+	STA PRG_RAM_PROTECT
+	LDA #$B1
+	STA $3E
+	LDA #$20
+	STA $3F
+	LDA #$03
+	STA $40
+	LDA #$62
+	STA $41
+	LDX #$0C
+	LDY #$08
+	JSR L_D2F1
+	LDA #$C0
+	STA PRG_RAM_PROTECT
+	LDA #$4A
+	LDX #$0F
+	JSR L_C3AF
+	JSR L_20_9327
+	LDX #$1B
+	JSR L_CC8F
+	RTS
+
+L_20_90D0:
+	LDA #$F0
+	STA $0204
+	JSR L_20_92F4
+	LDY #$B1
+	LDX #$20
+	LDA #$03
+	STA $3E
+	LDA #$62
+	STA $3F
+	JSR L_CCFC
+	LDX #$1B
+	JSR L_CC8F
+	RTS
+
+L_20_90ED:
+	DEC PLAYER2_TIMEOUTS
+	JSR L_20_9327
+	LDA #$00
+	STA CLOCK
+	JSR L_20_92F4
+	LDA #$80
+	STA PRG_RAM_PROTECT
+	LDA #$32
+	STA $3E
+	LDA #$21
+	STA $3F
+	LDA #$03
+	STA $40
+	LDA #$63
+	STA $41
+	LDX #$0D
+	LDY #$07
+	JSR L_D2F1
+	LDA #$C0
+	STA PRG_RAM_PROTECT
+	LDA #$F0
+	STA $0204
+	LDA #$48
+	LDX #$0F
+	JSR L_C3AF
+	LDX #$1B
+	JSR L_CC8F
+	RTS
+
+L_20_912C:
+	DEC PLAYER2_TIMEOUTS
+	JSR L_20_9327
+	LDA #$00
+	STA CLOCK
+	JSR L_20_92F4
+	LDA #$80
+	STA PRG_RAM_PROTECT
+	LDA #$32
+	STA $3E
+	LDA #$21
+	STA $3F
+	LDA #$03
+	STA $40
+	LDA #$63
+	STA $41
+	LDX #$0C
+	LDY #$07
+	JSR L_D2F1
+	LDA #$C0
+	STA PRG_RAM_PROTECT
+	LDA #$F0
+	STA $0204
+	LDA #$4B
+	LDX #$0F
+	JSR L_C3AF
+	LDX #$1B
+	JSR L_CC8F
+	RTS
+
+L_20_916B:
+	JSR L_20_92F4
+	LDY #$32
+	LDX #$21
+	LDA #$03
+	STA $3E
+	LDA #$63
+	STA $3F
+	JSR L_CCFC
+	LDX #$1B
+	JSR L_CC8F
+	RTS
+
+L_20_9183:
+	LDA #$80
+	STA PRG_RAM_PROTECT
+	LDA #$07
+	STA $6003
+	LDA #$06
+	STA $6004
+	LDX #$00
+	LDA $70
+	BPL @Loop1
+	LDX #$08
+@Loop1:
+	STX $AC
+	LDA #$00
+	STA $AD
+@Loop2:
+	LDA $AD
+	ASL
+	TAX
+	LDA L_20_94E6,X
+	STA $3E
+	LDA L_20_94E6+1,X
+	STA $3F
+	LDX $AC
+	LDA $667E,X
+	JSR L_20_91E8
+	LDX $AC
+	LDA $667E,X
+	JSR L_20_9241
+	INC $AC
+	INC $AD
+	LDA $AD
+	CMP #$08
+	BCC @Loop2
+	LDA #$C0
+	STA PRG_RAM_PROTECT
+	RTS
+
+L_20_91CE:
+	LDA #$80
+	STA PRG_RAM_PROTECT
+	LDA #$07
+	STA $6003
+	LDA #$06
+	STA $6004
+	LDA $43
+	JSR L_20_91E8
+	LDA #$C0
+	STA PRG_RAM_PROTECT
+	RTS
+
+L_20_91E8:
+	LDX #$2A
+	JSR L_D7A0
+	LDA $44
+	CLC
+	ADC #<PLAY_PICTURES
+	STA $44
+	LDA $45
+	ADC #>PLAY_PICTURES
+	STA $45
+	LDA $70
+	BMI @Loop2
+	LDY #$00
+@Loop1:
+	LDA ($44),Y
+	STA $6005,Y
+	INY
+	CPY #$2A
+	BCC @Loop1
+	LDA #$22
+	JMP @Loop5
+@Loop2:
+	LDX #$00
+@Loop3:
+	LDY #$05
+@Loop4:
+	LDA ($44),Y
+	STA $6005,X
+	INX
+	DEY
+	BPL @Loop4
+	LDA $44
+	CLC
+	ADC #$06
+	STA $44
+	LDA $45
+	ADC #$00
+	STA $45
+	CPX #$2A
+	BCC @Loop3
+	LDA #$1E
+@Loop5:
+	STA $030A
+	LDY $3E
+	LDX $3F
+	LDA #$03
+	STA $3E
+	LDA #$60
+	STA $3F
+	JMP L_CEB9
+
+L_20_9241:
+	CMP #$20
+	BCS @Loop3
+	TAX
+	LDY RUN_PLAY_PLAYER_HEADER,X
+	LDA $70
+	BMI @Loop1
+	LDA $6610,Y
+	STA $45
+	LDA $6611,Y
+	JMP @Loop2
+@Loop1:
+	LDA $6644,Y
+	STA $45
+	LDA $6645,Y
+@Loop2:
+	STA $44
+	TXA
+	AND #$18
+	LSR
+	LSR
+	TAX
+	LDA L_20_94E6,X
+	SEC
+	SBC #$40
+	TAY
+	LDA L_20_94E6+1,X
+	SBC #$00
+	TAX
+	LDA #$06
+	JMP L_D3BC
+@Loop3:
+	RTS
+
+L_20_927B:
+	LDA $E1
+	ASL
+	ASL
+	CLC
+	ADC $E2
+	LDX $70
+	BPL @Loop1
+	CLC
+	ADC #$08
+@Loop1:
+	TAX
+	LDA $667E,X
+L_20_928D:
+	LDX #$18
+	JSR L_D7A0
+	LDA $44
+	CLC
+	ADC #<PLAY_LIST
+	STA $44
+	LDA $45
+	ADC #>PLAY_LIST
+	STA $45
+	LDX #$0E ; BANK15
+	JSR L_D8E3
+	LDY $3E
+	LDX $3F
+	LDA #$0F
+	JSR L_D29A
+	LDY #$00
+@Loop1:
+	LDA ($44),Y
+	STA $033A,X
+	INX
+	INY
+	CPY #$0F
+	BCC @Loop1
+	JMP L_D2C8
+
+L_20_92BD:
+	LDA $43
+	JMP L_20_928D
+
+L_20_92C2:
+	SEC
+	ROR $2C
+	JSR L_20_92CF
+	RTS
+
+L_20_92C9:
+	JSR L_20_92CF
+	LSR $2C
+	RTS
+
+L_20_92CF:
+	LDY #$FC
+@Loop1:
+	LDX $0104,Y
+	LDA $0108,Y
+	STA $0104,Y
+	TXA
+	STA $0108,Y
+	INY
+	BNE @Loop1
+	LDY #$FA
+@Loop2:
+	LDX $FFE7,Y
+	LDA $FFED,Y
+	STA $FFE7,Y
+	TXA
+	STA $FFED,Y
+	INY
+	BNE @Loop2
+	RTS
+
+L_20_92F4:
+	LDA $64
+	BPL @Loop1
+	LDA #$01
+	JSR L_CC9A
+	JMP L_20_92F4
+@Loop1:
+	LDA $1B
+	AND #$0F
+	STA $1B
+	RTS
+
+L_20_9307:
+	LDA $64
+	BPL @Loop1
+	LDA #$01
+	JSR L_CC9A
+	JMP L_20_9307
+@Loop1:
+	LDX #$0C
+	JSR L_CCDD
+	LDX #$1B
+	JSR L_CCDD
+	RTS
+
+L_20_931E:
+	LDA PLAYER1_TIMEOUTS
+	LDY #$2C
+	LDX #$21
+	JMP L_D5A0
+
+L_20_9327:
+	LDA PLAYER2_TIMEOUTS
+	LDY #$3A
+	LDX #$21
+	JMP L_D5A0
+
+L_20_9330:
+	LDY #$41
+	LDX #$20
+	LDA #$02
+	STA $3F
+	LDA #$0B
+	STA $3E
+	JSR L_D09B
+	LDY #$54
+	LDX #$20
+	LDA #$02
+	STA $3F
+	LDA #$0B
+	STA $3E
+	JSR L_D09B
+	RTS
+
+L_20_934F:
+	LDY #$80
+	LDX #$20
+	LDA #$1C
+	STA $3F
+	LDA #$20
+	STA $3E
+	JSR L_D09B
+	LDY #$00
+	LDX #$24
+	LDA #$20
+	STA $3F
+	LDA #$20
+	STA $3E
+	JSR L_D09B
+	JMP L_D571
+
+L_20_9370:
+	TAX
+@Loop1:
+	LDA $7C
+	BEQ @Loop2
+	LDA #$01
+	JSR L_CC9A
+	JMP @Loop1
+@Loop2:
+	STX $7C
+	RTS
+
+L_20_9380:
+	LDA #$00
+	STA OFFENSE_DEFENSE_TOGGLE
+	JSR L_20_93B6
+	LDX PLAYER1_TEAM
+	LDA TEAM_OFFENSIVE_STYLE,X
+	STA OFFENSIVE_STYLE
+	JMP L_20_93D4
+
+L_20_9391:
+	LDA #$80
+	STA OFFENSE_DEFENSE_TOGGLE
+	JSR L_20_93C5
+	JMP L_20_93D4
+
+L_20_939B:
+	LDA #$00
+	STA OFFENSE_DEFENSE_TOGGLE
+	JSR L_20_93C5
+	LDX PLAYER2_TEAM
+	LDA TEAM_OFFENSIVE_STYLE,X
+	STA OFFENSIVE_STYLE
+	JMP L_20_9410
+
+L_20_93AC:
+	LDA #$80
+	STA OFFENSE_DEFENSE_TOGGLE
+	JSR L_20_93B6
+	JMP L_20_9410
+
+L_20_93B6:
+	LDA $0399
+	STA TEAM_SCORE
+	LDA $039E
+	STA OPPONENT_SCORE
+	LDA PLAYER1_TIMEOUTS
+	STA TIMEOUTS
+	RTS
+
+L_20_93C5:
+	LDA $039E
+	STA TEAM_SCORE
+	LDA $0399
+	STA OPPONENT_SCORE
+	LDA PLAYER2_TIMEOUTS
+	STA TIMEOUTS
+	RTS
+
+L_20_93D4:
+	LDA #$90
+	SEC
+	SBC FIELD_POSITION
+	STA YARDLINE
+	LDA #$09
+	SBC FIELD_POSITION+1
+	STA YARDLINE+1
+	LDA FIELD_POSITION_ORIGINAL
+	CLC
+	ADC #$50
+	STA YARDS_TO_GO
+	LDA FIELD_POSITION_ORIGINAL+1
+	ADC #$00
+	STA YARDS_TO_GO+1
+	LDA YARDS_TO_GO
+	CMP #$90
+	LDA YARDS_TO_GO+1
+	SBC #$09
+	BCC @Loop1
+	LDA #$90
+	STA YARDS_TO_GO
+	LDA #$09
+	STA YARDS_TO_GO+1
+@Loop1:
+	LDA YARDS_TO_GO
+	SEC
+	SBC FIELD_POSITION
+	STA YARDS_TO_GO
+	LDA YARDS_TO_GO+1
+	SBC FIELD_POSITION+1
+	STA YARDS_TO_GO+1
+	JMP L_C54F
+
+L_20_9410:
+	LDA FIELD_POSITION
+	SEC
+	SBC #$70
+	STA YARDLINE
+	LDA FIELD_POSITION+1
+	SBC #$06
+	STA YARDLINE+1
+	LDA FIELD_POSITION_ORIGINAL
+	SEC
+	SBC #$50
+	STA YARDS_TO_GO
+	LDA FIELD_POSITION_ORIGINAL+1
+	SBC #$00
+	STA YARDS_TO_GO+1
+	LDA YARDS_TO_GO
+	CMP #$70
+	LDA YARDS_TO_GO+1
+	SBC #$06
+	BCS @Loop1
+	LDA #$70
+	STA YARDS_TO_GO
+	LDA #$06
+	STA YARDS_TO_GO+1
+@Loop1:
+	LDA FIELD_POSITION
+	SEC
+	SBC YARDS_TO_GO
+	STA YARDS_TO_GO
+	LDA FIELD_POSITION+1
+	SBC YARDS_TO_GO+1
+	STA YARDS_TO_GO+1
+	JMP L_C54F
+
+L_20_944C:
+	LDA $2D
+	AND #$08
+	BNE @Loop1
+	RTS
+@Loop1:
+	PLA
+	PLA
+	JSR L_20_9307
+	JSR L_D194
+	LDA $2D
+	AND #$F7
+	STA $2D
+	JSR L_CC59
+	JMP L_20_8825
+
+L_20_9467:
+	LDX PLAYER1_TEAM
+	LDA TEAM_OFFENSIVE_STYLE,X
+	STA $0620
+	LDX PLAYER2_TEAM
+	LDA TEAM_OFFENSIVE_STYLE,X
+	STA $0621
+	LDY #$00
+@Loop1:
+	LDX $667E,Y
+	LDA RUN_PLAY_PLAYER_HEADER,X
+	LSR
+	STA $0622,Y
+	INY
+	CPY #$04
+	BCC @Loop1
+	LDY #$00
+@Loop2:
+	LDX $6686,Y
+	LDA RUN_PLAY_PLAYER_HEADER,X
+	LSR
+	STA $0626,Y
+	INY
+	CPY #$04
+	BCC @Loop2
+	RTS
+
+L_20_949A:
+	.BYTE $00,$00,$20
+	.BYTE $05
+	.BYTE $38, $48, $58, $68, $78
+
+L_20_94A3:
+	.BYTE $00, $00, $90
+	.BYTE $02
+	.BYTE $38, $48
+
+L_20_94A9:
+	.BYTE $00,$00,$20
+	.BYTE $02
+	.BYTE $38, $48
+
+L_20_94AF:
+	.BYTE $00,$00,$90
+	.BYTE $05
+	.BYTE $38, $48, $58, $68, $78
+
+L_20_94B8:
+	.BYTE $21, $25, $24, $2A, $31, $28, $30, $11
+
+L_20_94C0:
+	.BYTE $06
+	.BYTE $60, $61, $62, $61, $63, $64
+	.BYTE $FF
+
+L_20_94C8:
+	.BYTE $07
+	.BYTE $65, $66, $67, $68, $69, $00, $6A
+	.BYTE $FF
+
+L_20_94D1:
+	.BYTE $FF, $02, $01, $FF, $03, $FF, $FF, $FF, $00, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+
+L_20_94E1:
+	.BYTE $00,$00,$18
+	.BYTE $20,$00
+L_20_94E6:
+	.WORD $20E3, $20EA, $20F1, $20F8, $2223, $222A, $2231, $2238
+
+RUN_PLAY_PLAYER_HEADER:
+	.BYTE $02, $02, $02, $02, $02, $02, $02, $04
+	.BYTE $02, $02, $02, $02, $02, $02, $02, $02
+	.BYTE $02, $02, $04, $04, $04, $04, $06, $08
+	.BYTE $00, $00, $00, $02, $04, $04, $04, $06
+
+TEAM_OFFENSIVE_STYLE:
+	.BYTE $00, $02, $02, $02, $00
+	.BYTE $00, $03, $03, $00
+	.BYTE $00, $01, $01, $00, $00
+	.BYTE $00, $01, $00, $00, $00
+	.BYTE $00, $02, $03, $00, $00
+	.BYTE $02, $02, $00, $02
+	.BYTE $00, $00, $00, $00
+
+PLAY_PICTURES:
+	.BYTE $01, $01, $01, $93, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+	.BYTE $01, $90, $01, $96, $01, $01
+	.BYTE $01, $98, $99, $9C, $01, $01
+	.BYTE $01, $9A, $01, $91, $01, $01
+	.BYTE $01, $C2, $B1, $B4, $01, $01
+	.BYTE $01, $01, $01, $91, $01, $01
+
+	.BYTE $01, $01, $01, $93, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+	.BYTE $01, $91, $E8, $96, $01, $01
+	.BYTE $01, $01, $98, $9C, $01, $01
+	.BYTE $01, $91, $9A, $91, $01, $01
+	.BYTE $01, $01, $C2, $B4, $01, $01
+	.BYTE $01, $01, $01, $91, $01, $01
+
+	.BYTE $01, $01, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+	.BYTE $01, $01, $01, $96, $01, $01
+	.BYTE $91, $AF, $8D, $9C, $01, $01
+	.BYTE $01, $01, $C2, $9E, $B4, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $01, $91, $01, $01
+
+	.BYTE $01, $01, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $90, $01, $01
+	.BYTE $01, $01, $95, $9E, $B4, $01
+	.BYTE $91, $AF, $97, $9C, $01, $01
+	.BYTE $01, $01, $01, $96, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $01, $90, $01, $01
+
+	.BYTE $01, $A0, $A1, $91, $01, $01
+	.BYTE $01, $8F, $01, $93, $01, $01
+	.BYTE $01, $98, $92, $96, $01, $01
+	.BYTE $01, $93, $01, $9C, $01, $01
+	.BYTE $01, $01, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $93, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+
+	.BYTE $01, $01, $94, $91, $01, $01
+	.BYTE $01, $01, $9F, $90, $01, $01
+	.BYTE $01, $01, $9F, $96, $01, $01
+	.BYTE $91, $8D, $B7, $9C, $01, $01
+	.BYTE $01, $C2, $B7, $9E, $B4, $01
+	.BYTE $01, $01, $BD, $01, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+
+	.BYTE $01, $A0, $A1, $91, $01, $01
+	.BYTE $01, $8F, $01, $90, $01, $01
+	.BYTE $01, $8F, $01, $96, $01, $01
+	.BYTE $01, $9B, $B1, $9C, $01, $01
+	.BYTE $01, $01, $01, $96, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+
+	.BYTE $01, $01, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $01, $96, $01, $01
+	.BYTE $91, $98, $99, $9C, $01, $01
+	.BYTE $01, $9A, $93, $96, $01, $01
+	.BYTE $01, $C2, $B4, $01, $01, $01
+	.BYTE $01, $01, $01, $90, $01, $01
+
+	.BYTE $01, $01, $01, $93, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+	.BYTE $01, $93, $01, $96, $01, $01
+	.BYTE $01, $95, $A3, $A6, $A1, $01
+	.BYTE $01, $93, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+
+	.BYTE $01, $01, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $90, $01, $01
+	.BYTE $01, $01, $95, $9E, $B4, $01
+	.BYTE $91, $AF, $97, $9C, $01, $01
+	.BYTE $01, $01, $01, $96, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $01, $90, $01, $01
+
+	.BYTE $01, $01, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $93, $01, $01
+	.BYTE $01, $01, $01, $96, $01, $01
+	.BYTE $91, $AF, $A3, $A6, $A1, $01
+	.BYTE $01, $01, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $93, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+
+	.BYTE $01, $A0, $A1, $91, $01, $01
+	.BYTE $01, $8F, $01, $90, $01, $01
+	.BYTE $01, $98, $92, $96, $01, $01
+	.BYTE $01, $93, $01, $9C, $01, $01
+	.BYTE $01, $01, $01, $96, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $01, $90, $01, $01
+
+	.BYTE $01, $01, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $90, $01, $01
+	.BYTE $01, $01, $01, $96, $01, $01
+	.BYTE $91, $AF, $98, $9C, $01, $01
+	.BYTE $01, $01, $9A, $96, $01, $01
+	.BYTE $01, $01, $C2, $B4, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+
+	.BYTE $01, $01, $94, $91, $01, $01
+	.BYTE $01, $01, $9F, $90, $01, $01
+	.BYTE $01, $01, $9F, $96, $01, $01
+	.BYTE $91, $98, $B7, $9C, $01, $01
+	.BYTE $01, $8F, $9F, $96, $01, $01
+	.BYTE $01, $9A, $BD, $01, $01, $01
+	.BYTE $01, $C2, $B4, $01, $01, $01
+
+	.BYTE $01, $01, $01, $93, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+	.BYTE $01, $8E, $92, $96, $01, $01
+	.BYTE $01, $C2, $CB, $9C, $01, $01
+	.BYTE $01, $91, $D2, $C8, $A1, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+
+	.BYTE $01, $01, $01, $93, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+	.BYTE $01, $91, $E8, $96, $01, $01
+	.BYTE $01, $01, $98, $9C, $01, $01
+	.BYTE $01, $91, $9A, $91, $01, $01
+	.BYTE $01, $01, $C2, $B1, $B4, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+
+	.BYTE $01, $01, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $93, $01, $01
+	.BYTE $01, $8E, $A0, $B3, $A1, $01
+	.BYTE $01, $B2, $97, $BF, $01, $01
+	.BYTE $01, $01, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $93, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+
+	.BYTE $01, $01, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $93, $01, $01
+	.BYTE $01, $01, $01, $96, $01, $01
+	.BYTE $91, $98, $99, $9C, $01, $01
+	.BYTE $01, $9A, $94, $91, $01, $01
+	.BYTE $01, $C2, $B1, $B1, $B4, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+
+	.BYTE $01, $A0, $A1, $93, $01, $01
+	.BYTE $01, $8F, $01, $94, $01, $01
+	.BYTE $91, $8F, $01, $96, $01, $01
+	.BYTE $01, $98, $B1, $9C, $01, $01
+	.BYTE $01, $93, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+
+	.BYTE $01, $01, $01, $91, $01, $01
+	.BYTE $01, $F9, $B6, $93, $01, $01
+	.BYTE $01, $95, $B7, $9E, $B4, $01
+	.BYTE $01, $98, $B7, $9C, $01, $01
+	.BYTE $01, $93, $9F, $96, $01, $01
+	.BYTE $01, $01, $BD, $01, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+
+	.BYTE $01, $01, $01, $93, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+	.BYTE $01, $93, $95, $9E, $B4, $01
+	.BYTE $01, $95, $97, $9C, $01, $01
+	.BYTE $01, $93, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+
+	.BYTE $01, $A0, $A1, $91, $01, $01
+	.BYTE $01, $8F, $01, $90, $01, $01
+	.BYTE $01, $8F, $01, $96, $01, $01
+	.BYTE $01, $9B, $99, $9C, $01, $01
+	.BYTE $01, $01, $01, $96, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $01, $90, $01, $01
+
+	.BYTE $A0, $A8, $A9, $AC, $01, $01
+	.BYTE $8F, $BB, $01, $90, $01, $01
+	.BYTE $8F, $8F, $01, $96, $01, $01
+	.BYTE $8F, $9B, $99, $9C, $01, $01
+	.BYTE $9A, $01, $01, $96, $01, $01
+	.BYTE $C2, $B4, $01, $01, $01, $01
+	.BYTE $01, $01, $01, $90, $01, $01
+
+	.BYTE $01, $A0, $A1, $91, $01, $01
+	.BYTE $01, $8F, $01, $90, $01, $01
+	.BYTE $01, $8F, $01, $96, $01, $01
+	.BYTE $91, $BE, $98, $9C, $01, $01
+	.BYTE $01, $8F, $8F, $96, $01, $01
+	.BYTE $01, $9A, $BB, $01, $01, $01
+	.BYTE $01, $C2, $AF, $BA, $01, $01
+
+	.BYTE $01, $A0, $A1, $91, $01, $01
+	.BYTE $01, $8F, $01, $93, $01, $01
+	.BYTE $01, $9A, $01, $96, $01, $01
+	.BYTE $91, $C2, $B1, $9C, $01, $01
+	.BYTE $01, $01, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $93, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+
+	.BYTE $01, $A0, $A1, $01, $01, $01
+	.BYTE $01, $8F, $01, $94, $01, $01
+	.BYTE $01, $8F, $01, $96, $01, $01
+	.BYTE $01, $9B, $99, $BF, $01, $01
+	.BYTE $01, $93, $94, $91, $01, $01
+	.BYTE $01, $01, $94, $01, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+
+	.BYTE $01, $01, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $93, $01, $01
+	.BYTE $01, $01, $01, $96, $01, $01
+	.BYTE $01, $93, $AE, $A6, $A1, $01
+	.BYTE $01, $01, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $93, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+
+	.BYTE $01, $01, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $90, $01, $01
+	.BYTE $01, $01, $01, $96, $01, $01
+	.BYTE $91, $B1, $A3, $A6, $A1, $01
+	.BYTE $01, $01, $01, $96, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+
+	.BYTE $01, $01, $01, $93, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+	.BYTE $01, $93, $01, $96, $01, $01
+	.BYTE $01, $95, $A3, $A6, $A1, $01
+	.BYTE $01, $93, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+
+	.BYTE $01, $01, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $01, $96, $01, $01
+	.BYTE $91, $B1, $A3, $A6, $A1, $01
+	.BYTE $01, $91, $01, $96, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $01, $90, $01, $01
+
+	.BYTE $01, $01, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $93, $01, $01
+	.BYTE $01, $AA, $AB, $B3, $A1, $01
+	.BYTE $01, $9B, $99, $BF, $01, $01
+	.BYTE $01, $01, $01, $91, $01, $01
+	.BYTE $01, $01, $01, $93, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+
+	.BYTE $B8, $A9, $AC, $01, $01, $01
+	.BYTE $98, $99, $B9, $94, $01, $01
+	.BYTE $8F, $91, $8F, $96, $01, $01
+	.BYTE $8F, $01, $98, $9C, $01, $01
+	.BYTE $9A, $91, $BC, $91, $01, $01
+	.BYTE $C2, $B1, $B4, $01, $01, $01
+	.BYTE $01, $01, $01, $94, $01, $01
+
+	.BYTE $E2, $01, $D8, $B1, $B1, $B4
+	.BYTE $E8, $01, $94, $CA, $01, $01
+	.BYTE $EC, $95, $9E, $BC, $01, $01
+	.BYTE $EA, $BE, $9C, $01, $01, $01
+	.BYTE $91, $BC, $91, $01, $01, $CA
+	.BYTE $01, $01, $01, $01, $01, $8F
+	.BYTE $01, $01, $91, $B1, $B1, $BC
+
+	.BYTE $01, $94, $C8, $C1, $B1, $B4
+	.BYTE $A0, $AB, $AB, $C0, $A1, $01
+	.BYTE $8F, $01, $96, $C2, $C3, $01
+	.BYTE $93, $C9, $9C, $01, $01, $01
+	.BYTE $01, $01, $91, $01, $01, $01
+	.BYTE $01, $91, $B1, $C4, $AB, $A1
+	.BYTE $01, $01, $E4, $C6, $B4, $01
+
+	.BYTE $01, $01, $D8, $B1, $B1, $C3
+	.BYTE $01, $01, $94, $01, $01, $01
+	.BYTE $91, $CB, $96, $01, $01, $01
+	.BYTE $FA, $E1, $9C, $01, $01, $01
+	.BYTE $EC, $E3, $91, $01, $01, $01
+	.BYTE $E9, $C2, $C3, $01, $95, $CC
+	.BYTE $01, $01, $91, $B1, $DC, $01
+
+	.BYTE $01, $E0, $91, $B1, $CB, $01
+	.BYTE $01, $8F, $90, $01, $C2, $C3
+	.BYTE $B8, $E6, $96, $01, $01, $01
+	.BYTE $EC, $BC, $9C, $01, $01, $01
+	.BYTE $E8, $01, $96, $EB, $01, $01
+	.BYTE $E9, $01, $01, $C2, $C3, $D3
+	.BYTE $01, $01, $91, $B1, $B1, $DC
+
+	.BYTE $E2, $94, $91, $B1, $B1, $B4
+	.BYTE $E8, $9F, $E4, $CE, $01, $01
+	.BYTE $ED, $9F, $96, $01, $01, $01
+	.BYTE $EF, $B5, $9C, $01, $01, $01
+	.BYTE $01, $9F, $96, $AB, $CE, $01
+	.BYTE $01, $9F, $01, $01, $01, $01
+	.BYTE $01, $9F, $AB, $AB, $AB, $CE
+
+	.BYTE $01, $01, $D8, $B1, $CB, $01
+	.BYTE $01, $01, $94, $01, $C2, $C3
+	.BYTE $95, $93, $96, $01, $01, $01
+	.BYTE $C9, $E7, $A6, $AB, $EE, $01
+	.BYTE $8F, $93, $91, $01, $01, $01
+	.BYTE $9A, $01, $01, $01, $01, $01
+	.BYTE $C2, $B4, $94, $AB, $AB, $A1
+
+	.BYTE $01, $01, $D8, $B1, $B1, $B4
+	.BYTE $01, $E0, $94, $AB, $EB, $01
+	.BYTE $01, $93, $96, $01, $C2, $C3
+	.BYTE $01, $C9, $9C, $01, $01, $01
+	.BYTE $01, $93, $91, $01, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $94, $AB, $AB, $EE
+
+	.BYTE $01, $01, $91, $B1, $B1, $B4
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $96, $01, $01, $01
+	.BYTE $91, $C7, $A6, $AB, $A1, $01
+	.BYTE $01, $93, $96, $01, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $D4
+	.BYTE $01, $01, $D8, $B1, $B1, $DC
+
+	.BYTE $01, $01, $91, $B1, $CC, $01
+	.BYTE $01, $01, $90, $01, $01, $01
+	.BYTE $01, $95, $9E, $B4, $01, $01
+	.BYTE $91, $CD, $9C, $01, $01, $01
+	.BYTE $01, $01, $96, $01, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $94, $AB, $AB, $CE
+
+	.BYTE $01, $01, $91, $B1, $B1, $B4
+	.BYTE $01, $01, $94, $01, $01, $01
+	.BYTE $B8, $CF, $96, $01, $01, $01
+	.BYTE $EC, $A3, $D5, $01, $01, $01
+	.BYTE $E9, $99, $D7, $01, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $94, $AB, $AB, $CE
+
+	.BYTE $A0, $A1, $91, $B1, $B1, $C5
+	.BYTE $8F, $01, $D8, $B1, $C5, $01
+	.BYTE $93, $01, $96, $01, $01, $01
+	.BYTE $9B, $99, $BF, $01, $01, $01
+	.BYTE $01, $01, $91, $01, $01, $01
+	.BYTE $01, $01, $D8, $B1, $C5, $01
+	.BYTE $01, $01, $94, $AB, $AB, $EE
+
+	.BYTE $01, $01, $91, $B1, $CC, $01
+	.BYTE $01, $01, $E4, $AB, $AB, $A1
+	.BYTE $01, $01, $96, $01, $01, $01
+	.BYTE $91, $C9, $9C, $01, $01, $01
+	.BYTE $01, $01, $91, $01, $01, $01
+	.BYTE $01, $01, $D8, $B1, $CC, $01
+	.BYTE $01, $01, $94, $AB, $AB, $A1
+
+	.BYTE $E0, $91, $B1, $B1, $B1, $C3
+	.BYTE $8F, $01, $94, $EB, $01, $01
+	.BYTE $93, $01, $96, $C2, $C3, $01
+	.BYTE $01, $C9, $9C, $01, $01, $01
+	.BYTE $90, $01, $91, $01, $01, $01
+	.BYTE $9A, $01, $01, $A0, $EB, $01
+	.BYTE $C2, $C3, $91, $DC, $C2, $C3
+
+	.BYTE $01, $01, $91, $B1, $B1, $C5
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $96, $01, $01, $01
+	.BYTE $8E, $C9, $9C, $01, $01, $01
+	.BYTE $E3, $94, $96, $01, $01, $01
+	.BYTE $E3, $C2, $F7, $CE, $01, $01
+	.BYTE $C2, $C3, $E4, $AB, $AB, $A1
+
+	.BYTE $01, $01, $E4, $AB, $CE, $01
+	.BYTE $01, $01, $94, $01, $01, $01
+	.BYTE $01, $01, $96, $01, $01, $01
+	.BYTE $01, $C9, $9C, $01, $CA, $01
+	.BYTE $91, $F7, $B3, $FE, $BC, $01
+	.BYTE $01, $9F, $FB, $C0, $AB, $A1
+	.BYTE $01, $9F, $90, $C2, $C3, $01
+
+	.BYTE $01, $01, $91, $B1, $B1, $C5
+	.BYTE $01, $01, $E4, $EB, $01, $01
+	.BYTE $01, $01, $96, $C2, $C3, $01
+	.BYTE $91, $C9, $9C, $01, $01, $01
+	.BYTE $01, $01, $96, $01, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $E4, $AB, $AB, $CE
+
+	.BYTE $01, $01, $01, $D8, $B1, $C3
+	.BYTE $94, $D0, $E0, $94, $01, $01
+	.BYTE $B8, $A2, $8F, $96, $01, $01
+	.BYTE $E9, $A4, $BE, $9C, $01, $01
+	.BYTE $94, $AB, $D1, $91, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $CA
+	.BYTE $01, $01, $01, $91, $B1, $BC
+
+	.BYTE $01, $01, $91, $B1, $B1, $B4
+	.BYTE $01, $01, $90, $01, $01, $01
+	.BYTE $01, $95, $9E, $B4, $01, $01
+	.BYTE $91, $CD, $9C, $01, $01, $01
+	.BYTE $01, $01, $96, $AB, $CE, $01
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $E4, $AB, $AB, $A1
+
+	.BYTE $A0, $A1, $91, $B1, $FF, $B4
+	.BYTE $8F, $01, $D8, $B1, $BC, $01
+	.BYTE $93, $01, $96, $01, $01, $01
+	.BYTE $9B, $99, $BF, $01, $01, $01
+	.BYTE $01, $01, $91, $01, $D3, $01
+	.BYTE $01, $01, $D8, $B1, $DC, $01
+	.BYTE $01, $01, $94, $AB, $AB, $A1
+
+	.BYTE $01, $01, $91, $B1, $B1, $B4
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $96, $01, $A0, $A1
+	.BYTE $91, $C9, $9C, $01, $8F, $01
+	.BYTE $01, $01, $DA, $AB, $D1, $CA
+	.BYTE $01, $01, $D8, $B1, $B1, $BC
+	.BYTE $01, $01, $94, $AB, $AB, $A1
+
+	.BYTE $01, $01, $91, $B1, $B1, $B4
+	.BYTE $01, $01, $E4, $AB, $EE, $01
+	.BYTE $01, $01, $96, $01, $01, $01
+	.BYTE $F3, $F2, $A6, $A1, $01, $01
+	.BYTE $01, $01, $96, $01, $01, $01
+	.BYTE $01, $01, $01, $01, $01, $CA
+	.BYTE $01, $01, $94, $AB, $AB, $D1
+
+	.BYTE $01, $94, $91, $B1, $B1, $CC
+	.BYTE $01, $9F, $E4, $CE, $01, $01
+	.BYTE $B8, $A5, $96, $01, $01, $01
+	.BYTE $93, $B0, $9C, $01, $01, $01
+	.BYTE $01, $9F, $96, $01, $01, $01
+	.BYTE $01, $9F, $AB, $AB, $AB, $CE
+	.BYTE $01, $01, $01, $01, $01, $01
+
+	.BYTE $01, $01, $D8, $B1, $B1, $B4
+	.BYTE $01, $01, $94, $AB, $EB, $01
+	.BYTE $91, $01, $96, $01, $C2, $C3
+	.BYTE $01, $C9, $9C, $01, $01, $01
+	.BYTE $8E, $01, $91, $01, $01, $01
+	.BYTE $C2, $F7, $AB, $AB, $CE, $01
+	.BYTE $01, $01, $94, $AB, $AB, $EE
+
+	.BYTE $01, $01, $01, $01, $01, $01
+	.BYTE $01, $01, $94, $AB, $CE, $01
+	.BYTE $01, $01, $96, $01, $01, $01
+	.BYTE $9B, $99, $BF, $01, $01, $01
+	.BYTE $91, $FD, $F6, $AB, $CE, $01
+	.BYTE $01, $94, $FC, $AB, $EE, $01
+	.BYTE $01, $01, $94, $AB, $AB, $CE
+
+	.BYTE $01, $01, $91, $B1, $B1, $B4
+	.BYTE $01, $01, $D8, $B1, $B1, $B4
+	.BYTE $91, $B1, $9E, $B1, $CC, $01
+	.BYTE $9B, $99, $BF, $01, $01, $01
+	.BYTE $01, $01, $91, $01, $01, $01
+	.BYTE $01, $01, $D8, $F7, $AB, $CE
+	.BYTE $01, $01, $94, $AB, $AB, $A1
+
+	.BYTE $A0, $A1, $91, $B1, $B1, $C3
+	.BYTE $8F, $01, $D8, $B1, $C3, $01
+	.BYTE $8F, $01, $96, $01, $01, $01
+	.BYTE $93, $C9, $9C, $01, $01, $01
+	.BYTE $01, $01, $91, $01, $01, $01
+	.BYTE $01, $01, $D8, $B1, $B1, $B4
+	.BYTE $01, $01, $91, $B1, $B1, $C3
+
+	.BYTE $01, $01, $91, $B1, $F7, $CE
+	.BYTE $01, $01, $E4, $CE, $01, $01
+	.BYTE $01, $01, $96, $01, $01, $01
+	.BYTE $8E, $C9, $9C, $01, $01, $01
+	.BYTE $D2, $EB, $96, $F1, $AB, $CE
+	.BYTE $01, $C2, $B1, $BC, $01, $01
+	.BYTE $01, $01, $E4, $AB, $AB, $CE
+
+	.BYTE $01, $01, $E0, $01, $01, $01
+	.BYTE $01, $95, $D6, $BA, $01, $01
+	.BYTE $95, $DC, $8F, $90, $01, $01
+	.BYTE $BB, $DF, $DD, $96, $01, $01
+	.BYTE $C9, $BA, $AF, $9C, $01, $01
+	.BYTE $01, $01, $01, $96, $01, $01
+	.BYTE $01, $01, $01, $E4, $AB, $CE
+
+	.BYTE $01, $01, $91, $B1, $B1, $B4
+	.BYTE $94, $B6, $D8, $B1, $C3, $01
+	.BYTE $01, $9F, $96, $01, $01, $01
+	.BYTE $01, $C9, $9C, $01, $01, $01
+	.BYTE $90, $9F, $96, $EB, $01, $01
+	.BYTE $9A, $9F, $AB, $F5, $AB, $CE
+	.BYTE $C2, $F7, $A1, $01, $01, $01
+
+	.BYTE $01, $94, $91, $B1, $B1, $C5
+	.BYTE $01, $F8, $AB, $EB, $D3, $01
+	.BYTE $01, $9F, $96, $C2, $BC, $01
+	.BYTE $01, $C9, $9C, $01, $A0, $A1
+	.BYTE $01, $9F, $96, $01, $8F, $01
+	.BYTE $01, $9F, $AB, $AB, $D1, $01
+	.BYTE $01, $01, $94, $AB, $AB, $A1
+
+	.BYTE $01, $DB, $91, $B1, $B1, $B4
+	.BYTE $01, $8F, $D8, $B1, $B1, $C3
+	.BYTE $01, $93, $96, $01, $01, $01
+	.BYTE $01, $9B, $BF, $01, $01, $01
+	.BYTE $01, $01, $91, $01, $CA, $01
+	.BYTE $01, $01, $D8, $B1, $BC, $01
+	.BYTE $01, $01, $91, $B1, $B1, $B4
+
+	.BYTE $01, $01, $90, $01, $01, $01
+	.BYTE $01, $D3, $E5, $B1, $B1, $B4
+	.BYTE $01, $8F, $F0, $DE, $B1, $C3
+	.BYTE $01, $8F, $96, $E3, $01, $01
+	.BYTE $96, $D9, $BF, $E3, $01, $01
+	.BYTE $01, $01, $91, $C2, $C3, $01
+	.BYTE $01, $01, $94, $AB, $AB, $A1

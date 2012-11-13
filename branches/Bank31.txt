@@ -642,8 +642,8 @@ L_C481:
 	AND #$03
 	RTS
 
-L_C4B3:
-	JSR L_C4BD
+store_sram_checksum:
+	JSR sram_checksum
 	STY $66BE
 	STX $66BF
 	RTS

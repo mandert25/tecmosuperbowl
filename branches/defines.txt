@@ -25,6 +25,11 @@
 .define IRQ_DISABLE     $E000
 .define IRQ_ENABLE      $E001
 
+; Team Values
+.define BUFFALO $00
+.define AFC     $1C
+.define NFC     $1D
+
 .segment "ZEROPAGE": zeropage
 .define SOFT_PPUCTRL $31
 .define SOFT_PPUMASK $32
@@ -34,6 +39,7 @@
 .define TEMP40       $40
 .define TEMP40_LO    $40
 .define TEMP40_HI    $41
+.define TEMP43       $43
 .define TEMP44       $44
 .define TEMP44_LO    $44
 .define TEMP44_HI    $45
@@ -47,9 +53,18 @@
 .define SRAM_CHECKSUM_HI $66BF
 
 ; Subroutine Defines
-.define sram_checksum  L_C4BD
-.define add_size       L_C4F5
-.define clear_sprites  L_D571
-.define clear_ram_size L_D60E
-.define bank_swap_8000 L_D8DD
-.define bank_swap_A000 L_D8E3
+.define store_default_sram     L_26_8245
+.define store_default_players  L_26_82A4
+.define store_default_playbook L_26_82F1
+.define default_afc_players    L_26_8374
+.define default_nfc_players    L_26_8380
+.define default_afc_starters   L_26_83AE
+.define default_nfc_starters   L_26_83BA
+.define store_sram_checksum    L_C4B3
+.define sram_checksum          L_C4BD
+.define add_size               L_C4F5
+.define clear_sprites          L_D571
+.define clear_ram_size         L_D60E
+.define bank_swap_8000         L_D8DD
+.define bank_swap_A000         L_D8E3
+

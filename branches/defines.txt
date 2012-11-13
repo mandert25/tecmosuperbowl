@@ -1,0 +1,55 @@
+; NES PPU Registers
+.define PPUCTRL   $2000
+.define PPUMASK   $2001
+.define PPUSTATUS $2002
+.define OAMADDR   $2003
+.define OAMDATA   $2004
+.define PPUSCROLL $2005
+.define PPUADDR   $2006
+.define PPUDATA   $2007
+
+; NES CPU Registers
+.define SOUND_DMC   $4010
+.define OAM_DMA     $4014
+.define APU_CONTROL $4015
+.define STROBE      $4016
+.define APU_COUNTER $4017
+
+; MMC3 Registers
+.define BANK_SELECT     $8000
+.define BANK_DATA       $8001
+.define MIRRORING       $A000
+.define PRG_RAM_PROTECT $A001
+.define IRQ_LATCH       $C000
+.define IRQ_RELOAD      $C001
+.define IRQ_DISABLE     $E000
+.define IRQ_ENABLE      $E001
+
+.segment "ZEROPAGE": zeropage
+.define SOFT_PPUCTRL $31
+.define SOFT_PPUMASK $32
+.define TEMP3E       $3E
+.define TEMP3E_LO    $3E
+.define TEMP3E_HI    $3F
+.define TEMP40       $40
+.define TEMP40_LO    $40
+.define TEMP40_HI    $41
+.define TEMP44       $44
+.define TEMP44_LO    $44
+.define TEMP44_HI    $45
+
+.segment "SPRITE": absolute
+.define SPRITE $0200
+
+.segment "SRAM": absolute
+.define SRAM_CHECK       $66B7
+.define SRAM_CHECKSUM_LO $66BE
+.define SRAM_CHECKSUM_HI $66BF
+
+; Subroutine Defines
+.define sram_checksum  L_C4BD
+.define add_size       L_C4F5
+.define clear_sprites  L_D571
+.define clear_ram_size L_D60E
+.define bank_swap_8000 L_D8DD
+.define bank_swap_A000 L_D8E3

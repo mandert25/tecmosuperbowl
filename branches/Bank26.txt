@@ -3,7 +3,7 @@ L_26_8000:	JMP L_26_803C
 L_26_8003:	JMP L_26_816B
 L_26_8006:	JMP L_26_81D1
 L_26_8009:	JMP L_26_8239
-L_26_800C:	JMP L_26_8245
+L_26_800C:	JMP store_default_sram
 L_26_800F:	JMP L_26_82E0
 L_26_8012:	JMP L_26_834C
 L_26_8015:	JMP L_26_8360
@@ -241,15 +241,15 @@ L_26_816B:
 	RTS
 
 L_26_81D1:
-	LDA #$80
+	LDA #%10000000
 	STA PRG_RAM_PROTECT
 	LDA $6758
 	ASL
 	TAX
-	LDA L_26_8997,X
-	STA $44
+	LDA L_26_8997+0,X
+	STA TEMP44_LO
 	LDA L_26_8997+1,X
-	STA $45
+	STA TEMP44_HI
 	LDX $6758
 	LDA GAMES_PER_WEEK,X
 	STA $3E
@@ -257,7 +257,7 @@ L_26_81D1:
 	TAX
 	LDY #$00
 @Loop1:
-	LDA ($44),Y
+	LDA (TEMP44),Y
 	STA $675A,Y
 	INY
 	DEX
@@ -287,7 +287,7 @@ L_26_81D1:
 	DEC $3F
 	BNE @Loop2
 	JSR L_C4B3
-	LDA #$C0
+	LDA #%11000000
 	STA PRG_RAM_PROTECT
 	RTS
 
@@ -298,148 +298,153 @@ L_26_8239:
 	STA $45
 	RTS
 
-L_26_8245:
-	LDA #$80
+store_default_sram:
+; Clear SRAM $66C0-$7F71
+	LDA #%10000000
 	STA PRG_RAM_PROTECT
-	LDA #$B2
-	LDX #$18
-	LDY #$C0
-	STY $44
-	LDY #$66
-	JSR L_D60E
-	LDA #$00
-	STA $43
-@Loop1:
-	LDA $43
-	JSR L_26_82A4
-	LDA $43
-	JSR L_26_82F1
-	INC $43
-	LDA $43
-	CMP #$1C
-	BCC @Loop1
+	LDA #<$18B2
+	LDX #>$18B2
+	LDY #<$66C0
+	STY TEMP44_LO
+	LDY #>$66C0
+	JSR clear_ram_size
+; Store Default Team Data in SRAM
+	LDA #BUFFALO
+	STA TEMP43
+:	LDA TEMP43
+	JSR store_default_players
+	LDA TEMP43
+	JSR store_default_playbook
+	INC TEMP43
+	LDA TEMP43
+	CMP #AFC
+	BCC :-
+;
 	LDA #$FF
 	LDY #$F4
-@Loop2:
-	STA $66AE,Y
+:	STA $67A2-$F4,Y
 	INY
-	BNE @Loop2
+	BNE :-
+;
 	LDA #$03
 	LDY #$E4
-@Loop3:
-	STA $65B7,Y
+:	STA $669B-$E4,Y
 	INY
-	BNE @Loop3
-	JSR L_26_8374
-	JSR L_26_83AE
-	JSR L_26_8380
-	JSR L_26_83BA
-	LDA #$1C
-	STA $43
-	JSR L_26_82F1
-	LDA #$1D
-	STA $43
-	JSR L_26_82F1
-	JSR L_C4B3
-	LDA #$C0
+	BNE :-
+; Store Pro Bowl Teams in SRAM
+	JSR default_afc_players
+	JSR default_afc_starters
+	JSR default_nfc_players
+	JSR default_nfc_starters
+	LDA #AFC
+	STA TEMP43
+	JSR store_default_playbook
+	LDA #NFC
+	STA TEMP43
+	JSR store_default_playbook
+; Store Checksum in SRAM
+	JSR store_sram_checksum
+	LDA #%11000000
 	STA PRG_RAM_PROTECT
 	RTS
 
-L_26_82A4:
+store_default_players:
 	TAX
 	ASL
 	TAY
-	LDA TEAM_SRAM_POINTERS,Y
-	STA $3E
+	LDA TEAM_SRAM_POINTERS+0,Y
+	STA TEMP3E_LO
 	LDA TEAM_SRAM_POINTERS+1,Y
-	STA $3F
-	LDA L_26_88C3,X
+	STA TEMP3E_HI
+; Store Returners
+	LDA TEAM_RETURNERS,X
 	LDY #$C4
-	STA ($3E),Y
+	STA (TEMP3E),Y
+; Store Offensive Starters
 	LDY #$C1
 	LDA #$02
-	STA ($3E),Y
+	STA (TEMP3E),Y
 	INY
 	LDA #$36
-	STA ($3E),Y
+	STA (TEMP3E),Y
 	INY
 	LDA #$7A
-	STA ($3E),Y
+	STA (TEMP3E),Y
+; Store Injuries
 	LDY #$C5
 	LDA #$00
-	STA ($3E),Y
+	STA (TEMP3E),Y
 	INY
-	STA ($3E),Y
+	STA (TEMP3E),Y
 	INY
-	STA ($3E),Y
+	STA (TEMP3E),Y
+; Store Conditions
 	LDY #$C8
 	LDA #$55
-@Loop1:
-	STA ($3E),Y
+:	STA (TEMP3E),Y
 	INY
 	CPY #$D0
-	BCC @Loop1
+	BCC :-
 	RTS
 
 L_26_82E0:
-	LDA #$80
+	LDA #%10000000
 	STA PRG_RAM_PROTECT
-	JSR L_26_82F1
+	JSR store_default_playbook
 	JSR L_C4B3
-	LDA #$C0
+	LDA #%11000000
 	STA PRG_RAM_PROTECT
 	RTS
 
-L_26_82F1:
+store_default_playbook:
 	LDX #$0E ; BANK15
-	JSR L_D8E3
-	LDA $43
-	CMP #$1C
-	BCS @Loop1
+	JSR bank_swap_A000
+	LDA TEMP43
+	CMP #AFC
+	BCS @ProBowl
 	TAX
 	ASL
 	TAY
-	LDA TEAM_SRAM_POINTERS,Y
-	STA $3E
+	LDA TEAM_SRAM_POINTERS+0,Y
+	STA TEMP3E_LO
 	LDA TEAM_SRAM_POINTERS+1,Y
-	STA $3F
+	STA TEMP3E_HI
 	TXA
 	ASL
 	ASL
 	TAX
 	LDY #$BD
-	LDA TEAM_PLAYBOOK_LIST,X
-	STA ($3E),Y
+	LDA TEAM_PLAYBOOK_LIST+0,X
+	STA (TEMP3E),Y
 	INY
 	LDA TEAM_PLAYBOOK_LIST+1,X
-	STA ($3E),Y
+	STA (TEMP3E),Y
 	INY
 	LDA TEAM_PLAYBOOK_LIST+2,X
-	STA ($3E),Y
+	STA (TEMP3E),Y
 	INY
 	LDA TEAM_PLAYBOOK_LIST+3,X
-	STA ($3E),Y
-	JMP @Loop5
-@Loop1:
-	CMP #$1D
-	BEQ @Loop3
+	STA (TEMP3E),Y
+	JMP @exit
+@ProBowl:
+	CMP #NFC
+	BEQ @NFC
+@AFC
 	LDY #$F8
-@Loop2:
-	LDA AFC_PLAYBOOK_LIST-$F8,Y
-	STA $6650,Y
+:	LDA AFC_PLAYBOOK_LIST-$F8,Y
+	STA $6748-$F8,Y
 	INY
-	BNE @Loop2
-	JMP @Loop5
-@Loop3:
+	BNE :-
+	JMP @exit
+@NFC:
 	LDY #$F8
-@Loop4:
-	LDA NFC_PLAYBOOK_LIST-$F8,Y
-	STA $6658,Y
+:	LDA NFC_PLAYBOOK_LIST-$F8,Y
+	STA $6750-$F8,Y
 	INY
-	BNE @Loop4
-@Loop5:
+	BNE :-
+@exit:
 	LDX #$11 ; BANK18
-	JSR L_D8E3
+	JSR bank_swap_A000
 	RTS
 
 L_26_834C:
@@ -462,22 +467,20 @@ L_26_8360:
 	STA PRG_RAM_PROTECT
 	RTS
 
-L_26_8374:
+default_afc_players:
 	LDY #$C4
-@Loop1:
-	LDA L_26_8843-$C4,Y
-	STA $660C,Y
+:	LDA AFC_PRO_BOWLERS-$C4,Y
+	STA $66D0-$C4,Y
 	INY
-	BNE @Loop1
+	BNE :-
 	RTS
 
-L_26_8380:
+default_nfc_players:
 	LDY #$C4
-@Loop1:
-	LDA L_26_887F-$C4,Y
-	STA $6648,Y
+:	LDA NFC_PRO_BOWLERS-$C4,Y
+	STA $670C-$C4,Y
 	INY
-	BNE @Loop1
+	BNE :-
 	RTS
 
 L_26_838C:
@@ -498,22 +501,20 @@ L_26_839D:
 	STA PRG_RAM_PROTECT
 	RTS
 
-L_26_83AE:
+default_afc_starters:
 	LDY #$F8
-@Loop1:
-	LDA L_26_88BB-$F8,Y
-	STA $65C8,Y
+:	LDA PRO_BOWL_STARTERS-$F8,Y
+	STA $66C0-$F8,Y
 	INY
-	BNE @Loop1
+	BNE :-
 	RTS
 
-L_26_83BA:
+default_nfc_starters:
 	LDY #$F8
-@Loop1:
-	LDA L_26_88BB-$F8,Y
-	STA $65D0,Y
+:	LDA PRO_BOWL_STARTERS-$F8,Y
+	STA $66C8-$F8,Y
 	INY
-	BNE @Loop1
+	BNE :-
 	RTS
 
 L_26_83C6:
@@ -1121,166 +1122,39 @@ L_26_87D4:	.BYTE $20
 	.BYTE $23
 	.BYTE $57
 	.BYTE $23
-L_26_8843:
-	.BYTE $00
-	.BYTE $00
-	.BYTE $07
-	.BYTE $00
-	.BYTE $0B
-	.BYTE $02
-	.BYTE $00
-	.BYTE $02
-	.BYTE $09
-	.BYTE $02
-	.BYTE $05
-	.BYTE $02
-	.BYTE $00
-	.BYTE $07
-	.BYTE $07
-	.BYTE $07
-	.BYTE $0C
-	.BYTE $07
-	.BYTE $07
-	.BYTE $03
-	.BYTE $05
-	.BYTE $0A
-	.BYTE $02
-	.BYTE $0A
-	.BYTE $00
-	.BYTE $0C
-	.BYTE $07
-	.BYTE $0D
-	.BYTE $0B
-	.BYTE $0D
-	.BYTE $05
-	.BYTE $0F
-	.BYTE $03
-	.BYTE $0F
-	.BYTE $00
-	.BYTE $11
-	.BYTE $0A
-	.BYTE $12
-	.BYTE $0B
-	.BYTE $11
-	.BYTE $0A
-	.BYTE $14
-	.BYTE $08
-	.BYTE $15
-	.BYTE $02
-	.BYTE $16
-	.BYTE $00
-	.BYTE $17
-	.BYTE $08
-	.BYTE $18
-	.BYTE $0A
-	.BYTE $19
-	.BYTE $09
-	.BYTE $1A
-	.BYTE $05
-	.BYTE $1B
-	.BYTE $0A
-	.BYTE $1C
-	.BYTE $01
-	.BYTE $1D
-L_26_887F:
-	.BYTE $18
-	.BYTE $00
-	.BYTE $10
-	.BYTE $00
-	.BYTE $14
-	.BYTE $02
-	.BYTE $0E
-	.BYTE $02
-	.BYTE $12
-	.BYTE $02
-	.BYTE $11
-	.BYTE $02
-	.BYTE $18
-	.BYTE $07
-	.BYTE $1B
-	.BYTE $07
-	.BYTE $15
-	.BYTE $06
-	.BYTE $0E
-	.BYTE $07
-	.BYTE $10
-	.BYTE $0A
-	.BYTE $16
-	.BYTE $0A
-	.BYTE $13
-	.BYTE $0C
-	.BYTE $16
-	.BYTE $0D
-	.BYTE $13
-	.BYTE $0D
-	.BYTE $0E
-	.BYTE $0F
-	.BYTE $19
-	.BYTE $10
-	.BYTE $16
-	.BYTE $11
-	.BYTE $14
-	.BYTE $12
-	.BYTE $10
-	.BYTE $13
-	.BYTE $0F
-	.BYTE $14
-	.BYTE $13
-	.BYTE $16
-	.BYTE $0F
-	.BYTE $15
-	.BYTE $18
-	.BYTE $17
-	.BYTE $0E
-	.BYTE $18
-	.BYTE $16
-	.BYTE $19
-	.BYTE $18
-	.BYTE $1A
-	.BYTE $16
-	.BYTE $1B
-	.BYTE $1A
-	.BYTE $1C
-	.BYTE $0F
-	.BYTE $1D
-L_26_88BB:
-	.BYTE $00
-	.BYTE $04
-	.BYTE $06
-	.BYTE $0C
-	.BYTE $0E
-	.BYTE $14
-	.BYTE $08
-	.BYTE $0A
-L_26_88C3:
-	.BYTE $59
-	.BYTE $88
-	.BYTE $49
-	.BYTE $96
-	.BYTE $88
-	.BYTE $58
-	.BYTE $37
-	.BYTE $BB
-	.BYTE $97
-	.BYTE $66
-	.BYTE $48
-	.BYTE $88
-	.BYTE $88
-	.BYTE $55
-	.BYTE $89
-	.BYTE $33
-	.BYTE $97
-	.BYTE $55
-	.BYTE $96
-	.BYTE $55
-	.BYTE $55
-	.BYTE $89
-	.BYTE $28
-	.BYTE $89
-	.BYTE $46
-	.BYTE $46
-	.BYTE $55
-	.BYTE $57
+AFC_PRO_BOWLERS:
+	.BYTE $00,$00, $07,$00
+	.BYTE $0B,$02, $00,$02, $09,$02, $05,$02
+	.BYTE $00,$07, $07,$07, $0C,$07, $07,$03
+	.BYTE $05,$0A, $02,$0A
+	.BYTE $00,$0C, $07,$0D, $0B,$0D, $05,$0F, $03,$0F
+	.BYTE $00,$11, $0A,$12, $0B,$11
+	.BYTE $0A,$14, $08,$15, $02,$16, $00,$17
+	.BYTE $08,$18, $0A,$19
+	.BYTE $09,$1A, $05,$1B
+	.BYTE $0A,$1C
+	.BYTE $01,$1D
+NFC_PRO_BOWLERS:
+	.BYTE $18,$00, $10,$00
+	.BYTE $14,$02, $0E,$02, $12,$02, $11,$02
+	.BYTE $18,$07, $1B,$07, $15,$06, $0E,$07
+	.BYTE $10,$0A, $16,$0A
+	.BYTE $13,$0C, $16,$0D, $13,$0D, $0E,$0F, $19,$10
+	.BYTE $16,$11, $14,$12, $10,$13
+	.BYTE $0F,$14, $13,$16, $0F,$15, $18,$17
+	.BYTE $0E,$18, $16,$19
+	.BYTE $18,$1A, $16,$1B
+	.BYTE $1A,$1C
+	.BYTE $0F,$1D
+PRO_BOWL_STARTERS:
+	.BYTE $00,$04,$06,$0C,$0E,$14,$08,$0A
+TEAM_RETURNERS:
+	.BYTE $59,$88,$49,$96,$88
+	.BYTE $58,$37,$BB,$97
+	.BYTE $66,$48,$88,$88,$55
+	.BYTE $89,$33,$97,$55,$96
+	.BYTE $55,$55,$89,$28,$89
+	.BYTE $46,$46,$55,$57
 L_26_88DF:
 	.BYTE $00
 	.BYTE $02

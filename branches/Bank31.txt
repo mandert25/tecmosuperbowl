@@ -1,10 +1,11 @@
 .segment "BANK_31"
 START:
-	LDA #$08
+	LDA #%00001000
 	STA PPUCTRL
 	CLD
 	SEI
-	LDA #$40
+; Disable SRAM
+	LDA #%01000000
 	STA PRG_RAM_PROTECT
 ; Reset the Stack
 	LDX #$FF
@@ -15,124 +16,131 @@ START:
 	STA $01
 	TAY
 	LDX #$08
-@Loop1:
-	STA ($00),Y
+: STA ($00),Y
 	INY
 	BNE @Loop1
 	INC $01
 	DEX
-	BNE @Loop1
+	BNE :-
 	STA $01
-	JSR L_D571
+; Clear Sprites
+	JSR clear_sprites
+;
 	LDA #$18
 	STA $0309
-; Disable All Graphics
-	LDA #$00
+; Disable Screen
+	LDA #%00000000
 	STA PPUCTRL
 	STA PPUMASK
 ; Wait for VBLANK
 	LDX #$02
-@Loop2:
-	LDA PPUSTATUS
-	BPL @Loop2
-@Loop3:
-	LDA PPUSTATUS
-	BMI @Loop3
+: LDA PPUSTATUS
+	BPL :-
+: LDA PPUSTATUS
+	BMI :-
 	DEX
-	BNE @Loop2
+	BNE :--
 ; Set basic PPU registers
-	LDA #$08
+	LDA #%00001000
 	STA PPUCTRL
-	LDA #$18
+	LDA #%00011000
 	STA PPUMASK
-	LDA #$00
+; Disable Interrupts
+	LDA #%00000000
 	STA SOUND_DMC
-	LDA #$40
+	LDA #%01000000
 	STA APU_COUNTER
 	STA IRQ_DISABLE
+;
 	LDA PPUSTATUS
 	LDA #$10
 	TAX
-@Loop4:
-	STA PPUADDR
+: STA PPUADDR
 	STA PPUADDR
 	EOR #$10
 	DEX
-	BNE @Loop4
+	BNE :-
+; Set to Vertical Mirroring
 	LDA #$00
 	STA MIRRORING
-	LDA #$80
+; Clear SRAM $6000-$609A
+	LDA #%10000000
 	STA PRG_RAM_PROTECT
-	LDA #$9B
-	LDX #$06
-	LDY #$00
-	STY $44
-	LDY #$60
-	JSR L_D60E
-	LDA #$C0
+	LDA #<$069B
+	LDX #>$069B
+	LDY #<$6000
+	STY TEMP44_LO
+	LDY #>$6000
+	JSR clear_ram_size
+	LDA #%11000000
 	STA PRG_RAM_PROTECT
-	LDA #$00
+; Clear Nametables
+	LDA #%00000000
 	STA PPUMASK
-	LDA #$20
+	LDA #>$2000
 	STA PPUADDR
-	LDA #$00
+	LDA #<$2000
 	STA PPUADDR
 	LDX #$10
 	LDY #$00
-@Loop5:
-	STA PPUDATA
+: STA PPUDATA
 	DEY
-	BNE @Loop5
+	BNE :-
 	DEX
-	BNE @Loop5
-	LDA #$1E
-	STA $32
-	LDA #$A8
-	STA $31
+	BNE :-
+; Enable Screen
+	LDA #%00011110 ; BG Enable, Sprite Enable, No Clipping, Color Mode
+	STA SOFT_PPUMASK
+	LDA #%10101000 ; NMI, 8x16 Sprites, BG $0000, Sprite $1000, Increment Across, Nametable $2000
+	STA SOFT_PPUCTRL
 	STA PPUCTRL
 	CLI
+;
 	LDX #$01
 	JSR L_D680
+;
 	LDA #$00
 	STA BANK_SELECT
 	LDA #$18
 	STA BANK_DATA
+; Check for Corrupted SRAM
 	LDX #$06
-@Loop6:
-	LDA $66B7,X
-	CMP @Loop10,X
-	BNE @Loop7
+: LDA $66B7,X
+	CMP @sram_check,X
+	BNE @sram_bad
 	DEX
-	BPL @Loop6
-	JSR L_C4BD
+	BPL :-
+	JSR sram_checksum
 	CPY $66BE
-	BNE @Loop7
+	BNE @sram_bad
 	CPX $66BF
-	BEQ @Loop9
-@Loop7:
-	LDA #$80
+	BEQ @sram_good
+@sram_bad:
+; Clear SRAM $6000-$7FFE
+	LDA #%10000000
 	STA PRG_RAM_PROTECT
-	LDA #$FF
-	LDX #$1F
-	LDY #$00
-	STY $44
-	LDY #$60
-	JSR L_D60E
+	LDA #<$1FFF
+	LDX #>$1FFF
+	LDY #<$6000
+	STY TEMP44_LO
+	LDY #>$6000
+	JSR clear_ram_size
+;
 	LDX #$19 ; BANK26
-	JSR L_D8DD
+	JSR bank_swap_8000
 	JSR L_26_800C
 	JSR L_26_8006
-	LDA #$80
+; Store SRAM Check
+	LDA #%10000000
 	STA PRG_RAM_PROTECT
 	LDY #$F9
-@Loop8:
-	LDA @Loop10-$F9,Y
-	STA $65BE,Y
+: LDA @sram_check-$F9,Y
+	STA $66B7-$F9,Y
 	INY
-	BNE @Loop8
-	LDA #$C0
+	BNE :-
+	LDA #%11000000
 	STA PRG_RAM_PROTECT
-@Loop9:
+@sram_good:
 	LDA $6403
 	STA $3B
 	LDA $6404
@@ -146,8 +154,8 @@ START:
 	LDX #$02
 	JSR L_CC45
 	JMP L_CB4E
-@Loop10:
-	.BYTE $41,$4B,$49,$48,$49,$4B,$4F
+@sram_check:
+	.BYTE "AKIHIKO"
 
 NMI:
 	STA $0300
@@ -640,60 +648,64 @@ L_C4B3:
 	STX $66BF
 	RTS
 
-L_C4BD:
+sram_checksum:
+; Clear Total
 	LDA #$00
-	STA $44
-	STA $45
-	LDA #$C0
-	STA $3E
-	LDA #$66
-	STA $3F
-	LDA #$3E
-	STA $40
-	LDA #$08
-	STA $41
-	JSR L_C4F5
-	LDA #$02
-	STA $3E
-	LDA #$70
-	STA $3F
-	LDA #$70
-	STA $40
-	LDA #$0F
-	STA $41
-	JSR L_C4F5
-	LDA $44
+	STA TEMP44_LO
+	STA TEMP44_HI
+; SUM $66C0-$66FD
+	LDA #<$66C0
+	STA TEMP3E_LO
+	LDA #>$66C0
+	STA TEMP3E_HI
+	LDA #<$083E
+	STA TEMP40_LO
+	LDA #>$083E
+	STA TEMP40_HI
+	JSR add_size
+; SUM $7002-$7F71
+	LDA #<$7002
+	STA TEMP3E_LO
+	LDA #>$7002
+	STA TEMP3E_HI
+	LDA #<$0F70
+	STA TEMP40_LO
+	LDA #>$0F70
+	STA TEMP40_HI
+	JSR add_size
+; Total + $3412
+	LDA TEMP44_LO
 	CLC
-	ADC #$12
+	ADC #<$3412
 	TAY
-	LDA $45
-	ADC #$34
+	LDA TEMP44_HI
+	ADC #>$3412
 	TAX
 	RTS
 
-L_C4F5:
+add_size:
 	LDY #$00
-@Loop1:
-	LDA ($3E),Y
+@more:
+	LDA (TEMP3E),Y
 	CLC
-	ADC $44
-	STA $44
+	ADC TEMP44_LO
+	STA TEMP44_LO
 	LDA #$00
-	ADC $45
-	STA $45
-	INC $3E
-	BNE @Loop2
-	INC $3F
-@Loop2:
-	LDA $40
+	ADC TEMP45_HI
+	STA TEMP45_HI
+	INC TEMP3E_LO
+	BNE @end
+	INC TEMP3E_HI
+@end:
+	LDA TEMP40_LO
 	SEC
 	SBC #$01
-	STA $40
-	LDA $41
+	STA TEMP40_LO
+	LDA TEMP40_HI
 	SBC #$00
-	STA $41
-	ORA $40
-	BNE @Loop1
+	STA TEMP40_HI
+	ORA TEMP40_LO
+	BNE @more
 	RTS
 
 L_C51C:
@@ -3661,7 +3673,7 @@ L_D565:
 	STA $2D
 	RTS
 
-L_D571:
+clear_sprites:
 ; Clear Page #2 For Sprites
 	LDX #$00
 	LDA #$F0
@@ -3759,24 +3771,24 @@ L_D609:
 	INX
 	RTS
 
-L_D60E:
-	STY $45
+clear_ram_size:
+	STY TEMP44_HI
 	INX
 	LDY #$00
-@Loop1:
+@more:
 	PHA
 	LDA #$00
-	STA ($44),Y
-	INC $44
-	BNE @Loop2
-	INC $45
-@Loop2:
+	STA (TEMP44),Y
+	INC TEMP44_LO
+	BNE @end
+	INC TEMP44_HI
+@end:
 	PLA
 	SEC
 	SBC #$01
-	BNE @Loop1
+	BNE @more
 	DEX
-	BNE @Loop1
+	BNE @more
 	RTS
 
 L_D628:
@@ -4236,14 +4248,15 @@ L_D8B7:
 	STA $44
 	RTS
 
-L_D8DD:
+bank_swap_8000:
 	STX $2E
 	LDA #$06
-	BNE :+
-L_D8E3:
+	BNE @swap
+bank_swap_A000:
 	STX $2F
 	LDA #$07
-:	ORA $33
+@swap:
+  ORA $33
 	STA $34
 	SEC
 	ROR $2C

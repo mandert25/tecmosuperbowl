@@ -1,0 +1,855 @@
+.include "Play.h"
+
+.segment "DEFENSIVE_DESIGN"
+L_6_A000: .BYTE SetBall, $F0, $38, Kickoff, Control, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A008: .BYTE SetBall, $A8, $2C, TwoPt
+L_6_A00C: .BYTE Move, $00, $64, Move, $00, $44, Wait, $32, $64, Jump, <L_6_AABC, >L_6_AABC
+L_6_A018: .BYTE SetBall, $B0, $28, TwoPt
+L_6_A01C: .BYTE Move, $00, $7F, Move, $00, $44, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A025: .BYTE SetBall, $C0, $2C, TwoPt
+L_6_A029: .BYTE Move, $00, $7F, Turn, $3C, Jump, <L_6_AABC, >L_6_AABC
+L_6_A031: .BYTE SetBall, $D0, $28, TwoPt
+L_6_A035: .BYTE Loop, L_6_A01C + 1 - *
+L_6_A037: .BYTE SetBall, $E0, $28, TwoPt
+L_6_A03B: .BYTE Move, $00, $7F, Wait, $64, $FF, Wait, $64, $FF, Jump, <L_6_AABC, >L_6_AABC
+L_6_A047: .BYTE SetBall, $00, $28, TwoPt, Loop, L_6_A03B + 1 - *
+L_6_A04D: .BYTE SetBall, $10, $28, TwoPt
+L_6_A051: .BYTE Jump, <L_6_A035, >L_6_A035
+L_6_A054: .BYTE SetBall, $20, $2C, TwoPt, Jump, <L_6_A029, >L_6_A029
+L_6_A05B: .BYTE SetBall, $30, $28, TwoPt, Loop, L_6_A051 + 1 - *
+L_6_A061: .BYTE SetBall, $38, $2C, TwoPt, Jump, <L_6_A00C, >L_6_A00C
+L_6_A068: .BYTE SetMiddle, $36, $0C, TwoPt, SetGrab, %00010000, %00000000, Move, $00, $10, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A075: .BYTE SetMiddle, $C0, $0C, TwoPt, SetGrab, %00001000, %00000000, Move, $00, $10, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A082: .BYTE SetBall, $D0, $48, TwoPt, Jump, <L_6_BE18, >L_6_BE18
+L_6_A089: .BYTE SetBall, $10, $48, TwoPt, Move, $00, $88, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A093: .BYTE Move, $00, $A0
+L_6_A096: .BYTE SetBlock, %11111111, %11100000, Pull, $00, $60, Loop, L_6_A096 + 1 - *
+L_6_A09E: .BYTE MoveLong, $80, $30, BoostHP, $06, Loop, L_6_A096 + 1 - *
+L_6_A0A5: .BYTE SetBall, $B4, $0C, ThreePt, MoveBall, $B4, $10, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A0AF: .BYTE SetBall, $C4, $0C, ThreePt, MoveBall, $D4, $10, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A0B9: .BYTE SetBall, $D4, $0C, ThreePt, MoveBall, $E0, $10, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A0C3: .BYTE SetBall, $E4, $0C, ThreePt, MoveBall, $F0, $08, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A0CD: .BYTE SetBall, $FC, $0C, ThreePt, MoveBall, $FC, $10, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A0D7: .BYTE SetBall, $0C, $0C, ThreePt, MoveBall, $08, $10, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A0E1: .BYTE SetBall, $1C, $0C, ThreePt, MoveBall, $14, $10, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A0EB: .BYTE SetBall, $30, $0C, ThreePt, MoveBall, $30, $10, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A0F5: .BYTE SetBall, $C4, $24, ThreePt, MoveBall, $C4, $10, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A0FF: .BYTE SetBall, $1C, $24, ThreePt, Wait, $01, $28, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A109: .BYTE SetBall, $00, $48, ThreePt, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A110: .BYTE SetBall, $D8, $08, ThreePt, SetGrab, %00000100, %00000000, MoveBall, $D8, $10, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A11D: .BYTE SetBall, $F0, $08, ThreePt, SetGrab, %00000000, %10000000, MoveBall, $E8, $00, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A12A: .BYTE SetBall, $08, $08, ThreePt, SetGrab, %00000000, %00100000, MoveBall, $10, $00, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A137: .BYTE SetBall, $C8, $10, TwoPt
+L_6_A13B: .BYTE MoveBall, $CC, $10, Jump, <L_6_AABC, >L_6_AABC
+L_6_A141: .BYTE SetBall, $E0, $18, TwoPt
+L_6_A145: .BYTE MoveBall, $E0, $10, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A14B: .BYTE SetBall, $00, $18, TwoPt
+L_6_A14F: .BYTE SetGrab, %11111111, %11100000, MoveBall, $04, $F0, MoveBall, $04, $08, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A15B: .BYTE SetBall, $18, $0C, TwoPt
+L_6_A15F: .BYTE Turn, $14, MoveBall, $10, $E8, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A167: .BYTE SetMiddle, $36, $28, TwoPt, Stand, $0A
+L_6_A16D: .BYTE Move, $00, $90, Move, $20, $C0, Jump, <L_6_AABC, >L_6_AABC
+L_6_A176: .BYTE SetMiddle, $C0, $28, TwoPt
+L_6_A17A: .BYTE Stand, $0A, MoveBall, $F0, $E8, MoveBall, $F0, $00, Jump, <L_6_BDE8, >L_6_BDE8
+L_6_A185: .BYTE Stand, $64, Move, $30, $C8, Move, $28, $F0, Jump, <L_6_AABC, >L_6_AABC
+L_6_A190: .BYTE Turn, $1E, MoveBall, $F8, $C8, MoveBall, $F8, $E0, Jump, <L_6_BDE8, >L_6_BDE8
+L_6_A19B: .BYTE SetBall, $D8, $08, ThreePt, Stand, $0A, MoveBall, $E0, $00, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A1A7: .BYTE SetBall, $F0, $08, ThreePt, Stand, $0A, MoveBall, $F0, $04, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A1B3: .BYTE SetBall, $08, $08, ThreePt
+L_6_A1B7: .BYTE MoveBall, $00, $06, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A1BD: .BYTE SetBall, $C8, $10, TwoPt
+L_6_A1C1: .BYTE MoveBall, $C0, $00, MoveBall, $C0, $28, Turn, $19, Jump, <L_6_AABC, >L_6_AABC
+L_6_A1CC: .BYTE MoveBall, $D0, $D8, MoveBall, $C0, $A8, MoveBall, $C0, $81, Jump, <L_6_AABC, >L_6_AABC
+L_6_A1D8: .BYTE SetBall, $00, $18, TwoPt, MoveBall, $00, $E8, MoveBall, $F0, $D8, MoveBall, $E0, $B8, Turn, $0A, MoveBall, $F0, $98, Jump, <L_6_AABC, >L_6_AABC
+L_6_A1ED: .BYTE SetBall, $18, $0C, TwoPt, MoveBall, $08, $0C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A1F7: .BYTE MoveBall, $E8, $C0, Jump, <L_6_AABC, >L_6_AABC
+L_6_A1FD: .BYTE SetMiddle, $C0, $28, TwoPt
+L_6_A201: .BYTE MoveBall, $0C, $E0, Turn, $50, Jump, <L_6_AABC, >L_6_AABC
+L_6_A209: .BYTE SetBall, $C8, $50, TwoPt
+L_6_A20D: .BYTE Move, $30, $C0, Move, $40, $00, Jump, <L_6_AABC, >L_6_AABC
+L_6_A216: .BYTE SetBall, $18, $50, TwoPt
+L_6_A21A: .BYTE CPUJuice, <L_6_AAD8, >L_6_AAD8, $02, MoveBall, $00, $B0, Turn, $78, Jump, <L_6_AABC, >L_6_AABC
+L_6_A226: .BYTE SetBall, $08, $08, ThreePt, MoveBall, $14, $08, MoveBall, $14, $14, MoveBall, $0C, $20, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A236: .BYTE SetBall, $C8, $10, TwoPt
+L_6_A23A: .BYTE MoveBall, $C8, $18, MoveBall, $D0, $28, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A243: .BYTE SetBall, $F0, $08, ThreePt, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A24A: .BYTE SetBall, $00, $18, TwoPt
+L_6_A24E: .BYTE MoveBall, $FC, $0C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A254: .BYTE SetBall, $18, $0C, TwoPt
+L_6_A258: .BYTE MoveBall, $28, $00, MoveBall, $28, $20, MoveBall, $18, $34, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A264: .BYTE SetMiddle, $36, $28, TwoPt
+L_6_A268: .BYTE MoveMiddle, $36, $B0, MoveBall, $F8, $88, Jump, <L_6_AABC, >L_6_AABC
+L_6_A271: .BYTE SetMiddle, $C0, $28, TwoPt
+L_6_A275: .BYTE MoveMiddle, $C0, $B0, MoveBall, $30, $A0, MoveBall, $14, $81, Move, $F0, $D0, Jump, <L_6_AABC, >L_6_AABC
+L_6_A284: .BYTE SetBall, $C8, $50, TwoPt
+L_6_A288: .BYTE Wait, $01, $14, MoveBall, $F8, $B8, Jump, <L_6_AABC, >L_6_AABC
+L_6_A291: .BYTE SetBall, $18, $50, TwoPt, Random4, <L_6_A8D8, >L_6_A8D8, Jump, <L_6_A8A0, >L_6_A8A0
+L_6_A29B: .BYTE SetBall, $D8, $08, ThreePt, MoveBall, $E8, $00, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A2A5: .BYTE SetBall, $F0, $08, ThreePt, MoveBall, $F8, $F8, MoveBall, $00, $00, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A2B2: .BYTE SetBall, $C8, $10, TwoPt, MoveBall, $C4, $F8, MoveBall, $C4, $10, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A2BF: .BYTE SetBall, $E0, $18, TwoPt
+L_6_A2C3: .BYTE MoveBall, $F0, $F0, MoveBall, $F0, $08, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A2CC: .BYTE SetBall, $00, $18, TwoPt, Random7, <L_6_A2DB, >L_6_A2DB
+L_6_A2D3: .BYTE Stand, $3C, MoveBall, $F8, $C8, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A2DB: .BYTE MoveBall, $28, $D8, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A2E1: .BYTE SetBall, $18, $0C, TwoPt
+L_6_A2E5: .BYTE RandomB, <L_6_A2EC, >L_6_A2EC, CPUJuice, <L_6_AADC, >L_6_AADC, $06
+L_6_A2EC: .BYTE MoveBall, $28, $00, MoveBall, $28, $28, Turn, $14, Jump, <L_6_AABC, >L_6_AABC
+L_6_A2F7: .BYTE SetMiddle, $36, $28, TwoPt, Turn, $14, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A300: .BYTE SetMiddle, $C0, $28, TwoPt
+L_6_A304: .BYTE Move, $00, $90, Jump, <L_6_AABC, >L_6_AABC
+L_6_A30A: .BYTE SetBall, $C8, $50, TwoPt, Random7, <L_6_A315, >L_6_A315, CPUJuice, <L_6_AAD8, >L_6_AAD8, $01
+L_6_A315: .BYTE Turn, $0A, MoveBall, $F8, $B0, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A31D: .BYTE SetBall, $18, $50, TwoPt, Random7, <L_6_BDEC, >L_6_BDEC, MoveBall, $E8, $98, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A32A: .BYTE SetBall, $08, $08, ThreePt, MoveBall, $08, $0C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A334: .BYTE SetBall, $C8, $10, TwoPt, MoveBall, $D8, $F8, MoveBall, $D8, $00, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A341: .BYTE SetBall, $00, $18, TwoPt
+L_6_A345: .BYTE Random7, <L_6_A353, >L_6_A353, Turn, $14, MoveBall, $F8, $C8, MoveBall, $E8, $C0, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A353: .BYTE Turn, $3C, MoveBall, $10, $C8, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A35B: .BYTE SetBall, $18, $0C, TwoPt, Random7, <L_6_A366, >L_6_A366, CPUJuice, <L_6_AADC, >L_6_AADC, $06
+L_6_A366: .BYTE MoveBall, $20, $00, MoveBall, $20, $08, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A36F: .BYTE SetMiddle, $36, $28, TwoPt, Turn, $0A, MoveMiddle, $36, $C0, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A37B: .BYTE SetBall, $00, $18, TwoPt
+L_6_A37F: .BYTE Random6, <L_6_A345, >L_6_A345, MoveBall, $F0, $D0, Turn, $14, Jump, <L_6_AABC, >L_6_AABC
+L_6_A38A: .BYTE SetBall, $C8, $50, TwoPt
+L_6_A38E: .BYTE Random4, <L_6_A395, >L_6_A395, CPUJuice, <L_6_AAD8, >L_6_AAD8, $04
+L_6_A395: .BYTE MoveBall, $08, $B8, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A39B: .BYTE SetBall, $18, $50, TwoPt
+L_6_A39F: .BYTE Turn, $14, MoveBall, $E8, $81, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A3A7: .BYTE SetBall, $F0, $08, ThreePt, MoveBall, $EA, $F8, MoveBall, $E4, $0C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A3B4: .BYTE SetBall, $E0, $18, TwoPt, Stand, $3C, MoveBall, $F0, $D0, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A3C0: .BYTE SetBall, $00, $18, TwoPt
+L_6_A3C4: .BYTE MoveBall, $F0, $06, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A3CA: .BYTE SetBall, $18, $0C, TwoPt, MoveBall, $14, $0C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A3D4: .BYTE SetBall, $C8, $10, TwoPt, SetGrab, %11111111, %11100000, MoveBall, $E0, $0C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A3E1: .BYTE SetBall, $E0, $18, TwoPt
+L_6_A3E5: .BYTE Stand, $14, MoveBall, $F0, $D0, Stand, $5A, Jump, <L_6_AABC, >L_6_AABC
+L_6_A3EF: .BYTE SetBall, $00, $18, TwoPt
+L_6_A3F3: .BYTE Turn, $3C, MoveBall, $10, $C8, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A3FB: .BYTE SetBall, $08, $08, ThreePt, MoveBall, $14, $00, MoveBall, $14, $0C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A408: .BYTE SetBall, $08, $08, ThreePt, MoveBall, $10, $08, MoveBall, $10, $10, MoveBall, $08, $1C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A418: .BYTE SetBall, $E0, $18, TwoPt, RandomB, <L_6_A423, >L_6_A423, CPUJuice, <L_6_AADC, >L_6_AADC, $0A
+L_6_A423: .BYTE Stand, $0A, MoveBall, $D8, $D0, Turn, $5A, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A42D: .BYTE SetBall, $00, $18, TwoPt, Stand, $12, MoveBall, $10, $C8, Turn, $64, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A43B: .BYTE SetBall, $18, $0C, TwoPt, MoveBall, $20, $00, MoveBall, $20, $1C, MoveBall, $10, $2C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A44B: .BYTE SetBall, $E0, $18, TwoPt
+L_6_A44F: .BYTE Stand, $14, Random7, <L_6_A45C, >L_6_A45C, MoveBall, $F0, $C8, Turn, $5A, Jump, <L_6_AABC, >L_6_AABC
+L_6_A45C: .BYTE MoveBall, $10, $E0, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A462: .BYTE SetBall, $00, $18, TwoPt, MoveBall, $0C, $F8, MoveBall, $0C, $1C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A46F: .BYTE SetBall, $18, $0C, TwoPt
+L_6_A473: .BYTE Stand, $1E, MoveBall, $20, $00, MoveBall, $20, $28, MoveBall, $14, $3C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A481: .BYTE SetBall, $E0, $18, TwoPt
+L_6_A485: .BYTE Stand, $32, MoveBall, $C8, $D0, MoveBall, $B0, $C8, Turn, $C8, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A492: .BYTE SetBall, $00, $18, TwoPt, Stand, $3C, MoveBall, $E0, $C8, MoveBall, $D0, $C0, Turn, $3C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A4A3: .BYTE SetBall, $18, $0C, TwoPt
+L_6_A4A7: .BYTE CPUJuice, <L_6_AADC, >L_6_AADC, $01, MoveBall, $28, $08, Stand, $3C, MoveBall, $20, $F0, MoveBall, $00, $D0, MoveBall, $E8, $C8, Turn, $50, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A4BE: .BYTE SetBall, $00, $18, TwoPt, Stand, $0A, MoveBall, $F8, $D8, Turn, $14, MoveBall, $10, $F8, Turn, $28, MoveBall, $10, $18, MoveBall, $0C, $2C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A4D7: .BYTE SetBall, $18, $0C, TwoPt
+L_6_A4DB: .BYTE MoveBall, $20, $F8, MoveBall, $20, $08, Turn, $8C, MoveBall, $20, $28, MoveBall, $14, $3C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A4EC: .BYTE SetBall, $C8, $10, TwoPt
+L_6_A4F0: .BYTE CPUJuice, <L_6_AADC, >L_6_AADC, $01, Turn, $0A, MoveBall, $C8, $E0, MoveBall, $08, $D0, Turn, $3C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A501: .BYTE SetBall, $08, $08, ThreePt, MoveBall, $04, $F4, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A50B: .BYTE SetBall, $E0, $18, TwoPt
+L_6_A50F: .BYTE MoveBall, $D8, $F0, Turn, $28, MoveBall, $E8, $D0, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A51A: .BYTE SetBall, $18, $0C, TwoPt, MoveBall, $18, $F8, MoveBall, $18, $08, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A527: .BYTE SetBall, $18, $0C, TwoPt, MoveBall, $20, $00, MoveBall, $20, $10, MoveBall, $18, $18, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A537: .BYTE SetMiddle, $C0, $28, TwoPt
+L_6_A53B: .BYTE MoveMiddle, $C0, $00, MoveBall, $20, $28, Turn, $50, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A546: .BYTE SetBall, $D8, $08, ThreePt, MoveBall, $D8, $20, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A550: .BYTE SetBall, $C8, $10, TwoPt
+L_6_A554: .BYTE MoveBall, $BC, $00, MoveBall, $BC, $38, Turn, $5A, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A55F: .BYTE SetBall, $E0, $18, TwoPt, MoveBall, $D0, $F0, MoveBall, $D0, $0C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A56C: .BYTE SetBall, $00, $18, TwoPt, MoveBall, $10, $F0, MoveBall, $10, $08, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A579: .BYTE SetBall, $18, $0C, TwoPt
+L_6_A57D: .BYTE CPUJuice, <L_6_AADC, >L_6_AADC, $05, MoveBall, $28, $08, MoveBall, $28, $30, Turn, $5A, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A58C: .BYTE SetBall, $08, $08, ThreePt, MoveBall, $18, $08, MoveBall, $18, $20, Turn, $64, MoveBall, $18, $F8, MoveBall, $08, $E0, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A5A1: .BYTE SetBall, $C8, $10, TwoPt, MoveBall, $D0, $F4, MoveBall, $D0, $00, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A5AE: .BYTE MoveBall, $E8, $D8, MoveBall, $08, $C8, Turn, $3C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A5B9: .BYTE SetBall, $00, $18, TwoPt, MoveBall, $00, $00, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A5C3: .BYTE SetBall, $08, $08, ThreePt, Turn, $0A, MoveBall, $08, $E8, MoveBall, $D0, $D8, MoveBall, $B8, $D8, Turn, $50, Jump, <L_6_AABC, >L_6_AABC
+L_6_A5D7: .BYTE SetBall, $E0, $18, TwoPt, CPUJuice, <L_6_A5ED, >L_6_A5ED, $06, MoveBall, $D0, $E8, MoveBall, $C0, $00, Turn, $1E, MoveBall, $C0, $18, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A5ED: .BYTE Random7, <L_6_BDFC, >L_6_BDFC, MoveBall, $28, $E8, Jump, <L_6_BDF0, >L_6_BDF0
+L_6_A5F6: .BYTE SetBall, $18, $0C, TwoPt
+L_6_A5FA: .BYTE Turn, $0A, MoveBall, $18, $E0, MoveBall, $D8, $C0, MoveBall, $C0, $C0, Turn, $50, Jump, <L_6_AABC, >L_6_AABC
+L_6_A60A: .BYTE SetBall, $F0, $08, ThreePt, MoveBall, $E8, $F8, MoveBall, $E0, $08, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A617: .BYTE SetBall, $08, $08, ThreePt, MoveBall, $00, $00, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A621: .BYTE SetBall, $E0, $18, TwoPt, Stand, $3C, MoveBall, $E8, $C8, Turn, $14, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A62F: .BYTE SetBall, $18, $0C, TwoPt, MoveBall, $10, $FC, MoveBall, $10, $08, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A63C: .BYTE SetBall, $F0, $08, ThreePt, MoveBall, $F0, $E0, Turn, $3C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A648: .BYTE SetBall, $E0, $18, TwoPt, MoveBall, $E8, $F0, MoveBall, $E8, $00, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A655: .BYTE SetBall, $18, $0C, TwoPt
+L_6_A659: .BYTE MoveBall, $18, $00, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A65F: .BYTE SetBall, $E0, $18, TwoPt, Random4, <L_6_A66A, >L_6_A66A, CPUJuice, <L_6_AAD6, >L_6_AAD6, $06
+L_6_A66A: .BYTE MoveBall, $E0, $D8, Turn, $08, MoveBall, $C8, $C8, MoveBall, $BC, $B8, Turn, $50, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A67A: .BYTE SetBall, $00, $18, TwoPt, Random4, <L_6_A685, >L_6_A685, CPUJuice, <L_6_AAD6, >L_6_AAD6, $0A
+L_6_A685: .BYTE MoveBall, $08, $D8, Turn, $0A, MoveBall, $20, $D0, MoveBall, $28, $C8, Turn, $3C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A695: .BYTE SetBall, $C8, $10, TwoPt, Random9, <L_6_A1C1, >L_6_A1C1, Turn, $1E, MoveBall, $D0, $E8, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A6A4: .BYTE SetBall, $18, $0C, TwoPt, Random9, <L_6_A2E5, >L_6_A2E5, Turn, $1E, MoveBall, $10, $E8, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A6B3: .BYTE SetBall, $C8, $50, TwoPt, Random9, <L_6_BDEC, >L_6_BDEC, MoveBall, $D8, $C8, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A6C0: .BYTE SetBall, $18, $50, TwoPt, Random9, <L_6_BDEC, >L_6_BDEC, MoveBall, $08, $C0, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A6CD: .BYTE SetBall, $08, $08, ThreePt, MoveBall, $0C, $18, MoveBall, $0C, $30, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A6DA: .BYTE SetBall, $E0, $18, TwoPt, Turn, $32, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A6E3: .BYTE SetBall, $00, $18, TwoPt, MoveBall, $10, $F8, MoveBall, $10, $20, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A6F0: .BYTE SetBall, $08, $08, ThreePt, MoveBall, $18, $0C, Turn, $32, MoveBall, $18, $F8, MoveBall, $F0, $E0, Turn, $64, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A704: .BYTE SetBall, $D8, $08, ThreePt
+L_6_A708: .BYTE SetRS, $0F, BoostRS, $30, BoostHP, $30, MoveBall, $D8, $08, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A714: .BYTE SetBall, $F0, $08, ThreePt
+L_6_A718: .BYTE SetRS, $0F, BoostRS, $30, BoostHP, $20, Stand, $28, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A723: .BYTE SetBall, $08, $08, ThreePt
+L_6_A727: .BYTE SetRS, $0F, BoostRS, $30, BoostHP, $30, MoveBall, $08, $08, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A733: .BYTE SetBall, $C8, $10, TwoPt
+L_6_A737: .BYTE SetRS, $0F, BoostRS, $30, BoostHP, $30, MoveBall, $C4, $08, Jump, <L_6_AABC, >L_6_AABC
+L_6_A743: .BYTE SetBall, $E0, $18, TwoPt
+L_6_A747: .BYTE SetRS, $0F, BoostRS, $30, BoostHP, $30, MoveBall, $E4, $00, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A753: .BYTE SetBall, $00, $18, TwoPt
+L_6_A757: .BYTE SetRS, $0F, BoostRS, $30, BoostHP, $30, MoveBall, $FC, $00, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A763: .BYTE SetBall, $18, $0C, TwoPt
+L_6_A767: .BYTE SetRS, $0F, BoostRS, $30, BoostHP, $30, MoveBall, $20, $08, Jump, <L_6_AABC, >L_6_AABC
+L_6_A773: .BYTE SetMiddle, $36, $28, TwoPt
+L_6_A777: .BYTE SetRS, $0F, BoostRS, $30, BoostHP, $30, MoveMiddle, $36, $00, Jump, <L_6_AABC, >L_6_AABC
+L_6_A783: .BYTE SetMiddle, $C0, $28, TwoPt, SetRS, $0F, BoostRS, $30, BoostHP, $30, MoveMiddle, $C0, $00, Jump, <L_6_AABC, >L_6_AABC
+L_6_A793: .BYTE SetBall, $C8, $50, TwoPt
+L_6_A797: .BYTE SetRS, $0F, BoostRS, $30, BoostHP, $30, MoveBall, $C4, $C8, Jump, <L_6_AABC, >L_6_AABC
+L_6_A7A3: .BYTE SetBall, $18, $50, TwoPt, SetRS, $0F, BoostRS, $30, BoostHP, $30, MoveBall, $24, $C8, Jump, <L_6_AABC, >L_6_AABC
+L_6_A7B3: .BYTE SetBall, $00, $18, TwoPt
+L_6_A7B7: .BYTE MoveBall, $08, $D0, Turn, $28, Jump, <L_6_AAC2, >L_6_AAC2
+L_6_A7BF: .BYTE SetMiddle, $36, $28, TwoPt
+L_6_A7C3: .BYTE BoostRS, $04, MoveMiddle, $36, $B0, Move, $40, $B8, Jump, <L_6_AABC, >L_6_AABC
+L_6_A7CE: .BYTE SetBall, $E0, $18, TwoPt
+L_6_A7D2: .BYTE MoveBall, $D8, $E0, MoveBall, $D8, $C8, MoveBall, $00, $A0, Jump, <L_6_AABC, >L_6_AABC
+L_6_A7DE: .BYTE SetBall, $C8, $50, TwoPt, RandomA, <L_6_A7EB, >L_6_A7EB
+L_6_A7E5: .BYTE Move, $30, $90, Jump, <L_6_AABC, >L_6_AABC
+L_6_A7EB: .BYTE MoveBall, $D0, $D8, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A7F1: .BYTE SetBall, $E0, $18, TwoPt
+L_6_A7F5: .BYTE MoveBall, $F0, $C8, MoveBall, $10, $C8, Jump, <L_6_AABC, >L_6_AABC
+L_6_A7FE: .BYTE SetBall, $00, $18, TwoPt
+L_6_A802: .BYTE MoveBall, $08, $F0, Jump, <L_6_AAC2, >L_6_AAC2
+L_6_A808: .BYTE SetMiddle, $C0, $28, TwoPt
+L_6_A80C: .BYTE MoveBall, $0C, $E0, Wait, $01, $28, Jump, <L_6_AABC, >L_6_AABC
+L_6_A815: .BYTE SetBall, $18, $50, TwoPt
+L_6_A819: .BYTE Move, $08, $D0, Stand, $01, Face, $00, Wait, $01, $28, Jump, <L_6_AABC, >L_6_AABC
+L_6_A826: .BYTE SetMiddle, $36, $28, TwoPt, Random4, <L_6_A1F7, >L_6_A1F7, Jump, <L_6_A7C3, >L_6_A7C3
+L_6_A830: .BYTE SetBall, $08, $08, ThreePt, Random6, <L_6_A1B7, >L_6_A1B7, BoostHP, $20, Jump, <L_6_A1B7, >L_6_A1B7
+L_6_A83C: .BYTE SetBall, $E0, $18, TwoPt, Random5, <L_6_A1CC, >L_6_A1CC, Jump, <L_6_A7D2, >L_6_A7D2
+L_6_A846: .BYTE SetMiddle, $36, $28, TwoPt
+L_6_A84A: .BYTE Random9, <L_6_BDEC, >L_6_BDEC, Random7, <L_6_A1F7, >L_6_A1F7, Jump, <L_6_A7C3, >L_6_A7C3
+L_6_A853: .BYTE SetBall, $C8, $50, TwoPt, Random4, <L_6_A20D, >L_6_A20D, Jump, <L_6_A7E5, >L_6_A7E5
+L_6_A85D: .BYTE SetBall, $E0, $18, TwoPt, RandomA, <L_6_A7D2, >L_6_A7D2, Jump, <L_6_A7F5, >L_6_A7F5
+L_6_A867: .BYTE SetBall, $00, $18, TwoPt, RandomA, <L_6_A7B7, >L_6_A7B7, Jump, <L_6_A802, >L_6_A802
+L_6_A871: .BYTE SetMiddle, $C0, $28, TwoPt, Random7, <L_6_A80C, >L_6_A80C, Wait, $50, $78, Jump, <L_6_AABC, >L_6_AABC
+L_6_A87E: .BYTE SetBall, $18, $50, TwoPt, RandomC, <L_6_A21A, >L_6_A21A, Jump, <L_6_A819, >L_6_A819
+L_6_A888: .BYTE SetBall, $C8, $10, TwoPt
+L_6_A88C: .BYTE CPUJuice, <L_6_AADC, >L_6_AADC, $0A, MoveBall, $BC, $D8, MoveBall, $BC, $81, Move, $40, $C0, Jump, <L_6_AABC, >L_6_AABC
+L_6_A89C: .BYTE SetBall, $18, $50, TwoPt
+L_6_A8A0: .BYTE CPUJuice, <L_6_AAD8, >L_6_AAD8, $03, MoveBall, $E8, $90, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A8AA: .BYTE SetBall, $C8, $10, TwoPt, Random7, <L_6_A23A, >L_6_A23A, Jump, <L_6_A88C, >L_6_A88C
+L_6_A8B4: .BYTE SetBall, $C8, $50, TwoPt, Random3, <L_6_A7E5, >L_6_A7E5, Jump, <L_6_A288, >L_6_A288
+L_6_A8BE: .BYTE SetMiddle, $36, $28, TwoPt, Stand, $1E, MoveBall, $C8, $C8, Jump, <L_6_AAC2, >L_6_AAC2
+L_6_A8CA: .BYTE SetBall, $E0, $18, TwoPt, Random7, <L_6_A145, >L_6_A145, Jump, <L_6_AAC2, >L_6_AAC2
+L_6_A8D4: .BYTE SetBall, $18, $50, TwoPt
+L_6_A8D8: .BYTE MoveBall, $D0, $E0, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A8DE: .BYTE SetMiddle, $C0, $28, TwoPt, Move, $00, $30, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A8E8: .BYTE SetBall, $C8, $10, TwoPt, Jump, <L_6_AAC2, >L_6_AAC2
+L_6_A8EF: .BYTE SetMiddle, $C0, $28, TwoPt
+L_6_A8F3: .BYTE Turn, $14, CPUJuice, <L_6_AAD8, >L_6_AAD8, $01, Turn, $14, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A8FE: .BYTE SetMiddle, $C0, $28, TwoPt
+L_6_A902: .BYTE Random7, <L_6_AAC2, >L_6_AAC2, Loop, L_6_A8F3 + 1 - *
+L_6_A907: .BYTE SetBall, $F0, $08, ThreePt, RandomC, <L_6_AAAD, >L_6_AAAD, Jump, <L_6_A718, >L_6_A718
+L_6_A911: .BYTE SetBall, $E0, $18, TwoPt, RandomC, <L_6_A145, >L_6_A145, Jump, <L_6_A747, >L_6_A747
+L_6_A91B: .BYTE SetBall, $00, $18, TwoPt, RandomC, <L_6_A24E, >L_6_A24E, Stand, $1E, Jump, <L_6_A757, >L_6_A757
+L_6_A927: .BYTE SetBall, $18, $0C, TwoPt, RandomC, <L_6_A258, >L_6_A258, Stand, $28, Jump, <L_6_AAC5, >L_6_AAC5
+L_6_A933: .BYTE SetBall, $C8, $50, TwoPt
+L_6_A937: .BYTE CPUJuice, <L_6_AAD8, >L_6_AAD8, $08, MoveBall, $E8, $98, RandomB, <L_6_A947, >L_6_A947, MoveBall, $30, $90, Jump, <L_6_AABC, >L_6_AABC
+L_6_A947: .BYTE MoveBall, $20, $90, Jump, <L_6_AABC, >L_6_AABC
+L_6_A94D: .BYTE SetBall, $18, $50, TwoPt
+L_6_A951: .BYTE MoveBall, $00, $C8, Wait, $32, $5A, MoveBall, $18, $C8, Turn, $14, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A95F: .BYTE SetBall, $C8, $50, TwoPt, CPUJuice, <L_6_AAD8, >L_6_AAD8, $05, Random4, <L_6_A185, >L_6_A185, Jump, <L_6_A937, >L_6_A937
+L_6_A96D: .BYTE SetBall, $18, $50, TwoPt, CPUJuice, <L_6_AAD8, >L_6_AAD8, $01, Random4, <L_6_A190, >L_6_A190, Jump, <L_6_A951, >L_6_A951
+L_6_A97B: .BYTE SetMiddle, $36, $28, TwoPt, Random7, <L_6_A16D, >L_6_A16D, MoveBall, $E8, $A8, MoveBall, $10, $A8, Jump, <L_6_AABC, >L_6_AABC
+L_6_A98B: .BYTE SetBall, $18, $0C, TwoPt, Random7, <L_6_BDEC, >L_6_BDEC, Turn, $14, MoveBall, $10, $E8, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A99A: .BYTE SetBall, $00, $18, TwoPt, Stand, $14, Random5, <L_6_A14F, >L_6_A14F, Move, $20, $00, Jump, <L_6_AAC2, >L_6_AAC2
+L_6_A9A9: .BYTE SetBall, $18, $0C, TwoPt, Wait, $14, $5A, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A9B3: .BYTE SetMiddle, $C0, $28, TwoPt, RandomA, <L_6_A17A, >L_6_A17A, Wait, $14, $64, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_A9C0: .BYTE SetBall, $18, $50, TwoPt, CPUJuice, <L_6_AAD8, >L_6_AAD8, $03, Random7, <L_6_A951, >L_6_A951, Wait, $14, $82, Jump, <L_6_AABC, >L_6_AABC
+L_6_A9D1: .BYTE SetBall, $C8, $10, TwoPt, Random9, <L_6_A88C, >L_6_A88C, MoveBall, $E8, $E0, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A9DE: .BYTE SetBall, $00, $18, TwoPt, RandomB, <L_6_A2D3, >L_6_A2D3, Stand, $14, MoveBall, $F0, $C8, Random7, <L_6_AABC, >L_6_AABC, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_A9F0: .BYTE SetBall, $18, $0C, TwoPt, CPUJuice, <L_6_AADC, >L_6_AADC, $0A, MoveBall, $28, $00, MoveBall, $28, $D8, MoveBall, $00, $B8, Jump, <L_6_AABC, >L_6_AABC
+L_6_AA04: .BYTE SetBall, $18, $50, TwoPt
+L_6_AA08: .BYTE MoveBall, $E8, $98, MoveBall, $B8, $90, Jump, <L_6_AABC, >L_6_AABC
+L_6_AA11: .BYTE SetBall, $D8, $08, ThreePt, Stand, $1E, Jump, <L_6_A708, >L_6_A708
+L_6_AA1A: .BYTE SetBall, $F0, $08, ThreePt, Stand, $1E, Jump, <L_6_A718, >L_6_A718
+L_6_AA23: .BYTE SetBall, $08, $08, ThreePt, Stand, $1E, Jump, <L_6_A727, >L_6_A727
+L_6_AA2C: .BYTE SetBall, $C8, $10, TwoPt, Stand, $1E, Jump, <L_6_A737, >L_6_A737
+L_6_AA35: .BYTE SetBall, $E0, $18, TwoPt, Stand, $1E, Jump, <L_6_A747, >L_6_A747
+L_6_AA3E: .BYTE SetBall, $00, $18, TwoPt, Stand, $1E, Jump, <L_6_A757, >L_6_A757
+L_6_AA47: .BYTE SetBall, $18, $0C, TwoPt, Stand, $1E, Jump, <L_6_A767, >L_6_A767
+L_6_AA50: .BYTE SetBall, $00, $18, TwoPt, Jump, <L_6_AAC2, >L_6_AAC2
+L_6_AA57: .BYTE SetMiddle, $36, $28, TwoPt, Move, $00, $20, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_AA61: .BYTE SetMiddle, $C0, $28, TwoPt, Random7, <L_6_A304, >L_6_A304, Jump, <L_6_AABC, >L_6_AABC
+L_6_AA6B: .BYTE SetBall, $C8, $50, TwoPt
+L_6_AA6F: .BYTE CPUJuice, <L_6_AAD8, >L_6_AAD8, $03, MoveBall, $B8, $D8, Wait, $0A, $46, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_AA7C: .BYTE SetBall, $18, $0C, TwoPt, Jump, <L_6_AABC, >L_6_AABC
+L_6_AA83: .BYTE SetBall, $C8, $50, TwoPt, Random9, <L_6_AA6F, >L_6_AA6F, Jump, <L_6_AAC2, >L_6_AAC2
+L_6_AA8D: .BYTE SetBall, $C8, $50, TwoPt
+L_6_AA91: .BYTE CPUJuice, <L_6_AAD8, >L_6_AAD8, $07, RandomB, <L_6_AAA0, >L_6_AAA0, MoveBall, $C0, $C0, Stand, $50, Jump, <L_6_AABC, >L_6_AABC
+L_6_AAA0: .BYTE MoveBall, $B8, $90, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AAA6: .BYTE SetBall, $18, $50, TwoPt, Jump, <L_6_AAC2, >L_6_AAC2
+L_6_AAAD: .BYTE SetGrab, %11111111, %11100000, RunRush, Loop, L_6_AAAD + 1 - *
+L_6_AAB3: .BYTE Control
+L_6_AAB4: .BYTE SetGrab, %11111111, %11100000, PassRush, Loop, L_6_AAB4 + 1 - *
+L_6_AABA: .BYTE BoostRS, $16
+L_6_AABC: .BYTE SetGrab, %11111111, %11100000, PassRush, Loop, L_6_AABC + 1 - *
+L_6_AAC2: .BYTE Mirror, Loop, L_6_AAC2 + 1 - *
+L_6_AAC5: .BYTE BoostHP, $30, BoostRP, $08, BoostRS, $08, Loop, L_6_AABC + 1 - *
+L_6_AACD: .BYTE BoostRS, $10, SwitchIcon, SetMS, $00, Control
+L_6_AAD3: .BYTE CPUControl, Loop, L_6_AAD3 + 1 - *
+L_6_AAD6: .BYTE Turn, $46
+L_6_AAD8: .BYTE BoostHP, $30, Loop, L_6_AABC + 1 - *
+L_6_AADC: .BYTE BoostHP, $30, Loop, L_6_AAC2 + 1 - *
+L_6_AAE0: .BYTE SetBall, $00, $18, TwoPt
+L_6_AAE4: .BYTE Random9, <L_6_A37F, >L_6_A37F, Jump, <L_6_AAC2, >L_6_AAC2
+L_6_AAEA: .BYTE SetBall, $C8, $50, TwoPt, Random7, <L_6_AA91, >L_6_AA91, Jump, <L_6_A38E, >L_6_A38E
+L_6_AAF4: .BYTE SetBall, $E0, $18, TwoPt, RandomB, <L_6_A50F, >L_6_A50F, MoveBall, $E0, $E0, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AB01: .BYTE SetMiddle, $36, $28, TwoPt, RandomB, <L_6_A268, >L_6_A268, MoveBall, $D0, $9C, MoveBall, $F0, $90, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AB11: .BYTE SetMiddle, $C0, $28, TwoPt, Random7, <L_6_A8F3, >L_6_A8F3, MoveMiddle, $C0, $A0, MoveMiddle, $C8, $81, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AB21: .BYTE SetBall, $18, $50, TwoPt, CPUJuice, <L_6_AAD8, >L_6_AAD8, $01, Random7, <L_6_A8A0, >L_6_A8A0, MoveBall, $30, $C0, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AB32: .BYTE SetBall, $C8, $10, TwoPt, Random7, <L_6_A1C1, >L_6_A1C1
+L_6_AB39: .BYTE CPUJuice, <L_6_AADC, >L_6_AADC, $06, MoveBall, $C8, $E0, MoveBall, $D8, $C8, Turn, $3C, Jump, <L_6_AABC, >L_6_AABC
+L_6_AB48: .BYTE SetBall, $C8, $50, TwoPt, Jump, <L_6_AAC2, >L_6_AAC2
+L_6_AB4F: .BYTE SetBall, $00, $18, TwoPt, Random7, <L_6_A3C4, >L_6_A3C4, Random7, <L_6_AB61, >L_6_AB61
+L_6_AB59: .BYTE MoveBall, $34, $D8, Turn, $32, Jump, <L_6_AABC, >L_6_AABC
+L_6_AB61: .BYTE MoveBall, $F8, $D8, MoveBall, $F8, $B8, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AB6A: .BYTE SetBall, $C8, $10, TwoPt, Jump, <L_6_AB39, >L_6_AB39
+L_6_AB71: .BYTE SetBall, $E0, $18, TwoPt, MoveBall, $E8, $D8, Jump, <L_6_AAC2, >L_6_AAC2
+L_6_AB7B: .BYTE SetBall, $00, $18, TwoPt, Jump, <L_6_AB59, >L_6_AB59
+L_6_AB82: .BYTE SetMiddle, $36, $28, TwoPt, Move, $00, $D0, Jump, <L_6_AABC, >L_6_AABC
+L_6_AB8C: .BYTE SetBall, $18, $0C, TwoPt, Jump, <L_6_AAC5, >L_6_AAC5
+L_6_AB93: .BYTE SetMiddle, $36, $28, TwoPt
+L_6_AB97: .BYTE RandomB, <L_6_AB9E, >L_6_AB9E
+L_6_AB9A: .BYTE CPUJuice, <L_6_AAD8, >L_6_AAD8, $01
+L_6_AB9E: .BYTE MoveBall, $DC, $D8, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_ABA4: .BYTE SetBall, $00, $18, TwoPt, RandomB, <L_6_A3F3, >L_6_A3F3, MoveBall, $E8, $C0, Turn, $3C, Jump, <L_6_AABC, >L_6_AABC
+L_6_ABB3: .BYTE SetBall, $E0, $18, TwoPt, RandomC, <L_6_A3E5, >L_6_A3E5, Wait, $0A, $32, Jump, <L_6_AABC, >L_6_AABC
+L_6_ABC0: .BYTE SetBall, $18, $0C, TwoPt
+L_6_ABC4: .BYTE Random7, <L_6_BDEC, >L_6_BDEC, MoveBall, $18, $C8, Jump, <L_6_AABC, >L_6_AABC
+L_6_ABCD: .BYTE SetMiddle, $36, $28, TwoPt, Wait, $0A, $5A
+L_6_ABD4: .BYTE Random7, <L_6_ABDD, >L_6_ABDD, MoveBall, $C0, $B0, Jump, <L_6_AABC, >L_6_AABC
+L_6_ABDD: .BYTE MoveBall, $D8, $DC, Jump, <L_6_AABC, >L_6_AABC
+L_6_ABE3: .BYTE SetMiddle, $C0, $28, TwoPt, Wait, $0A, $5A
+L_6_ABEA: .BYTE Random7, <L_6_ABF3, >L_6_ABF3, MoveBall, $30, $B0, Jump, <L_6_AABC, >L_6_AABC
+L_6_ABF3: .BYTE MoveBall, $20, $DC, Jump, <L_6_AABC, >L_6_AABC
+L_6_ABF9: .BYTE SetBall, $C8, $50, TwoPt, Wait, $0A, $5A
+L_6_AC00: .BYTE Random7, <L_6_AC07, >L_6_AC07, CPUJuice, <L_6_AAD8, >L_6_AAD8, $01
+L_6_AC07: .BYTE Random7, <L_6_AC10, >L_6_AC10, MoveBall, $E8, $D0, Jump, <L_6_AABC, >L_6_AABC
+L_6_AC10: .BYTE MoveBall, $F0, $A8, Jump, <L_6_AABC, >L_6_AABC
+L_6_AC16: .BYTE SetBall, $18, $50, TwoPt, Wait, $0A, $5A
+L_6_AC1D: .BYTE Random7, <L_6_AC24, >L_6_AC24, CPUJuice, <L_6_AAD8, >L_6_AAD8, $03
+L_6_AC24: .BYTE Random7, <L_6_AC2D, >L_6_AC2D, MoveBall, $00, $D0, Jump, <L_6_AABC, >L_6_AABC
+L_6_AC2D: .BYTE MoveBall, $10, $90, Jump, <L_6_AABC, >L_6_AABC
+L_6_AC33: .BYTE SetMiddle, $36, $28, TwoPt
+L_6_AC37: .BYTE RandomB, <L_6_ABD4, >L_6_ABD4, Jump, <L_6_ACF1, >L_6_ACF1
+L_6_AC3D: .BYTE SetBall, $C8, $50, TwoPt
+L_6_AC41: .BYTE RandomB, <L_6_AC00, >L_6_AC00, Jump, <L_6_AABC, >L_6_AABC
+L_6_AC47: .BYTE SetBall, $18, $50, TwoPt
+L_6_AC4B: .BYTE RandomB, <L_6_AC1D, >L_6_AC1D, Jump, <L_6_AABC, >L_6_AABC
+L_6_AC51: .BYTE SetBall, $E0, $18, TwoPt, Turn, $3C, Jump, <L_6_AABC, >L_6_AABC
+L_6_AC5A: .BYTE SetBall, $18, $0C, TwoPt, Wait, $82, $AA, MoveBall, $10, $F0, Jump, <L_6_AABC, >L_6_AABC
+L_6_AC67: .BYTE SetMiddle, $36, $28, TwoPt, Stand, $1E, Move, $00, $E8, Turn, $28, Jump, <L_6_AABC, >L_6_AABC
+L_6_AC75: .BYTE SetMiddle, $C0, $28, TwoPt, CPUJuice, <L_6_AAD8, >L_6_AAD8, $06, Stand, $14, Move, $00, $E8, Turn, $28, Jump, <L_6_AABC, >L_6_AABC
+L_6_AC87: .BYTE SetBall, $C8, $50, TwoPt, Turn, $32, Jump, <L_6_AABC, >L_6_AABC
+L_6_AC90: .BYTE SetBall, $18, $50, TwoPt
+L_6_AC94: .BYTE MoveBall, $08, $A0, Turn, $3C, Jump, <L_6_AABC, >L_6_AABC
+L_6_AC9C: .BYTE SetMiddle, $36, $28, TwoPt, Random9, <L_6_ACAB, >L_6_ACAB, Turn, $28, MoveMiddle, $36, $81, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_ACAB: .BYTE Turn, $5A, Jump, <L_6_ABD4, >L_6_ABD4
+L_6_ACB0: .BYTE SetMiddle, $C0, $28, TwoPt, Random9, <L_6_ACBB, >L_6_ACBB, CPUJuice, <L_6_AAD8, >L_6_AAD8, $01
+L_6_ACBB: .BYTE Random9, <L_6_ACC6, >L_6_ACC6, Turn, $28, MoveMiddle, $C0, $81, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_ACC6: .BYTE Turn, $5A, Jump, <L_6_ABEA, >L_6_ABEA
+L_6_ACCB: .BYTE SetBall, $18, $0C, TwoPt, Random9, <L_6_A473, >L_6_A473
+L_6_ACD2: .BYTE CPUJuice, <L_6_AADC, >L_6_AADC, $0A, MoveBall, $20, $FC, MoveBall, $20, $10, Turn, $1E, MoveBall, $18, $00, Jump, <L_6_AABC, >L_6_AABC
+L_6_ACE4: .BYTE SetBall, $18, $0C, TwoPt, Jump, <L_6_ACD2, >L_6_ACD2
+L_6_ACEB: .BYTE SetMiddle, $36, $28, TwoPt, Turn, $32
+L_6_ACF1: .BYTE MoveBall, $D0, $F0, Jump, <L_6_AABC, >L_6_AABC
+L_6_ACF7: .BYTE SetMiddle, $C0, $28, TwoPt, Random7, <L_6_A53B, >L_6_A53B, Random6, <L_6_A275, >L_6_A275, Jump, <L_6_A902, >L_6_A902
+L_6_AD04: .BYTE SetBall, $C8, $10, TwoPt, Random9, <L_6_A554, >L_6_A554, MoveBall, $C0, $F8, Turn, $0A, Wait, $0A, $2D, MoveBall, $C0, $E0, Jump, <L_6_AABC, >L_6_AABC
+L_6_AD19: .BYTE SetBall, $18, $0C, TwoPt, Random9, <L_6_A57D, >L_6_A57D, MoveBall, $28, $08, Turn, $0A, Wait, $0A, $2D, MoveBall, $28, $E4, Jump, <L_6_AABC, >L_6_AABC
+L_6_AD2E: .BYTE SetBall, $F0, $08, ThreePt, Turn, $14, MoveBall, $DC, $F0, Jump, <L_6_AAC2, >L_6_AAC2
+L_6_AD3A: .BYTE SetBall, $18, $50, TwoPt, Random7, <L_6_A39F, >L_6_A39F, Jump, <L_6_AA08, >L_6_AA08
+L_6_AD44: .BYTE SetBall, $E0, $18, TwoPt, RandomB, <L_6_A5AE, >L_6_A5AE, MoveBall, $C8, $EC, Turn, $46, Jump, <L_6_AABC, >L_6_AABC
+L_6_AD53: .BYTE SetBall, $00, $18, TwoPt, Random6, <L_6_AAE4, >L_6_AAE4, MoveBall, $E0, $D8, Turn, $3C, Jump, <L_6_AABC, >L_6_AABC
+L_6_AD62: .BYTE SetBall, $18, $50, TwoPt, Move, $00, $88, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AD6C: .BYTE SetBall, $C8, $50, TwoPt, Random7, <L_6_BDEC, >L_6_BDEC, Random7, <L_6_A38A, >L_6_A38A, MoveBall, $00, $E8, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AD7C: .BYTE SetMiddle, $36, $28, TwoPt, CPUJuice, <L_6_AAD8, >L_6_AAD8, $01, RandomB, <L_6_BDEC, >L_6_BDEC, MoveMiddle, $36, $28, Turn, $3C, Jump, <L_6_AABC, >L_6_AABC
+L_6_AD8F: .BYTE SetMiddle, $C0, $28, TwoPt, MoveMiddle, $C0, $68, Move, $C8, $E8, Move, $C8, $E8, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AD9F: .BYTE SetBall, $C8, $10, TwoPt, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_ADA6: .BYTE SetBall, $E0, $18, TwoPt, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_ADAD: .BYTE SetBall, $00, $18, TwoPt, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_ADB4: .BYTE SetBall, $18, $0C, TwoPt, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_ADBB: .BYTE SetMiddle, $36, $28, TwoPt, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_ADC2: .BYTE SetMiddle, $C0, $28, TwoPt, CPUJuice, <L_6_B99A, >L_6_B99A, $03, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_ADCD: .BYTE SetBall, $C8, $50, TwoPt, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_ADD4: .BYTE SetBall, $18, $50, TwoPt, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_ADDB: .BYTE SetBall, $E0, $18, TwoPt, Random7, <L_6_A44F, >L_6_A44F, Jump, <L_6_A485, >L_6_A485
+L_6_ADE5: .BYTE SetBall, $18, $0C, TwoPt, Random6, <L_6_A4A7, >L_6_A4A7, Turn, $3C, MoveBall, $18, $E0, MoveBall, $08, $C8, Turn, $1E, Jump, <L_6_AABC, >L_6_AABC
+L_6_ADF9: .BYTE SetMiddle, $36, $28, TwoPt, Random7, <L_6_AB97, >L_6_AB97, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AE03: .BYTE SetMiddle, $C0, $28, TwoPt, MoveMiddle, $C0, $88, Turn, $64, Jump, <L_6_AABC, >L_6_AABC
+L_6_AE0F: .BYTE SetMiddle, $36, $28, TwoPt, MoveBall, $D0, $D8, Turn, $3C, Jump, <L_6_AABC, >L_6_AABC
+L_6_AE1B: .BYTE SetBall, $C8, $10, TwoPt, Turn, $8C, Jump, <L_6_A737, >L_6_A737
+L_6_AE24: .BYTE SetMiddle, $36, $28, TwoPt, Turn, $96, Jump, <L_6_A777, >L_6_A777
+L_6_AE2D: .BYTE SetBall, $C8, $50, TwoPt, Turn, $A0, Jump, <L_6_A797, >L_6_A797
+L_6_AE36: .BYTE SetMiddle, $36, $28, TwoPt, RandomC, <L_6_AE41, >L_6_AE41, CPUJuice, <L_6_AAD8, >L_6_AAD8, $06
+L_6_AE41: .BYTE Turn, $3C, MoveMiddle, $36, $B0, Move, $50, $B0, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AE4C: .BYTE SetBall, $C8, $50, TwoPt
+L_6_AE50: .BYTE Turn, $50, MoveBall, $00, $B8, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AE58: .BYTE SetBall, $18, $50, TwoPt
+L_6_AE5C: .BYTE Turn, $3C, MoveBall, $20, $90, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AE64: .BYTE SetBall, $C8, $10, TwoPt, Random6, <L_6_A4F0, >L_6_A4F0, Turn, $0A, MoveBall, $C8, $E0, MoveBall, $D8, $DC, Turn, $3C, Jump, <L_6_AAC2, >L_6_AAC2
+L_6_AE78: .BYTE SetBall, $C8, $50, TwoPt, Random7, <L_6_AE50, >L_6_AE50, Random7, <L_6_AE88, >L_6_AE88, MoveBall, $D8, $C0, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AE88: .BYTE MoveBall, $B8, $B8, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AE8E: .BYTE SetMiddle, $C0, $28, TwoPt, Random7, <L_6_A304, >L_6_A304, Move, $00, $90, Move, $00, $90, Move, $00, $90, Jump, <L_6_AABC, >L_6_AABC
+L_6_AEA1: .BYTE SetMiddle, $C0, $28, TwoPt, Turn, $50, Jump, <L_6_AABC, >L_6_AABC
+L_6_AEAA: .BYTE SetBall, $18, $50, TwoPt, Random4, <L_6_AE5C, >L_6_AE5C, Jump, <L_6_AAC2, >L_6_AAC2
+L_6_AEB4: .BYTE SetBall, $18, $0C, TwoPt, Move, $F8, $F8, Jump, <L_6_AAC2, >L_6_AAC2
+L_6_AEBE: .BYTE SetBall, $18, $0C, TwoPt, Random9, <L_6_A15F, >L_6_A15F, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AEC8: .BYTE SetMiddle, $36, $28, TwoPt, Random9, <L_6_AC37, >L_6_AC37, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AED2: .BYTE SetMiddle, $C0, $28, TwoPt, Random9, <L_6_A17A, >L_6_A17A, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AEDC: .BYTE SetBall, $C8, $50, TwoPt, Random8, <L_6_AC41, >L_6_AC41, Jump, <L_6_AC00, >L_6_AC00
+L_6_AEE6: .BYTE SetBall, $18, $50, TwoPt, Random8, <L_6_AC4B, >L_6_AC4B, Jump, <L_6_AC1D, >L_6_AC1D
+L_6_AEF0: .BYTE SetBall, $C8, $10, TwoPt
+L_6_AEF4: .BYTE Turn, $14, MoveBall, $D8, $E0, MoveBall, $18, $D8, Turn, $50, Jump, <L_6_AABC, >L_6_AABC
+L_6_AF01: .BYTE SetBall, $E0, $18, TwoPt, CPUJuice, <L_6_B988, >L_6_B988, $06, Turn, $0A, MoveBall, $F0, $D0, MoveBall, $20, $C4, Turn, $50, Jump, <L_6_AABC, >L_6_AABC
+L_6_AF16: .BYTE SetBall, $00, $18, TwoPt, CPUJuice, <L_6_B951, >L_6_B951, $07, Turn, $0A, MoveBall, $10, $D8, MoveBall, $28, $D0, Turn, $50, Jump, <L_6_AABC, >L_6_AABC
+L_6_AF2B: .BYTE SetMiddle, $36, $28, TwoPt, CPUJuice, <L_6_B940, >L_6_B940, $02, MoveMiddle, $36, $B0, Move, $40, $D0, Move, $40, $D0, Jump, <L_6_BDE8, >L_6_BDE8
+L_6_AF3F: .BYTE SetMiddle, $C0, $28, TwoPt
+L_6_AF43: .BYTE Turn, $14, MoveMiddle, $C0, $28, Turn, $64, Jump, <L_6_AABC, >L_6_AABC
+L_6_AF4D: .BYTE SetBall, $C8, $50, TwoPt
+L_6_AF51: .BYTE CPUJuice, <L_6_B94B, >L_6_B94B, $04, MoveBall, $00, $A0, MoveBall, $34, $90, Turn, $78, Jump, <L_6_BE18, >L_6_BE18
+L_6_AF60: .BYTE MoveBall, $30, $A8, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AF66: .BYTE SetMiddle, $36, $28, TwoPt, Random9, <L_6_BE36, >L_6_BE36, Random9, <L_6_BDF4, >L_6_BDF4, MoveBall, $E8, $A8, Turn, $64, Jump, <L_6_BDFC, >L_6_BDFC
+L_6_AF78: .BYTE SetBall, $C8, $10, TwoPt, Random7, <L_6_AEF4, >L_6_AEF4
+L_6_AF7F: .BYTE Turn, $14, MoveBall, $D8, $E0, MoveBall, $E0, $E0, Turn, $1E, MoveBall, $C8, $00, MoveBall, $C8, $28, Wait, $28, $64, Jump, <L_6_AABC, >L_6_AABC
+L_6_AF95: .BYTE SetBall, $18, $50, TwoPt
+L_6_AF99: .BYTE CPUJuice, <L_6_B98E, >L_6_B98E, $05, Random7, <L_6_AF60, >L_6_AF60, MoveBall, $18, $88, Jump, <L_6_B60C, >L_6_B60C
+L_6_AFA6: .BYTE SetMiddle, $C0, $28, TwoPt, Random9, <L_6_BE10, >L_6_BE10, Jump, <L_6_AF43, >L_6_AF43
+L_6_AFB0: .BYTE SetBall, $C8, $50, TwoPt, RandomA, <L_6_BE78, >L_6_BE78, Random9, <L_6_AF51, >L_6_AF51, MoveBall, $B8, $F0, Jump, <L_6_BE08, >L_6_BE08
+L_6_AFC0: .BYTE SetBall, $18, $50, TwoPt, Random6, <L_6_AF99, >L_6_AF99, MoveBall, $E0, $B0, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_AFCD: .BYTE SetBall, $C8, $10, TwoPt, RandomC, <L_6_AEF4, >L_6_AEF4, Jump, <L_6_AF7F, >L_6_AF7F
+L_6_AFD7: .BYTE SetBall, $E0, $18, TwoPt
+L_6_AFDB: .BYTE CPUJuice, <L_6_B97C, >L_6_B97C, $06
+L_6_AFDF: .BYTE Move, $00, $20, Wait, $5A, $C8, Jump, <L_6_AABC, >L_6_AABC
+L_6_AFE8: .BYTE SetBall, $00, $18, TwoPt
+L_6_AFEC: .BYTE CPUJuice, <L_6_B982, >L_6_B982, $07
+L_6_AFF0: .BYTE Move, $00, $20, Wait, $5A, $C8, Jump, <L_6_AABC, >L_6_AABC
+L_6_AFF9: .BYTE SetMiddle, $36, $28, TwoPt
+L_6_AFFD: .BYTE CPUJuice, <L_6_B994, >L_6_B994, $02
+L_6_B001: .BYTE Move, $00, $50, Turn, $14, Wait, $3C, $78, Jump, <L_6_AABC, >L_6_AABC
+L_6_B00C: .BYTE SetMiddle, $C0, $28, TwoPt
+L_6_B010: .BYTE CPUJuice, <L_6_B99A, >L_6_B99A, $03
+L_6_B014: .BYTE Move, $00, $50, Turn, $14, Wait, $3C, $78, Jump, <L_6_AABC, >L_6_AABC
+L_6_B01F: .BYTE SetBall, $C8, $50, TwoPt, CPUJuice, <L_6_B988, >L_6_B988, $04, Random7, <L_6_B033, >L_6_B033, MoveBall, $C0, $00, Wait, $3C, $A0, Jump, <L_6_BE18, >L_6_BE18
+L_6_B033: .BYTE MoveBall, $F8, $88, Random7, <L_6_B03C, >L_6_B03C, Jump, <L_6_B60C, >L_6_B60C
+L_6_B03C: .BYTE Move, $D8, $F8, Jump, <L_6_B60C, >L_6_B60C
+L_6_B042: .BYTE SetBall, $18, $50, TwoPt
+L_6_B046: .BYTE CPUJuice, <L_6_B98E, >L_6_B98E, $05, Random7, <L_6_B056, >L_6_B056, MoveBall, $28, $00, Wait, $3C, $A0, Jump, <L_6_BE18, >L_6_BE18
+L_6_B056: .BYTE MoveMiddle, $C8, $F8, Turn, $6E, Jump, <L_6_BE18, >L_6_BE18
+L_6_B05E: .BYTE SetMiddle, $36, $28, TwoPt, Random9, <L_6_BE36, >L_6_BE36, Random9, <L_6_BDF0, >L_6_BDF0, Random7, <L_6_AFFD, >L_6_AFFD, MoveBall, $F0, $E0, Jump, <L_6_BDF4, >L_6_BDF4
+L_6_B071: .BYTE SetMiddle, $C0, $28, TwoPt, Random7, <L_6_B07E, >L_6_B07E, Random9, <L_6_BE00, >L_6_BE00, Jump, <L_6_B010, >L_6_B010
+L_6_B07E: .BYTE RandomD, <L_6_BDFC, >L_6_BDFC, MoveBall, $30, $D8, MoveBall, $18, $C8, Move, $00, $81, Move, $00, $C0, Jump, <L_6_BDFC, >L_6_BDFC
+L_6_B090: .BYTE SetBall, $E0, $18, TwoPt, Random1, <L_6_BE08, >L_6_BE08, Jump, <L_6_AFDB, >L_6_AFDB
+L_6_B09A: .BYTE SetBall, $C8, $50, TwoPt, Random7, <L_6_BE78, >L_6_BE78, Random8, <L_6_BE04, >L_6_BE04, MoveBall, $00, $E0, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_B0AA: .BYTE SetBall, $18, $50, TwoPt, Random7, <L_6_B0B4, >L_6_B0B4, Jump, <L_6_BE14, >L_6_BE14
+L_6_B0B4: .BYTE Turn, $14, Jump, <L_6_BEB0, >L_6_BEB0
+L_6_B0B9: .BYTE SetMiddle, $36, $28, TwoPt, MoveMiddle, $36, $A0, Jump, <L_6_BDF8, >L_6_BDF8
+L_6_B0C3: .BYTE SetMiddle, $C0, $28, TwoPt, MoveMiddle, $C0, $A0, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_B0CD: .BYTE SetMiddle, $C0, $28, TwoPt, CPUJuice, <L_6_B956, >L_6_B956, $03, Jump, <L_6_BE18, >L_6_BE18
+L_6_B0D8: .BYTE SetBall, $C8, $50, TwoPt, CPUJuice, <L_6_B966, >L_6_B966, $04, MoveMiddle, $30, $AC, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_B0E6: .BYTE SetBall, $18, $50, TwoPt
+L_6_B0EA: .BYTE CPUJuice, <L_6_B94B, >L_6_B94B, $05, MoveBall, $BC, $90, Jump, <L_6_BE18, >L_6_BE18
+L_6_B0F4: .BYTE SetMiddle, $C0, $28, TwoPt, Random9, <L_6_BDFC, >L_6_BDFC, Random9, <L_6_B104, >L_6_B104, MoveBall, $F0, $90, Jump, <L_6_BDF8, >L_6_BDF8
+L_6_B104: .BYTE MoveBall, $30, $00, Jump, <L_6_BDF0, >L_6_BDF0
+L_6_B10A: .BYTE SetBall, $18, $0C, TwoPt, Random7, <L_6_A5FA, >L_6_A5FA
+L_6_B111: .BYTE Turn, $0A, MoveBall, $18, $E0, MoveBall, $08, $D8, Turn, $14, MoveBall, $28, $00, MoveBall, $28, $28, Wait, $28, $64, Jump, <L_6_AABC, >L_6_AABC
+L_6_B127: .BYTE SetBall, $18, $0C, TwoPt, RandomC, <L_6_A5FA, >L_6_A5FA, Loop, L_6_B111 + 1 - *
+L_6_B130: .BYTE SetMiddle, $36, $28, TwoPt, Random9, <L_6_BE0C, >L_6_BE0C, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_B13A: .BYTE SetBall, $C8, $50, TwoPt, Random9, <L_6_B147, >L_6_B147, MoveBall, $D8, $98, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_B147: .BYTE MoveBall, $E8, $98, Jump, <L_6_BE18, >L_6_BE18
+L_6_B14D: .BYTE SetBall, $18, $50, TwoPt, Random9, <L_6_BE10, >L_6_BE10, Random6, <L_6_B0EA, >L_6_B0EA, MoveBall, $28, $08, Jump, <L_6_BE04, >L_6_BE04
+L_6_B15D: .BYTE SetBall, $E0, $18, TwoPt, CPUJuice, <L_6_B9A0, >L_6_B9A0, $06, MoveBall, $C8, $F0, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_B16B: .BYTE SetBall, $00, $18, TwoPt
+L_6_B16F: .BYTE CPUJuice, <L_6_B9AB, >L_6_B9AB, $07, Turn, $0A, MoveBall, $F8, $E0, MoveBall, $D8, $E4, Turn, $6E, Jump, <L_6_AABC, >L_6_AABC
+L_6_B180: .BYTE SetMiddle, $C0, $28, TwoPt
+L_6_B184: .BYTE CPUJuice, <L_6_B99A, >L_6_B99A, $03, MoveBall, $E8, $E8, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_B18E: .BYTE SetBall, $18, $50, TwoPt
+L_6_B192: .BYTE CPUJuice, <L_6_B98E, >L_6_B98E, $05, Random7, <L_6_B1A4, >L_6_B1A4, MoveBall, $30, $88, Turn, $14, Wait, $5A, $B4, Jump, <L_6_BE18, >L_6_BE18
+L_6_B1A4: .BYTE MoveBall, $F8, $E0, Turn, $78, Jump, <L_6_AABC, >L_6_AABC
+L_6_B1AC: .BYTE SetBall, $00, $18, TwoPt, Random7, <L_6_B16F, >L_6_B16F
+L_6_B1B3: .BYTE MoveBall, $F8, $D8, Turn, $1E, MoveBall, $20, $00, MoveBall, $20, $28, Wait, $28, $64, Jump, <L_6_AABC, >L_6_AABC
+L_6_B1C4: .BYTE SetMiddle, $36, $28, TwoPt, Random9, <L_6_BDF8, >L_6_BDF8, Random9, <L_6_BDF0, >L_6_BDF0, Jump, <L_6_AFFD, >L_6_AFFD
+L_6_B1D1: .BYTE SetMiddle, $C0, $28, TwoPt, Random9, <L_6_BE41, >L_6_BE41, Random9, <L_6_BE00, >L_6_BE00, Loop, L_6_B184 + 1 - *
+L_6_B1DD: .BYTE SetBall, $C8, $50, TwoPt
+L_6_B1E1: .BYTE CPUJuice, <L_6_B96C, >L_6_B96C, $04, MoveBall, $B8, $E8, MoveBall, $B8, $10, Turn, $78, Jump, <L_6_AABC, >L_6_AABC
+L_6_B1F0: .BYTE SetBall, $00, $18, TwoPt, RandomC, <L_6_B16F, >L_6_B16F, Jump, <L_6_B1B3, >L_6_B1B3
+L_6_B1FA: .BYTE SetBall, $C8, $50, TwoPt, Random9, <L_6_B20A, >L_6_B20A, Random5, <L_6_B1E1, >L_6_B1E1, MoveBall, $E8, $A0, Jump, <L_6_BE0C, >L_6_BE0C
+L_6_B20A: .BYTE MoveBall, $B8, $C8, Jump, <L_6_BE04, >L_6_BE04
+L_6_B210: .BYTE SetBall, $18, $50, TwoPt, Random8, <L_6_BE10, >L_6_BE10, Random7, <L_6_B192, >L_6_B192, MoveBall, $30, $E8, Jump, <L_6_BE14, >L_6_BE14
+L_6_B220: .BYTE SetMiddle, $36, $28, TwoPt, RandomA, <L_6_BDF8, >L_6_BDF8, RandomA, <L_6_B233, >L_6_B233, RandomA, <L_6_B239, >L_6_B239, MoveBall, $F8, $81, Jump, <L_6_BDFC, >L_6_BDFC
+L_6_B233: .BYTE MoveBall, $C0, $F0, Jump, <L_6_BDF4, >L_6_BDF4
+L_6_B239: .BYTE MoveBall, $E0, $C0, Jump, <L_6_BE00, >L_6_BE00
+L_6_B23F: .BYTE SetMiddle, $C0, $28, TwoPt, RandomC, <L_6_BE10, >L_6_BE10, Move, $00, $90, Wait, $3C, $78, Move, $D8, $D8, Jump, <L_6_BE18, >L_6_BE18
+L_6_B252: .BYTE SetBall, $18, $50, TwoPt, RandomC, <L_6_BE10, >L_6_BE10, Random7, <L_6_AF99, >L_6_AF99, MoveBall, $F8, $D8, Jump, <L_6_BE14, >L_6_BE14
+L_6_B262: .BYTE SetBall, $C8, $50, TwoPt
+L_6_B266: .BYTE CPUJuice, <L_6_B940, >L_6_B940, $04, Turn, $14, MoveBall, $B8, $E0, Turn, $AA, Jump, <L_6_AABC, >L_6_AABC
+L_6_B274: .BYTE Turn, $14, MoveBall, $00, $F8, Turn, $8C, Jump, <L_6_AABC, >L_6_AABC
+L_6_B27E: .BYTE SetMiddle, $36, $28, TwoPt, Random9, <L_6_BDF8, >L_6_BDF8, Random6, <L_6_BC5A, >L_6_BC5A, MoveBall, $F0, $C8, Jump, <L_6_BDF4, >L_6_BDF4
+L_6_B28E: .BYTE SetMiddle, $C0, $28, TwoPt, Random9, <L_6_BE41, >L_6_BE41, Random9, <L_6_BDF0, >L_6_BDF0, Jump, <L_6_BC44, >L_6_BC44
+L_6_B29B: .BYTE SetBall, $18, $50, TwoPt
+L_6_B29F: .BYTE CPUJuice, <L_6_B951, >L_6_B951, $05, Random7, <L_6_B274, >L_6_B274, MoveBall, $00, $A0, Move, $00, $B0, Jump, <L_6_B60C, >L_6_B60C
+L_6_B2AF: .BYTE SetBall, $C8, $50, TwoPt, Random9, <L_6_BE0C, >L_6_BE0C, MoveBall, $F0, $E8, Jump, <L_6_BE08, >L_6_BE08
+L_6_B2BC: .BYTE SetBall, $18, $50, TwoPt, Random4, <L_6_B2C6, >L_6_B2C6, Jump, <L_6_B29F, >L_6_B29F
+L_6_B2C6: .BYTE MoveBall, $30, $D0, Random7, <L_6_BE86, >L_6_BE86, MoveBall, $30, $00, Jump, <L_6_BE04, >L_6_BE04
+L_6_B2D2: .BYTE SetMiddle, $36, $28, TwoPt
+L_6_B2D6: .BYTE CPUJuice, <L_6_B994, >L_6_B994, $02, Turn, $0A, MoveBall, $D0, $C0, Move, $18, $B0, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_B2E5: .BYTE SetBall, $C8, $50, TwoPt
+L_6_B2E9: .BYTE CPUJuice, <L_6_B9B6, >L_6_B9B6, $04, Move, $48, $88, Jump, <L_6_B60C, >L_6_B60C
+L_6_B2F3: .BYTE SetMiddle, $36, $28, TwoPt, Random9, <L_6_BE36, >L_6_BE36, Random9, <L_6_B306, >L_6_B306, Random9, <L_6_B2D6, >L_6_B2D6, MoveBall, $E8, $C8, Jump, <L_6_BE00, >L_6_BE00
+L_6_B306: .BYTE MoveBall, $C0, $00, MoveBall, $C0, $28, Jump, <L_6_BDF0, >L_6_BDF0
+L_6_B30F: .BYTE SetBall, $C8, $50, TwoPt, Random7, <L_6_BE78, >L_6_BE78, MoveBall, $B8, $D8, MoveBall, $B8, $10, Jump, <L_6_BE04, >L_6_BE04
+L_6_B31F: .BYTE SetBall, $18, $50, TwoPt, Random9, <L_6_BDFC, >L_6_BDFC, Random7, <L_6_B32F, >L_6_B32F, MoveBall, $F8, $C8, Jump, <L_6_BE00, >L_6_BE00
+L_6_B32F: .BYTE Move, $E8, $88, Jump, <L_6_BE18, >L_6_BE18
+L_6_B335: .BYTE SetBall, $18, $50, TwoPt, CPUJuice, <L_6_B940, >L_6_B940, $05, Move, $E8, $C8, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_B343: .BYTE SetMiddle, $36, $28, TwoPt, Random7, <L_6_BE36, >L_6_BE36, Jump, <L_6_AFFD, >L_6_AFFD
+L_6_B34D: .BYTE SetMiddle, $C0, $28, TwoPt, Random7, <L_6_BE41, >L_6_BE41, Jump, <L_6_B010, >L_6_B010
+L_6_B357: .BYTE SetBall, $C8, $50, TwoPt, Random6, <L_6_B2E9, >L_6_B2E9, MoveBall, $E0, $E0, Jump, <L_6_BDF4, >L_6_BDF4
+L_6_B364: .BYTE SetBall, $18, $50, TwoPt, Random6, <L_6_B374, >L_6_B374, Random7, <L_6_B37A, >L_6_B37A, MoveBall, $30, $D8, Jump, <L_6_BE10, >L_6_BE10
+L_6_B374: .BYTE MoveBall, $F8, $E0, Jump, <L_6_BE08, >L_6_BE08
+L_6_B37A: .BYTE MoveBall, $C0, $88, Jump, <L_6_BE0C, >L_6_BE0C
+L_6_B380: .BYTE SetMiddle, $36, $28, TwoPt
+L_6_B384: .BYTE CPUJuice, <L_6_B994, >L_6_B994, $04
+L_6_B388: .BYTE Turn, $14, MoveBall, $B8, $F8, Wait, $64, $96, Jump, <L_6_AABC, >L_6_AABC
+L_6_B393: .BYTE SetBall, $C8, $50, TwoPt
+L_6_B397: .BYTE CPUJuice, <L_6_B96C, >L_6_B96C, $04
+L_6_B39B: .BYTE Turn, $14, MoveBall, $C8, $F0, Wait, $64, $96, Jump, <L_6_AABC, >L_6_AABC
+L_6_B3A6: .BYTE SetBall, $18, $50, TwoPt
+L_6_B3AA: .BYTE CPUJuice, <L_6_B966, >L_6_B966, $05, Random9, <L_6_B3BC, >L_6_B3BC, Turn, $14, MoveBall, $D8, $E8, Wait, $64, $96, Jump, <L_6_AABC, >L_6_AABC
+L_6_B3BC: .BYTE MoveBall, $C8, $90, Jump, <L_6_BE18, >L_6_BE18
+L_6_B3C2: .BYTE SetMiddle, $36, $28, TwoPt, Random9, <L_6_BDF0, >L_6_BDF0, Random9, <L_6_BDF8, >L_6_BDF8, Jump, <L_6_B384, >L_6_B384
+L_6_B3CF: .BYTE SetBall, $C8, $50, TwoPt, Random9, <L_6_B3DC, >L_6_B3DC, Random7, <L_6_B3E2, >L_6_B3E2, Jump, <L_6_B397, >L_6_B397
+L_6_B3DC: .BYTE MoveBall, $B8, $B0, Jump, <L_6_BE0C, >L_6_BE0C
+L_6_B3E2: .BYTE MoveBall, $C8, $D8, Jump, <L_6_BE04, >L_6_BE04
+L_6_B3E8: .BYTE SetBall, $18, $50, TwoPt, Random9, <L_6_B3F2, >L_6_B3F2, Jump, <L_6_B3AA, >L_6_B3AA
+L_6_B3F2: .BYTE Jump, <L_6_BE86, >L_6_BE86
+L_6_B3F5: .BYTE SetMiddle, $36, $28, TwoPt
+L_6_B3F9: .BYTE CPUJuice, <L_6_B94B, >L_6_B94B, $02, Turn, $32, MoveBall, $C8, $C8, MoveBall, $E8, $D0, Turn, $32, Random7, <L_6_B40D, >L_6_B40D, Jump, <L_6_AABC, >L_6_AABC
+L_6_B40D: .BYTE Wait, $01, $1E, Jump, <L_6_BE18, >L_6_BE18
+L_6_B413: .BYTE SetMiddle, $C0, $28, TwoPt
+L_6_B417: .BYTE CPUJuice, <L_6_B966, >L_6_B966, $03, Turn, $46, MoveBall, $28, $E0, Turn, $46, Random7, <L_6_B428, >L_6_B428, Jump, <L_6_AABC, >L_6_AABC
+L_6_B428: .BYTE Wait, $01, $1E, Jump, <L_6_BE18, >L_6_BE18
+L_6_B42E: .BYTE SetBall, $C8, $50, TwoPt
+L_6_B432: .BYTE Wait, $01, $14, MoveBall, $F8, $B8, Turn, $32, Random4, <L_6_B443, >L_6_B443, MoveBall, $00, $E0, Jump, <L_6_AABC, >L_6_AABC
+L_6_B443: .BYTE Wait, $0A, $50, Jump, <L_6_BE18, >L_6_BE18
+L_6_B449: .BYTE Turn, $46, MoveBall, $10, $D0, Turn, $3C, Random7, <L_6_B456, >L_6_B456, Jump, <L_6_AABC, >L_6_AABC
+L_6_B456: .BYTE Wait, $01, $1E, Jump, <L_6_BE18, >L_6_BE18
+L_6_B45C: .BYTE SetMiddle, $36, $28, TwoPt, Random6, <L_6_B3F9, >L_6_B3F9, Jump, <L_6_BDF8, >L_6_BDF8
+L_6_B466: .BYTE SetMiddle, $C0, $28, TwoPt, Random9, <L_6_BDFC, >L_6_BDFC, Jump, <L_6_B417, >L_6_B417
+L_6_B470: .BYTE SetBall, $18, $50, TwoPt
+L_6_B474: .BYTE Random7, <L_6_B449, >L_6_B449, Wait, $0A, $1E, MoveBall, $E0, $88, Turn, $14, Wait, $01, $64, Jump, <L_6_BE18, >L_6_BE18
+L_6_B485: .BYTE SetBall, $C8, $50, TwoPt, Random7, <L_6_B432, >L_6_B432, Jump, <L_6_BE0C, >L_6_BE0C
+L_6_B48F: .BYTE SetBall, $18, $50, TwoPt, Random7, <L_6_B474, >L_6_B474, Jump, <L_6_BE41, >L_6_BE41
+L_6_B499: .BYTE SetMiddle, $36, $28, TwoPt, CPUJuice, <L_6_B96C, >L_6_B96C, $02, Turn, $14, Jump, <L_6_BE18, >L_6_BE18
+L_6_B4A6: .BYTE SetMiddle, $C0, $28, TwoPt
+L_6_B4AA: .BYTE CPUJuice, <L_6_B98E, >L_6_B98E, $03, Turn, $1E, Jump, <L_6_BE18, >L_6_BE18
+L_6_B4B3: .BYTE SetBall, $C8, $50, TwoPt, CPUJuice, <L_6_B988, >L_6_B988, $04, MoveBall, $E8, $81, Jump, <L_6_BE18, >L_6_BE18
+L_6_B4C1: .BYTE SetBall, $18, $50, TwoPt, CPUJuice, <L_6_B94B, >L_6_B94B, $05, Move, $00, $C8, Move, $F0, $00, Turn, $3C, Random7, <L_6_BE18, >L_6_BE18, Move, $E8, $20, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_B4DA: .BYTE SetBall, $E0, $18, TwoPt
+L_6_B4DE: .BYTE CPUJuice, <L_6_B9BC, >L_6_B9BC, $06
+L_6_B4E2: .BYTE MoveBall, $D0, $00, MoveBall, $D0, $18, Wait, $5A, $C8, Jump, <L_6_AABC, >L_6_AABC
+L_6_B4EE: .BYTE SetBall, $00, $18, TwoPt
+L_6_B4F2: .BYTE CPUJuice, <L_6_B9CB, >L_6_B9CB, $07, MoveBall, $18, $08, MoveBall, $18, $18, Turn, $3C, Wait, $1E, $8C, Jump, <L_6_AABC, >L_6_AABC
+L_6_B504: .BYTE SetMiddle, $36, $28, TwoPt, Random9, <L_6_BDF8, >L_6_BDF8, Random7, <L_6_BDF4, >L_6_BDF4, MoveMiddle, $36, $20, Jump, <L_6_BDF0, >L_6_BDF0
+L_6_B514: .BYTE SetMiddle, $C0, $28, TwoPt, Random9, <L_6_BDFC, >L_6_BDFC, Random9, <L_6_BE00, >L_6_BE00, Jump, <L_6_B4AA, >L_6_B4AA
+L_6_B521: .BYTE SetBall, $E0, $18, TwoPt, Random7, <L_6_B4DE, >L_6_B4DE, MoveBall, $C0, $18, MoveBall, $C0, $28, Jump, <L_6_BE04, >L_6_BE04
+L_6_B531: .BYTE SetBall, $C8, $50, TwoPt, Random7, <L_6_BE0C, >L_6_BE0C, Jump, <L_6_BE08, >L_6_BE08
+L_6_B53B: .BYTE SetBall, $18, $50, TwoPt, Random7, <L_6_BE14, >L_6_BE14, Jump, <L_6_BE10, >L_6_BE10
+L_6_B545: .BYTE SetBall, $C8, $50, TwoPt, CPUJuice, <L_6_B94B, >L_6_B94B, $04, MoveBall, $C0, $E0, MoveBall, $C0, $08, Turn, $C8, Jump, <L_6_BE18, >L_6_BE18
+L_6_B558: .BYTE SetBall, $18, $50, TwoPt, CPUJuice, <L_6_B951, >L_6_B951, $05, Random7, <L_6_B56B, >L_6_B56B, MoveBall, $F0, $E8, Turn, $6E, Jump, <L_6_BE18, >L_6_BE18
+L_6_B56B: .BYTE MoveBall, $F0, $98, Jump, <L_6_B60C, >L_6_B60C
+L_6_B571: .BYTE SetMiddle, $36, $28, TwoPt, Random9, <L_6_BDF8, >L_6_BDF8, Random9, <L_6_BE28, >L_6_BE28, Jump, <L_6_AFFD, >L_6_AFFD
+L_6_B57E: .BYTE SetMiddle, $C0, $28, TwoPt, Random9, <L_6_BE41, >L_6_BE41, Random9, <L_6_B58B, >L_6_B58B, Jump, <L_6_B010, >L_6_B010
+L_6_B58B: .BYTE MoveBall, $1C, $D8, Jump, <L_6_BE00, >L_6_BE00
+L_6_B591: .BYTE SetBall, $C8, $50, TwoPt, Random7, <L_6_BE62, >L_6_BE62, MoveMiddle, $36, $D8, Jump, <L_6_BE0C, >L_6_BE0C
+L_6_B59E: .BYTE SetBall, $18, $50, TwoPt, Random7, <L_6_BE14, >L_6_BE14, MoveBall, $30, $D0, Jump, <L_6_BE86, >L_6_BE86
+L_6_B5AB: .BYTE SetMiddle, $36, $28, TwoPt, Jump, <L_6_BE18, >L_6_BE18
+L_6_B5B2: .BYTE SetMiddle, $C0, $28, TwoPt, Jump, <L_6_BE18, >L_6_BE18
+L_6_B5B9: .BYTE SetBall, $C8, $50, TwoPt, Jump, <L_6_BE18, >L_6_BE18
+L_6_B5C0: .BYTE SetBall, $18, $50, TwoPt, Jump, <L_6_BE18, >L_6_BE18
+L_6_B5C7: .BYTE SetMiddle, $36, $28, TwoPt
+L_6_B5CB: .BYTE CPUJuice, <L_6_B994, >L_6_B994, $02, MoveBall, $D8, $F8, MoveBall, $E0, $08, Wait, $5A, $C8, Jump, <L_6_AABC, >L_6_AABC
+L_6_B5DB: .BYTE SetMiddle, $C0, $28, TwoPt
+L_6_B5DF: .BYTE CPUJuice, <L_6_B951, >L_6_B951, $03
+L_6_B5E3: .BYTE MoveBall, $10, $E8, MoveBall, $00, $08, Wait, $5A, $C8, Jump, <L_6_AABC, >L_6_AABC
+L_6_B5EF: .BYTE SetBall, $C8, $50, TwoPt, CPUJuice, <L_6_B9A0, >L_6_B9A0, $04
+L_6_B5F7: .BYTE MoveBall, $B8, $C0, Turn, $C8, Turn, $64, Jump, <L_6_BE18, >L_6_BE18
+L_6_B601: .BYTE SetBall, $18, $50, TwoPt
+L_6_B605: .BYTE CPUJuice, <L_6_B99A, >L_6_B99A, $05, Move, $D8, $C8
+L_6_B60C: .BYTE Random7, <L_6_BDEC, >L_6_BDEC, Turn, $14, Wait, $01, $8C, Jump, <L_6_BE18, >L_6_BE18
+L_6_B617: .BYTE SetBall, $00, $18, TwoPt, CPUJuice, <L_6_B9CB, >L_6_B9CB, $07
+L_6_B61F: .BYTE MoveBall, $10, $08, Wait, $5A, $C8, Jump, <L_6_AABC, >L_6_AABC
+L_6_B628: .BYTE SetMiddle, $36, $28, TwoPt, Random6, <L_6_BE36, >L_6_BE36, Random6, <L_6_B63E, >L_6_B63E, Random9, <L_6_B5CB, >L_6_B5CB, MoveBall, $C0, $00, MoveBall, $C0, $28, Jump, <L_6_BDF0, >L_6_BDF0
+L_6_B63E: .BYTE MoveBall, $E8, $D8, Jump, <L_6_BE00, >L_6_BE00
+L_6_B644: .BYTE SetMiddle, $C0, $28, TwoPt, Random7, <L_6_B657, >L_6_B657, Random9, <L_6_B5DF, >L_6_B5DF, MoveBall, $28, $00, MoveBall, $28, $28, Jump, <L_6_BDF4, >L_6_BDF4
+L_6_B657: .BYTE Turn, $14, MoveBall, $2C, $C0, Move, $00, $90, Move, $00, $C0, Jump, <L_6_BDFC, >L_6_BDFC
+L_6_B665: .BYTE SetBall, $E0, $18, TwoPt, Random7, <L_6_BE14, >L_6_BE14, Jump, <L_6_B4DE, >L_6_B4DE
+L_6_B66F: .BYTE SetBall, $18, $50, TwoPt, Random7, <L_6_BEB0, >L_6_BEB0, Random9, <L_6_B605, >L_6_B605, MoveBall, $30, $F8, MoveBall, $30, $20, Jump, <L_6_BE08, >L_6_BE08
+L_6_B682: .BYTE SetBall, $18, $50, TwoPt
+L_6_B686: .BYTE CPUJuice, <L_6_B951, >L_6_B951, $05, Move, $00, $C8, Jump, <L_6_B60C, >L_6_B60C
+L_6_B690: .BYTE SetMiddle, $36, $28, TwoPt, Random9, <L_6_BDF8, >L_6_BDF8, Jump, <L_6_AFFD, >L_6_AFFD
+L_6_B69A: .BYTE SetMiddle, $C0, $28, TwoPt, Random9, <L_6_BE41, >L_6_BE41, Random9, <L_6_B010, >L_6_B010, MoveBall, $28, $E8, Random7, <L_6_BDF0, >L_6_BDF0, Jump, <L_6_BDF4, >L_6_BDF4
+L_6_B6AD: .BYTE SetBall, $00, $18, TwoPt, Random7, <L_6_BE04, >L_6_BE04, Jump, <L_6_B4F2, >L_6_B4F2
+L_6_B6B7: .BYTE SetBall, $C8, $50, TwoPt, Random7, <L_6_BE0C, >L_6_BE0C, Random7, <L_6_B266, >L_6_B266, MoveBall, $D8, $88, Jump, <L_6_BE18, >L_6_BE18
+L_6_B6C7: .BYTE SetBall, $18, $50, TwoPt, Random9, <L_6_BE86, >L_6_BE86, Random7, <L_6_B686, >L_6_B686, MoveBall, $30, $F0, Jump, <L_6_BE08, >L_6_BE08
+L_6_B6D7: .BYTE SetBall, $C8, $50, TwoPt
+L_6_B6DB: .BYTE CPUJuice, <L_6_B94B, >L_6_B94B, $04, MoveBall, $C8, $10, Turn, $C8, Jump, <L_6_AABC, >L_6_AABC
+L_6_B6E7: .BYTE SetBall, $18, $50, TwoPt
+L_6_B6EB: .BYTE CPUJuice, <L_6_B971, >L_6_B971, $05, MoveBall, $F8, $81, Jump, <L_6_B60C, >L_6_B60C
+L_6_B6F5: .BYTE SetMiddle, $C0, $28, Motion, $A0, MoveBall, $10, $D8, TwoPt, Random6, <L_6_BDFC, >L_6_BDFC, Random7, <L_6_BDF0, >L_6_BDF0, MoveBall, $28, $C8, Jump, <L_6_BDF4, >L_6_BDF4
+L_6_B70A: .BYTE SetBall, $C8, $50, TwoPt, Random7, <L_6_B6DB, >L_6_B6DB, Turn, $64, Move, $08, $81, Move, $00, $81, Jump, <L_6_BE0C, >L_6_BE0C
+L_6_B71C: .BYTE SetBall, $18, $50, TwoPt, Random6, <L_6_BE6D, >L_6_BE6D, Random7, <L_6_B6EB, >L_6_B6EB, MoveBall, $08, $E8, Jump, <L_6_BE10, >L_6_BE10
+L_6_B72C: .BYTE SetBall, $C8, $50, TwoPt, MoveBall, $F0, $81, Random7, <L_6_BDEC, >L_6_BDEC, Jump, <L_6_B60C, >L_6_B60C
+L_6_B739: .BYTE SetBall, $E0, $18, TwoPt, Turn, $50, MoveBall, $00, $F0, Turn, $14, Wait, $3C, $8C, Jump, <L_6_AABC, >L_6_AABC
+L_6_B74A: .BYTE SetBall, $00, $18, TwoPt, Turn, $46, MoveBall, $18, $E8, MoveBall, $30, $F8, Turn, $14, Wait, $28, $5A, Random7, <L_6_BE18, >L_6_BE18, Jump, <L_6_AABC, >L_6_AABC
+L_6_B761: .BYTE SetMiddle, $C0, $28, TwoPt
+L_6_B765: .BYTE Turn, $3C, MoveBall, $38, $00, MoveBall, $28, $18, Wait, $46, $78, Jump, <L_6_AABC, >L_6_AABC
+L_6_B773: .BYTE SetBall, $C8, $50, TwoPt
+L_6_B777: .BYTE CPUJuice, <L_6_B951, >L_6_B951, $04, RandomE, <L_6_B787, >L_6_B787, MoveBall, $08, $A8, MoveBall, $24, $D8, Jump, <L_6_B60C, >L_6_B60C
+L_6_B787: .BYTE Move, $00, $C8, Turn, $28, Jump, <L_6_B60C, >L_6_B60C
+L_6_B78F: .BYTE SetBall, $18, $50, TwoPt
+L_6_B793: .BYTE CPUJuice, <L_6_B94B, >L_6_B94B, $05, Turn, $14, MoveBall, $28, $C8, MoveBall, $28, $08, Wait, $64, $96, Jump, <L_6_AABC, >L_6_AABC
+L_6_B7A5: .BYTE SetBall, $C8, $10, TwoPt
+L_6_B7A9: .BYTE MoveBall, $C0, $00, MoveBall, $C0, $28, Turn, $14, Wait, $50, $82, Jump, <L_6_AABC, >L_6_AABC
+L_6_B7B7: .BYTE SetMiddle, $C0, $28, TwoPt, Random6, <L_6_BDFC, >L_6_BDFC, Jump, <L_6_B765, >L_6_B765
+L_6_B7C1: .BYTE SetBall, $C8, $50, TwoPt, Random9, <L_6_BE0C, >L_6_BE0C, Random7, <L_6_B777, >L_6_B777, MoveBall, $C0, $F0, Jump, <L_6_BE08, >L_6_BE08
+L_6_B7D1: .BYTE SetBall, $18, $50, TwoPt, Random7, <L_6_B7DB, >L_6_B7DB, Jump, <L_6_BE41, >L_6_BE41
+L_6_B7DB: .BYTE Random7, <L_6_B793, >L_6_B793, Move, $00, $A0, Jump, <L_6_B60C, >L_6_B60C
+L_6_B7E4: .BYTE SetMiddle, $C0, $28, TwoPt
+L_6_B7E8: .BYTE CPUJuice, <L_6_B98E, >L_6_B98E, $03
+L_6_B7EC: .BYTE Turn, $14, MoveBall, $28, $F8, RandomB, <L_6_B60C, >L_6_B60C, Wait, $64, $C8, Jump, <L_6_AABC, >L_6_AABC
+L_6_B7FA: .BYTE SetBall, $18, $50, TwoPt, CPUJuice, <L_6_B9AB, >L_6_B9AB, $05
+L_6_B802: .BYTE Random7, <L_6_B810, >L_6_B810, Turn, $14, MoveBall, $D8, $E8, Wait, $64, $96, Jump, <L_6_AABC, >L_6_AABC
+L_6_B810: .BYTE MoveBall, $E8, $98, Jump, <L_6_B60C, >L_6_B60C
+L_6_B816: .BYTE SetMiddle, $C0, $28, TwoPt, Random9, <L_6_BE41, >L_6_BE41, Random6, <L_6_B7E8, >L_6_B7E8, MoveBall, $14, $D8, Jump, <L_6_BE00, >L_6_BE00
+L_6_B826: .BYTE SetBall, $18, $0C, TwoPt, MoveBall, $28, $00, MoveBall, $28, $28, Turn, $14, Wait, $50, $82, Jump, <L_6_AABC, >L_6_AABC
+L_6_B838: .BYTE SetBall, $18, $50, TwoPt, Random7, <L_6_BE86, >L_6_BE86, MoveBall, $10, $D8, Jump, <L_6_BE14, >L_6_BE14
+L_6_B845: .BYTE SetBall, $C8, $50, TwoPt, CPUJuice, <L_6_B94B, >L_6_B94B, $04, Random7, <L_6_B85B, >L_6_B85B, MoveBall, $E8, $F8, Turn, $14, Wait, $50, $82, Jump, <L_6_AABC, >L_6_AABC
+L_6_B85B: .BYTE Move, $40, $B8, Jump, <L_6_B60C, >L_6_B60C
+L_6_B861: .BYTE SetMiddle, $36, $28, TwoPt, Random9, <L_6_BDF4, >L_6_BDF4, Random7, <L_6_BE36, >L_6_BE36, MoveBall, $B8, $D8, Turn, $64, Move, $00, $B0, Jump, <L_6_BDF0, >L_6_BDF0
+L_6_B876: .BYTE SetMiddle, $C0, $28, TwoPt, Random9, <L_6_BE4C, >L_6_BE4C, Random6, <L_6_B010, >L_6_B010, MoveBall, $20, $D8, Jump, <L_6_BDFC, >L_6_BDFC
+L_6_B886: .BYTE SetBall, $C8, $10, TwoPt, Random7, <L_6_BEE9, >L_6_BEE9, Jump, <L_6_BE08, >L_6_BE08
+L_6_B890: .BYTE SetBall, $C8, $50, TwoPt, Random7, <L_6_B89F, >L_6_B89F, MoveBall, $B8, $B0, Turn, $64, Jump, <L_6_BE04, >L_6_BE04
+L_6_B89F: .BYTE Jump, <L_6_BE78, >L_6_BE78
+L_6_B8A2: .BYTE SetBall, $18, $50, TwoPt, Random7, <L_6_BE9B, >L_6_BE9B, MoveBall, $18, $C8, Jump, <L_6_BE10, >L_6_BE10
+L_6_B8AF: .BYTE SetBall, $18, $50, TwoPt, CPUJuice, <L_6_B951, >L_6_B951, $05, Random7, <L_6_B686, >L_6_B686, Jump, <L_6_B046, >L_6_B046
+L_6_B8BD: .BYTE SetMiddle, $C0, $28, TwoPt, Random6, <L_6_BE41, >L_6_BE41, Random7, <L_6_B8CD, >L_6_B8CD, MoveBall, $10, $E0, Jump, <L_6_BDF4, >L_6_BDF4
+L_6_B8CD: .BYTE MoveBall, $F0, $B8, Jump, <L_6_BE00, >L_6_BE00
+L_6_B8D3: .BYTE SetBall, $C8, $50, TwoPt, Random7, <L_6_BE78, >L_6_BE78, Turn, $50, Jump, <L_6_BE18, >L_6_BE18
+L_6_B8DF: .BYTE SetBall, $18, $50, TwoPt, Random7, <L_6_BE86, >L_6_BE86, Jump, <L_6_BE14, >L_6_BE14
+L_6_B8E9: .BYTE SetBall, $C8, $50, TwoPt, CPUJuice, <L_6_B96C, >L_6_B96C, $04, Random7, <L_6_B904, >L_6_B904, Turn, $14, MoveBall, $F4, $EC, MoveBall, $F4, $F8, Turn, $14, Wait, $50, $82, Jump, <L_6_AABC, >L_6_AABC
+L_6_B904: .BYTE MoveBall, $D0, $81, Jump, <L_6_B60C, >L_6_B60C
+L_6_B90A: .BYTE SetMiddle, $C0, $28, TwoPt
+L_6_B90E: .BYTE CPUJuice, <L_6_B961, >L_6_B961, $03, MoveBall, $20, $F0, Turn, $14, Wait, $50, $82, Jump, <L_6_AABC, >L_6_AABC
+L_6_B91D: .BYTE SetBall, $18, $50, TwoPt, CPUJuice, <L_6_B940, >L_6_B940, $05, MoveBall, $00, $F0, Turn, $14, Wait, $50, $82, Jump, <L_6_AABC, >L_6_AABC
+L_6_B930: .BYTE SetMiddle, $36, $28, TwoPt, Random9, <L_6_BE36, >L_6_BE36, Random6, <L_6_AFFD, >L_6_AFFD, MoveBall, $C8, $D8, Jump, <L_6_BDF4, >L_6_BDF4
+L_6_B940: .BYTE RandomB, <L_6_BDF4, >L_6_BDF4, RandomA, <L_6_BDF8, >L_6_BDF8, RandomA, <L_6_BDFC, >L_6_BDFC, Loop, L_6_B940 + 1 - *
+L_6_B94B: .BYTE Random7, <L_6_BDF8, >L_6_BDF8
+L_6_B94E: .BYTE Jump, <L_6_BDFC, >L_6_BDFC
+L_6_B951: .BYTE Random7, <L_6_BDF4, >L_6_BDF4, Loop, L_6_B94E + 1 - *
+L_6_B956: .BYTE RandomB, <L_6_BDF0, >L_6_BDF0, RandomA, <L_6_BDF8, >L_6_BDF8, RandomA, <L_6_BDFC, >L_6_BDFC, Loop, L_6_B956 + 1 - *
+L_6_B961: .BYTE Random7, <L_6_BDF0, >L_6_BDF0, Loop, L_6_B94E + 1 - *
+L_6_B966: .BYTE RandomA, <L_6_BDFC, >L_6_BDFC
+L_6_B969: .BYTE Jump, <L_6_BDF8, >L_6_BDF8
+L_6_B96C: .BYTE Random7, <L_6_BDF0, >L_6_BDF0, Loop, L_6_B969 + 1 - *
+L_6_B971: .BYTE RandomB, <L_6_BDF0, >L_6_BDF0, RandomB, <L_6_BDF4, >L_6_BDF4, RandomB, <L_6_BDFC, >L_6_BDFC, Loop, L_6_B971 + 1 - *
+L_6_B97C: .BYTE Random7, <L_6_BDF0, >L_6_BDF0, Jump, <L_6_BDF4, >L_6_BDF4
+L_6_B982: .BYTE Random7, <L_6_BDF0, >L_6_BDF0, Jump, <L_6_BE00, >L_6_BE00
+L_6_B988: .BYTE Random7, <L_6_BDF4, >L_6_BDF4, Jump, <L_6_BDF8, >L_6_BDF8
+L_6_B98E: .BYTE Random7, <L_6_BE00, >L_6_BE00, Jump, <L_6_BDFC, >L_6_BDFC
+L_6_B994: .BYTE Random7, <L_6_BDF8, >L_6_BDF8, Jump, <L_6_BDF0, >L_6_BDF0
+L_6_B99A: .BYTE Random7, <L_6_BDFC, >L_6_BDFC, Jump, <L_6_BE00, >L_6_BE00
+L_6_B9A0: .BYTE RandomB, <L_6_BDF8, >L_6_BDF8, RandomB, <L_6_BDF0, >L_6_BDF0, RandomB, <L_6_BE00, >L_6_BE00, Loop, L_6_B9A0 + 1 - *
+L_6_B9AB: .BYTE RandomB, <L_6_BDFC, >L_6_BDFC, RandomB, <L_6_BE00, >L_6_BE00, RandomB, <L_6_BDF8, >L_6_BDF8, Loop, L_6_B9AB + 1 - *
+L_6_B9B6: .BYTE Random7, <L_6_BE00, >L_6_BE00, Jump, <L_6_BDF8, >L_6_BDF8
+L_6_B9BC: .BYTE Random7, <L_6_BE00, >L_6_BE00, MoveBall, $C0, $00, Jump, <L_6_BDF0, >L_6_BDF0
+L_6_B9C5: .BYTE Random7, <L_6_BDF8, >L_6_BDF8, Jump, <L_6_BE00, >L_6_BE00
+L_6_B9CB: .BYTE Random7, <L_6_B9D8, >L_6_B9D8
+L_6_B9CE: .BYTE m2mFB, $0A, Random7, <L_6_B9DD, >L_6_B9DD
+L_6_B9D3: .BYTE m2mWR1, $0A, Random7, <L_6_B9E2, >L_6_B9E2
+L_6_B9D8: .BYTE m2mWR2, $0A, Random7, <L_6_B9CE, >L_6_B9CE
+L_6_B9DD: .BYTE m2mTE, $0A, Random7, <L_6_B9D3, >L_6_B9D3
+L_6_B9E2: .BYTE m2mHB, $0A, Loop, L_6_B9CB + 1 - *
+L_6_B9E6: .BYTE RandomB, <L_6_BDF4, >L_6_BDF4, RandomA, <L_6_BDF8, >L_6_BDF8, RandomB, <L_6_BE00, >L_6_BE00, Loop, L_6_B9E6 + 1 - *
+L_6_B9F1: .BYTE MoveBall, $B8, $D8, Random7, <L_6_BDF0, >L_6_BDF0, Jump, <L_6_BE00, >L_6_BE00
+L_6_B9FA: .BYTE SetMiddle, $C0, $28, TwoPt, Random9, <L_6_BDFC, >L_6_BDFC, Random6, <L_6_B90E, >L_6_B90E, MoveBall, $08, $D8, MoveBall, $F8, $C8, Jump, <L_6_BE1D, >L_6_BE1D
+L_6_BA0D: .BYTE SetBall, $C8, $50, TwoPt, Random7, <L_6_BE78, >L_6_BE78, MoveBall, $C8, $D0, Jump, <L_6_BE08, >L_6_BE08
+L_6_BA1A: .BYTE SetBall, $18, $50, TwoPt, Random7, <L_6_BA29, >L_6_BA29, MoveBall, $F8, $B0, Turn, $32, Jump, <L_6_BE57, >L_6_BE57
+L_6_BA29: .BYTE MoveMiddle, $C0, $B0, Jump, <L_6_BE10, >L_6_BE10
+L_6_BA2F: .BYTE SetMiddle, $36, $28, Random6, <L_6_BA40, >L_6_BA40, Motion, $14, Move, $02, $04, FollowWR2, Turn, $28, Jump, <L_6_BE41, >L_6_BE41
+L_6_BA40: .BYTE TwoPt, Random7, <L_6_BDF8, >L_6_BDF8, Jump, <L_6_BDF4, >L_6_BDF4
+L_6_BA47: .BYTE SetMiddle, $C0, $28, TwoPt, Random7, <L_6_B765, >L_6_B765, MoveMiddle, $B8, $A0, Turn, $14, Wait, $1E, $50, Jump, <L_6_BE18, >L_6_BE18
+L_6_BA59: .BYTE SetBall, $C8, $50, TwoPt, Random7, <L_6_BE0C, >L_6_BE0C, MoveBall, $C8, $E0, Jump, <L_6_BE08, >L_6_BE08
+L_6_BA66: .BYTE SetBall, $18, $50, TwoPt, Random7, <L_6_B793, >L_6_B793, MoveBall, $F4, $88, Turn, $14, Wait, $1E, $50, Jump, <L_6_BE18, >L_6_BE18
+L_6_BA78: .BYTE SetMiddle, $36, $28, TwoPt, Random9, <L_6_BE36, >L_6_BE36, Random6, <L_6_BC5A, >L_6_BC5A, MoveBall, $CC, $D8, Jump, <L_6_BE00, >L_6_BE00
+L_6_BA88: .BYTE SetMiddle, $C0, $28, TwoPt, Random9, <L_6_BDFC, >L_6_BDFC, Random6, <L_6_B010, >L_6_B010, MoveBall, $10, $D8, Jump, <L_6_BDF4, >L_6_BDF4
+L_6_BA98: .BYTE SetBall, $C8, $50, TwoPt, Random7, <L_6_BE78, >L_6_BE78, Jump, <L_6_BE14, >L_6_BE14
+L_6_BAA2: .BYTE SetBall, $18, $50, TwoPt, Random7, <L_6_BAAF, >L_6_BAAF, MoveBall, $E8, $C8, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_BAAF: .BYTE MoveMiddle, $C0, $B0, Jump, <L_6_BE10, >L_6_BE10
+L_6_BAB5: .BYTE SetMiddle, $36, $28, TwoPt, Random7, <L_6_BC5A, >L_6_BC5A, MoveBall, $C0, $C8, Jump, <L_6_BE3B, >L_6_BE3B
+L_6_BAC2: .BYTE SetMiddle, $C0, $28, TwoPt, Random6, <L_6_BE41, >L_6_BE41, Random6, <L_6_BDF0, >L_6_BDF0, Random6, <L_6_BAD5, >L_6_BAD5, MoveBall, $18, $D8, Jump, <L_6_BE00, >L_6_BE00
+L_6_BAD5: .BYTE MoveBall, $2C, $D8, Jump, <L_6_BDF4, >L_6_BDF4
+L_6_BADB: .BYTE SetBall, $00, $18, TwoPt, Random7, <L_6_AFEC, >L_6_AFEC, Jump, <L_6_BE14, >L_6_BE14
+L_6_BAE5: .BYTE SetBall, $18, $0C, TwoPt, Random7, <L_6_BF24, >L_6_BF24, Jump, <L_6_BE04, >L_6_BE04
+L_6_BAEF: .BYTE SetBall, $C8, $50, TwoPt, Random7, <L_6_B6DB, >L_6_B6DB, Jump, <L_6_BE78, >L_6_BE78
+L_6_BAF9: .BYTE SetBall, $18, $50, TwoPt, Random7, <L_6_BE08, >L_6_BE08, MoveBall, $28, $B8, Jump, <L_6_BEB0, >L_6_BEB0
+L_6_BB06: .BYTE SetMiddle, $36, $28, TwoPt, Random7, <L_6_BB16, >L_6_BB16, Random7, <L_6_BC5A, >L_6_BC5A, MoveBall, $D8, $C8, Jump, <L_6_BDF4, >L_6_BDF4
+L_6_BB16: .BYTE Random7, <L_6_BE1D, >L_6_BE1D, Jump, <L_6_BE36, >L_6_BE36
+L_6_BB1C: .BYTE SetBall, $C8, $50, TwoPt, Random7, <L_6_BB2E, >L_6_BB2E, MoveBall, $F8, $90, Turn, $14, Wait, $0A, $78, Jump, <L_6_BE18, >L_6_BE18
+L_6_BB2E: .BYTE Random7, <L_6_BE57, >L_6_BE57, Jump, <L_6_BE78, >L_6_BE78
+L_6_BB34: .BYTE SetMiddle, $36, $28, TwoPt, Random9, <L_6_BE36, >L_6_BE36, Random7, <L_6_BB44, >L_6_BB44, MoveBall, $C0, $00, Jump, <L_6_BDF0, >L_6_BDF0
+L_6_BB44: .BYTE MoveBall, $D0, $D8, Jump, <L_6_BDF4, >L_6_BDF4
+L_6_BB4A: .BYTE SetMiddle, $C0, $28, TwoPt, Random9, <L_6_BE41, >L_6_BE41, MoveBall, $14, $D0, Random9, <L_6_BDF0, >L_6_BDF0, Random9, <L_6_BE00, >L_6_BE00, Jump, <L_6_B010, >L_6_B010
+L_6_BB5D: .BYTE SetBall, $E0, $18, TwoPt, CPUJuice, <L_6_B961, >L_6_B961, $06, MoveBall, $C8, $D0, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_BB6B: .BYTE SetBall, $C8, $50, TwoPt, Random6, <L_6_BCBA, >L_6_BCBA, MoveBall, $B0, $C8, Turn, $C8, MoveBall, $B0, $81, Jump, <L_6_BDF0, >L_6_BDF0
+L_6_BB7D: .BYTE SetBall, $18, $50, TwoPt, Random9, <L_6_BE10, >L_6_BE10, Random7, <L_6_BCCB, >L_6_BCCB, MoveBall, $E8, $98, MoveBall, $B8, $A0, Jump, <L_6_BE04, >L_6_BE04
+L_6_BB90: .BYTE SetMiddle, $36, $28, TwoPt, Random9, <L_6_BE36, >L_6_BE36, Random9, <L_6_BB9D, >L_6_BB9D, Jump, <L_6_BCD2, >L_6_BCD2
+L_6_BB9D: .BYTE RandomA, <L_6_BDFC, >L_6_BDFC, Turn, $14, MoveBall, $C8, $D8, MoveBall, $D8, $B8, MoveBall, $E8, $A8, MoveBall, $F8, $A0, Jump, <L_6_BDFC, >L_6_BDFC
+L_6_BBB1: .BYTE SetMiddle, $C0, $28, TwoPt, Random9, <L_6_BDF0, >L_6_BDF0, Random7, <L_6_BE00, >L_6_BE00, Jump, <L_6_BDF4, >L_6_BDF4
+L_6_BBBE: .BYTE SetBall, $18, $0C, TwoPt, Random7, <L_6_BF24, >L_6_BF24, Jump, <L_6_BE08, >L_6_BE08
+L_6_BBC8: .BYTE SetBall, $C8, $50, TwoPt, Random7, <L_6_BE78, >L_6_BE78, MoveMiddle, $80, $A0, Jump, <L_6_BE10, >L_6_BE10
+L_6_BBD5: .BYTE SetBall, $18, $50, TwoPt, Random7, <L_6_BE14, >L_6_BE14, MoveMiddle, $C0, $B0, Jump, <L_6_BE04, >L_6_BE04
+L_6_BBE2: .BYTE SetBall, $E0, $18, TwoPt, BoostRP, $16, BoostRS, $16, MoveMiddle, $68, $B8, Jump, <L_6_BDFC, >L_6_BDFC
+L_6_BBF0: .BYTE SetMiddle, $36, $28, Random7, <L_6_BBFF, >L_6_BBFF, Motion, $82, Move, $02, $04, FollowFB, Jump, <L_6_BDF4, >L_6_BDF4
+L_6_BBFF: .BYTE TwoPt, Random7, <L_6_BDF8, >L_6_BDF8, Jump, <L_6_BDF0, >L_6_BDF0
+L_6_BC06: .BYTE SetMiddle, $36, $28, RandomA, <L_6_BC19, >L_6_BC19, TwoPt, Random7, <L_6_BE4C, >L_6_BE4C, Random7, <L_6_BC23, >L_6_BC23, MoveBall, $C0, $D8, Jump, <L_6_BDF4, >L_6_BDF4
+L_6_BC19: .BYTE Motion, $64, FollowWR1, TwoPt, MoveBall, $F0, $D8, Jump, <L_6_BDF8, >L_6_BDF8
+L_6_BC23: .BYTE MoveMiddle, $36, $00, Jump, <L_6_BDF0, >L_6_BDF0
+L_6_BC29: .BYTE SetBall, $C8, $50, TwoPt, Random9, <L_6_BE08, >L_6_BE08, Jump, <L_6_BE14, >L_6_BE14
+L_6_BC33: .BYTE SetBall, $18, $50, TwoPt, Random7, <L_6_BE41, >L_6_BE41, MoveBall, $08, $D0, Jump, <L_6_BE0C, >L_6_BE0C
+L_6_BC40: .BYTE SetMiddle, $C0, $28, TwoPt
+L_6_BC44: .BYTE CPUJuice, <L_6_B961, >L_6_B961, $03, Jump, <L_6_B014, >L_6_B014
+L_6_BC4B: .BYTE SetBall, $18, $0C, TwoPt, CPUJuice, <L_6_B971, >L_6_B971, $0C, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_BC56: .BYTE SetMiddle, $36, $28, TwoPt
+L_6_BC5A: .BYTE CPUJuice, <L_6_B988, >L_6_B988, $02, Jump, <L_6_B001, >L_6_B001
+L_6_BC61: .BYTE SetBall, $E0, $18, TwoPt, CPUJuice, <L_6_B9BC, >L_6_B9BC, $06, Jump, <L_6_AFDF, >L_6_AFDF
+L_6_BC6C: .BYTE SetBall, $00, $18, TwoPt, CPUJuice, <L_6_B9C5, >L_6_B9C5, $07, Jump, <L_6_AFF0, >L_6_AFF0
+L_6_BC77: .BYTE SetMiddle, $C0, $28, TwoPt, Random7, <L_6_BDFC, >L_6_BDFC, Jump, <L_6_B010, >L_6_B010
+L_6_BC81: .BYTE SetBall, $E0, $18, TwoPt, Jump, <L_6_AFDF, >L_6_AFDF
+L_6_BC88: .BYTE SetBall, $C8, $10, TwoPt, CPUJuice, <L_6_B97C, >L_6_B97C, $09, Jump, <L_6_B7A9, >L_6_B7A9
+L_6_BC93: .BYTE SetBall, $E0, $18, TwoPt, CPUJuice, <L_6_B9E6, >L_6_B9E6, $06, Jump, <L_6_AFDF, >L_6_AFDF
+L_6_BC9E: .BYTE SetMiddle, $36, $28, TwoPt, Jump, <L_6_B388, >L_6_B388
+L_6_BCA5: .BYTE SetMiddle, $C0, $28, TwoPt, CPUJuice, <L_6_BCB0, >L_6_BCB0, $03
+L_6_BCAD: .BYTE Jump, <L_6_B7EC, >L_6_B7EC
+L_6_BCB0: .BYTE Random9, <L_6_BCAD, >L_6_BCAD, Jump, <L_6_BDFC, >L_6_BDFC
+L_6_BCB6: .BYTE SetBall, $C8, $50, TwoPt
+L_6_BCBA: .BYTE CPUJuice, <L_6_BCC1, >L_6_BCC1, $04
+L_6_BCBE: .BYTE Jump, <L_6_B39B, >L_6_B39B
+L_6_BCC1: .BYTE RandomA, <L_6_BCBE, >L_6_BCBE, Jump, <L_6_BDF0, >L_6_BDF0
+L_6_BCC7: .BYTE SetBall, $18, $50, TwoPt
+L_6_BCCB: .BYTE Jump, <L_6_B802, >L_6_B802
+L_6_BCCE: .BYTE SetMiddle, $36, $28, TwoPt
+L_6_BCD2: .BYTE CPUJuice, <L_6_B94B, >L_6_B94B, $02, Jump, <L_6_B001, >L_6_B001
+L_6_BCD9: .BYTE SetMiddle, $C0, $28, TwoPt, CPUJuice, <L_6_B961, >L_6_B961, $03, Jump, <L_6_B5E3, >L_6_B5E3
+L_6_BCE4: .BYTE SetBall, $C8, $50, TwoPt, CPUJuice, <L_6_B956, >L_6_B956, $04, Jump, <L_6_B5F7, >L_6_B5F7
+L_6_BCEF: .BYTE SetBall, $00, $18, TwoPt, CPUJuice, <L_6_BCFA, >L_6_BCFA, $07, Jump, <L_6_B61F, >L_6_B61F
+L_6_BCFA: .BYTE Random7, <L_6_BE04, >L_6_BE04, MoveBall, $00, $81, Jump, <L_6_BDFC, >L_6_BDFC
+L_6_BD03: .BYTE SetBall, $18, $0C, TwoPt, CPUJuice, <L_6_B940, >L_6_B940, $0C, Jump, <L_6_A4DB, >L_6_A4DB
+L_6_BD0E: .BYTE SetBall, $E0, $18, TwoPt, CPUJuice, <L_6_B97C, >L_6_B97C, $06, Jump, <L_6_B4E2, >L_6_B4E2
+L_6_BD19: .BYTE SetBall, $C8, $10, TwoPt, Random9, <L_6_A13B, >L_6_A13B, CPUJuice, <L_6_AADC, >L_6_AADC, $06, Jump, <L_6_A13B, >L_6_A13B
+L_6_BD27: .BYTE SetBall, $18, $50, TwoPt, Random9, <L_6_BDEC, >L_6_BDEC
+L_6_BD2E: .BYTE CPUJuice, <L_6_AAD8, >L_6_AAD8, $03, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_BD35: .BYTE SetBall, $C8, $50, TwoPt, Random9, <L_6_BDEC, >L_6_BDEC, Loop, L_6_BD2E + 1 - *
+L_6_BD3E: .BYTE SetMiddle, $36, $28, TwoPt, Random6, <L_6_AB9A, >L_6_AB9A, Jump, <L_6_AB9E, >L_6_AB9E
+L_6_BD48: .BYTE SetBall, $C8, $10, TwoPt, RandomB, <L_6_BD53, >L_6_BD53, CPUJuice, <L_6_AADC, >L_6_AADC, $09
+L_6_BD53: .BYTE Jump, <L_6_A1C1, >L_6_A1C1
+L_6_BD56: .BYTE SetMiddle, $C0, $28, TwoPt, RandomB, <L_6_A201, >L_6_A201, CPUJuice, <L_6_BD64, >L_6_BD64, $06, Jump, <L_6_A201, >L_6_A201
+L_6_BD64: .BYTE Turn, $28, Jump, <L_6_AAD8, >L_6_AAD8
+L_6_BD69: .BYTE SetMiddle, $36, $28, TwoPt, CPUJuice, <L_6_BD7A, >L_6_BD7A, $04, RandomC, <L_6_BDEC, >L_6_BDEC, Random5, <L_6_A84A, >L_6_A84A, Jump, <L_6_ACF1, >L_6_ACF1
+L_6_BD7A: .BYTE MoveBall, $F0, $D0, Jump, <L_6_AAD8, >L_6_AAD8
+L_6_BD80: .BYTE SetBall, $C8, $50, TwoPt, Random9, <L_6_AAC2, >L_6_AAC2, CPUJuice, <L_6_AAD8, >L_6_AAD8, $09, Jump, <L_6_AAC2, >L_6_AAC2
+L_6_BD8E: .BYTE SetBall, $18, $50, TwoPt, Random9, <L_6_AC94, >L_6_AC94, CPUJuice, <L_6_AAD8, >L_6_AAD8, $0B, Jump, <L_6_AC94, >L_6_AC94
+L_6_BD9C: .BYTE SetMiddle, $36, $28, TwoPt, RandomB, <L_6_BDEC, >L_6_BDEC, CPUJuice, <L_6_AAD8, >L_6_AAD8, $01, Jump, <L_6_BDEC, >L_6_BDEC
+L_6_BDAA: .BYTE SetBall, $E0, $18, TwoPt, RandomB, <L_6_A2C3, >L_6_A2C3, CPUJuice, <L_6_BDB8, >L_6_BDB8, $05, Jump, <L_6_A2C3, >L_6_A2C3
+L_6_BDB8: .BYTE MoveBall, $C6, $E8, Jump, <L_6_AAD8, >L_6_AAD8
+L_6_BDBE: .BYTE SetMiddle, $C0, $28, TwoPt, RandomB, <L_6_A304, >L_6_A304, CPUJuice, <L_6_AADC, >L_6_AADC, $08, Jump, <L_6_A304, >L_6_A304
+L_6_BDCC: .BYTE SetBall, $18, $0C, TwoPt, Random9, <L_6_A659, >L_6_A659, CPUJuice, <L_6_AADC, >L_6_AADC, $06, Jump, <L_6_A659, >L_6_A659
+L_6_BDDA: .BYTE SetBall, $18, $0C, TwoPt, Random9, <L_6_ABC4, >L_6_ABC4, CPUJuice, <L_6_AADC, >L_6_AADC, $0A, Jump, <L_6_ABC4, >L_6_ABC4
+L_6_BDE8: .BYTE Stand, $00, Loop, L_6_BDE8 + 1 - *
+L_6_BDEC: .BYTE Turn, $00, Loop, L_6_BDEC + 1 - *
+L_6_BDF0: .BYTE m2mHB, $00, Loop, L_6_BDF0 + 1 - *
+L_6_BDF4: .BYTE m2mFB, $00, Loop, L_6_BDF4 + 1 - *
+L_6_BDF8: .BYTE m2mWR1, $00, Loop, L_6_BDF8 + 1 - *
+L_6_BDFC: .BYTE m2mWR2, $00, Loop, L_6_BDFC + 1 - *
+L_6_BE00: .BYTE m2mTE, $00, Loop, L_6_BE00 + 1 - *
+L_6_BE04: .BYTE m2m_HB, $00, Loop, L_6_BDF0 + 1 - *
+L_6_BE08: .BYTE m2m_FB, $00, Loop, L_6_BDF4 + 1 - *
+L_6_BE0C: .BYTE m2m_WR1, $00, Loop, L_6_BDF8 + 1 - *
+L_6_BE10: .BYTE m2m_WR2, $00, Loop, L_6_BDFC + 1 - *
+L_6_BE14: .BYTE m2m_TE, $00, Loop, L_6_BE00 + 1 - *
+L_6_BE18: .BYTE Move, $00, $C0, Loop, L_6_BE18 + 1 - *
+L_6_BE1D: .BYTE RandomE, <L_6_BE25, >L_6_BE25, Turn, $1E, Move, $00, $81
+L_6_BE25: .BYTE Jump, <L_6_BDF0, >L_6_BDF0
+L_6_BE28: .BYTE RandomE, <L_6_BE33, >L_6_BE33, Turn, $1E, MoveBall, $C8, $C0, Move, $00, $81
+L_6_BE33: .BYTE Jump, <L_6_BDF4, >L_6_BDF4
+L_6_BE36: .BYTE RandomE, <L_6_BDF8, >L_6_BDF8, Turn, $1E
+L_6_BE3B: .BYTE Move, $00, $81, Jump, <L_6_BDF8, >L_6_BDF8
+L_6_BE41: .BYTE RandomE, <L_6_BE49, >L_6_BE49, Turn, $1E, Move, $00, $81
+L_6_BE49: .BYTE Jump, <L_6_BDFC, >L_6_BDFC
+L_6_BE4C: .BYTE RandomE, <L_6_BE54, >L_6_BE54, Turn, $1E, Move, $00, $81
+L_6_BE54: .BYTE Jump, <L_6_BE00, >L_6_BE00
+L_6_BE57: .BYTE RandomE, <L_6_BE5F, >L_6_BE5F, Turn, $1E, Move, $00, $81
+L_6_BE5F: .BYTE Jump, <L_6_BE04, >L_6_BE04
+L_6_BE62: .BYTE RandomE, <L_6_BE6A, >L_6_BE6A, Turn, $64, Move, $00, $81
+L_6_BE6A: .BYTE Jump, <L_6_BE08, >L_6_BE08
+L_6_BE6D: .BYTE RandomE, <L_6_BE75, >L_6_BE75, Turn, $50, Move, $00, $81
+L_6_BE75: .BYTE Jump, <L_6_BE08, >L_6_BE08
+L_6_BE78: .BYTE MoveMiddle, $36, $B0, RandomE, <L_6_BE83, >L_6_BE83, Turn, $32, Move, $00, $81
+L_6_BE83: .BYTE Jump, <L_6_BE0C, >L_6_BE0C
+L_6_BE86: .BYTE RandomE, <L_6_BE98, >L_6_BE98, MoveBall, $18, $B8, MoveBall, $20, $C0, MoveBall, $30, $C0, MoveMiddle, $C0, $B8, Move, $00, $81
+L_6_BE98: .BYTE Jump, <L_6_BE10, >L_6_BE10
+L_6_BE9B: .BYTE RandomE, <L_6_BEAD, >L_6_BEAD, MoveBall, $18, $B8, MoveBall, $20, $C0, MoveBall, $30, $C0, MoveMiddle, $C0, $B8, Move, $00, $81
+L_6_BEAD: .BYTE Jump, <L_6_BE14, >L_6_BE14
+L_6_BEB0: .BYTE RandomE, <L_6_BE10, >L_6_BE10, Turn, $1E, Move, $00, $81, Jump, <L_6_BE10, >L_6_BE10
+L_6_BEBB: .BYTE SetBall, $D8, $08, ThreePt, MoveBall, $D8, $08, MoveBall, $E0, $1C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_BEC8: .BYTE SetBall, $F0, $08, ThreePt, MoveBall, $F0, $14, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_BED2: .BYTE SetBall, $08, $08, ThreePt, MoveBall, $08, $08, MoveBall, $00, $1C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_BEDF: .BYTE SetBall, $C8, $10, TwoPt, Loop, L_6_BEED + 1 - *
+L_6_BEE5: .BYTE SetBall, $C8, $10, TwoPt
+L_6_BEE9: .BYTE CPUJuice, <L_6_B97C, >L_6_B97C, $09
+L_6_BEED: .BYTE MoveBall, $C4, $00, MoveBall, $C4, $14, MoveBall, $D4, $2C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_BEF9: .BYTE SetBall, $C8, $10, TwoPt, CPUJuice, <L_6_B9F1, >L_6_B9F1, $0C, Loop, L_6_BEED + 1 - *
+L_6_BF03: .BYTE SetBall, $18, $0C, TwoPt, Loop, L_6_BF14 + 1 - *
+L_6_BF09: .BYTE SetBall, $18, $0C, TwoPt, Random9, <L_6_BF14, >L_6_BF14, CPUJuice, <L_6_BE00, >L_6_BE00, $0C
+L_6_BF14: .BYTE MoveBall, $1C, $08, MoveBall, $1C, $18, MoveBall, $0C, $2C, Jump, <L_6_AAAD, >L_6_AAAD
+L_6_BF20: .BYTE SetBall, $18, $0C, TwoPt
+L_6_BF24: .BYTE CPUJuice, <L_6_B97C, >L_6_B97C, $0C, Loop, L_6_BF14 + 1 - *
+L_6_BF2A: .BYTE SetMS, $00, SetGrab, %11111111, %11100000, Wait, $01, $50, Loop, L_6_BF44 + 1 - *
+L_6_BF34: .BYTE SetGrab, %11111111, %11100000, Wait, $01, $50, Loop, L_6_BF44 + 1 - *
+L_6_BF3C: .BYTE SetGrab, %11111111, %11100000, Wait, $01, $50, Loop, L_6_BF44 + 1 - *
+L_6_BF44: .BYTE SetMS, $00, SetGrab, %11111111, %11100000
+L_6_BF49: .BYTE Recover, Loop, L_6_BF49 + 1 - *
+L_6_BF4C: .BYTE SetMS, $00, Control, Loop, L_6_BF44 + 1 - *
+L_6_BF51: .BYTE Celebrate, $14
+L_6_BF53: .BYTE Celebrate, $3C
+L_6_BF55: .BYTE Celebrate, $50
+L_6_BF57: .BYTE Cry, $1E
+L_6_BF59: .BYTE Cry, $32
+L_6_BF5B: .BYTE Cry, $46
+L_6_BF5D: .BYTE BoostRS, $FC, SetGrab, %11111111, %11100000, BlockFS, Loop, L_6_BF5D + 1 - *
+L_6_BF65: .BYTE BoostRS, $FC, SetGrab, %11111111, %11100000, BlockLOLB, Loop, L_6_BF65 + 1 - *
+L_6_BF6D: .BYTE BoostRS, $FC, SetGrab, %00000000, %00100000, BlockSS, Loop, L_6_BF6D + 1 - *
+L_6_BF75: .BYTE BoostRS, $FC, SetGrab, %11111111, %11100000, BlockLILB, Loop, L_6_BF75 + 1 - *
+L_6_BF7D: .BYTE BoostRS, $FC, SetGrab, %11111111, %11100000, BlockRCB, Loop, L_6_BF7D + 1 - *
+L_6_BF85: .BYTE BoostRS, $FC, SetGrab, %11111111, %11100000, BlockLCB, Loop, L_6_BF85 + 1 - *
+L_6_BF8D: .BYTE BoostRS, $FC, SetGrab, %11111111, %11100000, BlockLE, Loop, L_6_BF8D + 1 - *
+L_6_BF95: .BYTE BoostRS, $FC, SetGrab, %11111111, %11100000, BlockROLB, Loop, L_6_BF95 + 1 - *
+L_6_BF9D: .BYTE BoostRS, $FC, SetGrab, %11111111, %11100000, BlockLILB, Loop, L_6_BF9D + 1 - *
+L_6_BFA5: .BYTE BoostRS, $FC, SetGrab, %11111111, %11100000, BlockNT, Loop, L_6_BFA5 + 1 - *
+L_6_BFAD: .BYTE BoostRS, $FC, SetGrab, %11111111, %11100000, BlockRE, Loop, L_6_BFAD + 1 - *
+L_6_BFB5: .BYTE SetMS, $00, BoostRP, $03, BoostRS, $EF, Control
+L_6_BFBC: .BYTE CPUControl, Loop, L_6_BFBC + 1 - *

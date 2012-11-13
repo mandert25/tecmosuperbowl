@@ -1,0 +1,839 @@
+.include "Play.h"
+
+.segment "OFFENSIVE_DESIGN"
+L_5_A000: .BYTE SetShort, $CC, $98, TwoPt, SetGrab, %11111111, %11100000, MoveLong, $48, $88, SetBlock, %11111111, %11100000, Wait, $01, $19, Pull, $60, $28, Pull, $0C, $7F
+L_5_A016: .BYTe PullMiddle, $10, $00, Loop, L_5_A016 + 1 - *
+L_5_A01B: .BYTE SetShort, $DC, $88, TwoPt, SetGrab, %00111100, %00000000, MoveLong, $60, $A0, SetBlock, %11111111, %11100000, Pull, $F8, $10, Pull, $00, $7F
+L_5_A02E: .BYTE PullMiddle, $F8, $E8, Loop, L_5_A02E + 1 - *
+L_5_A033: .BYTE SetShort, $F0, $80, TwoPt, SetGrab, %10000110, %00000000, MoveLong, $78, $B0, SetBlock, %11111111, %11100000, Pull, $00, $7F
+L_5_A043: .BYTE PullMiddle, $08, $E0, Loop, L_5_A043 + 1 - *
+L_5_A048: .BYTE SetShort, $04, $88, TwoPt, SetGrab, %00000011, %11000000, MoveLong, $90, $A0, SetBlock, %11111111, %11100000, Pull, $08, $10, Pull, $00, $7F
+L_5_A05B: .BYTE PullMiddle, $00, $C8, Loop, L_5_A05B + 1 - *
+L_5_A060: .BYTE SetShort, $18, $98, TwoPt, SetGrab, %00000000, %11100000, MoveLong, $A8, $88, SetBlock, %11111111, %11100000, Wait, $01, $19, Pull, $A8, $28, Pull, $F8, $7F
+L_5_A076: .BYTE PullMiddle, $F0, $00, Loop, L_5_A076 + 1 - *
+L_5_A07B: .BYTE SetLong, $CC, $00, TwoPt, SetGrab, %01110000, %00000000, MoveLong, $50, $38, SetBlock, %11111111, %11100000, Pull, $04, $7F
+L_5_A08B: .BYTE PullMiddle, $F8, $18, Loop, L_5_A08B + 1 - *
+L_5_A090: .BYTE SetLong, $E4, $00, TwoPt, SetGrab, %00001110, %00000000, MoveLong, $68, $48, SetBlock, %11111111, %11100000, Pull, $04, $7F, Pull, $04, $7F, Pull, $00, $7F, Pull, $00, $7F
+L_5_A0A9: .BYTE Block, Loop, L_5_A0A9 + 1 - *
+L_5_A0AC: .BYTE SetLong, $FC, $00, TwoPt, SetGrab, %00000111, %00000000, MoveLong, $88, $48, SetBlock, %11111111, %11100000, Pull, $FC, $7F, Pull, $FC, $7F, Pull, $00, $7F, Pull, $00, $7F
+L_5_A0C5: .BYTE Block, Loop, L_5_A0C5 + 1 - *
+L_5_A0C8: .BYTE SetLong, $14, $00, TwoPt, MoveLong, $A0, $38, SetBlock, %11111111, %11100000, Pull, $04, $7F
+L_5_A0D5: .BYTE PullMiddle, $08, $20, Loop, L_5_A0D5 + 1 - *
+L_5_A0DA: .BYTE SetLong, $E0, $78, TwoPt, MoveLong, $88, $28, SetGrab, %11111111, %11100000, PullMiddle, $00, $30, Pull, $00, $7F
+L_5_A0EA: .BYTE PullMiddle, $00, $B8, Loop, L_5_A0EA + 1 - *
+L_5_A0EF: .BYTE SetLong, $00, $48, TwoPt, BoostRS, $30, SwitchIcon, SetMS, $00, Control
+L_5_A0F9: .BYTE CPUControl, Loop, L_5_A0F9 + 1 - *
+L_5_A0FC: .BYTE SetBall, $F0, $48, TwoPt, Punt
+L_5_A101: .BYTE Turn, $00, Loop, L_5_A101 + 1 - *
+L_5_A105: .BYTE SetBall, $00, $30, TwoPt, SetGrab, %11111111, %11100000, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_A10F: .BYTE SetBall, $C8, $1C, ThreePt, Jump, <L_5_A65F, >L_5_A65F
+L_5_A116: .BYTE SetMiddle, $36, $0C, TwoPt
+L_5_A11A: .BYTE Move, $00, $7F, Jump, <L_5_B832, >L_5_B832
+L_5_A120: .BYTE SetMiddle, $C0, $0C, TwoPt, Jump, <L_5_A11A, >L_5_A11A
+L_5_A127: .BYTE SetBall, $18, $1C, ThreePt, Jump, <L_5_A720, >L_5_A720
+L_5_A12E: .BYTE SetBall, $F0, $06, GunHike, Jump, <L_5_BE30, >L_5_BE30
+L_5_A135: .BYTE SetBall, $E4, $0C, ThreePt, Jump, <L_5_BE42, >L_5_BE42
+L_5_A13C: .BYTE SetBall, $FC, $0C, ThreePt, Jump, <L_5_BE48, >L_5_BE48
+L_5_A143: .BYTE SetBall, $D8, $0C, ThreePt, Jump, <L_5_BE2A, >L_5_BE2A
+L_5_A14A: .BYTE SetBall, $08, $0C, TwoPt, Jump, <L_5_BE36, >L_5_BE36
+L_5_A151: .BYTE BoostHP, $07, BoostRP, $06, BoostRS, $04, Control, Move, $00, $30, Jump, <L_5_BF38, >L_5_BF38
+L_5_A15E: .BYTE BoostHP, $07, BoostRP, $06, BoostRS, $04, Move, $00, $30, Jump, <L_5_BF38, >L_5_BF38
+L_5_A16A: .BYTE SetBall, $F0, $40, FGTakeSnap, Jump, <L_5_B832, >L_5_B832
+L_5_A171: .BYTE SetBall, $F0, $60, TwoPt, FieldGoal, Jump, <L_5_B832, >L_5_B832
+L_5_A179: .BYTE SetBall, $B4, $24, ThreePt, BoostHP, $06, Jump, <L_5_BE2A, >L_5_BE2A
+L_5_A182: .BYTE SetBall, $C4, $10, ThreePt, BoostHP, $06, Jump, <L_5_BE5A, >L_5_BE5A
+L_5_A18B: .BYTE SetBall, $D4, $10, ThreePt, BoostHP, $06, Jump, <L_5_BE30, >L_5_BE30
+L_5_A194: .BYTE SetBall, $E0, $10, ThreePt, Jump, <L_5_BE36, >L_5_BE36
+L_5_A19B: .BYTE SetBall, $F0, $08, Face, $80, GunHike, Jump, <L_5_BE3C, >L_5_BE3C
+L_5_A1A4: .BYTE SetBall, $00, $10, ThreePt, MoveBall, $FC, $F8, Jump, <L_5_BE42, >L_5_BE42
+L_5_A1AE: .BYTE SetBall, $0C, $10, ThreePt, MoveBall, $08, $F8, Jump, <L_5_BE48, >L_5_BE48
+L_5_A1B8: .BYTE SetBall, $1C, $10, ThreePt, MoveBall, $18, $F8, Jump, <L_5_BE4E, >L_5_BE4E
+L_5_A1C2: .BYTE SetBall, $30, $24, ThreePt, Jump, <L_5_BE54, >L_5_BE54
+L_5_A1C9: .BYTE SetBall, $F0, $60, TwoPt, ExtraPoint
+L_5_A1CE: .BYTE Turn, $00, Loop, L_5_A1CE + 1 - *
+L_5_A1D2: .BYTE SetBall, $F0, $48, QBStance
+L_5_A1D6: .BYTE SetBall, $F0, $12, QBStance
+L_5_A1DA: .BYTE SetBall, $0C, $40, Shift, $3C, MoveBall, $0C, $D8, MoveBall, $D4, $D8, ThreePt
+L_5_A1E6: .BYTE SetBall, $0C, $40, TwoPt
+L_5_A1EA: .BYTE SetBall, $C0, $18, TwoPt
+L_5_A1EE: .BYTE SetBall, $0C, $40, TwoPt
+L_5_A1F2: .BYTE SetBall, $0C, $30, ThreePt
+L_5_A1F6: .BYTE SetBall, $F0, $48, Shift, $64, MoveBall, $0C, $B8, ThreePt
+L_5_A1FF: .BYTE SetBall, $D4, $40, Shift, $32, MoveBall, $D4, $C0, MoveBall, $F0, $C0, ThreePt
+L_5_A20B: .BYTE SetBall, $D8, $40, TwoPt
+L_5_A20F: .BYTE SetBall, $F0, $48, ThreePt
+L_5_A213: .BYTE SetBall, $D4, $40, Shift, $3C, MoveBall, $D4, $CC, MoveBall, $E0, $D8, MoveMiddle, $C0, $D8, TwoPt
+L_5_A222: .BYTE SetBall, $D4, $40, ThreePt
+L_5_A226: .BYTE SetBall, $D4, $40, Shift, $46, MoveBall, $C0, $C0, MoveBall, $C0, $E4, Shift, $3C, MoveMiddle, $B8, $E4, ThreePt
+L_5_A237: .BYTE SetMiddle, $48, $0C, TwoPt
+L_5_A23B: .BYTE SetBall, $D8, $40, TwoPt
+L_5_A23F: .BYTE SetMiddle, $B2, $18, TwoPt
+L_5_A243: .BYTE SetMiddle, $48, $18, TwoPt
+L_5_A247: .BYTE SetBall, $18, $16, TwoPt
+L_5_A24B: .BYTE SetBall, $C4, $18, TwoPt
+L_5_A24F: .BYTE SetBall, $F0, $48, ThreePt
+L_5_A253: .BYTE SetBall, $14, $0C, Shift, $50, MoveMiddle, $C0, $F4, TwoPt
+L_5_A25C: .BYTE SetBall, $0C, $40, Shift, $14, MoveBall, $0C, $D8, MoveMiddle, $50, $D8, MoveMiddle, $50, $E8, ThreePt
+L_5_A26B: .BYTE SetBall, $CC, $0C, ThreePt
+L_5_A26F: .BYTE SetBall, $C8, $18, TwoPt
+L_5_A273: .BYTE SetBall, $0C, $40, ThreePt
+L_5_A277: .BYTE SetMiddle, $2E, $18, Motion, $5A, MoveBall, $CC, $E8, ThreePt
+L_5_A280: .BYTE SetBall, $CC, $0C, ThreePt
+L_5_A284: .BYTE SetMiddle, $2C, $14, Motion, $32, MoveBall, $C0, $EC, TwoPt
+L_5_A28D: .BYTE SetBall, $CC, $0C, Shift, $28, MoveMiddle, $36, $F4, TwoPt
+L_5_A296: .BYTE SetMiddle, $36, $0C, TwoPt
+L_5_A29A: .BYTE SetMiddle, $36, $14, TwoPt
+L_5_A29E: .BYTE SetMiddle, $C0, $0C, TwoPt
+L_5_A2A2: .BYTE SetMiddle, $A8, $18, TwoPt
+L_5_A2A6: .BYTE SetMiddle, $C6, $0C, TwoPt
+L_5_A2AA: .BYTE SetMiddle, $C6, $18, Motion, $8C, MoveBall, $10, $E8, TwoPt
+L_5_A2B3: .BYTE SetBall, $1C, $0C, Shift, $28, MoveMiddle, $C0, $F4, TwoPt
+L_5_A2BC: .BYTE SetBall, $B8, $18, Motion, $14, MoveBall, $B8, $D8, Move, $40, $00, MoveMiddle, $B8, $D8, TwoPt
+L_5_A2CB: .BYTE SetMiddle, $C0, $14, TwoPt
+L_5_A2CF: .BYTE SetMiddle, $4C, $18, TwoPt
+L_5_A2D3: .BYTE SetMiddle, $C0, $0C, TwoPt
+L_5_A2D7: .BYTE SetMiddle, $3A, $0C, TwoPt
+L_5_A2DB: .BYTE SetBall, $20, $18, TwoPt
+L_5_A2DF: .BYTE SetBall, $18, $16, TwoPt
+L_5_A2E3: .BYTE SetMiddle, $A8, $18, TwoPt
+L_5_A2E7: .BYTE SetMiddle, $C0, $0C, TwoPt
+L_5_A2EB: .BYTE SetMiddle, $B2, $18, TwoPt
+L_5_A2EF: .BYTE SetBall, $1C, $18, TwoPt
+L_5_A2F3: .BYTE SetBall, $14, $0C, ThreePt
+L_5_A2F7: .BYTE SetBall, $CC, $0C, ThreePt
+L_5_A2FB: .BYTE SetBall, $F0, $06, GunHike
+L_5_A2FF: .BYTE SetBall, $F0, $06, Hike
+L_5_A303: .BYTE SetBall, $E4, $0C, ThreePt
+L_5_A307: .BYTE SetBall, $FC, $0C, ThreePt
+L_5_A30B: .BYTE SetBall, $D8, $0C, ThreePt
+L_5_A30F: .BYTE SetBall, $08, $0C, ThreePt
+L_5_A313: .BYTE SetBall, $F0, $48, QBStance
+L_5_A317: .BYTE SetBall, $D4, $38, TwoPt
+L_5_A31B: .BYTE SetBall, $00, $40, Face, $80, Wait, $01, $FF, MoveBall, $C0, $D8, MoveBall, $18, $D8, TwoPt
+L_5_A32A: .BYTE SetMiddle, $38, $08, TwoPt
+L_5_A32E: .BYTE SetMiddle, $C8, $08, TwoPt
+L_5_A332: .BYTE SetMiddle, $B0, $18, TwoPt
+L_5_A336: .BYTE SetBall, $F0, $06, GunHike
+L_5_A33A: .BYTE TakeSnap, MoveBall, $F8, $E0, MoveBall, $F8, $DC, FakeFB, MoveBall, $F8, $DA, PitchHB, MoveBall, $F0, $D0, Jump, <L_5_B832, >L_5_B832
+L_5_A34C: .BYTE MoveBall, $E0, $B0, CPU, <L_5_A382, >L_5_A382
+L_5_A352: .BYTE MoveBall, $F4, $B0, MoveBall, $20, $D8, Control, CPUJuice, <L_5_A372, >L_5_A372, $09, CPUJuice, <L_5_A376, >L_5_A376, $05, CPUJuice, <L_5_A37A, >L_5_A37A, $02, CPU, <L_5_A37E, >L_5_A37E
+L_5_A368: .BYTE MoveBall, $28, $F4, Jump, <L_5_B838, >L_5_B838
+L_5_A36E: .BYTE BoostRS, $07, Loop, L_5_A368 + 1 - *
+L_5_A372: .BYTE BoostRS, $06, Loop, L_5_A368 + 1 - *
+L_5_A376: .BYTE BoostRS, $05, Loop, L_5_A368 + 1 - *
+L_5_A37A: .BYTE BoostRS, $04, Loop, L_5_A368 + 1 - *
+L_5_A37E: .BYTE BoostRS, $03, Loop, L_5_A368 + 1 - *
+L_5_A382: .BYTE BoostRP, $12, Loop, L_5_A352 + 1 - *
+L_5_A386: .BYTE MoveBall, $00, $CC, MoveBall, $F8, $E8, MoveBall, $F8, $38, SetGrab, %11111111, %11100000, SetBlock, %00001111, %11100000, PullBall, $10, $50
+L_5_A398: .BYTE Pull, $F0, $20, Loop, L_5_A398 + 1 - *
+L_5_A39D: .BYTE MoveMiddle, $36, $18, SetGrab, %11111111, %11100000, SetBlock, %00000110, %01100000, PullBall, $F8, $60
+L_5_A3A9: .BYTE Pull, $08, $D0, Loop, L_5_A3A9 + 1 - *
+L_5_A3AE: .BYTE MoveMiddle, $B0, $F8, SetGrab, %11111111, %11100000, Jump, <L_5_BE4E, >L_5_BE4E
+L_5_A3B7: .BYTE BoostHP, $10, SetGrab, %00011001, %00000000, Jump, <L_5_BE3C, >L_5_BE3C
+L_5_A3BF: .BYTE SetGrab, %01000000, %00000000, MoveBall, $EC, $00, Jump, <L_5_BE30, >L_5_BE30
+L_5_A3C8: .BYTE SetGrab, %00001000, %00000000, Jump, <L_5_BE42, >L_5_BE42
+L_5_A3CE: .BYTE SetGrab, %00000100, %00000000, MoveBall, $02, $00, Jump, <L_5_BE48, >L_5_BE48
+L_5_A3D7: .BYTE SetGrab, %10000000, %00000000, Jump, <L_5_BE2A, >L_5_BE2A
+L_5_A3DD: .BYTE SetGrab, %00100000, %00000000, MoveBall, $10, $00, Jump, <L_5_BE36, >L_5_BE36
+L_5_A3E6: .BYTE TakeSnap, MoveBall, $F8, $E0, MoveBall, $F8, $DC, HandoffFB, MoveBall, $F8, $DA, MoveBall, $F0, $D0, Jump, <L_5_B832, >L_5_B832
+L_5_A3F7: .BYTE MoveBall, $E0, $B0, MoveBall, $F4, $B0, MoveBall, $2C, $D8, MoveBall, $30, $EC, MoveBall, $30, $00, Jump, <L_5_B832, >L_5_B832
+L_5_A409: .BYTE MoveBall, $00, $CC, MoveBall, $F8, $E8, Control, CPUJuice, <L_5_A429, >L_5_A429, $09, CPUJuice, <L_5_A42D, >L_5_A42D, $05, CPUJuice, <L_5_A431, >L_5_A431, $02, CPU, <L_5_A435, >L_5_A435
+L_5_A41F: .BYTE MoveBall, $F8, $38, Jump, <L_5_B838, >L_5_B838
+L_5_A425: .BYTE BoostRS, $07, Loop, L_5_A439 + 1 - *
+L_5_A429: .BYTE BoostRS, $06, Loop, L_5_A439 + 1 - *
+L_5_A42D: .BYTE BoostRS, $05, Loop, L_5_A439 + 1 - *
+L_5_A431: .BYTE BoostRS, $04, Loop, L_5_A439 + 1 - *
+L_5_A435: .BYTE BoostRS, $03, Loop, L_5_A439 + 1 - *
+L_5_A439: .BYTE BoostRP, $12, Loop, L_5_A41F + 1 - *
+L_5_A43D: .BYTE TakeSnap, MoveBall, $F0, $D0, HandoffHB, MoveBall, $E0, $C0, MoveBall, $C8, $C0, Jump, <L_5_B832, >L_5_B832
+L_5_A44B: .BYTE Stand, $14, MoveBall, $F0, $C8, Control, MoveBall, $18, $D0, CPUJuice, <L_5_A473, >L_5_A473, $09, CPUJuice, <L_5_A477, >L_5_A477, $05, CPUJuice, <L_5_A47B, >L_5_A47B, $02, CPU, <L_5_A47F, >L_5_A47F
+L_5_A463: .BYTE RandomB, <L_5_B838, >L_5_B838, MoveBall, $28, $E0, MoveBall, $30, $F8, Jump, <L_5_B838, >L_5_B838
+L_5_A46F: .BYTE BoostRS, $07, Loop, L_5_A483 + 1 - *
+L_5_A473: .BYTE BoostRS, $06, Loop, L_5_A483 + 1 - *
+L_5_A477: .BYTE BoostRS, $05, Loop, L_5_A483 + 1 - *
+L_5_A47B: .BYTE BoostRS, $04, Loop, L_5_A483 + 1 - *
+L_5_A47F: .BYTE BoostRS, $03, Loop, L_5_A483 + 1 - *
+L_5_A483: .BYTE BoostRP, $12, Loop, L_5_A463 + 1 - *
+L_5_A487: .BYTE MoveBall, $0C, $D0, MoveBall, $E0, $E0, MoveMiddle, $40, $20, Turn, $64, SetGrab, %11111111, %11100000, SetBlock, %00001110, %10100000
+L_5_A498: .BYTE PullMiddle, $F0, $E8, Loop, L_5_A498 + 1 - *
+L_5_A49D: .BYTE Jump, <L_5_BE54, >L_5_BE54
+L_5_A4A0: .BYTE MoveMiddle, $C0, $48, MoveMiddle, $48, $68, Turn, $50, Jump, <L_5_BE66, >L_5_BE66
+L_5_A4AB: .BYTE SetGrab, %10000000, %00000000, MoveBall, $DA, $F8, Jump, <L_5_BE2A, >L_5_BE2A
+L_5_A4B4: .BYTE SetGrab, %00100000, %00000000, MoveBall, $00, $FA, Jump, <L_5_BE36, >L_5_BE36
+L_5_A4BD: .BYTE MoveBall, $E8, $E4, MoveBall, $10, $E4, MoveBall, $18, $F0, SetGrab, %11111111, %11100000, MoveBall, $20, $00, Jump, <L_5_BE5A, >L_5_BE5A
+L_5_A4CF: .BYTE MoveBall, $00, $E8, MoveBall, $18, $E8, MoveBall, $20, $08, SetBlock, %00000100, %00100000, SetGrab, %11111111, %11100000, PullBall, $28, $20, Jump, <L_5_BE66, >L_5_BE66
+L_5_A4E4: .BYTE SetGrab, %00000000, %00000001, MoveBall, $E8, $F8, Jump, <L_5_BE30, >L_5_BE30
+L_5_A4ED: .BYTE TakeSnap, MoveBall, $F0, $D0, FakeHB, MoveBall, $E0, $C0, MoveBall, $D8, $C0, Control, MoveBall, $C8, $C0, Face, $80, Random7, <L_5_A517, >L_5_A517, CPU, <L_5_A511, >L_5_A511, Passing, $3C, $50, $7F
+L_5_A508: .BYTE Pass3, $42, $64, $F3, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_A511: .BYTE Passing, $3C, $50, $CC, Loop, L_5_A508 + 1 - *
+L_5_A517: .BYTE Passing, $19, $2D, $FD, MoveBall, $B8, $D8, Random7, <L_5_A508, >L_5_A508, BoostRP, $03, BoostRS, $03, MoveBall, $B8, $F0, Passing, $3C, $41, $FD, Random7, <L_5_B838, >L_5_B838, Loop, L_5_A508 + 1 - *
+L_5_A531: .BYTE Stand, $14, MoveBall, $F0, $C8, MoveBall, $18, $D0, MoveBall, $28, $E0, MoveBall, $30, $F8, Jump, <L_5_B832, >L_5_B832
+L_5_A542: .BYTE Route1, MoveBall, $0C, $D0, MoveBall, $E0, $E0, MoveMiddle, $40, $20, MoveMiddle, $40, $28, Jump, <L_5_B832, >L_5_B832
+L_5_A552: .BYTE Route2, MoveMiddle, $C0, $48, MoveMiddle, $68, $68, Jump, <L_5_B832, >L_5_B832
+L_5_A55C: .BYTE TakeSnap, MoveBall, $F0, $D8, HandoffHB, Move, $00, $C8, Jump, <L_5_B832, >L_5_B832
+L_5_A567: .BYTE Stand, $14, MoveBall, $F0, $C0, MoveBall, $F8, $E0, MoveBall, $04, $F0, CPUJuice, <L_5_A589, >L_5_A589, $09, CPUJuice, <L_5_A58D, >L_5_A58D, $05, CPUJuice, <L_5_A591, >L_5_A591, $02, CPU, <L_5_A595, >L_5_A595
+L_5_A581: .BYTE Control, Jump, <L_5_B838, >L_5_B838
+L_5_A585: .BYTE BoostRS, $07, Loop, L_5_A599 + 1 - *
+L_5_A589: .BYTE BoostRS, $06, Loop, L_5_A599 + 1 - *
+L_5_A58D: .BYTE BoostRS, $05, Loop, L_5_A599 + 1 - *
+L_5_A591: .BYTE BoostRS, $04, Loop, L_5_A599 + 1 - *
+L_5_A595: .BYTE BoostRS, $03, Loop, L_5_A599 + 1 - *
+L_5_A599: .BYTE BoostRP, $12, Loop, L_5_A581 + 1 - *
+L_5_A59D: .BYTE MoveBall, $D0, $D8, Stand, $01, Face, $60
+L_5_A5A4: .BYTE SetBlock, %10011001, %00000000, SetGrab, %11111111, %11100000, Loop, L_5_A5A4 + 1 - *
+L_5_A5AC: .BYTE MoveMiddle, $C0, $60, Move, $E8, $20, Turn, $01, Jump, <L_5_BE66, >L_5_BE66
+L_5_A5B7: .BYTE MoveBall, $18, $EC, MoveBall, $18, $CC, Stand, $01, Face, $A0
+L_5_A5C1: .BYTE SetBlock, %00000110, %10000000, Block, SetGrab, %11111111, %11100000, Loop, L_5_A5C1 + 1 - *
+L_5_A5CA: .BYTE MoveBall, $0C, $EC, MoveBall, $0C, $E0, Stand, $01, Face, $A0
+L_5_A5D4: .BYTE SetBlock, %01100110, %00000000, SetGrab, %11111111, %11100000, Block, Jump, <L_5_A5D4, >L_5_A5D4
+L_5_A5DE: .BYTE TakeSnap, MoveBall, $F0, $D8, HandoffHB, MoveBall, $F0, $BC, Turn, $28, Control, CPU, <L_5_A5F8, >L_5_A5F8, Passing, $01, $78, $7F
+L_5_A5F0: .BYTE Pass2, $73, $F4, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_A5F8: .BYTE Passing, $01, $78, $CC, Loop, L_5_A5F0 + 1 - *
+L_5_A5FE: .BYTE Stand, $14, MoveBall, $F0, $D0, MoveBall, $00, $E0, MoveBall, $04, $F0, PitchQB, Face, $80
+L_5_A60C: .BYTE SetBlock, %01100110, %00000000, SetGrab, %11111111, %11100000, Block, Loop, L_5_A60C + 1 - *
+L_5_A615: .BYTE TakeSnap, MoveBall, $F0, $E8, MoveBall, $EC, $DC, HandoffHB, MoveBall, $EC, $B8, MoveBall, $F0, $B0, Jump, <L_5_B832, >L_5_B832
+L_5_A626: .BYTE Stand, $0A, MoveBall, $EC, $D4, Control, MoveBall, $E0, $E4, CPUJuice, <L_5_A64B, >L_5_A64B, $09, CPUJuice, <L_5_A64F, >L_5_A64F, $05, CPUJuice, <L_5_A653, >L_5_A653, $02, CPU, <L_5_A657, >L_5_A657
+L_5_A63E: .BYTE RandomB, <L_5_B838, >L_5_B838, MoveBall, $D0, $00, Jump, <L_5_B838, >L_5_B838
+L_5_A647: .BYTE BoostRS, $07, Loop, L_5_A65B + 1 - *
+L_5_A64B: .BYTE BoostRS, $06, Loop, L_5_A65B + 1 - *
+L_5_A64F: .BYTE BoostRS, $05, Loop, L_5_A65B + 1 - *
+L_5_A653: .BYTE BoostRS, $04, Loop, L_5_A65B + 1 - *
+L_5_A657: .BYTE BoostRS, $03, Loop, L_5_A65B + 1 - *
+L_5_A65B: .BYTE BoostRP, $12, Loop, L_5_A63E + 1 - *
+L_5_A65F: .BYTE MoveBall, $C4, $F8, Random6, <L_5_A668, >L_5_A668, Jump, <L_5_BE3C, >L_5_BE3C
+L_5_A668: .BYTE BoostHP, $10, Jump, <L_5_BE3C, >L_5_BE3C
+L_5_A66D: .BYTE MoveMiddle, $C0, $60, MoveMiddle, $C0, $10, Turn, $14, Jump, <L_5_BE66, >L_5_BE66
+L_5_A678: .BYTE MoveBall, $14, $18, Jump, <L_5_BE60, >L_5_BE60
+L_5_A67E: .BYTE Stand, $06, Jump, <L_5_BE42, >L_5_BE42
+L_5_A683: .BYTE MoveBall, $E4, $00, Jump, <L_5_BE2A, >L_5_BE2A
+L_5_A689: .BYTE MoveBall, $FC, $00, Jump, <L_5_BE30, >L_5_BE30
+L_5_A68F: .BYTE TakeSnap, MoveBall, $F0, $E8, MoveBall, $EC, $DC, FakeHB, MoveBall, $EC, $B8, Control, MoveBall, $F0, $B0, Face, $80, CPU, <L_5_A6B1, >L_5_A6B1, Passing, $14, $78, $7F
+L_5_A6A7: .BYTE Pass4, $54, $53, $21, $F5, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_A6B1: .BYTE Passing, $14, $78, $CC, Jump, <L_5_A6A7, >L_5_A6A7
+L_5_A6B8: .BYTE Route3, Stand, $05, MoveBall, $EC, $D4, MoveBall, $E0, $E4, MoveBall, $D0, $00, MoveBall, $C0, $50, Move, $00, $30, Jump, <L_5_B82E, >L_5_B82E
+L_5_A6CD: .BYTE TakeSnap, MoveBall, $F0, $E8, PitchHB, MoveBall, $F0, $D0, Jump, <L_5_B832, >L_5_B832
+L_5_A6D8: .BYTE Stand, $14, MoveBall, $D0, $C8, Control, MoveBall, $C4, $D4, CPUJuice, <L_5_A700, >L_5_A700, $09, CPUJuice, <L_5_A704, >L_5_A704, $05, CPUJuice, <L_5_A708, >L_5_A708, $02, CPU, <L_5_A70C, >L_5_A70C
+L_5_A6F0: .BYTE RandomB, <L_5_B838, >L_5_B838, MoveBall, $C0, $E8, MoveBall, $BC, $F0, Jump, <L_5_B838, >L_5_B838
+L_5_A6FC: .BYTE BoostRS, $07, Loop, L_5_A710 + 1 - *
+L_5_A700: .BYTE BoostRS, $06, Loop, L_5_A710 + 1 - *
+L_5_A704: .BYTE BoostRS, $05, Loop, L_5_A710 + 1 - *
+L_5_A708: .BYTE BoostRS, $04, Loop, L_5_A710 + 1 - *
+L_5_A70C: .BYTE BoostRS, $03, Loop, L_5_A710 + 1 - *
+L_5_A710: .BYTE BoostRP, $12, Loop, L_5_A6F0 + 1 - *
+L_5_A714: .BYTE MoveMiddle, $C0, $18, SetGrab, %11111111, %11100000, MoveBall, $F8, $50, Jump, <L_5_BE60, >L_5_BE60
+L_5_A720: .BYTE MoveBall, $20, $F8, Jump, <L_5_BE4E, >L_5_BE4E
+L_5_A726: .BYTE MoveBall, $D8, $00, SetGrab, %11111111, %11100000, Jump, <L_5_BE3C, >L_5_BE3C
+L_5_A72F: .BYTE MoveBall, $F0, $E8, PitchFB, MoveBall, $F0, $C0, Jump, <L_5_B832, >L_5_B832
+L_5_A739: .BYTE MoveBall, $28, $E8, MoveBall, $30, $18, SetBlock, %00000100, %11100000, SetGrab, %11111111, %11100000, PullBall, $30, $50
+L_5_A748: .BYTE Pull, $E0, $40, Loop, L_5_A748 + 1 - *
+L_5_A74D: .BYTE Stand, $10, MoveBall, $20, $CC, Control, CPUJuice, <L_5_A772, >L_5_A772, $09, CPUJuice, <L_5_A776, >L_5_A776, $05, CPUJuice, <L_5_A77A, >L_5_A77A, $02, CPU, <L_5_A77E, >L_5_A77E
+L_5_A762: .BYTE RandomB, <L_5_B838, >L_5_B838, MoveBall, $2C, $D8, MoveBall, $34, $E8, Jump, <L_5_B838, >L_5_B838
+L_5_A76E: .BYTE BoostRS, $07, Loop, L_5_A782 + 1 - *
+L_5_A772: .BYTE BoostRS, $06, Loop, L_5_A782 + 1 - *
+L_5_A776: .BYTE BoostRS, $05, Loop, L_5_A782 + 1 - *
+L_5_A77A: .BYTE BoostRS, $04, Loop, L_5_A782 + 1 - *
+L_5_A77E: .BYTE BoostRS, $03, Loop, L_5_A782 + 1 - *
+L_5_A782: .BYTE BoostRP, $12, Loop, L_5_A762 + 1 - *
+L_5_A786: .BYTE Stand, $06, Jump, <L_5_BE48, >L_5_BE48
+L_5_A78B: .BYTE TakeSnap, MoveBall, $EC, $D4, HandoffHB, MoveBall, $F8, $B8, MoveBall, $00, $B0, MoveBall, $10, $A8, MoveBall, $20, $A8, Jump, <L_5_B832, >L_5_B832
+L_5_A79F: .BYTE Stand, $21, MoveBall, $F0, $C0, MoveBall, $E8, $D4, Control, MoveBall, $D0, $E0, MoveBall, $C8, $E4, CPUJuice, <L_5_A7CD, >L_5_A7CD, $09, CPUJuice, <L_5_A7D1, >L_5_A7D1, $05, CPUJuice, <L_5_A7D5, >L_5_A7D5, $02, CPU, <L_5_A7D9, >L_5_A7D9
+L_5_A7BD: .BYTE RandomB, <L_5_B838, >L_5_B838, MoveBall, $C0, $F0, MoveBall, $B8, $00, Jump, <L_5_B838, >L_5_B838
+L_5_A7C9: .BYTE BoostRS, $07, Loop, L_5_A7DD + 1 - *
+L_5_A7CD: .BYTE BoostRS, $06, Loop, L_5_A7DD + 1 - *
+L_5_A7D1: .BYTE BoostRS, $05, Loop, L_5_A7DD + 1 - *
+L_5_A7D5: .BYTE BoostRS, $04, Loop, L_5_A7DD + 1 - *
+L_5_A7D9: .BYTE BoostRS, $03, Loop, L_5_A7DD + 1 - *
+L_5_A7DD: .BYTE BoostRP, $12, Loop, L_5_A7BD + 1 - *
+L_5_A7E1: .BYTE MoveBall, $C8, $08, Jump, <L_5_BE42, >L_5_BE42
+L_5_A7E7: .BYTE MoveBall, $14, $18, MoveBall, $1C, $1C, Jump, <L_5_BE66, >L_5_BE66
+L_5_A7F0: .BYTE SetGrab, %00010000, %00000000, MoveBall, $DA, $F4, Jump, <L_5_BE3C, >L_5_BE3C
+L_5_A7F9: .BYTE MoveMiddle, $C0, $60, MoveBall, $F8, $60, SetGrab, %11111111, %11100000, MoveBall, $C0, $60, Jump, <L_5_BE60, >L_5_BE60
+L_5_A808: .BYTE TakeSnap, MoveBall, $EC, $D4, FakeHB, MoveBall, $F8, $B8, MoveBall, $00, $B0, MoveBall, $10, $A8, Control, MoveBall, $20, $A8, Face, $80, Random7, <L_5_A836, >L_5_A836, CPU, <L_5_A830, >L_5_A830, Passing, $0A, $46, $7F
+L_5_A826: .BYTE Pass4, $45, $31, $43, $F4, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_A830: .BYTE Passing, $0A, $46, $CC, Loop, L_5_A826 + 1 - *
+L_5_A836: .BYTE BoostRP, $04, BoostRS, $04, MoveBall, $30, $C8, Random7, <L_5_A826, >L_5_A826, MoveBall, $30, $F0, Passing, $3C, $41, $FD, Loop, L_5_A826 + 1 - *
+L_5_A849: .BYTE TakeSnap, MoveBall, $F8, $E0, MoveBall, $F8, $DC, HandoffHB, MoveBall, $F8, $D0, MoveBall, $E8, $C0, Jump, <L_5_B832, >L_5_B832
+L_5_A85A: .BYTE MoveBall, $FC, $C4, MoveBall, $F8, $E8, Control, CPUJuice, <L_5_A87A, >L_5_A87A, $09, CPUJuice, <L_5_A87E, >L_5_A87E, $05, CPUJuice, <L_5_A882, >L_5_A882, $02, CPU, <L_5_A886, >L_5_A886
+L_5_A870: .BYTE MoveBall, $F8, $10, Jump, <L_5_B838, >L_5_B838
+L_5_A876: .BYTE BoostRS, $07, Loop, L_5_A88A + 1 - *
+L_5_A87A: .BYTE BoostRS, $06, Loop, L_5_A88A + 1 - *
+L_5_A87E: .BYTE BoostRS, $05, Loop, L_5_A88A + 1 - *
+L_5_A882: .BYTE BoostRS, $04, Loop, L_5_A88A + 1 - *
+L_5_A886: .BYTE BoostRS, $03, Loop, L_5_A88A + 1 - *
+L_5_A88A: .BYTE BoostRP, $12, Loop, L_5_A870 + 1 - *
+L_5_A88E: .BYTE BoostRP, $09, MoveBall, $F0, $E0, MoveBall, $F8, $F8, SetBlock, %00010001, %11100000, SetGrab, %11111111, %11100000, PullBall, $F8, $48
+L_5_A89F: .BYTE Block, Loop, L_5_A89F + 1 - *
+L_5_A8A2: .BYTE MoveBall, $38, $48, SetGrab, %11111111, %11100000, MoveBall, $D0, $68
+L_5_A8AB: .BYTE SetBlock, %00000001, %11100000, SetGrab, %11111111, %11100000, Block, Loop, L_5_A8AB + 1 - *
+L_5_A8B4: .BYTE TakeSnap, DropBack, $00, $D4, HandoffHB, MoveBall, $F0, $A8, Jump, <L_5_B832, >L_5_B832
+L_5_A8BF: .BYTE Stand, $3C, MoveBall, $F2, $C0, Control, CPUJuice, <L_5_A8E1, >L_5_A8E1, $09, CPUJuice, <L_5_A8E5, >L_5_A8E5, $05, CPUJuice, <L_5_A8E9, >L_5_A8E9, $02, CPU, <L_5_A8ED, >L_5_A8ED
+L_5_A8D4: .BYTE MoveBall, $FE, $E4, MoveBall, $04, $00, Jump, <L_5_B838, >L_5_B838
+L_5_A8DD: .BYTE BoostRS, $07, Loop, L_5_A8F1 + 1 - *
+L_5_A8E1: .BYTE BoostRS, $06, Loop, L_5_A8F1 + 1 - *
+L_5_A8E5: .BYTE BoostRS, $05, Loop, L_5_A8F1 + 1 - *
+L_5_A8E9: .BYTE BoostRS, $04, Loop, L_5_A8F1 + 1 - *
+L_5_A8ED: .BYTE BoostRS, $03, Loop, L_5_A8F1 + 1 - *
+L_5_A8F1: .BYTE BoostRP, $12, Loop, L_5_A8D4 + 1 - *
+L_5_A8F5: .BYTE Move, $00, $20, Jump, <L_5_BE42, >L_5_BE42
+L_5_A8FB: .BYTE MoveMiddle, $36, $48, Jump, <L_5_BE60, >L_5_BE60
+L_5_A901: .BYTE MoveMiddle, $C0, $48, Jump, <L_5_BE66, >L_5_BE66
+L_5_A907: .BYTE Move, $00, $1C, Jump, <L_5_BE48, >L_5_BE48
+L_5_A90D: .BYTE MoveBall, $08, $E4, Stand, $01, Face, $80
+L_5_A914: .BYTE SetBlock, %00100100, %00000000, SetGrab, %11111111, %11100000, Block, Loop, L_5_A914 + 1 - *
+L_5_A91D: .BYTE MoveBall, $10, $E8, MoveBall, $10, $D4, Stand, $01, Face, $A0
+L_5_A927: .BYTE SetBlock, %00000110, %10000000, SetGrab, %11111111, %11100000, Block, Loop, L_5_A927 + 1 - *
+L_5_A930: .BYTE TakeSnap, MoveBall, $F0, $E0, PitchHB, MoveBall, $F0, $9C, Jump, <L_5_B832, >L_5_B832
+L_5_A93B: .BYTE Stand, $1E, MoveBall, $D8, $C0, MoveBall, $C0, $D0, FakeWR1, Control, CPUJuice, <L_5_A964, >L_5_A964, $09, CPUJuice, <L_5_A968, >L_5_A968, $05, CPUJuice, <L_5_A96C, >L_5_A96C, $02, CPU, <L_5_A970, >L_5_A970
+L_5_A954: .BYTE RandomB, <L_5_B838, >L_5_B838, MoveBall, $B8, $E0, MoveBall, $B8, $08, Jump, <L_5_B838, >L_5_B838
+L_5_A960: .BYTE BoostRS, $07, Loop, L_5_A974 + 1 - *
+L_5_A964: .BYTE BoostRS, $06, Loop, L_5_A974 + 1 - *
+L_5_A968: .BYTE BoostRS, $05, Loop, L_5_A974 + 1 - *
+L_5_A96C: .BYTE BoostRS, $04, Loop, L_5_A974 + 1 - *
+L_5_A970: .BYTE BoostRS, $03, Loop, L_5_A974 + 1 - *
+L_5_A974: .BYTE BoostRP, $12, Loop, L_5_A954 + 1 - *
+L_5_A978: .BYTE MoveBall, $C8, $00, MoveBall, $C0, $10, SetBlock, %00001001, %01000000, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_A984: .BYTE Stand, $3C, MoveMiddle, $36, $E8, MoveBall, $C0, $C8, MoveBall, $D0, $B8, MoveBall, $E0, $B0, MoveBall, $08, $B0, Jump, <L_5_B832, >L_5_B832
+L_5_A998: .BYTE MoveMiddle, $C0, $38, Jump, <L_5_BE60, >L_5_BE60
+L_5_A99E: .BYTE Stand, $1E, MoveBall, $D8, $C0, MoveBall, $C0, $D0, HandoffWR1, MoveBall, $B8, $E0, MoveBall, $B8, $08, Jump, <L_5_BE54, >L_5_BE54
+L_5_A9B0: .BYTE MoveBall, $C8, $00, MoveBall, $C0, $10, Stand, $0A, Jump, <L_5_BE66, >L_5_BE66
+L_5_A9BB: .BYTE Stand, $3C, MoveMiddle, $36, $E8, MoveBall, $C0, $C8, MoveBall, $D0, $B8, Control, CPUJuice, <L_5_A9EC, >L_5_A9EC, $09, CPUJuice, <L_5_A9F0, >L_5_A9F0, $05, CPUJuice, <L_5_A9F4, >L_5_A9F4, $02, CPU, <L_5_A9F8, >L_5_A9F8
+L_5_A9D6: .BYTE MoveBall, $E0, $B0, MoveBall, $08, $B0, RandomB, <L_5_B838, >L_5_B838, MoveBall, $18, $B8, MoveBall, $28, $C8, Jump, <L_5_B838, >L_5_B838
+L_5_A9E8: .BYTE BoostRS, $07, Loop, L_5_A9FC + 1 - *
+L_5_A9EC: .BYTE BoostRS, $07, Loop, L_5_A9FC + 1 - *
+L_5_A9F0: .BYTE BoostRS, $06, Loop, L_5_A9FC + 1 - *
+L_5_A9F4: .BYTE BoostRS, $05, Loop, L_5_A9FC + 1 - *
+L_5_A9F8: .BYTE BoostRS, $04, Loop, L_5_A9FC + 1 - *
+L_5_A9FC: .BYTE BoostRP, $12, Loop, L_5_A9D6 + 1 - *
+L_5_AA00: .BYTE MoveMiddle, $C0, $38, MoveMiddle, $98, $40, Random7, <L_5_BE5A, >L_5_BE5A, BoostHP, $10, Jump, <L_5_BE5A, >L_5_BE5A
+L_5_AA0E: .BYTE MoveBall, $14, $C4, Stand, $01, Face, $A0, Stand, $1E, Jump, <L_5_BE4E, >L_5_BE4E
+L_5_AA1A: .BYTE MoveBall, $0C, $D4, Stand, $01, Face, $A0, Stand, $1E, Jump, <L_5_BE48, >L_5_BE48
+L_5_AA26: .BYTE TakeSnap, MoveBall, $F0, $E0, SetRS, $04, SetMS, $03, PitchHB, MoveBall, $F0, $9C, Stand, $01, Face, $80, Turn, $5A, Face, $80, SetMS, $00, Control, CPU, <L_5_AA4C, >L_5_AA4C, Passing, $0A, $6E, $7F
+L_5_AA44: .BYTE Pass2, $A4, $F1, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_AA4C: .BYTE Passing, $0A, $6E, $CC, Loop, L_5_AA44 + 1 - *
+L_5_AA52: .BYTE Stand, $3C, MoveMiddle, $36, $E8, MoveBall, $C0, $C8, MoveBall, $D0, $B8, PitchQB, Face, $E0, Stand, $14, Face, $80, SetBlock, %10011001, %00000000, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_AA6A: .BYTE TakeSnap, MoveBall, $F8, $D8, MoveBall, $F8, $D4, HandoffHB, MoveBall, $F8, $C8, MoveBall, $E8, $B0, MoveBall, $D8, $B0, MoveBall, $D0, $B8, MoveBall, $C8, $D0, MoveBall, $C8, $08, Jump, <L_5_BE54, >L_5_BE54
+L_5_AA87: .BYTE Stand, $14, MoveBall, $F0, $C4, MoveBall, $08, $D4, Control, CPUJuice, <L_5_AAB2, >L_5_AAB2, $09, CPUJuice, <L_5_AAB6, >L_5_AAB6, $05, CPUJuice, <L_5_AABA, >L_5_AABA, $02, CPU, <L_5_AABE, >L_5_AABE
+L_5_AA9F: .BYTE MoveBall, $28, $E0, RandomB, <L_5_B838, >L_5_B838, MoveBall, $30, $F0, MoveBall, $30, $00, Jump, <L_5_B838, >L_5_B838
+L_5_AAAE: .BYTE BoostRS, $07, Loop, L_5_AAC2 + 1 - *
+L_5_AAB2: .BYTE BoostRS, $06, Loop, L_5_AAC2 + 1 - *
+L_5_AAB6: .BYTE BoostRS, $05, Loop, L_5_AAC2 + 1 - *
+L_5_AABA: .BYTE BoostRS, $04, Loop, L_5_AAC2 + 1 - *
+L_5_AABE: .BYTE BoostRS, $03, Loop, L_5_AAC2 + 1 - *
+L_5_AAC2: .BYTE BoostRP, $12, Loop, L_5_AA9F + 1 - *
+L_5_AAC6: .BYTE MoveBall, $C8, $20, Jump, <L_5_BE66, >L_5_BE66
+L_5_AACC: .BYTE BoostHP, $10, MoveMiddle, $36, $10, Jump, <L_5_BE60, >L_5_BE60
+L_5_AAD4: .BYTE Stand, $1E, MoveBall, $F0, $C4, MoveBall, $08, $D4, MoveBall, $20, $D8, HandoffWR2, MoveBall, $28, $E0, MoveBall, $30, $F8, MoveBall, $30, $00, Stand, $64, Jump, <L_5_BE60, >L_5_BE60
+L_5_AAEE: .BYTE Stand, $1E, MoveBall, $C8, $18, Jump, <L_5_BE3C, >L_5_BE3C
+L_5_AAF6: .BYTE Stand, $37, MoveBall, $30, $E0, MoveBall, $18, $CC, Control, CPUJuice, <L_5_AB2A, >L_5_AB2A, $09, CPUJuice, <L_5_AB2E, >L_5_AB2E, $05, CPUJuice, <L_5_AB32, >L_5_AB32, $02, CPU, <L_5_AB36, >L_5_AB36
+L_5_AB0E: .BYTE MoveBall, $F8, $C8, MoveBall, $E8, $C8, MoveBall, $D8, $D0, MoveBall, $C8, $E0, RandomB, <L_5_B838, >L_5_B838, MoveBall, $C0, $F0, MoveBall, $C0, $00, Jump, <L_5_B838, >L_5_B838
+L_5_AB26: .BYTE BoostRS, $07, Loop, L_5_AB3A + 1 - *
+L_5_AB2A: .BYTE BoostRS, $07, Loop, L_5_AB3A + 1 - *
+L_5_AB2E: .BYTE BoostRS, $06, Loop, L_5_AB3A + 1 - *
+L_5_AB32: .BYTE BoostRS, $05, Loop, L_5_AB3A + 1 - *
+L_5_AB36: .BYTE BoostRS, $04, Loop, L_5_AB3A + 1 - *
+L_5_AB3A: .BYTE BoostRP, $12, Loop, L_5_AB0E + 1 - *
+L_5_AB3E: .BYTE TakeSnap, MoveBall, $F8, $D4, HandoffHB, MoveBall, $F8, $C8, MoveBall, $F4, $BC, MoveBall, $E8, $B4, MoveBall, $D8, $B0, MoveBall, $C8, $B0, Jump, <L_5_B832, >L_5_B832
+L_5_AB55: .BYTE MoveBall, $C8, $08, Jump, <L_5_BE42, >L_5_BE42
+L_5_AB5B: .BYTE SetGrab, %11111111, %11100000, MoveBall, $14, $E0, Face, $80, Stand, $14, MoveBall, $20, $E8, MoveBall, $28, $00, Jump, <L_5_BE5A, >L_5_BE5A
+L_5_AB6E: .BYTE TakeSnap, MoveBall, $F8, $D4, FakeHB, MoveBall, $F8, $C8, MoveBall, $F4, $BC, MoveBall, $E8, $B4, MoveBall, $D8, $B0, Control, MoveBall, $C8, $B0, Face, $80, Random7, <L_5_AB9F, >L_5_AB9F, CPU, <L_5_AB99, >L_5_AB99, Passing, $23, $82, $7F
+L_5_AB8F: .BYTE Pass4, $32, $35, $44, $F3, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_AB99: .BYTE Passing, $23, $82, $CC, Loop, L_5_AB8F + 1 - *
+L_5_AB9F: .BYTE BoostRP, $04, BoostRS, $04, MoveBall, $B8, $C8, MoveBall, $B8, $D8, Random7, <L_5_AB8F, >L_5_AB8F, MoveBall, $B8, $F0, Random7, <L_5_B838, >L_5_B838, Loop, L_5_AB8F + 1 - *
+L_5_ABB4: .BYTE Stand, $14, MoveBall, $F0, $C4, MoveBall, $08, $D4, MoveBall, $18, $D8, Stand, $01, Face, $A0, SetBlock, %00100110, %10100000, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_ABC9: .BYTE Stand, $0D, MoveBall, $F0, $C4, MoveBall, $00, $D8, Control, CPUJuice, <L_5_ABF1, >L_5_ABF1, $09, CPUJuice, <L_5_ABF5, >L_5_ABF5, $05, CPUJuice, <L_5_ABF9, >L_5_ABF9, $02, CPU, <L_5_ABFD, >L_5_ABFD
+L_5_ABE1: .BYTE RandomB, <L_5_B838, >L_5_B838, MoveBall, $08, $EC, MoveBall, $10, $08, Jump, <L_5_B838, >L_5_B838
+L_5_ABED: .BYTE BoostRS, $07, Loop, L_5_AC01 + 1 - *
+L_5_ABF1: .BYTE BoostRS, $06, Loop, L_5_AC01 + 1 - *
+L_5_ABF5: .BYTE BoostRS, $05, Loop, L_5_AC01 + 1 - *
+L_5_ABF9: .BYTE BoostRS, $04, Loop, L_5_AC01 + 1 - *
+L_5_ABFD: .BYTE BoostRS, $03, Loop, L_5_AC01 + 1 - *
+L_5_AC01: .BYTE BoostRP, $12, Loop, L_5_ABE1 + 1 - *
+L_5_AC05: .BYTE MoveBall, $14, $E0, Stand, $08, MoveBall, $20, $EC, Jump, <L_5_BE5A, >L_5_BE5A
+L_5_AC10: .BYTE MoveBall, $10, $F8, Jump, <L_5_BE4E, >L_5_BE4E
+L_5_AC16: .BYTE TakeSnap, MoveBall, $F0, $D8, HandoffHB, MoveBall, $F0, $C0, Jump, <L_5_B832, >L_5_B832
+L_5_AC21: .BYTE MoveBall, $F8, $D4, Control, CPUJuice, <L_5_AC44, >L_5_AC44, $09, CPUJuice, <L_5_AC48, >L_5_AC48, $05, CPUJuice, <L_5_AC4C, >L_5_AC4C, $02, CPU, <L_5_AC50, >L_5_AC50
+L_5_AC34: .BYTE MoveBall, $0C, $E4, MoveBall, $14, $F4, MoveBall, $18, $08, Jump, <L_5_B838, >L_5_B838
+L_5_AC40: .BYTE BoostRS, $07, Loop, L_5_AC54 + 1 - *
+L_5_AC44: .BYTE BoostRS, $06, Loop, L_5_AC54 + 1 - *
+L_5_AC48: .BYTE BoostRS, $05, Loop, L_5_AC54 + 1 - *
+L_5_AC4C: .BYTE BoostRS, $04, Loop, L_5_AC54 + 1 - *
+L_5_AC50: .BYTE BoostRS, $03, Loop, L_5_AC54 + 1 - *
+L_5_AC54: .BYTE BoostRP, $12, Loop, L_5_AC34 + 1 - *
+L_5_AC58: .BYTE SetGrab, %00000010, %00000000, MoveBall, $0C, $D8, MoveBall, $18, $E8, Jump, <L_5_BE4E, >L_5_BE4E
+L_5_AC64: .BYTE MoveBall, $28, $08, Random7, <L_5_BF2A, >L_5_BF2A, Jump, <L_5_BE66, >L_5_BE66
+L_5_AC6D: .BYTE MoveBall, $18, $D0, MoveBall, $20, $F0
+L_5_AC73: .BYTE SetBlock, %00001101, %01100000, SetGrab, %11111111, %11100000, Pull, $00, $40, Loop, L_5_AC73 + 1 - *
+L_5_AC7E: .BYTE Jump, <L_5_B832, >L_5_B832
+L_5_AC81: .BYTE MoveBall, $E0, $C0, Stand, $01, Face, $80, GunTakeSnap, Control, CPUJuice, <L_5_ACAF, >L_5_ACAF, $09, CPUJuice, <L_5_ACB3, >L_5_ACB3, $05, CPUJuice, <L_5_ACB7, >L_5_ACB7, $02, CPU, <L_5_ACBB, >L_5_ACBB
+L_5_AC99: .BYTE MoveBall, $E4, $E0, MoveBall, $E2, $E8, RandomB, <L_5_B838, >L_5_B838, MoveBall, $E0, $F8, MoveBall, $E0, $00, Jump, <L_5_B838, >L_5_B838
+L_5_ACAB: .BYTE BoostRS, $07, Loop, L_5_ACBF + 1 - *
+L_5_ACAF: .BYTE BoostRS, $06, Loop, L_5_ACBF + 1 - *
+L_5_ACB3: .BYTE BoostRS, $05, Loop, L_5_ACBF + 1 - *
+L_5_ACB7: .BYTE BoostRS, $04, Loop, L_5_ACBF + 1 - *
+L_5_ACBB: .BYTE BoostRS, $03, Loop, L_5_ACBF + 1 - *
+L_5_ACBF: .BYTE BoostRP, $12, Loop, L_5_AC99 + 1 - *
+L_5_ACC3: .BYTE MoveMiddle, $48, $20, Jump, <L_5_BE60, >L_5_BE60
+L_5_ACC9: .BYTE MoveMiddle, $36, $48, Jump, <L_5_BE54, >L_5_BE54
+L_5_ACCF: .BYTE MoveMiddle, $C0, $48, Jump, <L_5_BE5A, >L_5_BE5A
+L_5_ACD5: .BYTE MoveMiddle, $A8, $20, Jump, <L_5_BE66, >L_5_BE66
+L_5_ACDB: .BYTE MoveBall, $D8, $E0, Stand, $01, Face, $80, SetBlock, %11011000, %00000000, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_ACE8: .BYTE MoveBall, $D0, $00, Jump, <L_5_BE42, >L_5_BE42
+L_5_ACEE: .BYTE MoveBall, $10, $00, Jump, <L_5_BE48, >L_5_BE48
+L_5_ACF4: .BYTE TakeSnap, MoveBall, $F0, $E0, MoveBall, $F8, $D0, HandoffFB, MoveBall, $00, $C0, MoveBall, $08, $B8, MoveBall, $18, $B0, MoveBall, $28, $B0, Jump, <L_5_B832, >L_5_B832
+L_5_AD0B: .BYTE MoveBall, $D4, $D0, MoveBall, $10, $E8, MoveBall, $34, $18, Jump, <L_5_B832, >L_5_B832
+L_5_AD17: .BYTE Stand, $19, MoveBall, $04, $C8, MoveBall, $E8, $C8, Control, CPUJuice, <L_5_AD45, >L_5_AD45, $09, CPUJuice, <L_5_AD49, >L_5_AD49, $05, CPUJuice, <L_5_AD4D, >L_5_AD4D, $02, CPU, <L_5_AD51, >L_5_AD51
+L_5_AD2F: .BYTE MoveBall, $D8, $D0, MoveBall, $C8, $E0, RandomB, <L_5_B838, >L_5_B838, MoveBall, $C0, $F0, MoveBall, $C0, $00, Jump, <L_5_B838, >L_5_B838
+L_5_AD41: .BYTE BoostRS, $07, Loop, L_5_AD55 + 1 - *
+L_5_AD45: .BYTE BoostRS, $06, Loop, L_5_AD55 + 1 - *
+L_5_AD49: .BYTE BoostRS, $05, Loop, L_5_AD55 + 1 - *
+L_5_AD4D: .BYTE BoostRS, $04, Loop, L_5_AD55 + 1 - *
+L_5_AD51: .BYTE BoostRS, $03, Loop, L_5_AD55 + 1 - *
+L_5_AD55: .BYTE BoostRP, $12, Loop, L_5_AD2F + 1 - *
+L_5_AD59: .BYTE MoveMiddle, $36, $28, Jump, <L_5_BE60, >L_5_BE60
+L_5_AD5F: .BYTE BoostHP, $10, MoveBall, $D0, $00, Jump, <L_5_BE3C, >L_5_BE3C
+L_5_AD67: .BYTE MoveBall, $E4, $E8, MoveBall, $D0, $E8, MoveBall, $C8, $EE, MoveBall, $C0, $FC, Jump, <L_5_BE54, >L_5_BE54
+L_5_AD76: .BYTE MoveBall, $F8, $E4, MoveBall, $D8, $E4, MoveBall, $D0, $E8, MoveBall, $C8, $F0, MoveBall, $C4, $F8, MoveBall, $C4, $00, SetBlock, %01001100, %00100000, SetGrab, %11111111, %11100000, PullBall, $C4, $10, PullBall, $CC, $20, PullBall, $E0, $30, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_AD9A: .BYTE MoveBall, $00, $00, Jump, <L_5_BE48, >L_5_BE48
+L_5_ADA0: .BYTE TakeSnap, MoveBall, $F0, $E0, MoveBall, $F8, $D0, FakeFB, MoveBall, $00, $C0, MoveBall, $08, $B8, MoveBall, $18, $B0, Control, MoveBall, $28, $B0, Face, $80, RandomB, <L_5_ADD0, >L_5_ADD0, CPU, <L_5_ADCA, >L_5_ADCA, Passing, $28, $64, $7F
+L_5_ADC1: .BYTE Pass3, $51, $54, $F3, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_ADCA: .BYTE Passing, $14, $50, $CC, Loop, L_5_ADC1 + 1 - *
+L_5_ADD0: .BYTE Passing, $19, $2D, $FD, MoveBall, $34, $C8, Random7, <L_5_ADC1, >L_5_ADC1, BoostRP, $03, BoostRS, $03, MoveBall, $34, $F0, Passing, $3C, $41, $FD, Random7, <L_5_B838, >L_5_B838, Loop, L_5_ADC1 + 1 - *
+L_5_ADEA: .BYTE Stand, $19, MoveBall, $04, $C8, MoveBall, $E8, $C8, MoveBall, $D8, $D0, Stand, $01, Face, $60, SetBlock, %11011001, %00000000, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_ADFF: .BYTE TakeSnap, MoveBall, $F0, $E8, PitchHB
+L_5_AE04: .BYTE MoveBall, $F0, $D0, Jump, <L_5_B832, >L_5_B832
+L_5_AE0A: .BYTE MoveBall, $20, $C4, Control, CPUJuice, <L_5_AE30, >L_5_AE30, $09, CPUJuice, <L_5_AE34, >L_5_AE34, $05, CPUJuice, <L_5_AE38, >L_5_AE38, $02, CPU, <L_5_AE3C, >L_5_AE3C
+L_5_AE1D: .BYTE MoveBall, $28, $CC, RandomB, <L_5_B838, >L_5_B838, MoveBall, $30, $E0, MoveBall, $30, $00, Jump, <L_5_B838, >L_5_B838
+L_5_AE2C: .BYTE BoostRS, $07, Loop, L_5_AE40 + 1 - *
+L_5_AE30: .BYTE BoostRS, $06, Loop, L_5_AE40 + 1 - *
+L_5_AE34: .BYTE BoostRS, $05, Loop, L_5_AE40 + 1 - *
+L_5_AE38: .BYTE BoostRS, $04, Loop, L_5_AE40 + 1 - *
+L_5_AE3C: .BYTE BoostRS, $03, Loop, L_5_AE40 + 1 - *
+L_5_AE40: .BYTE BoostRP, $12, Loop, L_5_AE1D + 1 - *
+L_5_AE44: .BYTE MoveBall, $D8, $E0, Jump, <L_5_BE2A, >L_5_BE2A
+L_5_AE4A: .BYTE MoveMiddle, $C0, $20, RandomB, <L_5_BF2A, >L_5_BF2A, Jump, <L_5_BE66, >L_5_BE66
+L_5_AE53: .BYTE SetGrab, %00000010, %00000000, MoveBall, $10, $F8, Jump, <L_5_BE4E, >L_5_BE4E
+L_5_AE5C: .BYTE MoveBall, $E8, $E4, MoveBall, $10, $E4, MoveBall, $20, $F0, MoveBall, $28, $00, SetBlock, %00001100, %01000000, SetGrab, %11111111, %11100000, PullBall, $28, $10, PullBall, $10, $30, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_AE77: .BYTE MoveBall, $FC, $E8, MoveBall, $10, $E8, MoveBall, $20, $F0, SetGrab, %11111111, %11100000, MoveBall, $20, $04, Jump, <L_5_BE5A, >L_5_BE5A
+L_5_AE89: .BYTE MoveBall, $E0, $F8, Jump, <L_5_BE30, >L_5_BE30
+L_5_AE8F: .BYTE MoveBall, $00, $00, Jump, <L_5_BE36, >L_5_BE36
+L_5_AE95: .BYTE TakeSnap, MoveBall, $FC, $D8, HandoffFB, MoveBall, $00, $C0, MoveBall, $10, $B0, Jump, <L_5_B832, >L_5_B832
+L_5_AEA3: .BYTE MoveBall, $30, $E8, MoveBall, $30, $28, SetBlock, %00001101, %01000000, SetGrab, %11111111, %11100000, PullBall, $E8, $50, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_AEB5: .BYTE Stand, $14, MoveBall, $04, $CC, MoveBall, $E8, $D8, Control, CPUJuice, <L_5_AEDD, >L_5_AEDD, $09, CPUJuice, <L_5_AEE1, >L_5_AEE1, $05, CPUJuice, <L_5_AEE5, >L_5_AEE5, $02, CPU, <L_5_AEE9, >L_5_AEE9
+L_5_AECD: .BYTE MoveBall, $DC, $E8, RandomB, <L_5_B838, >L_5_B838, MoveBall, $D0, $00, Jump, <L_5_B838, >L_5_B838
+L_5_AED9: .BYTE BoostRS, $07, Loop, L_5_AEED + 1 - *
+L_5_AEDD: .BYTE BoostRS, $06, Loop, L_5_AEED + 1 - *
+L_5_AEE1: .BYTE BoostRS, $05, Loop, L_5_AEED + 1 - *
+L_5_AEE5: .BYTE BoostRS, $04, Loop, L_5_AEED + 1 - *
+L_5_AEE9: .BYTE BoostRS, $03, Loop, L_5_AEED + 1 - *
+L_5_AEED: .BYTE BoostRP, $12, Loop, L_5_AECD + 1 - *
+L_5_AEF1: .BYTE Stand, $1E, MoveBall, $E8, $D4, Control, CPUJuice, <L_5_AF16, >L_5_AF16, $09, CPUJuice, <L_5_AF1A, >L_5_AF1A, $05, CPUJuice, <L_5_AF1E, >L_5_AF1E, $02, CPU, <L_5_AF22, >L_5_AF22
+L_5_AF06: .BYTE MoveBall, $DC, $E4, RandomB, <L_5_B838, >L_5_B838, MoveBall, $D0, $00, Jump, <L_5_B838, >L_5_B838
+L_5_AF12: .BYTE BoostRS, $07, Loop, L_5_AF26 + 1 - *
+L_5_AF16: .BYTE BoostRS, $06, Loop, L_5_AF26 + 1 - *
+L_5_AF1A: .BYTE BoostRS, $05, Loop, L_5_AF26 + 1 - *
+L_5_AF1E: .BYTE BoostRS, $04, Loop, L_5_AF26 + 1 - *
+L_5_AF22: .BYTE BoostRS, $03, Loop, L_5_AF26 + 1 - *
+L_5_AF26: .BYTE BoostRP, $12, Loop, L_5_AF06 + 1 - *
+L_5_AF2A: .BYTE Stand, $10, MoveBall, $D8, $C0, Control, CPUJuice, <L_5_AF52, >L_5_AF52, $09, CPUJuice, <L_5_AF56, >L_5_AF56, $05, CPUJuice, <L_5_AF5A, >L_5_AF5A, $02, CPU, <L_5_AF5E, >L_5_AF5E
+L_5_AF3F: .BYTE MoveBall, $C8, $D0, RandomB, <L_5_B838, >L_5_B838, MoveBall, $C0, $E8, MoveBall, $C0, $F8, Jump, <L_5_B838, >L_5_B838
+L_5_AF4E: .BYTE BoostRS, $07, Loop, L_5_AF62 + 1 - *
+L_5_AF52: .BYTE BoostRS, $06, Loop, L_5_AF62 + 1 - *
+L_5_AF56: .BYTE BoostRS, $05, Loop, L_5_AF62 + 1 - *
+L_5_AF5A: .BYTE BoostRS, $04, Loop, L_5_AF62 + 1 - *
+L_5_AF5E: .BYTE BoostRS, $03, Loop, L_5_AF62 + 1 - *
+L_5_AF62: .BYTE BoostRP, $12, Loop, L_5_AF3F + 1 - *
+L_5_AF66: .BYTE MoveBall, $D0, $F4, Jump, <L_5_BE3C, >L_5_BE3C
+L_5_AF6C: .BYTE MoveBall, $14, $20, SetBlock, %11111111, %11100000, PullBall, $E0, $58, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_AF78: .BYTE TakeSnap, MoveBall, $F6, $E4, MoveBall, $F6, $E0, HandoffHB, MoveBall, $F6, $B0, Jump, <L_5_B832, >L_5_B832
+L_5_AF86: .BYTE MoveBall, $F8, $C8, MoveBall, $F8, $D8, Control, CPUJuice, <L_5_AFA6, >L_5_AFA6, $09, CPUJuice, <L_5_AFAA, >L_5_AFAA, $05, CPUJuice, <L_5_AFAE, >L_5_AFAE, $02, CPU, <L_5_AFB2, >L_5_AFB2
+L_5_AF9C: .BYTE MoveBall, $F8, $18, Jump, <L_5_B838, >L_5_B838
+L_5_AFA2: .BYTE BoostRS, $07, Loop, L_5_AFB6 + 1 - *
+L_5_AFA6: .BYTE BoostRS, $06, Loop, L_5_AFB6 + 1 - *
+L_5_AFAA: .BYTE BoostRS, $05, Loop, L_5_AFB6 + 1 - *
+L_5_AFAE: .BYTE BoostRS, $04, Loop, L_5_AFB6 + 1 - *
+L_5_AFB2: .BYTE BoostRS, $03, Loop, L_5_AFB6 + 1 - *
+L_5_AFB6: .BYTE BoostRP, $12, Loop, L_5_AF9C + 1 - *
+L_5_AFBA: .BYTE MoveBall, $C8, $0C, SetBlock, %00000000, %01000000, PullBall, $D8, $28, SetBlock, %11111111, %11100000, PullBall, $F8, $40, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_AFCC: .BYTE MoveMiddle, $C0, $28, SetBlock, %11111111, %11100000, PullBall, $08, $58, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_AFD8: .BYTE SetGrab, %00000010, %00000000, MoveBall, $18, $FC, Jump, <L_5_BE4E, >L_5_BE4E
+L_5_AFE1: .BYTE TakeSnap, MoveBall, $F6, $E4, MoveBall, $F6, $E0, FakeHB, MoveBall, $F6, $B8, Stand, $01, Face, $80, Control, CPU, <L_5_B002, >L_5_B002, Passing, $3C, $6E, $7F
+L_5_AFF8: .BYTE Pass4, $53, $34, $41, $F2, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B002: .BYTE Passing, $3C, $6E, $CC, Loop, L_5_AFF8 + 1 - *
+L_5_B008: .BYTE TakeSnap, CPUJuice, <L_5_B03B, >L_5_B03B, $09, CPUJuice, <L_5_B03F, >L_5_B03F, $05, CPUJuice, <L_5_B043, >L_5_B043, $02, CPU, <L_5_B047, >L_5_B047
+L_5_B018: .BYTE MoveBall, $F0, $D8, MoveBall, $EC, $D0, MoveBall, $E0, $C8, MoveBall, $D4, $C8, MoveBall, $CC, $D0, Control, RandomB, <L_5_B838, >L_5_B838, MoveBall, $C4, $E0, MoveBall, $C0, $F8, MoveBall, $C0, $00, Jump, <L_5_B838, >L_5_B838
+L_5_B037: .BYTE BoostRS, $07, Loop, L_5_B04B + 1 - *
+L_5_B03B: .BYTE BoostRS, $06, Loop, L_5_B04B + 1 - *
+L_5_B03F: .BYTE BoostRS, $05, Loop, L_5_B04B + 1 - *
+L_5_B043: .BYTE BoostRS, $04, Loop, L_5_B04B + 1 - *
+L_5_B047: .BYTE BoostRS, $03, Loop, L_5_B04B + 1 - *
+L_5_B04B: .BYTE BoostRP, $12, Loop, L_5_B018 + 1 - *
+L_5_B04F: .BYTE MoveBall, $F0, $C8, MoveBall, $F8, $D4, MoveBall, $18, $D8, MoveBall, $30, $E8, MoveBall, $34, $00, Jump, <L_5_B832, >L_5_B832
+L_5_B061: .BYTE MoveBall, $1C, $20, Jump, <L_5_BE66, >L_5_BE66
+L_5_B067: .BYTE MoveBall, $FC, $E4, MoveBall, $D8, $E4, MoveBall, $CC, $E8, MoveBall, $C4, $F8, Jump, <L_5_BE54, >L_5_BE54
+L_5_B076: .BYTE Random7, <L_5_B07B, >L_5_B07B, BoostHP, $10
+L_5_B07B: .BYTE MoveMiddle, $C0, $28, MoveBall, $F0, $50, SetBlock, %11111111, %11100000, PullBall, $E0, $40, PullBall, $E0, $68, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_B08D: .BYTE MoveBall, $00, $E0, MoveBall, $F8, $F8, SetGrab, %11111111, %11100000, MoveBall, $F8, $24, SetBlock, %11111111, %11100000, PullBall, $F8, $48, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_B0A2: .BYTE MoveBall, $28, $F8, MoveBall, $20, $20, MoveBall, $10, $30, SetBlock, %11111111, %11100000, PullBall, $00, $50, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_B0B4: .BYTE TakeSnap, MoveBall, $F6, $E4, MoveBall, $F6, $E0, HandoffFB, MoveBall, $F6, $B0, Jump, <L_5_B832, >L_5_B832
+L_5_B0C2: .BYTE TakeSnap, MoveBall, $F6, $E4, MoveBall, $F6, $E0, FakeFB, MoveBall, $F6, $C0, Control, MoveBall, $F6, $B8, Stand, $01, Face, $80, CPU, <L_5_B0E5, >L_5_B0E5, Passing, $28, $64, $7F
+L_5_B0DC: .BYTE Pass3, $54, $42, $F3, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B0E5: .BYTE Passing, $28, $64, $CC, Loop, L_5_B0DC + 1 - *
+L_5_B0EB: .BYTE GunTakeSnap, Stand, $1E, PitchFB, Jump, <L_5_B832, >L_5_B832
+L_5_B0F2: .BYTE Stand, $50, MoveBall, $E4, $D0, Control, CPUJuice, <L_5_B114, >L_5_B114, $09, CPUJuice, <L_5_B118, >L_5_B118, $05, CPUJuice, <L_5_B11C, >L_5_B11C, $02, CPU, <L_5_B120, >L_5_B120
+L_5_B107: .BYTE RandomB, <L_5_B838, >L_5_B838, MoveBall, $E4, $F0, Jump, <L_5_B838, >L_5_B838
+L_5_B110: .BYTE BoostRS, $07, Loop, L_5_B124 + 1 - *
+L_5_B114: .BYTE BoostRS, $06, Loop, L_5_B124 + 1 - *
+L_5_B118: .BYTE BoostRS, $05, Loop, L_5_B124 + 1 - *
+L_5_B11C: .BYTE BoostRS, $04, Loop, L_5_B124 + 1 - *
+L_5_B120: .BYTE BoostRS, $03, Loop, L_5_B124 + 1 - *
+L_5_B124: .BYTE BoostRP, $12, Loop, L_5_B107 + 1 - *
+L_5_B128: .BYTE TakeSnap, DropBack, $00, $F8, CPUJuice, <L_5_B149, >L_5_B149, $09, CPUJuice, <L_5_B14D, >L_5_B14D, $05, CPUJuice, <L_5_B151, >L_5_B151, $02, CPU, <L_5_B155, >L_5_B155
+L_5_B13B: .BYTE MoveBall, $FA, $E4, Control, MoveBall, $FA, $00, Jump, <L_5_B838, >L_5_B838
+L_5_B145: .BYTE BoostRS, $07, Loop, L_5_B159 + 1 - *
+L_5_B149: .BYTE BoostRS, $06, Loop, L_5_B159 + 1 - *
+L_5_B14D: .BYTE BoostRS, $05, Loop, L_5_B159 + 1 - *
+L_5_B151: .BYTE BoostRS, $04, Loop, L_5_B159 + 1 - *
+L_5_B155: .BYTE BoostRS, $03, Loop, L_5_B159 + 1 - *
+L_5_B159: .BYTE BoostRP, $12, Loop, L_5_B13B + 1 - *
+L_5_B15D: .BYTE Random7, <L_5_BE3C, >L_5_BE3C, Jump, <L_5_BE60, >L_5_BE60
+L_5_B163: .BYTE Random7, <L_5_BE4E, >L_5_BE4E, Jump, <L_5_BE66, >L_5_BE66
+L_5_B169: .BYTE Random7, <L_5_BE30, >L_5_BE30, Jump, <L_5_BE42, >L_5_BE42
+L_5_B16F: .BYTE MoveBall, $04, $F8, Jump, <L_5_BE36, >L_5_BE36
+L_5_B175: .BYTE Random7, <L_5_BE36, >L_5_BE36, Jump, <L_5_BE48, >L_5_BE48
+L_5_B17B: .BYTE GunTakeSnap, Control, CPUJuice, <L_5_B1A5, >L_5_B1A5, $09, CPUJuice, <L_5_B1A9, >L_5_B1A9, $05, CPUJuice, <L_5_B1AD, >L_5_B1AD, $02, CPU, <L_5_B1B1, >L_5_B1B1
+L_5_B18C: .BYTE MoveBall, $E0, $BC, MoveBall, $CC, $C8, RandomB, <L_5_B838, >L_5_B838, MoveBall, $C0, $D8, MoveBall, $BC, $E8, MoveBall, $BC, $00, Jump, <L_5_B838, >L_5_B838
+L_5_B1A1: .BYTE BoostRS, $07, Loop, L_5_B1B5 + 1 - *
+L_5_B1A5: .BYTE BoostRS, $06, Loop, L_5_B1B5 + 1 - *
+L_5_B1A9: .BYTE BoostRS, $05, Loop, L_5_B1B5 + 1 - *
+L_5_B1AD: .BYTE BoostRS, $04, Loop, L_5_B1B5 + 1 - *
+L_5_B1B1: .BYTE BoostRS, $03, Loop, L_5_B1B5 + 1 - *
+L_5_B1B5: .BYTE BoostRP, $12, Loop, L_5_B18C + 1 - *
+L_5_B1B9: .BYTE MoveBall, $08, $D0, Stand, $01, Face, $80, SetBlock, %00100000, %00000000, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_B1C6: .BYTE MoveBall, $10, $E8, Stand, $0A, Jump, <L_5_BE48, >L_5_BE48
+L_5_B1CE: .BYTE MoveBall, $F8, $E4, MoveBall, $D8, $E4, MoveBall, $D0, $E8, MoveBall, $C8, $F0, MoveBall, $C4, $F8, MoveBall, $C4, $00, SetBlock, %01000100, %01100000, SetGrab, %11111111, %11100000, PullBall, $C4, $10, PullBall, $CC, $20, PullBall, $E0, $30, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_B1F2: .BYTE MoveBall, $04, $E0, MoveBall, $E4, $E0, Jump, <L_5_BE42, >L_5_BE42
+L_5_B1FB: .BYTE TakeSnap, MoveBall, $F0, $E0, MoveBall, $F8, $D0, HandoffFB, MoveBall, $00, $C0, MoveBall, $08, $B8, MoveBall, $18, $B0, MoveBall, $28, $B0, MoveBall, $30, $B8, MoveBall, $38, $C8, MoveBall, $38, $00, Jump, <L_5_BE5A, >L_5_BE5A
+L_5_B21B: .BYTE MoveBall, $D4, $D0, MoveBall, $10, $E8, MoveBall, $34, $18, SetBlock, %11111111, %11100000, PullBall, $20, $30, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_B22D: .BYTE Stand, $19, MoveBall, $04, $C8, MoveBall, $E8, $C8, MoveBall, $D8, $D0, MoveBall, $C8, $E0, PitchWR1, MoveBall, $C0, $F0, MoveBall, $C0, $00, Jump, <L_5_B832, >L_5_B832
+L_5_B245: .BYTE Stand, $64, MoveBall, $B8, $D8, MoveBall, $D0, $C0, CPUJuice, <L_5_B273, >L_5_B273, $09, CPUJuice, <L_5_B277, >L_5_B277, $05, CPUJuice, <L_5_B27B, >L_5_B27B, $02, CPU, <L_5_B27F, >L_5_B27F
+L_5_B25C: .BYTE MoveBall, $E8, $B8, MoveBall, $F8, $B8, Control, MoveBall, $08, $B8, RandomB, <L_5_B838, >L_5_B838, MoveBall, $18, $C0, Jump, <L_5_B838, >L_5_B838
+L_5_B26F: .BYTE BoostRS, $07, Loop, L_5_B283 + 1 - *
+L_5_B273: .BYTE BoostRS, $07, Loop, L_5_B283 + 1 - *
+L_5_B277: .BYTE BoostRS, $06, Loop, L_5_B283 + 1 - *
+L_5_B27B: .BYTE BoostRS, $05, Loop, L_5_B283 + 1 - *
+L_5_B27F: .BYTE BoostRS, $04, Loop, L_5_B283 + 1 - *
+L_5_B283: .BYTE BoostRP, $12, Loop, L_5_B25C + 1 - *
+L_5_B287: .BYTE TakeSnap, DropBack, $00, $DC, Control, DropBack, $00, $F0, Face, $80, RandomC, <L_5_B2AC, >L_5_B2AC, CPU, <L_5_B2A6, >L_5_B2A6, Passing, $1E, $C8, $B3
+L_5_B29B: .BYTE Pass5, $31, $25, $44, $32, $F3, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B2A6: .BYTE Passing, $1E, $C8, $F3, Loop, L_5_B29B + 1 - *
+L_5_B2AC: .BYTE Passing, $23, $2D, $FD, BoostRP, $04, BoostRS, $04, MoveBall, $10, $E8, MoveBall, $1A, $F0, Random7, <L_5_B838, >L_5_B838, Loop, L_5_B29B + 1 - *
+L_5_B2BF: .BYTE TakeSnap, MoveBall, $F8, $E0, MoveBall, $F8, $DC, FakeFB, MoveBall, $F8, $DA, MoveBall, $F0, $D0, MoveBall, $F0, $C8, Control, MoveBall, $F0, $C0, Stand, $01, Face, $80, CPU, <L_5_B2E9, >L_5_B2E9, Passing, $0A, $BE, $7F
+L_5_B2DF: .BYTE Pass4, $32, $21, $54, $F3, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B2E9: .BYTE Passing, $0A, $BE, $CC, Loop, L_5_B2DF + 1 - *
+L_5_B2EF: .BYTE TakeSnap
+L_5_B2F0: .BYTE DropBack, $00, $DC, Control, DropBack, $00, $F0, Face, $80, RandomC, <L_5_B313, >L_5_B313, CPU, <L_5_B30D, >L_5_B30D, Passing, $41, $8C, $7F
+L_5_B303: .BYTE Pass4, $31, $35, $44, $F3, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B30D: .BYTE Passing, $41, $8C, $CC, Loop, L_5_B303 + 1 - *
+L_5_B313: .BYTE Passing, $23, $2D, $FD, BoostRP, $04, BoostRS, $04, Random7, <L_5_B326, >L_5_B326, MoveBall, $16, $F0
+L_5_B321: .BYTE Random7, <L_5_B838, >L_5_B838, Loop, L_5_B303 + 1 - *
+L_5_B326: .BYTE MoveBall, $CC, $F0, Loop, L_5_B321 + 1 - *
+L_5_B32B: .BYTE GunTakeSnap
+L_5_B32C: .BYTE Face, $80, Control, RandomC, <L_5_B351, >L_5_B351, CPU, <L_5_B34B, >L_5_B34B, Passing, $5A, $5F, $7F
+L_5_B339: .BYTE Random7, <L_5_B340, >L_5_B340, Passing, $5A, $96, $CC
+L_5_B340: .BYTE Pass5, $35, $34, $33, $32, $F1, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B34B: .BYTE Passing, $5A, $5F, $CC, Loop, L_5_B339 + 1 - *
+L_5_B351: .BYTE Passing, $2D, $37, $FD, BoostRP, $03, BoostRS, $03, MoveBall, $E6, $F0, Random7, <L_5_B838, >L_5_B838, Stand, $1E, Loop, L_5_B339 + 1 - *
+L_5_B363: .BYTE TakeSnap, DropBack, $00, $DC, Control, DropBack, $00, $F0, Face, $80, RandomC, <L_5_B387, >L_5_B387, CPU, <L_5_B381, >L_5_B381, Passing, $50, $AA, $7F
+L_5_B377: .BYTE Pass4, $32, $35, $54, $F3, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B381: .BYTE Passing, $50, $AA, $CC, Loop, L_5_B377 + 1 - *
+L_5_B387: .BYTE Passing, $23, $2D, $FD, BoostRP, $04, BoostRS, $04, Random7, <L_5_B39A, >L_5_B39A, MoveBall, $16, $F0
+L_5_B395: .BYTE Random7, <L_5_B838, >L_5_B838, Loop, L_5_B377 + 1 - *
+L_5_B39A: .BYTE MoveBall, $CC, $F0, Loop, L_5_B395 + 1 - *
+L_5_B39F: .BYTE TakeSnap, DropBack, $00, $DC, Control, DropBack, $00, $F0, Face, $80, CPU, <L_5_B3BB, >L_5_B3BB, Passing, $3C, $8C, $7F
+L_5_B3B0: .BYTE Pass5, $23, $22, $44, $35, $F1, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B3BB: .BYTE Passing, $3C, $8C, $CC, Loop, L_5_B3B0 + 1 - *
+L_5_B3C1: .BYTE TakeSnap, DropBack, $00, $DC, Control, DropBack, $00, $F0, Face, $80, RandomC, <L_5_B3E5, >L_5_B3E5, CPU, <L_5_B3DF, >L_5_B3DF, Passing, $5A, $8C, $99
+L_5_B3D5: .BYTE Pass4, $32, $31, $53, $F4, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B3DF: .BYTE Passing, $5A, $8C, $CC, Loop, L_5_B3D5 + 1 - *
+L_5_B3E5: .BYTE Passing, $19, $1E, $FD, BoostRP, $04, BoostRS, $04, MoveBall, $F9, $F0, Random7, <L_5_B838, >L_5_B838, Loop, L_5_B3D5 + 1 - *
+L_5_B3F5: .BYTE TakeSnap, DropBack, $00, $DC, Control, DropBack, $00, $F0, Face, $80, RandomD, <L_5_B419, >L_5_B419, CPU, <L_5_B413, >L_5_B413, Passing, $82, $AA, $99
+L_5_B409: .BYTE Pass4, $34, $31, $42, $F3, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B413: .BYTE Passing, $82, $AA, $CC, Loop, L_5_B409 + 1 - *
+L_5_B419: .BYTE Passing, $19, $23, $FD, BoostRP, $04, BoostRS, $04, MoveBall, $16, $F0, Random7, <L_5_B838, >L_5_B838, Loop, L_5_B409 + 1 - *
+L_5_B429: .BYTE MoveBall, $CC, $C4, Stand, $01, Face, $60, SetBlock, %10011001, %00000000, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_B436: .BYTE TakeSnap, DropBack, $00, $DC, Control, DropBack, $00, $F0, Face, $80, RandomC, <L_5_B459, >L_5_B459, CPU, <L_5_B453, >L_5_B453, Passing, $2D, $8C, $7F
+L_5_B44A: .BYTE Pass3, $32, $54, $F3, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B453: .BYTE Passing, $2D, $8C, $CC, Loop, L_5_B44A + 1 - *
+L_5_B459: .BYTE Passing, $23, $2D, $FD, BoostRP, $04, BoostRS, $04, Random7, <L_5_B46C, >L_5_B46C, MoveBall, $16, $F0
+L_5_B467: .BYTE Random7, <L_5_B838, >L_5_B838, Loop, L_5_B44A + 1 - *
+L_5_B46C: .BYTE MoveBall, $CC, $F0, Loop, L_5_B467 + 1 - *
+L_5_B471: .BYTE TakeSnap, MoveBall, $F0, $D0, HandoffHB, MoveBall, $F0, $B8, Face, $A0, Stand, $3C, Control, Stand, $01, Face, $80, CPU, <L_5_B492, >L_5_B492, Passing, $1E, $64, $7F
+L_5_B489: .BYTE Pass3, $73, $32, $F4, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B492: .BYTE Passing, $1E, $64, $CC, Loop, L_5_B489 + 1 - *
+L_5_B498: .BYTE Stand, $14, MoveBall, $F0, $C8, MoveBall, $18, $D0, MoveBall, $20, $D8, PitchQB, Face, $80, SetBlock, %11111111, %11100000, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_B4AC: .BYTE GunTakeSnap, DropBack, $00, $F8, Control, Face, $80, RandomC, <L_5_B4DD, >L_5_B4DD, CPU, <L_5_B4D7, >L_5_B4D7, Passing, $36, $39, $7F
+L_5_B4BD: .BYTE Random7, <L_5_B4C8, >L_5_B4C8, Pass2, $F4, $F3, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B4C8: .BYTE Passing, $28, $5A, $B3, Pass5, $24, $31, $32, $33, $F5, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B4D7: .BYTE Passing, $36, $39, $CC, Loop, L_5_B4BD + 1 - *
+L_5_B4DD: .BYTE Passing, $23, $2D, $FD, BoostRP, $04, BoostRS, $04, Random7, <L_5_B4F0, >L_5_B4F0, MoveBall, $14, $F0
+L_5_B4EB: .BYTE Random7, <L_5_B838, >L_5_B838, Loop, L_5_B4BD + 1 - *
+L_5_B4F0: .BYTE MoveBall, $CE, $F0, Loop, L_5_B4EB + 1 - *
+L_5_B4F5: .BYTE TakeSnap, DropBack, $00, $DC, Control, DropBack, $00, $F0, Face, $80, RandomC, <L_5_B519, >L_5_B519, CPU, <L_5_B513, >L_5_B513, Passing, $28, $C8, $99
+L_5_B509: .BYTE Pass4, $53, $54, $22, $F5, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B513: .BYTE Passing, $28, $C8, $CC, Loop, L_5_B509 + 1 - *
+L_5_B519: .BYTE Passing, $0F, $19, $FD, BoostRP, $04, BoostRS, $04, Random7, <L_5_B52C, >L_5_B52C, MoveBall, $FA, $F0
+L_5_B527: .BYTE Random7, <L_5_B838, >L_5_B838, Loop, L_5_B509 + 1 - *
+L_5_B52C: .BYTE MoveBall, $CC, $F0, Loop, L_5_B527 + 1 - *
+L_5_B531: .BYTE MoveBall, $FC, $D0, Face, $A0, SetBlock, %11111111, %11100000, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_B53C: .BYTE TakeSnap, MoveBall, $F8, $D4, HandoffHB, SetRS, $07, SetMS, $07, MoveBall, $F8, $C8, MoveBall, $FC, $B8, Stand, $01, Face, $80, Turn, $5A, SetMS, $00, Control, Stand, $01, Face, $80, CPU, <L_5_B568, >L_5_B568, Passing, $3C, $64, $7F
+L_5_B55F: .BYTE Pass3, $74, $53, $F2, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B568: .BYTE Passing, $3C, $64, $CC, Loop, L_5_B55F + 1 - *
+L_5_B56E: .BYTE Stand, $14, MoveBall, $F0, $C4, MoveBall, $08, $D4, MoveBall, $28, $E0, PitchQB, Face, $A0, SetBlock, %11101110, %10100000, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_B582: .BYTE TakeSnap, DropBack, $00, $DC, Control, DropBack, $00, $F0, Face, $80, RandomC, <L_5_B5AD, >L_5_B5AD, CPU, <L_5_B5A7, >L_5_B5A7, Passing, $3C, $41, $7F
+L_5_B596: .BYTE Random7, <L_5_B59D, >L_5_B59D, Passing, $46, $5A, $B3
+L_5_B59D: .BYTE Pass4, $54, $43, $32, $F5, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B5A7: .BYTE Passing, $3C, $41, $CC, Loop, L_5_B596 + 1 - *
+L_5_B5AD: .BYTE Passing, $0F, $19, $FD, BoostRP, $04, BoostRS, $04, MoveBall, $16, $F0, Random7, <L_5_B838, >L_5_B838, Loop, L_5_B59D + 1 - *
+L_5_B5BD: .BYTE GunTakeSnap, DropBack, $00, $F8, Control, Face, $80, RandomC, <L_5_B5DF, >L_5_B5DF, CPU, <L_5_B5D9, >L_5_B5D9, Passing, $64, $B4, $99
+L_5_B5CE: .BYTE Pass5, $44, $33, $31, $25, $F2, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B5D9: .BYTE Passing, $64, $B4, $CC, Loop, L_5_B5CE + 1 - *
+L_5_B5DF: .BYTE Passing, $0F, $19, $FD, BoostRP, $04, BoostRS, $04, MoveBall, $14, $F0, Random7, <L_5_B838, >L_5_B838, Loop, L_5_B5CE + 1 - *
+L_5_B5EF: .BYTE GunTakeSnap, DropBack, $00, $E8, Control, Face, $80, RandomC, <L_5_B611, >L_5_B611, CPU, <L_5_B60B, >L_5_B60B, Passing, $A0, $FF, $D9
+L_5_B600: .BYTE Pass5, $34, $33, $25, $21, $F2, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B60B: .BYTE Passing, $A0, $FF, $F3, Loop, L_5_B600 + 1 - *
+L_5_B611: .BYTE Passing, $05, $0A, $FD, BoostRP, $04, BoostRS, $04, Random7, <L_5_B624, >L_5_B624, MoveBall, $FB, $F0
+L_5_B61F: .BYTE Random7, <L_5_B838, >L_5_B838, Loop, L_5_B600 + 1 - *
+L_5_B624: .BYTE MoveBall, $D1, $F0, Loop, L_5_B61F + 1 - *
+L_5_B629: .BYTE TakeSnap, DropBack, $00, $DC, Control, RandomC, <L_5_B64E, >L_5_B64E, DropBack, $00, $E0, Face, $80, CPU, <L_5_B648, >L_5_B648, Passing, $1E, $F0, $BF
+L_5_B63D: .BYTE Pass5, $35, $33, $34, $21, $F2, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B648: .BYTE Passing, $1E, $F0, $D9, Loop, L_5_B63D + 1 - *
+L_5_B64E: .BYTE Passing, $05, $0A, $FD, BoostRP, $03, BoostRS, $03, Random7, <L_5_B661, >L_5_B661, MoveBall, $16, $F0
+L_5_B65C: .BYTE Random7, <L_5_B838, >L_5_B838, Loop, L_5_B63D + 1 - *
+L_5_B661: .BYTE MoveBall, $CC, $F0, Loop, L_5_B65C + 1 - *
+L_5_B666: .BYTE TakeSnap, DropBack, $00, $DC, Control, RandomC, <L_5_B68B, >L_5_B68B, DropBack, $00, $E0, Face, $80, CPU, <L_5_B685, >L_5_B685, Passing, $50, $F0, $D9
+L_5_B67A: .BYTE Pass5, $43, $34, $31, $22, $F5, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B685: .BYTE Passing, $50, $F0, $F3, Loop, L_5_B67A + 1 - *
+L_5_B68B: .BYTE Passing, $05, $0A, $FD, BoostRP, $03, BoostRS, $03, MoveBall, $17, $F0, Random7, <L_5_B838, >L_5_B838, Loop, L_5_B67A + 1 - *
+L_5_B69B: .BYTE TakeSnap, DropBack, $00, $DC, Control, DropBack, $00, $F0, Face, $80, RandomF, <L_5_B6CF, >L_5_B6CF, CPU, <L_5_B6C9, >L_5_B6C9, Passing, $05, $19, $7F
+L_5_B6AF: .BYTE RandomA, <L_5_B6BA, >L_5_B6BA, Pass2, $F4, $F3, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B6BA: .BYTE Passing, $55, $D2, $D9, Pass5, $24, $43, $32, $31, $F5, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B6C9: .BYTE Passing, $05, $19, $CC, Loop, L_5_B6BA + 1 - *
+L_5_B6CF: .BYTE Passing, $0F, $19, $FD, BoostRP, $04, BoostRS, $04, MoveBall, $CC, $F0, Random7, <L_5_B838, >L_5_B838, Loop, L_5_B6AF + 1 - *
+L_5_B6DF: .BYTE TakeSnap, DropBack, $00, $DC, Control, RandomC, <L_5_B703, >L_5_B703, DropBack, $00, $E0, Face, $80, CPU, <L_5_B6FD, >L_5_B6FD, Passing, $5A, $D2, $D9
+L_5_B6F3: .BYTE Pass4, $54, $42, $31, $F3, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B6FD: .BYTE Passing, $5A, $D2, $F3, Loop, L_5_B6F3 + 1 - *
+L_5_B703: .BYTE Face, $80, Passing, $23, $2D, $FD, BoostRP, $03, BoostRS, $03, MoveBall, $FB, $F0, Random7, <L_5_B838, >L_5_B838, Loop, L_5_B6F3 + 1 - *
+L_5_B715: .BYTE GunTakeSnap, DropBack, $00, $F8, Control, Face, $80, CPU, <L_5_B73D, >L_5_B73D, Passing, $3A, $3C, $7F, Random7, <L_5_B72E, >L_5_B72E, Pass2, $F4, $F3, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B72E: .BYTE Passing, $28, $C8, $D9, Pass5, $04, $33, $32, $31, $F5, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B73D: .BYTE Passing, $3A, $3C, $CC, Loop, L_5_B72E + 1 - *
+L_5_B743: .BYTE GunTakeSnap, DropBack, $00, $F8, Control, Face, $80, RandomC, <L_5_B765, >L_5_B765, CPU, <L_5_B75F, >L_5_B75F, Passing, $5A, $FF, $D9
+L_5_B754: .BYTE Pass5, $44, $32, $31, $23, $F5, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B75F: .BYTE Passing, $5A, $FF, $F3, Loop, L_5_B754 + 1 - *
+L_5_B765: .BYTE Passing, $23, $2D, $FD, BoostRP, $04, BoostRS, $04, MoveBall, $CE, $F0, Random7, <L_5_B838, >L_5_B838, Loop, L_5_B754 + 1 - *
+L_5_B775: .BYTE MoveBall, $08, $00, Jump, <L_5_B82E, >L_5_B82E
+L_5_B77B: .BYTE Move, $00, $40, Jump, <L_5_B832, >L_5_B832
+L_5_B781: .BYTE BoostHP, $10, Jump, <L_5_BE54, >L_5_BE54
+L_5_B786: .BYTE BoostHP, $10, Move, $00, $20, Jump, <L_5_BE54, >L_5_BE54
+L_5_B78E: .BYTE BoostHP, $10, Jump, <L_5_BE5A, >L_5_BE5A
+L_5_B793: .BYTE Random8, <L_5_BE48, >L_5_BE48, SetGrab, %11111111, %11100000, Jump, <L_5_B82E, >L_5_B82E
+L_5_B79C: .BYTE RandomB, <L_5_BE48, >L_5_BE48, SetGrab, %11111111, %11100000, Jump, <L_5_B82E, >L_5_B82E
+L_5_B7A5: .BYTE Random9, <L_5_ACC3, >L_5_ACC3
+L_5_B7A8: .BYTE Move, $00, $70, Move, $00, $70, SetGrab, %11111111, %11100000, Jump, <L_5_B832, >L_5_B832
+L_5_B7B4: .BYTE Random9, <L_5_ACC9, >L_5_ACC9, Loop, L_5_B7A8 + 1 - *
+L_5_B7B9: .BYTE Random9, <L_5_ACCF, >L_5_ACCF, Loop, L_5_B7A8 + 1 - *
+L_5_B7BE: .BYTE Random9, <L_5_ACD5, >L_5_ACD5, Loop, L_5_B7A8 + 1 - *
+L_5_B7C3: .BYTE Random7, <L_5_B82E, >L_5_B82E, Jump, <L_5_AE5C, >L_5_AE5C
+L_5_B7C9: .BYTE BoostHP, $10, MoveMiddle, $36, $28, Jump, <L_5_BE60, >L_5_BE60
+L_5_B7D1: .BYTE RandomB, <L_5_AA0E, >L_5_AA0E, Jump, <L_5_BE8A, >L_5_BE8A
+L_5_B7D7: .BYTE RandomB, <L_5_AA1A, >L_5_AA1A, Jump, <L_5_BED9, >L_5_BED9
+L_5_B7DD: .BYTE BoostHP, $10, Jump, <L_5_AD5F, >L_5_AD5F
+L_5_B7E2: .BYTE RandomB, <L_5_BE4E, >L_5_BE4E, Jump, <L_5_B82E, >L_5_B82E
+L_5_B7E8: .BYTE MoveBall, $D0, $00, Jump, <L_5_BE3C, >L_5_BE3C
+L_5_B7EE: .BYTE TakeSnap, Turn, $14, Jump, <L_5_B2F0, >L_5_B2F0
+L_5_B7F4: .BYTE GunTakeSnap, Face, $80, Stand, $05, DropBack, $00, $F8, Jump, <L_5_B32C, >L_5_B32C
+L_5_B7FF: .BYTE TakeSnap, MoveBall, $F0, $E8, MoveBall, $EC, $DC, FakeHB, MoveBall, $EC, $B8, Control, MoveBall, $F0, $B0, Face, $80, CPU, <L_5_B820, >L_5_B820, Passing, $01, $64, $7F
+L_5_B817: .BYTE Pass3, $84, $53, $F1, <L_5_B842, >L_5_B842, Jump, <L_5_B832, >L_5_B832
+L_5_B820: .BYTE Passing, $01, $64, $CC, Loop, L_5_B817 + 1 - *
+L_5_B826: .BYTE TakeSnap, MoveBall, $F0, $E8, PitchFB, Jump, <L_5_AE04, >L_5_AE04
+L_5_B82E: .BYTE Stand, $00, Loop, L_5_B82E + 1 - *
+L_5_B832: .BYTE Turn, $00, Loop, L_5_B832 + 1 - *
+L_5_B836: .BYTE SetMS, $00
+L_5_B838: .BYTE Control
+L_5_B839: .BYTE CPUControl, Loop, L_5_B839 + 1 - *
+L_5_B83C: .BYTE Route3
+L_5_B83D: .BYTE Move, $00, $40, Loop, L_5_B83D + 1 - *
+L_5_B842: .BYTE Control
+L_5_B843: .BYTE CPUControl, Loop, L_5_B843 + 1 - *
+L_5_B846: .BYTE Route2, Move, $00, $6C, Move, $E8, $20, Jump, <L_5_BF5D, >L_5_BF5D
+L_5_B850: .BYTE Route4, Move, $00, $4C, Move, $EC, $20, Jump, <L_5_B832, >L_5_B832
+L_5_B85A: .BYTE Route3, Stand, $21, MoveBall, $F0, $C0, MoveBall, $E8, $D4, MoveBall, $D0, $E0, MoveBall, $C8, $E4, MoveBall, $C0, $F0, MoveBall, $B8, $00, Jump, <L_5_BF5D, >L_5_BF5D
+L_5_B872: .BYTE Route1, Move, $00, $6C, Move, $2C, $30, Jump, <L_5_B832, >L_5_B832
+L_5_B87C: .BYTE Route1, Move, $00, $6C, Move, $00, $50, Move, $00, $50, Move, $00, $50, Move, $D0, $70, Jump, <L_5_B832, >L_5_B832
+L_5_B88F: .BYTE Route2, Stand, $3C, MoveBall, $14, $18, MoveBall, $30, $38, Jump, <L_5_B832, >L_5_B832
+L_5_B89B: .BYTE Route2, Move, $00, $5C, Move, $4C, $00, Jump, <L_5_B832, >L_5_B832
+L_5_B8A5: .BYTE Route2, Stand, $1E, MoveBall, $D8, $C0, MoveBall, $C0, $D0, HandoffWR1, SetGrab, %00000000, %00000000, Face, $E0, Stand, $0A, MoveBall, $B8, $E0, MoveBall, $B8, $F0, MoveBall, $B0, $00, Move, $00, $40, Move, $00, $40, Jump, <L_5_B832, >L_5_B832
+L_5_B8C8: .BYTE Route1, Move, $00, $38, Move, $F0, $08, Jump, <L_5_B832, >L_5_B832
+L_5_B8D2: .BYTE Route2, MoveBall, $14, $20, MoveBall, $D8, $48, Jump, <L_5_B832, >L_5_B832
+L_5_B8DC: .BYTE Route3, Move, $00, $70, MoveBall, $E8, $7F, Move, $00, $10, Jump, <L_5_B832, >L_5_B832
+L_5_B8E9: .BYTE Route3, MoveBall, $D4, $D0, MoveBall, $10, $E8, MoveBall, $34, $18, Jump, <L_5_B832, >L_5_B832
+L_5_B8F6: .BYTE Route2, Move, $00, $1C, Move, $F0, $40, Move, $EC, $18, Move, $00, $08, Move, $04, $04, Move, $08, $00, Move, $08, $FC, Jump, <L_5_B832, >L_5_B832
+L_5_B90F: .BYTE Route3, Move, $08, $10, Move, $00, $30, Jump, <L_5_B83C, >L_5_B83C
+L_5_B919: .BYTE Route2, Move, $00, $50, Move, $04, $04, Move, $04, $00, Move, $04, $FC, Move, $00, $FC, Jump, <L_5_B832, >L_5_B832
+L_5_B92C: .BYTE Route3
+L_5_B92D: .BYTE Move, $00, $6C, Move, $D8, $00, Jump, <L_5_B832, >L_5_B832
+L_5_B936: .BYTE Route2, MoveBall, $F8, $C8, MoveBall, $F8, $08, MoveBall, $F8, $40, Move, $FC, $04, Move, $FC, $00, Move, $04, $FC, Move, $00, $FC, Jump, <L_5_B832, >L_5_B832
+L_5_B94F: .BYTE Route3, MoveMiddle, $C0, $68, Move, $FC, $04, Move, $FC, $00, Move, $04, $FC, Move, $00, $FC, Jump, <L_5_B832, >L_5_B832
+L_5_B962: .BYTE Route2, MoveBall, $E8, $C8, MoveBall, $E0, $F0, Wait, $08, $32, MoveBall, $D0, $00, MoveBall, $C8, $10, MoveBall, $C0, $28, MoveBall, $C0, $38, Jump, <L_5_B832, >L_5_B832
+L_5_B97B: .BYTE Route3, Stand, $0A, MoveBall, $C4, $10, MoveBall, $FC, $30, Jump, <L_5_B832, >L_5_B832
+L_5_B987: .BYTE Route1, MoveMiddle, $36, $28, MoveMiddle, $3C, $30, MoveMiddle, $36, $38
+L_5_B991: .BYTE Move, $00, $40, Loop, L_5_B991 + 1 - *
+L_5_B996: .BYTE Route4, MoveBall, $20, $08, MoveBall, $14, $18, MoveBall, $12, $28
+L_5_B9A0: .BYTE Move, $00, $40, Jump, <L_5_B9A0, >L_5_B9A0
+L_5_B9A6: .BYTE Route5, Stand, $28, MoveBall, $1C, $F8, MoveBall, $20, $00, MoveBall, $38, $18, MoveMiddle, $C4, $38, MoveMiddle, $C4, $78, Jump, <L_5_B832, >L_5_B832
+L_5_B9BB: .BYTE MoveBall, $00, $CC, MoveBall, $F8, $E8, MoveBall, $F8, $00, Route3, MoveBall, $F8, $50, MoveBall, $F4, $54, MoveBall, $F0, $54, MoveBall, $EC, $50, MoveBall, $EC, $48, Jump, <L_5_B832, >L_5_B832
+L_5_B9D7: .BYTE Route4, MoveBall, $E0, $B0, MoveBall, $F4, $B0, MoveBall, $10, $B6, MoveBall, $24, $C8, MoveBall, $2C, $D8, MoveBall, $30, $EC, MoveBall, $30, $20, MoveBall, $30, $78, Jump, <L_5_B832, >L_5_B832
+L_5_B9F3: .BYTE Route1
+L_5_B9F4: .BYTE Wait, $3C, $50, MoveBall, $C8, $C0, MoveBall, $B8, $C8, MoveBall, $B4, $D8, RandomC, <L_5_B832, >L_5_B832, Turn, $3C, MoveBall, $B4, $30, Jump, <L_5_B832, >L_5_B832
+L_5_BA0B: .BYTE Route4, Move, $00, $5C, Move, $00, $18, Move, $FE, $02, Move, $FE, $00, Move, $FE, $FE, Move, $00, $FE, Jump, <L_5_B832, >L_5_B832
+L_5_BA21: .BYTE Route3
+L_5_BA22: .BYTE MoveBall, $CC, $20, MoveBall, $F0, $40, Jump, <L_5_B832, >L_5_B832
+L_5_BA2B: .BYTE Route2, MoveBall, $C0, $30, Move, $04, $04, Move, $04, $00, Move, $04, $FC, Move, $00, $FC, Jump, <L_5_B832, >L_5_B832
+L_5_BA3E: .BYTE Route3, MoveBall, $20, $30, Move, $FC, $04, Move, $FC, $00, Move, $FC, $FC, Move, $00, $FC, Jump, <L_5_B832, >L_5_B832
+L_5_BA51: .BYTE Route1
+L_5_BA52: .BYTE Move, $00, $40, Move, $00, $4C, Move, $04, $04, Move, $04, $00, Move, $04, $FC, Move, $00, $FC, Jump, <L_5_B832, >L_5_B832
+L_5_BA67: .BYTE Route4, Move, $00, $40, Move, $00, $4C, Move, $FC, $04, Move, $FC, $00, Move, $FC, $FC, Move, $00, $FC, Jump, <L_5_B832, >L_5_B832
+L_5_BA7D: .BYTE Route4, MoveBall, $1C, $50, Move, $08, $00, Jump, <L_5_B832, >L_5_B832
+L_5_BA87: .BYTE Route5, MoveBall, $28, $D0, MoveMiddle, $C0, $E4, Move, $04, $FC, Move, $00, $FC, Move, $FC, $FC, Move, $FC, $00, Random7, <L_5_B832, >L_5_B832, Turn, $50, MoveMiddle, $C0, $00, MoveMiddle, $C0, $60, Jump, <L_5_B832, >L_5_B832
+L_5_BAA8: .BYTE Route1
+L_5_BAA9: .BYTE Move, $00, $60, Move, $00, $70, Move, $1C, $7F, Jump, <L_5_B832, >L_5_B832
+L_5_BAB5: .BYTE Route3, Move, $E8, $44, Move, $00, $50, Move, $0C, $7F
+L_5_BABF: .BYTE Move, $00, $40, Loop, L_5_BABF + 1 - *
+L_5_BAC4: .BYTE Route3, MoveBall, $10, $DC, MoveBall, $18, $F0, MoveBall, $18, $10, MoveBall, $18, $10, MoveBall, $10, $20, MoveBall, $F8, $38, Jump, <L_5_B832, >L_5_B832
+L_5_BADA: .BYTE Route4, MoveBall, $20, $C0, MoveBall, $30, $D0, MoveMiddle, $C0, $00, Turn, $0A, MoveMiddle, $C0, $28, Jump, <L_5_B832, >L_5_B832
+L_5_BAEC: .BYTE Route4, MoveBall, $18, $D0, MoveBall, $18, $08, MoveBall, $10, $10, MoveBall, $00, $18, MoveBall, $FC, $20, MoveBall, $FC, $24, MoveBall, $00, $29, MoveBall, $20, $34, Jump, <L_5_B832, >L_5_B832
+L_5_BB08: .BYTE Route3, MoveMiddle, $B0, $10
+L_5_BB0C: .BYTE Move, $00, $40, Loop, L_5_BB0C + 1 - *
+L_5_BB11: .BYTE Route1, MoveBall, $C0, $30, MoveBall, $C0, $60, Move, $F8, $7F, Jump, <L_5_B832, >L_5_B832
+L_5_BB1E: .BYTE Route2, Move, $00, $18, Move, $F0, $38, MoveMiddle, $68, $48, Jump, <L_5_B832, >L_5_B832
+L_5_BB2B: .BYTE Route3, MoveBall, $C8, $20, MoveBall, $E8, $38, Jump, <L_5_B832, >L_5_B832
+L_5_BB35: .BYTE Route1, MoveMiddle, $C0, $60, Move, $E0, $7F, Jump, <L_5_B832, >L_5_B832
+L_5_BB3F: .BYTE Route2, MoveBall, $0C, $D0, MoveBall, $E0, $E0, MoveBall, $B8, $20, Random7, <L_5_B832, >L_5_B832, Turn, $50, MoveBall, $B8, $40, Jump, <L_5_B832, >L_5_B832
+L_5_BB54: .BYTE Route5, Stand, $1E, MoveBall, $C8, $D0, MoveBall, $BC, $E0, MoveBall, $B8, $F8, Move, $00, $7F, Move, $00, $08, Jump, <L_5_B832, >L_5_B832
+L_5_BB69: .BYTE Route4, MoveBall, $C0, $28, Move, $FC, $00, Jump, <L_5_B832, >L_5_B832
+L_5_BB73: .BYTE Route1, MoveBall, $20, $40, MoveBall, $08, $50, Jump, <L_5_B832, >L_5_B832
+L_5_BB7D: .BYTE Route2, MoveBall, $18, $10, MoveBall, $14, $20, MoveBall, $10, $24, MoveBall, $08, $28, MoveBall, $00, $28, MoveBall, $F0, $30, MoveBall, $E8, $40, MoveBall, $E4, $50
+L_5_BB96: .BYTE Move, $00, $40, Loop, L_5_BB96 + 1 - *
+L_5_BB9B: .BYTE Route3, MoveMiddle, $B2, $50, MoveBall, $F8, $50, Jump, <L_5_B832, >L_5_B832
+L_5_BBA5: .BYTE Route2
+L_5_BBA6: .BYTE MoveBall, $C8, $28, Move, $F8, $00, Jump, <L_5_B832, >L_5_B832
+L_5_BBAF: .BYTE Route3, MoveMiddle, $36, $60, MoveBall, $E8, $60, Jump, <L_5_B832, >L_5_B832
+L_5_BBB9: .BYTE Route1, Move, $00, $50, Move, $00, $40, Move, $F0, $7F, Jump, <L_5_B832, >L_5_B832
+L_5_BBC6: .BYTE Route3, MoveBall, $20, $D0, MoveBall, $28, $E8, MoveBall, $28, $00, MoveBall, $20, $18, MoveBall, $10, $28, MoveBall, $F0, $40, Jump, <L_5_B832, >L_5_B832
+L_5_BBDC: .BYTE Route2, MoveBall, $CC, $60, Move, $30, $7F, Jump, <L_5_B832, >L_5_B832
+L_5_BBE6: .BYTE Route5, MoveBall, $20, $CC, MoveBall, $24, $D8, MoveBall, $24, $08, MoveBall, $28, $1C, MoveBall, $30, $28, Jump, <L_5_B832, >L_5_B832
+L_5_BBF9: .BYTE Route4, MoveMiddle, $B2, $60, MoveMiddle, $B0, $68, Move, $FC, $04, Move, $FC, $00, Move, $FC, $FC, Move, $00, $FC, Jump, <L_5_B832, >L_5_B832
+L_5_BC0F: .BYTE Route2, MoveBall, $CC, $30, Move, $F0, $7F, Jump, <L_5_B832, >L_5_B832
+L_5_BC19: .BYTE Route1, MoveMiddle, $C4, $70, Move, $E0, $7F, Jump, <L_5_B832, >L_5_B832
+L_5_BC23: .BYTE Route3, MoveBall, $18, $40, MoveBall, $F0, $40, Jump, <L_5_B832, >L_5_B832
+L_5_BC2D: .BYTE Route4, MoveBall, $D8, $00, MoveBall, $D8, $50, Move, $18, $28, Jump, <L_5_B832, >L_5_B832
+L_5_BC3A: .BYTE Route5, Stand, $3C, MoveBall, $20, $10, MoveBall, $28, $20, MoveMiddle, $C0, $30, MoveMiddle, $C4, $48, Move, $00, $60, Move, $E0, $7F, Jump, <L_5_B832, >L_5_B832
+L_5_BC52: .BYTE Route3, MoveBall, $E8, $B8, MoveBall, $D8, $C0, MoveBall, $C8, $D0, MoveBall, $C0, $E0, Random7, <L_5_B832, >L_5_B832, Turn, $5A, MoveBall, $B8, $50, MoveBall, $B8, $78, Jump, <L_5_B832, >L_5_B832
+L_5_BC6D: .BYTE Route4, MoveBall, $C4, $20, MoveBall, $F0, $40, Jump, <L_5_B832, >L_5_B832
+L_5_BC77: .BYTE Route1, MoveMiddle, $C0, $60, Move, $04, $7F, Jump, <L_5_B832, >L_5_B832
+L_5_BC81: .BYTE Route5, MoveBall, $10, $B8, MoveBall, $18, $C4, MoveBall, $18, $D0, MoveBall, $28, $E0, MoveBall, $28, $10, MoveBall, $18, $30, MoveBall, $F0, $40, Jump, <L_5_B832, >L_5_B832
+L_5_BC9A: .BYTE Route2, MoveMiddle, $36, $40, Move, $10, $18, Move, $00, $40, Move, $F4, $7F, Jump, <L_5_B832, >L_5_B832
+L_5_BCAA: .BYTE Route4, MoveBall, $14, $68, MoveBall, $00, $78, Jump, <L_5_B832, >L_5_B832
+L_5_BCB4: .BYTE Route4, MoveMiddle, $C4, $00, Move, $00, $50, Move, $00, $48, Move, $F0, $70, Jump, <L_5_B832, >L_5_B832
+L_5_BCC4: .BYTE Route3, MoveBall, $20, $E8, MoveMiddle, $C0, $F0, Jump, <L_5_B832, >L_5_B832
+L_5_BCCE: .BYTE Route5, MoveMiddle, $38, $28, MoveMiddle, $40, $60, Jump, <L_5_BF5D, >L_5_BF5D
+L_5_BCD8: .BYTE Route1, MoveMiddle, $4C, $10, MoveMiddle, $50, $30, MoveMiddle, $58, $44, MoveMiddle, $80, $70, Jump, <L_5_B832, >L_5_B832
+L_5_BCE8: .BYTE Route2, MoveBall, $14, $20, MoveMiddle, $B8, $40, Jump, <L_5_B832, >L_5_B832
+L_5_BCF2: .BYTE Route3, Move, $00, $28, Move, $04, $08, Move, $14, $08, Move, $00, $04, Move, $F4, $08, MoveMiddle, $38, $28, Jump, <L_5_B832, >L_5_B832
+L_5_BD08: .BYTE Route4, Move, $00, $1C, Move, $F8, $20, MoveBall, $E8, $38, Jump, <L_5_BF5D, >L_5_BF5D
+L_5_BD15: .BYTE Route5, MoveBall, $B8, $C0, MoveBall, $B6, $C2, MoveBall, $B6, $C4, MoveBall, $B8, $C6, MoveBall, $BA, $C6, Jump, <L_5_B832, >L_5_B832
+L_5_BD28: .BYTE Route4, MoveBall, $C0, $60, Move, $18, $28, Jump, <L_5_B832, >L_5_B832
+L_5_BD32: .BYTE Route3, MoveMiddle, $36, $40, MoveMiddle, $3A, $40, MoveMiddle, $3A, $58, MoveMiddle, $36, $60, MoveMiddle, $3A, $68
+L_5_BD42: .BYTE Move, $00, $40, Loop, L_5_BD42 + 1 - *
+L_5_BD47: .BYTE Route1, MoveMiddle, $A8, $48, MoveMiddle, $80, $48, Jump, <L_5_B832, >L_5_B832
+L_5_BD51: .BYTE Route5, MoveBall, $08, $C4, MoveBall, $D4, $C4, MoveBall, $C8, $C8, MoveBall, $BC, $D8, MoveBall, $B8, $E8, Turn, $0A, MoveBall, $B8, $20, MoveBall, $B8, $30, Jump, <L_5_B832, >L_5_B832
+L_5_BD6C: .BYTE Route4, MoveMiddle, $48, $28, MoveBall, $C8, $40, MoveBall, $D0, $58, MoveBall, $E0, $68, MoveBall, $00, $7F, Jump, <L_5_B832, >L_5_B832
+L_5_BD7F: .BYTE Route1, Move, $00, $10, Move, $04, $10, Move, $10, $18, Move, $10, $10, MoveBall, $10, $40, Jump, <L_5_B832, >L_5_B832
+L_5_BD92: .BYTE Route4, Move, $00, $4C, Move, $40, $38, Jump, <L_5_B832, >L_5_B832
+L_5_BD9C: .BYTE Route4, Jump, <L_5_B83D, >L_5_B83D
+L_5_BDA0: .BYTE Route1, Jump, <L_5_B83D, >L_5_B83D
+L_5_BDA4: .BYTE Route2, Jump, <L_5_B83D, >L_5_B83D
+L_5_BDA8: .BYTE Route5, Wait, $3C, $50, MoveBall, $C8, $C0, MoveBall, $B8, $C8, MoveBall, $B4, $D8, Jump, <L_5_B832, >L_5_B832
+L_5_BDB8: .BYTE Route2, MoveMiddle, $36, $50, Move, $08, $00, Jump, <L_5_B832, >L_5_B832
+L_5_BDC2: .BYTE Route4, Jump, <L_5_B9F4, >L_5_B9F4
+L_5_BDC6: .BYTE Route2, Jump, <L_5_BA22, >L_5_BA22
+L_5_BDCA: .BYTE Route2, Jump, <L_5_BA52, >L_5_BA52
+L_5_BDCE: .BYTE Route4, Jump, <L_5_B92D, >L_5_B92D
+L_5_BDD2: .BYTE Route5, Jump, <L_5_B83D, >L_5_B83D
+L_5_BDD6: .BYTE Route2, Jump, <L_5_BAA9, >L_5_BAA9
+L_5_BDDA: .BYTE Route3, Jump, <L_5_BBA6, >L_5_BBA6
+L_5_BDDE: .BYTE Route2, Move, $00, $64, Move, $24, $38, Jump, <L_5_B832, >L_5_B832
+L_5_BDE8: .BYTE Wait, $01, $50
+L_5_BDEB: .BYTE SetMS, $00
+L_5_BDED: .BYTE Recover, Loop, L_5_BDED + 1 - *
+L_5_BDF0: .BYTE Wait, $01, $50, Loop, L_5_BDEB + 1 - *
+L_5_BDF5: .BYTE Wait, $01, $50, Loop, L_5_BDEB + 1 - *
+L_5_BDFA: .BYTE Wait, $01, $50, Loop, L_5_BDEB + 1 - *
+L_5_BDFF: .BYTE Wait, $01, $50
+L_5_BE02: .BYTE Loop, L_5_BDEB + 1 - *
+L_5_BE04: .BYTE Wait, $01, $50, Loop, L_5_BE02 + 1 - *
+L_5_BE09: .BYTE Wait, $01, $50, Loop, L_5_BE02 + 1 - *
+L_5_BE0E: .BYTE Wait, $01, $50, Loop, L_5_BE02 + 1 - *
+L_5_BE13: .BYTE Wait, $01, $50, Loop, L_5_BE02 + 1 - *
+L_5_BE18: .BYTE Wait, $01, $50, Loop, L_5_BE02 + 1 - *
+L_5_BE1D: .BYTE Wait, $01, $50, Loop, L_5_BE02 + 1 - *
+L_5_BE22: .BYTE Wait, $01, $50, SetMS, $00, Control, Loop, L_5_BE02 + 1 - *
+L_5_BE2A: .BYTE SetGrab, %11111111, %11100000, BlockRE, Loop, L_5_BE2A + 1 - *
+L_5_BE30: .BYTE SetGrab, %11111111, %11100000, BlockNT, Loop, L_5_BE30 + 1 - *
+L_5_BE36: .BYTE SetGrab, %11111111, %11100000, BlockLE, Loop, L_5_BE36 + 1 - *
+L_5_BE3C: .BYTE SetGrab, %11111111, %11100000, BlockROLB, Loop, L_5_BE3C + 1 - *
+L_5_BE42: .BYTE SetGrab, %11111111, %11100000, BlockRILB, Loop, L_5_BE42 + 1 - *
+L_5_BE48: .BYTE SetGrab, %11111111, %11100000, BlockLILB, Loop, L_5_BE48 + 1 - *
+L_5_BE4E: .BYTE SetGrab, %11111111, %11100000, BlockLOLB, Loop, L_5_BE4E + 1 - *
+L_5_BE54: .BYTE SetGrab, %11111111, %11100000, BlockRCB, Loop, L_5_BE54 + 1 - *
+L_5_BE5A: .BYTE SetGrab, %11111111, %11100000, BlockLCB, Loop, L_5_BE5A + 1 - *
+L_5_BE60: .BYTE SetGrab, %11111111, %11100000, BlockFS, Loop, L_5_BE60 + 1 - *
+L_5_BE66: .BYTE SetGrab, %11111111, %11100000, BlockSS, Loop, L_5_BE66 + 1 - *
+L_5_BE6C: .BYTE Stand, $19, MoveBall, $E8, $D0, Stand, $01, Face, $80, SetBlock, %11111111, %11100000, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_BE7B: .BYTE Stand, $19, MoveBall, $F8, $CC, Stand, $01, Face, $80, SetBlock, %11111111, %11100000, Jump, <L_5_BEE8, >L_5_BEE8
+L_5_BE8A: .BYTE MoveBall, $14, $C4, Stand, $01, Face, $A0, SetGrab, %11111111, %11100000, SetBlock, %00100010, %10000000, Loop, L_5_BEE8 + 1 - *
+L_5_BE99: .BYTE Face, $80, Stand, $0A, MoveBall, $F0, $EC, Stand, $01, Face, $80, SetGrab, %11111111, %11100000, SetBlock, %11101100, %00000000, Loop, L_5_BEE8 + 1 - *
+L_5_BEAC: .BYTE MoveBall, $E0, $E4, Stand, $01, Face, $80, SetGrab, %11111111, %11100000, SetBlock, %11011000, %00000000, Loop, L_5_BEE8 + 1 - *
+L_5_BEBB: .BYTE MoveBall, $00, $E4, Stand, $01, Face, $80, SetGrab, %11111111, %11100000, SetBlock, %00101110, %00000000, Loop, L_5_BEE8 + 1 - *
+L_5_BECA: .BYTE MoveBall, $D4, $D4, Stand, $01, Face, $60, SetGrab, %11111111, %11100000, SetBlock, %00011001, %00000000, Loop, L_5_BEE8 + 1 - *
+L_5_BED9: .BYTE MoveBall, $0C, $D4, Stand, $01, Face, $A0, SetGrab, %11111111, %11100000, SetBlock, %00000110, %10000000, Loop, L_5_BEE8 + 1 - *
+L_5_BEE8: .BYTE SetGrab, %11111111, %11100000, Block, Loop, L_5_BEE8 + 1 - *
+L_5_BEEE: .BYTE SetGrab, %11111111, %11100000, ChopBlockRE, Loop, L_5_BEEE + 1 - *
+L_5_BEF4: .BYTE SetGrab, %11111111, %11100000, ChopBlockNT, Loop, L_5_BEF4 + 1 - *
+L_5_BEFA: .BYTE SetGrab, %11111111, %11100000, ChopBlockLE, Loop, L_5_BEFA + 1 - *
+L_5_BF00: .BYTE SetGrab, %11111111, %11100000, ChopBlockROLB, Loop, L_5_BF00 + 1 - *
+L_5_BF06: .BYTE SetGrab, %11111111, %11100000, ChopBlockRILB, Loop, L_5_BF06 + 1 - *
+L_5_BF0C: .BYTE SetGrab, %11111111, %11100000, ChopBlockLILB, Loop, L_5_BF0C + 1 - *
+L_5_BF12: .BYTE SetGrab, %11111111, %11100000, ChopBlockLOLB, Loop, L_5_BF12 + 1 - *
+L_5_BF18: .BYTE SetGrab, %11111111, %11100000, ChopBlockRCB, Loop, L_5_BF18 + 1 - *
+L_5_BF1E: .BYTE SetGrab, %11111111, %11100000, ChopBlockLCB, Loop, L_5_BF1E + 1 - *
+L_5_BF24: .BYTE SetGrab, %11111111, %11100000, ChopBlockFS, Loop, L_5_BF24 + 1 - *
+L_5_BF2A: .BYTE SetGrab, %11111111, %11100000, ChopBlockSS, Loop, L_5_BF2A + 1 - *
+L_5_BF30: .BYTE BoostRS, $11
+L_5_BF32: .BYTE SetGrab, %11111111, %11100000, RunRush, Loop, L_5_BF32 + 1 - *
+L_5_BF38: .BYTE BoostRS, $11
+L_5_BF3A: .BYTE SetGrab, %11111111, %11100000, PassRush, Loop, L_5_BF3A + 1 - *
+L_5_BF40: .BYTE BoostRS, $11, Control
+L_5_BF43: .BYTE SetGrab, %11111111, %11100000, PassRush, Loop, L_5_BF43 + 1 - *
+L_5_BF49: .BYTE Celebrate, $14
+L_5_BF4B: .BYTE Celebrate, $28
+L_5_BF4D: .BYTE Celebrate, $3C
+L_5_BF4F: .BYTE Celebrate, $50
+L_5_BF51: .BYTE Celebrate, $64
+L_5_BF53: .BYTE Cry, $14
+L_5_BF55: .BYTE Cry, $28
+L_5_BF57: .BYTE Cry, $3C
+L_5_BF59: .BYTE Cry, $50
+L_5_BF5B: .BYTE Cry, $64
+L_5_BF5D: .BYTE Move, $00, $50, Loop, L_5_BF5D + 1 - *
+L_5_BF62: .BYTE SetBall, $E0, $00, Face, $00, Stand, $3C, Stand, $01, $F8, $05, $C0, Jump, <L_5_BF62, >L_5_BF62
+L_5_BF71: .BYTE SetBall, $70, $70, Jump, <L_5_B82E, >L_5_B82E

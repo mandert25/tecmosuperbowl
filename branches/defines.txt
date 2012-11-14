@@ -76,6 +76,7 @@
 .define default_nfc_players    L_26_8380
 .define default_afc_starters   L_26_83AE
 .define default_nfc_starters   L_26_83BA
+.define update_randoms         L_C46D
 .define store_sram_checksum    L_C4B3
 .define sram_checksum          L_C4BD
 .define add_size               L_C4F5
@@ -84,4 +85,7 @@
 .define divide_8               L_D819
 .define bank_swap_8000         L_D8DD
 .define bank_swap_A000         L_D8E3
+.define update_random_3B       L_D929
+.define update_random_3C       L_D931
+.define update_random_3D       L_D939
 

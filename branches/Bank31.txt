@@ -125,7 +125,7 @@ START:
 	STY TEMP44_LO
 	LDY #>$6000
 	JSR clear_ram_size
-;
+; Store Default SRAM Data
 	LDX #$19 ; BANK26
 	JSR bank_swap_8000
 	JSR L_26_800C

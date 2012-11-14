@@ -152,8 +152,8 @@ START:
 	LDY #<(L_17_8000-1)
 	LDA #>(L_17_8000-1)
 	LDX #$02
-	JSR L_CC45
-	JMP L_CB4E
+	JSR create_thread
+	JMP start_all_threads
 @sram_check:
 	.BYTE "AKIHIKO"
 
@@ -2137,11 +2137,11 @@ L_CB2B:
 	SEI
 	LDY #$06
 	STY BANK_SELECT
-	LDA $2E
+	LDA BANK_8000
 	STA BANK_DATA
 	INY
 	STY BANK_SELECT
-	LDA $2F
+	LDA BANK_A000
 	STA BANK_DATA
 L_CB3F:
 	LDA $34
@@ -2151,41 +2151,46 @@ L_CB3F:
 	LDA $0300
 	RTI
 
-L_CB4E:
+start_all_threads:
+; Reset Stack
 	LDX #$FF
 	TXS
+;
 	LSR $2A
+; Find Ready Thread
 	LDX #$02
-:	LDA $00,X
+find_thread:
+	LDA $00,X
 	CMP #$12
-	BCS L_CB66
-L_CB5B:
+	BCS do_thread
+next_thread:
 	TXA
 	CLC
 	ADC #$05
 	TAX
 	CPX #$2A
-	BCC :-
-	BCS L_CB4E
-L_CB66:
+	BCC find_thread
+	BCS start_all_threads
+
+do_thread:
 	SEC
 	ROR $2A
 	STX $00
 	CMP #$14
-	BEQ L_CBE2
-	LDA $33
+	BEQ thread_first_run
+	LDA MODE_8000
 	ORA #$06
-	STA $34
+	STA SOFT_8000
 	STA BANK_SELECT
 	LDA $03,X
-	STA $2E
+	STA BANK_8000
 	STA BANK_DATA
-	LDA $33
+	LDA MODE_8000
 	ORA #$07
-	STA $34
+	STA SOFT_8000
 	STA BANK_SELECT
 	LDA $04,X
-	STA $2F
+	STA BANK_A000
 	STA BANK_DATA
 	LDA $00,X
 	CMP #$12
@@ -2219,6 +2224,7 @@ L_CB66:
 	PLP
 	LSR $2A
 	RTS
+
 L_CBBE:
 	LDA $02,X
 	TAX
@@ -2246,26 +2252,27 @@ L_CBBE:
 	PLA
 	LSR $2A
 	RTI
-L_CBE2:
+
+thread_first_run:
 	LDA #$12
 	STA $00,X
 	LDA $03,X
 	PHA
 	LDA $02,X
 	PHA
-	LDA $33
+	LDA MODE_8000
 	ORA #$06
-	STA $34
+	STA SOFT_8000
 	STA BANK_SELECT
 	LDA $04,X
-	STA $2E
+	STA BANK_8000
 	STA BANK_DATA
-	LDA $33
+	LDA MODE_8000
 	ORA #$07
-	STA $34
+	STA SOFT_8000
 	STA BANK_SELECT
 	LDA $04,X
-	STA $2F
+	STA BANK_A000
 	STA BANK_DATA
 	RTS
 
@@ -2296,15 +2303,15 @@ L_CC0D:
 	LDY $00
 	TSX
 	STX $02,Y
-	LDX $2E
+	LDX BANK_8000
 	STX $03,Y
-	LDX $2F
+	LDX BANK_A000
 	STX $04,Y
 	TAX
 	LDA $00,X
-	JMP L_CB66
+	JMP do_thread
 
-L_CC45:
+create_thread:
 	STY $02,X
 	STA $03,X
 	LDA #$14
@@ -2348,11 +2355,11 @@ L_CC59:
 	STA $02,X
 	LDA #$03
 	STA $00,X
-	LDA $2E
+	LDA BANK_8000
 	STA $03,X
-	LDA $2F
+	LDA BANK_A000
 	STA $04,X
-	JMP L_CB4E
+	JMP start_all_threads
 
 L_CC8F:
 	LDA $00,X
@@ -2395,15 +2402,15 @@ L_CC9A:
 	STA $01,X
 	LDA #$11
 	STA $00,X
-	LDA $2E
+	LDA BANK_8000
 	STA $03,X
-	LDA $2F
+	LDA BANK_A000
 	STA $04,X
 	LDX #$FF
 	TXS
 	LSR $2A
 	LDX $00
-	JMP L_CB5B
+	JMP next_thread
 
 L_CCDD:
 	LDA #$00

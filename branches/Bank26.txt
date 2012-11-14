@@ -1,7 +1,7 @@
 .segment "BANK_26"
 L_26_8000:	JMP L_26_803C
 L_26_8003:	JMP L_26_816B
-L_26_8006:	JMP L_26_81D1
+L_26_8006:	JMP store_week_games
 L_26_8009:	JMP L_26_8239
 L_26_800C:	JMP store_default_sram
 L_26_800F:	JMP L_26_82E0
@@ -240,40 +240,41 @@ L_26_816B:
 @Loop2:
 	RTS
 
-L_26_81D1:
+store_week_games:
 	LDA #%10000000
 	STA PRG_RAM_PROTECT
+; Get Week Game Location
 	LDA $6758
 	ASL
 	TAX
-	LDA L_26_8997+0,X
+	LDA WEEK_POINTER+0,X
 	STA TEMP44_LO
-	LDA L_26_8997+1,X
+	LDA WEEK_POINTER+1,X
 	STA TEMP44_HI
 	LDX $6758
 	LDA GAMES_PER_WEEK,X
-	STA $3E
+	STA TEMP3E
+; Get Week Games
 	ASL
 	TAX
 	LDY #$00
-@Loop1:
-	LDA (TEMP44),Y
+:	LDA (TEMP44),Y
 	STA $675A,Y
 	INY
 	DEX
-	BNE @Loop1
+	BNE :-
+; Randomize Week Games ??
 	JSR L_D8F7
 	AND #$0F
 	CLC
 	ADC #$0B
-	STA $3F
-@Loop2:
-	JSR L_D8F7
-	STA $45
-	LDA $3E
-	STA $44
-	JSR L_D819
-	LDA $42
+	STA TEMP3F
+:	JSR L_D8F7
+	STA TEMP45
+	LDA TEMP3E
+	STA TEMP44
+	JSR divide_8
+	LDA TEMP42
 	ASL
 	TAX
 	LDY $675A,X
@@ -284,9 +285,9 @@ L_26_81D1:
 	LDA $675B
 	STY $675B
 	STA $675B,X
-	DEC $3F
-	BNE @Loop2
-	JSR L_C4B3
+	DEC TEMP3F
+	BNE :-
+	JSR store_sram_checksum
 	LDA #%11000000
 	STA PRG_RAM_PROTECT
 	RTS
@@ -391,7 +392,7 @@ L_26_82E0:
 	LDA #%10000000
 	STA PRG_RAM_PROTECT
 	JSR store_default_playbook
-	JSR L_C4B3
+	JSR store_sram_checksum
 	LDA #%11000000
 	STA PRG_RAM_PROTECT
 	RTS
@@ -448,22 +449,22 @@ store_default_playbook:
 	RTS
 
 L_26_834C:
-	LDA #$80
+	LDA #%10000000
 	STA PRG_RAM_PROTECT
-	JSR L_26_8374
-	JSR L_26_83AE
-	JSR L_C4B3
-	LDA #$C0
+	JSR default_afc_players
+	JSR default_afc_starters
+	JSR store_sram_checksum
+	LDA #%11000000
 	STA PRG_RAM_PROTECT
 	RTS
 
 L_26_8360:
-	LDA #$80
+	LDA #%10000000
 	STA PRG_RAM_PROTECT
-	JSR L_26_8380
-	JSR L_26_83BA
-	JSR L_C4B3
-	LDA #$C0
+	JSR default_nfc_players
+	JSR default_nfc_starters
+	JSR store_sram_checksum
+	LDA #%11000000
 	STA PRG_RAM_PROTECT
 	RTS
 
@@ -484,20 +485,20 @@ default_nfc_players:
 	RTS
 
 L_26_838C:
-	LDA #$80
+	LDA #%10000000
 	STA PRG_RAM_PROTECT
-	JSR L_26_83AE
-	JSR L_C4B3
-	LDA #$C0
+	JSR default_afc_starters
+	JSR store_sram_checksum
+	LDA #%11000000
 	STA PRG_RAM_PROTECT
 	RTS
 
 L_26_839D:
-	LDA #$80
+	LDA #%10000000
 	STA PRG_RAM_PROTECT
-	JSR L_26_83BA
-	JSR L_C4B3
-	LDA #$C0
+	JSR default_nfc_starters
+	JSR store_sram_checksum
+	LDA #%11000000
 	STA PRG_RAM_PROTECT
 	RTS
 
@@ -1340,7 +1341,7 @@ L_26_8958:	.BYTE $00
 	.BYTE $FE
 	.BYTE $05
 	.BYTE $FB
-L_26_8997:
+WEEK_POINTER:
 	.WORD WEEK_1,WEEK_2,WEEK_3,WEEK_4,WEEK_5,WEEK_6,WEEK_7,WEEK_8,WEEK_9
 	.WORD WEEK_10,WEEK_11,WEEK_12,WEEK_13,WEEK_14,WEEK_15,WEEK_16,WEEK_17
 GAMES_PER_WEEK:

@@ -277,14 +277,14 @@ store_week_games:
 	LDA TEMP42
 	ASL
 	TAX
-	LDY $675A,X
-	LDA $675A
-	STY $675A
-	STA $675A,X
-	LDY $675B,X
-	LDA $675B
-	STY $675B
-	STA $675B,X
+	LDY $675A+0,X
+	LDA $675A+0
+	STY $675A+0
+	STA $675A+0,X
+	LDY $675A+1,X
+	LDA $675A+1
+	STY $675A+1
+	STA $675A+1,X
 	DEC TEMP3F
 	BNE :-
 	JSR store_sram_checksum

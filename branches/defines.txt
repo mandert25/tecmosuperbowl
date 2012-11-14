@@ -33,16 +33,22 @@
 .segment "ZEROPAGE": zeropage
 .define SOFT_PPUCTRL $31
 .define SOFT_PPUMASK $32
+.define RANDOM_3B    $3B
+.define RANDOM_3C    $3C
+.define RANDOM_3D    $3D
 .define TEMP3E       $3E
 .define TEMP3E_LO    $3E
 .define TEMP3E_HI    $3F
+.define TEMP3F       $3F
 .define TEMP40       $40
 .define TEMP40_LO    $40
 .define TEMP40_HI    $41
+.define TEMP42       $42
 .define TEMP43       $43
 .define TEMP44       $44
 .define TEMP44_LO    $44
 .define TEMP44_HI    $45
+.define TEMP45       $45
 
 .segment "SPRITE": absolute
 .define SPRITE $0200
@@ -51,8 +57,18 @@
 .define SRAM_CHECK       $66B7
 .define SRAM_CHECKSUM_LO $66BE
 .define SRAM_CHECKSUM_HI $66BF
+.define AFC_STARTERS     $66C0
+.define NFC_STARTERS     $66C8
+.define AFC_PLAYERS      $66D0
+.define NFC_PLAYERS      $670C
+.define AFC_PLAYBOOK     $6748
+.define NFC_PLAYBOOK     $6750
+;.define CURRENT_WEEK     $6758
+;.define CURRENT_GAME     $6759
+.define WEEK_SCHEDULE    $675A
 
 ; Subroutine Defines
+.define store_week_games       L_26_81D1
 .define store_default_sram     L_26_8245
 .define store_default_players  L_26_82A4
 .define store_default_playbook L_26_82F1
@@ -65,6 +81,7 @@
 .define add_size               L_C4F5
 .define clear_sprites          L_D571
 .define clear_ram_size         L_D60E
+.define divide_8               L_D819
 .define bank_swap_8000         L_D8DD
 .define bank_swap_A000         L_D8E3
 

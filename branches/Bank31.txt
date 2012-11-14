@@ -4121,22 +4121,23 @@ L_D7E7:
 	BNE @Loop1
 	RTS
 
-L_D819:
+divide_8:
+; $45 / $44 = Quotient $45 Remainder $42
 	LDA #$00
-	STA $42
+	STA TEMP42
 	LDX #$08
-@Loop1:
-	ASL $45
-	ROL $42
-	LDA $42
+@div:
+	ASL TEMP45
+	ROL TEMP42
+	LDA TEMP42
 	SEC
-	SBC $44
-	BCC @Loop2
-	STA $42
-	INC $45
-@Loop2:
+	SBC TEMP44
+	BCC @next
+	STA TEMP42
+	INC TEMP45
+@next:
 	DEX
-	BNE @Loop1
+	BNE @div
 	RTS
 
 L_D832:

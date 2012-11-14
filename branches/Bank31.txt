@@ -95,9 +95,9 @@ START:
 	STA SOFT_PPUCTRL
 	STA PPUCTRL
 	CLI
-;
+; Wait for Interrupt
 	LDX #$01
-	JSR L_D680
+	JSR wait_interrupt
 ;
 	LDA #$00
 	STA BANK_SELECT
@@ -3850,13 +3850,12 @@ L_D628:
 @Loop6:
 	RTS
 
-L_D680:
-	LDA $30
-@Loop1:
-	CMP $30
-	BEQ @Loop1
+wait_interrupt:
+	LDA FRAME_COUNT
+:	CMP FRAME_COUNT
+	BEQ :-
 	DEX
-	BNE L_D680
+	BNE wait_interrupt
 	RTS
 
 L_D68A:

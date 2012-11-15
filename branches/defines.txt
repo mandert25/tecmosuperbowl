@@ -41,9 +41,9 @@
 ; $04,X = $A000 BANK
 
 ; Thread Status Values
-.define PAUSE_THREAD   $11
+.define WAIT_THREAD    $11
 .define CURRENT_THREAD $12
-.define START_THREAD   $13
+.define READY_THREAD   $13
 .define NEW_THREAD     $14
 
 ; Bank Values

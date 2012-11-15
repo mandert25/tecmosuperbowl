@@ -3885,83 +3885,93 @@ wait_interrupt:
 	BNE wait_interrupt
 	RTS
 
-L_D68A:
-	STY $E3
-	STX $E4
-	STA $E5
+set_ymenu_arrow:
+	STY MENU_LO
+	STX MENU_HI
+	STA MENU_JOYPAD
 L_D690:
+; Store Arrow Tile #, Attributes, X Position
 	LDY #$02
-@Loop1:
-	LDA ($E3),Y
+@next:
+	LDA (MENU),Y
 	STA $0201,Y
 	DEY
-	BPL @Loop1
-	LDA $E3
+	BPL @next
+; Update Menu Address to Y Positions
+	LDA MENU_LO
 	CLC
 	ADC #$03
-	STA $E3
-	LDA $E4
+	STA MENU_LO
+	LDA MENU_HI
 	ADC #$00
-	STA $E4
-	LDY $E1
+	STA MENU_HI
+; Store Arrow Y Position
+	LDY Y_MENU_OPTION
 	INY
-	LDA ($E3),Y
+	LDA (MENU),Y
 	STA $0200
+; Store Arrow Wait
 	LDA #$00
-	STA $E6
+	STA MENU_WAIT
 	RTS
 
-L_D6B4:
-	LDY $E5
+ymenu_up_down:
+; Check for Up or Down
+	LDY MENU_JOYPAD
 	LDA JOYPAD1_RAW,Y
 	AND #%00001100
 	BEQ @no_updown
-	LDY $E6
-	BNE @Loop1
+; Check for Wait
+	LDY MENU_WAIT
+	BNE @wait
 	LDY #$14
-	STY $E6
+	STY MENU_WAIT
 	JMP @move
-@Loop1:
-	DEC $E6
+@wait:
+	DEC MENU_WAIT
 	BNE @no_set
 	LDY #$08
-	STY $E6
+	STY MENU_WAIT
 @move:
+; Up or Down?
 	AND #%00001000
 	BEQ @down
+; Move Up
 @up:
-	DEC $E1
+	DEC Y_MENU_OPTION
 	BPL @set_up
 	LDY #$00
-	LDA ($E3),Y
+	LDA (MENU),Y
 	SEC
 	SBC #$01
-	STA $E1
+	STA Y_MENU_OPTION
 @set_up:
 	SEC
 	RTS
+; Move Down
 @down:
-	INC $E1
-	LDA $E1
+	INC Y_MENU_OPTION
+	LDA Y_MENU_OPTION
 	LDY #$00
-	CMP ($E3),Y
+	CMP (MENU),Y
 	BCC @set_down
 	LDA #$00
-	STA $E1
+	STA Y_MENU_OPTION
 @set_down:
 	SEC
 	RTS
+; Not Up or Down
 @no_updown:
 	LDA #$00
-	STA $E6
+	STA MENU_WAIT
 @no_set:
 	CLC
 	RTS
 
-L_D6F9:
-	LDY $E1
+ymenu_set_y:
+	LDY Y_MENU_OPTION
 	INY
-	LDA ($E3),Y
+	LDA (MENU),Y
 	STA $0200
 	RTS
 

@@ -51,6 +51,12 @@
 ; 1 = COA
 ; 2 = COM
 
+; Game Type Values
+; 0 = PRESEASON
+; 1 = PRO BOWL
+; 2 = SEASON
+; 3 = PLAYOFFS
+
 ; Bank Values
 .define BANK17 $10
 .define BANK26 $19
@@ -65,6 +71,7 @@
 ; FIND OUT .define THREAD_TRANSFER $2A
 ; FIND OUT .define BUFFER_FLAG     $2B
 ; FIND OUT .define BANK_TRANSFER   $2C
+.define GAME_TYPE      $2D
 .define BANK_8000      $2E
 .define BANK_A000      $2F
 .define FRAME_COUNT    $30
@@ -101,7 +108,7 @@
 .define CHAR_1400      $4C
 .define CHAR_1800      $4D
 .define CHAR_1C00      $4E
-.define player_type    $75
+.define PLAYER_TYPE    $75
 .define Y_MENU_OPTION  $E1
 .define X_MENU_OPTION  $E2
 .define MENU           $E3
@@ -137,6 +144,9 @@
 
 ; Subroutine Defines
 .define preseason_menu         L_17_80E7
+.define season_menu            L_17_81F8
+.define pro_bowl_menu          L_17_87A2
+.define team_data_menu         L_17_88A5
 .define store_week_games       L_26_81D1
 .define store_default_sram     L_26_8245
 .define store_default_players  L_26_82A4
@@ -164,6 +174,10 @@
 .define set_ymenu_arrow        L_D68A
 .define ymenu_up_down          L_D6B4
 .define ymenu_set_y            L_D6F9
+.define set_xymenu_arrow       L_D702
+.define xymenu_move            L_D71C
+.define xymenu_set_xy          L_D77A
+.define xymenu_get_spot        L_D78E
 .define divide_8               L_D819
 .define bank_swap_8000         L_D8DD
 .define bank_swap_A000         L_D8E3

@@ -195,33 +195,36 @@ NMI:
 	JMP @Loop12
 @Loop4:
 	BMI @Loop8
+ ; Check for Buffer
 	LDX #$00
-@Loop5:
+@next:
 	LDA $033A,X
 	BEQ @Loop7
-	AND #$40
+; Set VRAM Increment
+	AND #%01000000
 	LSR
 	LSR
 	LSR
 	LSR
 	STA PPUCTRL
+; Get Buffer Length
 	LDA $033A,X
-	AND #$3F
+	AND #%00111111
 	TAY
 	LDA $033C,X
 	STA PPUADDR
 	LDA $033B,X
 	STA PPUADDR
-@Loop6:
+@more:
 	LDA $033D,X
 	STA PPUDATA
 	INX
 	DEY
-	BNE @Loop6
+	BNE @more
 	INX
 	INX
 	INX
-	BNE @Loop5
+	BNE @next
 @Loop7:
 	LDA #$00
 	STA $037D
@@ -237,7 +240,7 @@ NMI:
 	BVS @Loop12
 	LDA $033A
 	BEQ @Loop12
-	LDA #$08
+	LDA #%00001000
 	STA PPUCTRL
 	LDX #$00
 @Loop9:
@@ -262,7 +265,7 @@ NMI:
 	LDA #$C0
 	STA $037D
 @Loop12:
-	LDA $31
+	LDA SOFT_PPUCTRL
 	STA PPUCTRL
 	LDA #$00
 	STA $0306
@@ -287,7 +290,7 @@ NMI:
 	STA BANK_DATA
 	LDA $34
 	STA $48
-	LDA $33
+	LDA MODE_8000
 	ORA #$06
 	STA BANK_SELECT
 	LDA #$1B ; BANK28
@@ -466,14 +469,14 @@ L_C390:
 	LDY #<(L_24_8003-1)
 	LDA #>(L_24_8003-1)
 	LDX #$0C
-	JSR L_CC45
+	JSR create_thread
 	RTS
 
 L_C3A2:
 	JSR L_C390
 @Loop1:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $0C
 	BNE @Loop1
 	RTS
@@ -481,29 +484,29 @@ L_C3A2:
 L_C3AF:
 	STA $C2
 	STX $C3
-	LDA $2E
+	LDA BANK_8000
 	PHA
 	LDX #$17 ; BANK24
-	JSR L_D8DD
+	JSR bank_swap_8000
 	LDA $C2
 	LDX $C3
 	JSR L_24_8000
 	PLA
 	TAX
-	JMP L_D8DD
+	JMP bank_swap_8000
 
 L_C3C7:
 	STA $C2
 	LDA $2E
 	PHA
 	LDX #$17 ; BANK24
-	JSR L_D8DD
+	JSR bank_swap_8000
 	LDA $C2
 	LDX #$00
 	JSR L_24_8006
 	PLA
 	TAX
-	JMP L_D8DD
+	JMP bank_swap_8000
 
 	STA $C5
 	LDA #$01
@@ -516,23 +519,23 @@ L_C3E3:
 	LDA $2E
 	PHA
 	LDX #$17 ; BANK24
-	JSR L_D8DD
+	JSR bank_swap_8000
 	JSR L_24_8009
 	PLA
 	TAX
-	JMP L_D8DD
+	JMP bank_swap_8000
 
 L_C3FB:
 	TAY
 	LDA $2E
 	PHA
 	LDX #$17 ; BANK24
-	JSR L_D8DD
+	JSR bank_swap_8000
 	TYA
 	JSR L_24_8012
 	PLA
 	TAX
-	JMP L_D8DD
+	JMP bank_swap_8000
 
 L_C40D:
 	ORA #$80
@@ -542,7 +545,7 @@ L_C40D:
 	LDY #<(L_23_9009-1)
 	LDA #>(L_23_9009-1)
 	LDX #$16
-	JSR L_CC45
+	JSR create_thread
 	RTS
 
 L_C41F:
@@ -551,7 +554,7 @@ L_C41F:
 	LDA $0700
 	BEQ @Loop2
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JMP @Loop1
 @Loop2:
 	STX $0700
@@ -578,20 +581,19 @@ L_C442:
 	TAX
 	JMP L_D8DD
 
-L_C454:
-	STY $44
-	STX $45
+bank_swap_8000_jump:
+	STY TEMP44_LO
+	STX TEMP44_HI
 	TAX
-	LDA $2E
+	LDA BANK_8000
 	PHA
 	JSR bank_swap_8000
-	LDA #>L_C468-1
+	LDA #>bank_swap_8000_return-1
 	PHA
-	LDA #<L_C468-1
+	LDA #<bank_swap_8000_return-1
 	PHA
-	JMP ($0044)
-
-L_C468:
+	JMP (TEMP)
+bank_swap_8000_return:
 	PLA
 	TAX
 	JMP bank_swap_8000
@@ -2318,11 +2320,11 @@ create_thread:
 	STA $00,X
 	JMP L_CCE2
 
-L_CC50:
+destroy_thread:
 	LDA #$00
 	LDX $00
 	STA $00,X
-	JMP L_CB4E
+	JMP start_all_threads
 
 L_CC59:
 	SEC
@@ -2369,7 +2371,7 @@ L_CC8F:
 	STA $01,X
 	RTS
 
-L_CC9A:
+switch_thread:
 	SEC
 	ROR $2A
 	PHP
@@ -3166,10 +3168,10 @@ L_D1F4:
 	STA $53
 L_D1FD:
 	LDA #$20
-	LDY #$00
-	LDX #$3F
+	LDY #<$3F00
+	LDX #>$3F00
 	JSR L_D29A
-	STX $3F
+	STX TEMP3F
 	LDY #$00
 @Loop1:
 	LDA $031A,Y
@@ -3255,24 +3257,24 @@ L_D28D:
 	STA $53
 	JSR L_D1FD
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	RTS
 
 L_D29A:
 	PHA
 	BIT $2B
-	BPL @Loop2
-@Loop1:
+	BPL @ready
+@wait:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	PLA
 	JMP L_D29A
-@Loop2:
+@ready:
 	AND #$3F
 	CLC
 	ADC $037D
 	CMP #$3F
-	BCS @Loop1
+	BCS @wait
 	SEC
 	ROR $2B
 	TXA
@@ -4255,15 +4257,15 @@ L_D8B7:
 	RTS
 
 bank_swap_8000:
-	STX $2E
+	STX BANK_8000
 	LDA #$06
 	BNE @swap
 bank_swap_A000:
-	STX $2F
+	STX BANK_A000
 	LDA #$07
 @swap:
-  ORA $33
-	STA $34
+  ORA MODE_8000
+	STA SOFT_8000
 	SEC
 	ROR $2C
 	STA BANK_SELECT

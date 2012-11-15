@@ -192,7 +192,7 @@ NMI:
 	BPL @Loop3
 	JMP @Loop12
 @Loop3:
-	LDA $037D
+	LDA BUFFER_SIZE
 	BNE @Loop4
 	JMP @Loop12
 @Loop4:
@@ -2124,22 +2124,22 @@ L_CAEE:
 	LDY #$08
 	LDA #$00
 	STA $01
-@Loop1:
+@ready_thread:
 	LDA $00,X
 	CMP #$11
-	BNE @Loop2
+	BNE @next_thread
 	DEC $01,X
-	BNE @Loop2
+	BNE @next_thread
 	LDA #$13
 	STA A:$00,X
 	STX $01
-@Loop2:
+@next_thread:
 	TXA
 	SEC
 	SBC #$05
 	TAX
 	DEY
-	BNE @Loop1
+	BNE @ready_thread
 	BIT $2B
 	BMI L_CB2B
 	BIT $2C
@@ -2149,7 +2149,7 @@ L_CAEE:
 	LDY $00
 	LDA $0000,Y
 	CMP #$12
-	BNE L_CB4E
+	BNE start_all_threads
 	CPX $00
 	BCS L_CB2B
 	JMP L_CC0D

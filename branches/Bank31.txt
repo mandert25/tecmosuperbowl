@@ -305,50 +305,62 @@ NMI:
 	JSR L_28_8000
 	LDA $48
 	STA $34
+; Read Joypads
 	LDX #$02
 	LDA #$04
-	STA $47
-@Loop13:
-	LDA $34,X
-@Loop14:
-	STA $48
+	STA JOYPAD_CHECK
+@next_joypad:
+	LDA JOYPAD1_RAW-1,X
+@confirm_buttons:
+	STA JOYPAD_CONFIRM
+; Strobe Joypad
 	LDA #$01
 	STA STROBE
 	LDA #$00
 	STA STROBE
+; Get Joypad Buttons
 	LDY #$08
-@Loop15:
-	LDA $4015,X
+@next_button:
+	LDA JOYPAD-1,X
 	LSR
-	ROL $46
+	ROL JOYPAD_DATA
 	AND #$01
-	ORA $46
-	STA $46
+	ORA JOYPAD_DATA
+	STA JOYPAD_DATA
 	DEY
-	BNE @Loop15
-	CMP $48
-	BEQ @Loop16
-	DEC $47
-	BNE @Loop14
-	JMP @Loop17
-@Loop16:
-	LDA $34,X
-	EOR $46
-	AND $46
-	STA $37,X
-	LDA $46
-	STA $34,X
-@Loop17:
+	BNE @next_button
+; Check for good joypad read
+	CMP JOYPAD_CONFIRM
+	BEQ @good_buttons
+; Check joypad again?
+	DEC JOYPAD_CHECK
+	BNE @confirm_buttons
+	JMP @exit_buttons
+@good_buttons:
+; Store Joypad Press
+	LDA JOYPAD1_RAW-1,X
+	EOR JOYPAD_DATA
+	AND JOYPAD_DATA
+	STA JOYPAD1_PRESS-1,X
+; Store Joypad Raw
+	LDA JOYPAD_DATA
+	STA JOYPAD1_RAW-1,X
+@exit_buttons:
 	DEX
-	BNE @Loop13
-	LDA $35
-	ORA $36
-	STA $37
-	LDA $38
-	ORA $39
-	STA $3A
-	JSR L_C46D
-	INC $30
+	BNE @next_joypad
+; Store Both Raw
+	LDA JOYPAD1_RAW
+	ORA JOYPAD2_RAW
+	STA JOYPAD_RAW
+; Store Both Press
+	LDA JOYPAD1_PRESS
+	ORA JOYPAD2_PRESS
+	STA JOYPAD_PRESS
+; Update Random Numbers
+	JSR update_randoms
+; Update Frame
+	INC FRAME_COUNT
+;
 	LDA $06F6
 	CMP #$07
 	BNE @Loop19

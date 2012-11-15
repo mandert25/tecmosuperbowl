@@ -349,7 +349,7 @@ L_17_828F:
 	LDA #$19 ; BANK26
 	LDY #<L_26_8000
 	LDX #>L_26_8000
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDA #$15
 	LDX #$25
 	JSR L_D1D5
@@ -585,11 +585,11 @@ L_17_828F:
 	LDA #$19 ; BANK26
 	LDY #<L_26_800C
 	LDX #>L_26_800C
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDA #$19 ; BANK26
 	LDY #<L_26_8006
 	LDX #>L_26_8006
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	JMP L_17_828F
 @Loop23:
 	JSR L_17_B34C
@@ -854,7 +854,7 @@ L_17_8674:
 	LDA #$18 ; BANK25
 	LDY #<L_25_8000
 	LDX #>L_25_8000
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDX #$11 ; BANK18
 	JSR L_D8E3
 	LDA $EB
@@ -2398,7 +2398,7 @@ L_17_91E5:
 	LDA #$13 ; BANK20
 	LDY #<L_20_8806
 	LDX #>L_20_8806
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	INC $43
 	INC $42
 	LDA $42
@@ -3091,13 +3091,13 @@ L_17_9632:
 	LDA #$19 ; BANK26
 	LDY #<L_26_8021
 	LDX #>L_26_8021
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	JMP @Loop13
 @Loop12:
 	LDA #$19 ; BANK26
 	LDY #<L_26_8024
 	LDX #>L_26_8024
-	JSR L_C454
+	JSR bank_swap_8000_jump
 @Loop13:
 	JSR L_17_8ED5
 @Loop14:
@@ -3263,7 +3263,7 @@ L_17_9632:
 	LDA #$18 ; BANK25
 	LDY #<L_25_8003
 	LDX #>L_25_8003
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	PLA
 	STA $8E
 	PLA
@@ -4374,7 +4374,7 @@ L_17_A053:
 	LDA #$1A ; BANK27
 	LDY #<L_27_800F
 	LDX #>L_27_800F
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDA #$00
 	LDY #$F6
 @Loop2:
@@ -4553,7 +4553,7 @@ L_17_A053:
 	LDA #$13 ; BANK20
 	LDY #<L_20_880F
 	LDX #>L_20_880F
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDY #$F8
 @Loop15:
 	LDA $640B,Y
@@ -5043,7 +5043,7 @@ L_17_A4B4:
 	LDA #$19 ; BANK26
 	LDY #<L_26_802D
 	LDX #>L_26_802D
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDA $6C
 	JSR L_DEDE
 	LDY #$BB
@@ -5051,7 +5051,7 @@ L_17_A4B4:
 	LDA #$19 ; BANK26
 	LDY #<L_26_802A
 	LDX #>L_26_802A
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDA $6D
 	JSR L_DEDE
 	LDY #$BB
@@ -5059,7 +5059,7 @@ L_17_A4B4:
 	LDA #$19 ; BANK26
 	LDY #<L_26_8033
 	LDX #>L_26_8033
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDA $6C
 	JSR L_DEDE
 	LDY #$B9
@@ -5067,7 +5067,7 @@ L_17_A4B4:
 	LDA #$19 ; BANK26
 	LDY #<L_26_8030
 	LDX #>L_26_8030
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDA $6D
 	JSR L_DEDE
 	LDY #$B9
@@ -5088,7 +5088,7 @@ L_17_A4B4:
 	LDA #$19 ; BANK26
 	LDY #<L_26_8009
 	LDX #>L_26_8009
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDA #$80
 	STA PRG_RAM_PROTECT
 	INC $6759
@@ -5104,7 +5104,7 @@ L_17_A4B4:
 	LDA #$19 ; BANK26
 	LDY #<L_26_8006
 	LDX #>L_26_8006
-	JSR L_C454
+	JSR bank_swap_8000_jump
 @Loop4:
 	JSR L_C4B3
 	LDA #$C0

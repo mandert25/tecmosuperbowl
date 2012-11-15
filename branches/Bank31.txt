@@ -3913,47 +3913,48 @@ L_D690:
 
 L_D6B4:
 	LDY $E5
-	LDA $0035,Y
-	AND #$0C
-	BEQ @Loop6
+	LDA JOYPAD1_RAW,Y
+	AND #%00001100
+	BEQ @no_updown
 	LDY $E6
 	BNE @Loop1
 	LDY #$14
 	STY $E6
-	JMP @Loop2
+	JMP @move
 @Loop1:
 	DEC $E6
-	BNE @Loop7
+	BNE @no_set
 	LDY #$08
 	STY $E6
-@Loop2:
-	AND #$08
-	BEQ @Loop4
+@move:
+	AND #%00001000
+	BEQ @down
+@up:
 	DEC $E1
-	BPL @Loop3
+	BPL @set_up
 	LDY #$00
 	LDA ($E3),Y
 	SEC
 	SBC #$01
 	STA $E1
-@Loop3:
+@set_up:
 	SEC
 	RTS
-@Loop4:
+@down:
 	INC $E1
 	LDA $E1
 	LDY #$00
 	CMP ($E3),Y
-	BCC @Loop5
+	BCC @set_down
 	LDA #$00
 	STA $E1
-@Loop5:
+@set_down:
 	SEC
 	RTS
-@Loop6:
+@no_updown:
 	LDA #$00
 	STA $E6
-@Loop7:
+@no_set:
 	CLC
 	RTS
 

@@ -112,12 +112,13 @@ L_17_80B2:
 	LDA @Loop2+0,X
 	PHA
 	RTS
-@Loop2:	.WORD preseason_menu-1, L_17_81F8-1, L_17_87A2-1, L_17_88A5-1
+@Loop2:	.WORD preseason_menu-1, season_menu-1, pro_bowl_menu-1, team_data_menu-1
 
 preseason_menu:
-	LDA $2D
-	AND #$FC
-	STA $2D
+; Set to Preseason Mode
+	LDA GAME_TYPE
+	AND #%11111100
+	STA GAME_TYPE
 	JSR L_17_9456
 @Loop1:
 	LDY #<PRESEASON_MENU_SELECT
@@ -150,7 +151,7 @@ preseason_menu:
 
 @man_vs_com:
 	LDA #$02
-	STA player_type
+	STA PLAYER_TYPE
 	JSR L_17_AB44
 	JSR L_17_A9D2
 	BCS @Loop6
@@ -164,7 +165,7 @@ preseason_menu:
 
 @man_vs_man:
 	LDA #$00
-	STA player_type
+	STA PLAYER_TYPE
 	JSR L_17_AB44
 	JSR L_17_AA7D
 	BCS @Loop8
@@ -176,7 +177,7 @@ preseason_menu:
 
 @coa_vs_com:
 	LDA #$12
-	STA player_type
+	STA PLAYER_TYPE
 	JSR L_17_AB44
 	JSR L_17_A9D2
 	BCS @Loop10
@@ -190,7 +191,7 @@ preseason_menu:
 
 @coa_vs_coa:
 	LDA #$11
-	STA player_type
+	STA PLAYER_TYPE
 	JSR L_17_AB44
 	JSR L_17_AA7D
 	BCS @Loop12
@@ -202,7 +203,7 @@ preseason_menu:
 
 @man_vs_coa:
 	LDA #$01
-	STA player_type
+	STA PLAYER_TYPE
 	JSR L_17_AB44
 	JSR L_17_A9D2
 	BCS @Loop14
@@ -216,7 +217,7 @@ preseason_menu:
 
 @com_vs_com:
 	LDA #$22
-	STA player_type
+	STA PLAYER_TYPE
 	JSR L_17_AB44
 	JSR L_17_A9D2
 	BCS @Loop16
@@ -253,11 +254,12 @@ preseason_menu:
 	JSR L_D1D5
 	JMP @Loop1
 
-L_17_81F8:
-	LDA $2D
-	AND #$FC
-	ORA #$02
-	STA $2D
+season_menu:
+; Set to Season Mode
+	LDA GAME_TYPE
+	AND #%11111100
+	ORA #%00000010
+	STA GAME_TYPE
 	LDA #$00
 	STA Y_MENU_OPTION
 	JSR L_17_86EA
@@ -282,12 +284,12 @@ L_17_8207:
 	LDA Y_MENU_OPTION
 	ASL
 	TAX
-	LDA @Loop3+1,X
+	LDA @options+1,X
 	PHA
-	LDA @Loop3+0,X
+	LDA @options+0,X
 	PHA
 	RTS
-@Loop3:	.WORD L_17_8242-1, L_17_828F-1, L_17_9294-1, L_17_8507-1, L_17_85E0-1, L_17_8674-1, L_17_86C7-1
+@options:	.WORD L_17_8242-1, L_17_828F-1, L_17_9294-1, L_17_8507-1, L_17_85E0-1, L_17_8674-1, L_17_86C7-1
 
 L_17_8242:
 	JSR L_D28B
@@ -300,11 +302,11 @@ L_17_8242:
 	LDA #$19 ; BANK26
 	LDY #<L_26_801E
 	LDX #>L_26_801E
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	JSR L_17_94F4
 	LDA #$00
-	STA $E1
-	STA $E2
+	STA Y_MENU_OPTION
+	STA X_MENU_OPTION
 L_17_8265:
 	JSR L_17_8272
 	LDA #$13
@@ -315,7 +317,7 @@ L_17_8265:
 L_17_8272:
 	JSR L_D28B
 	JSR L_D10E
-	JSR L_D571
+	JSR clear_sprites
 	LDA #$00
 	LDX #$0F ; BANK16
 	JSR L_C3A2
@@ -353,18 +355,18 @@ L_17_828F:
 	JSR L_D1D5
 @Loop2:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$19 ; BANK26
 	LDY #<L_26_8003
 	LDX #>L_26_8003
-	JSR L_C454
-	BIT $3A
+	JSR bank_swap_8000_jump
+	BIT JOYPAD_PRESS
 	BVS L_17_8265
 	BMI @Loop5
-	LDA $3A
-	AND #$0C
+	LDA JOYPAD_PRESS
+	AND #%00001100
 	BEQ @Loop2
-	AND #$08
+	AND #%00001000
 	BEQ @Loop3
 	LDA $96
 	SEC
@@ -384,7 +386,7 @@ L_17_828F:
 	LDA #$19 ; BANK26
 	LDY #<L_26_8000
 	LDX #>L_26_8000
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	JMP @Loop2
 @Loop5:
 	LDA #$00
@@ -392,7 +394,7 @@ L_17_828F:
 	LDA #$19 ; BANK26
 	LDY #<L_26_8003
 	LDX #>L_26_8003
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	JSR L_17_84DD
 	LDA #$82
 	STA $3E
@@ -412,18 +414,18 @@ L_17_828F:
 	LDY #<SCHEDULE_MENU_SELECT
 	LDX #>SCHEDULE_MENU_SELECT
 	LDA #$02
-	JSR L_D68A
+	JSR set_ymenu_arrow
 @Loop7:
 	LDA #$01
-	JSR L_CC9A
-	JSR L_D6B4
-	JSR L_D6F9
-	BIT $3A
+	JSR switch_thread
+	JSR ymenu_up_down
+	JSR ymenu_set_y
+	BIT JOYPAD_PRESS
 	BVC @Loop8
 	JMP @Loop26
 @Loop8:
 	BPL @Loop7
-	LDA $E1
+	LDA Y_MENU_OPTION
 	CMP #$02
 	BNE @Loop9
 	JMP @Loop17
@@ -867,12 +869,13 @@ L_17_8674:
 
 L_17_86C7:
 	JSR L_17_88AF
-	LDA $2D
-	AND #$FC
-	ORA #$02
-	STA $2D
+; Set to Season Mode
+	LDA GAME_TYPE
+	AND #%11111100
+	ORA #%00000010
+	STA GAME_TYPE
 	LDA #$06
-	STA $E1
+	STA Y_MENU_OPTION
 	JMP L_17_8265
 
 L_17_86D9:
@@ -991,107 +994,117 @@ L_17_8783:
 	STA $57
 	RTS
 
-L_17_87A2:
-	LDA $2D
-	AND #$FC
-	ORA #$01
-	STA $2D
+pro_bowl_menu:
+; Set to Pro Bowl Mode
+	LDA GAME_TYPE
+	AND #%11111100
+	ORA #%00000001
+	STA GAME_TYPE
 	JSR L_17_9474
 	LDA #$00
-	STA $E1
+	STA Y_MENU_OPTION
 @Loop1:
 	LDY #<PRO_BOWL_MENU_SELECT
 	LDX #>PRO_BOWL_MENU_SELECT
 	LDA #$02
-	JSR L_D68A
-@Loop2:
+	JSR set_ymenu_arrow
+@not_selected:
 	LDA #$01
-	JSR L_CC9A
-	JSR L_D6B4
-	JSR L_D6F9
-	BIT $3A
-	BVC @Loop3
-	JMP @Loop17
-@Loop3:
-	BPL @Loop2
+	JSR switch_thread
+; Check for Arrow Movement
+	JSR ymenu_up_down
+	JSR ymenu_set_y
+; Check for A or B Button
+	BIT JOYPAD_PRESS
+	BVC @check_a
+	JMP @previous
+@check_a:
+	BPL @not_selected
 	JSR L_17_94F4
 	JSR L_D28B
-	LDA $E1
+	LDA Y_MENU_OPTION
 	ASL
 	TAX
-	LDA @Loop4+1,X
+	LDA @options+1,X
 	PHA
-	LDA @Loop4,X
+	LDA @options+0,X
 	PHA
 	RTS
-@Loop4:	.WORD @Loop5-1, @Loop7-1, @Loop13-1, @Loop9-1, @Loop11-1, @Loop15-1
-@Loop5:
+@options:	.WORD @man_vs_com-1, @man_vs_man-1, @man_vs_coa-1, @coa_vs_com-1, @coa_vs_coa-1, @com_vs_com-1
+
+@man_vs_com:
 	LDA #$02
-	STA $75
+	STA PLAYER_TYPE
 	JSR L_17_ABF7
 	JSR L_17_AB5E
 	BCS @Loop6
 	JMP L_17_9404
 @Loop6:
 	LDA #$00
-	STA $E1
+	STA Y_MENU_OPTION
 	JMP @Loop18
-@Loop7:
+
+@man_vs_man:
 	LDA #$00
-	STA $75
+	STA PLAYER_TYPE
 	JSR L_17_ABF7
 	JSR L_17_AB5E
 	BCS @Loop8
 	JMP L_17_9404
 @Loop8:
 	LDA #$01
-	STA $E1
+	STA Y_MENU_OPTION
 	JMP @Loop18
-@Loop9:
+
+@coa_vs_com:
 	LDA #$12
-	STA $75
+	STA PLAYER_TYPE
 	JSR L_17_ABF7
 	JSR L_17_AB5E
 	BCS @Loop10
 	JMP L_17_9404
 @Loop10:
 	LDA #$03
-	STA $E1
+	STA Y_MENU_OPTION
 	JMP @Loop18
-@Loop11:
+
+@coa_vs_coa:
 	LDA #$11
-	STA $75
+	STA PLAYER_TYPE
 	JSR L_17_ABF7
 	JSR L_17_AB5E
 	BCS @Loop12
 	JMP L_17_9404
 @Loop12:
 	LDA #$04
-	STA $E1
+	STA Y_MENU_OPTION
 	JMP @Loop18
-@Loop13:
+
+@man_vs_coa:
 	LDA #$01
-	STA $75
+	STA PLAYER_TYPE
 	JSR L_17_ABF7
 	JSR L_17_AB5E
 	BCS @Loop14
 	JMP L_17_9404
 @Loop14:
 	LDA #$02
-	STA $E1
+	STA Y_MENU_OPTION
 	JMP @Loop18
-@Loop15:
+
+@com_vs_com:
 	LDA #$22
-	STA $75
+	STA PLAYER_TYPE
 	JSR L_17_ABF7
 	JSR L_17_AB5E
 	BCS @Loop16
 	JMP L_17_9404
 @Loop16:
 	LDA #$05
-	STA $E1
+	STA Y_MENU_OPTION
 	JMP @Loop18
-@Loop17:
+
+@previous:
 	LDA #$F0
 	STA $0200
 	LDY #$C5
@@ -1102,8 +1115,9 @@ L_17_87A2:
 	STA $3F
 	JSR L_CCFC
 	LDA #$02
-	STA $E1
+	STA Y_MENU_OPTION
 	JMP L_17_80B2
+
 @Loop18:
 	JSR L_D28B
 	JSR L_D10E
@@ -1115,16 +1129,16 @@ L_17_87A2:
 	JSR L_D1D5
 	JMP @Loop1
 
-L_17_88A5:
+team_data_menu:
 	JSR L_17_88AF
 	LDA #$03
-	STA $E1
+	STA Y_MENU_OPTION
 	JMP L_17_809C
 
 L_17_88AF:
 	LDA #$00
-	STA $E1
-	STA $E2
+	STA Y_MENU_OPTION
+	STA X_MENU_OPTION
 @Loop1:
 	LDA #$19
 	LDX #$0F ; BANK16
@@ -1138,22 +1152,24 @@ L_17_88AF:
 	LDY #<TEAM_DATA_ARROW
 	LDX #>TEAM_DATA_ARROW
 	LDA #$02
-	JSR L_D702
-@Loop2:
+	JSR set_xymenu_arrow
+@not_selected:
 	LDA #$01
-	JSR L_CC9A
-	JSR L_D71C
-	JSR L_D77A
-	BIT $3A
-	BVC @Loop3
+	JSR switch_thread
+; Check for Arrow Movement
+	JSR xymenu_move
+	JSR xymenu_set_xy
+; Check for A or B Button
+	BIT JOYPAD_PRESS
+	BVC @check_a
 	JMP @Loop73
-@Loop3:
-	BPL @Loop2
-	LDA $E1
+@check_a:
+	BPL @not_selected
+	LDA Y_MENU_OPTION
 	STA $EB
-	LDA $E2
+	LDA X_MENU_OPTION
 	STA $EC
-	JSR L_D78E
+	JSR xymenu_get_spot
 	SEC
 	SBC #$06
 	CMP #$1E
@@ -1182,24 +1198,24 @@ L_17_88AF:
 	LDY #<TEAM_MENU_SELECT
 	LDX #>TEAM_MENU_SELECT
 	LDA #$02
-	JSR L_D68A
+	JSR set_ymenu_arrow
 @Loop8:
 	LDA #$01
-	JSR L_CC9A
-	JSR L_D6B4
-	JSR L_D6F9
-	BIT $3A
+	JSR switch_thread
+	JSR ymenu_up_down
+	JSR ymenu_set_y
+	BIT JOYPAD_PRESS
 	BVC @Loop9
 	JMP @Loop11
 @Loop9:
 	BPL @Loop8
 	JSR L_17_94F4
-	LDA $E1
+	LDA Y_MENU_OPTION
 	ASL
 	TAX
 	LDA @Loop10+1,X
 	PHA
-	LDA @Loop10,X
+	LDA @Loop10+0,X
 	PHA
 	RTS
 @Loop10:	.WORD @Loop12-1, @Loop27-1, @Loop28-1, @Loop29-1
@@ -1228,22 +1244,22 @@ L_17_88AF:
 	LDY #<TEAM_PLAYER_SELECT2
 	LDX #>TEAM_PLAYER_SELECT2
 	LDA #$02
-	JSR L_D68A
+	JSR set_ymenu_arrow
 	JMP @Loop17
 @Loop16:
 	LDY #<TEAM_PLAYER_SELECT1
 	LDX #>TEAM_PLAYER_SELECT1
 	LDA #$02
-	JSR L_D68A
+	JSR set_ymenu_arrow
 @Loop17:
 	LDA #$01
-	JSR L_CC9A
-	JSR L_D6B4
-	JSR L_D6F9
-	BIT $3A
+	JSR switch_thread
+	JSR ymenu_up_down
+	JSR ymenu_set_y
+	BIT JOYPAD_PRESS
 	BVS @Loop21
 	BMI @Loop22
-	LDA $3A
+	LDA JOYPAD_PRESS
 	LSR
 	BCS @Loop19
 	LSR
@@ -1257,7 +1273,7 @@ L_17_88AF:
 	STA $E2
 @Loop18:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $030C
 	SEC
 	SBC #$08
@@ -1282,7 +1298,7 @@ L_17_88AF:
 	STA $E2
 @Loop20:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $030C
 	CLC
 	ADC #$08
@@ -1327,9 +1343,9 @@ L_17_88AF:
 	LDA #$18 ; BANK25
 	LDY #<L_25_8003
 	LDX #>L_25_8003
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDX #$11 ; BANK18
-	JSR L_D8E3
+	JSR bank_swap_A000
 	JSR L_17_8FAC
 	LDY #$FC
 @Loop26:
@@ -1353,7 +1369,7 @@ L_17_88AF:
 	LDA #$19 ; BANK26
 	LDY #<L_26_801B
 	LDX #>L_26_801B
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	JMP @Loop6
 @Loop29:
 	JSR L_17_8FD0
@@ -1385,23 +1401,23 @@ L_17_88AF:
 	LDY #<PRO_BOWL_TEAM_MENU_SELECT
 	LDX #>PRO_BOWL_TEAM_MENU_SELECT
 	LDA #$02
-	JSR L_D702
+	JSR set_xymenu_arrow
 @Loop33:
 	LDA #$01
-	JSR L_CC9A
-	JSR L_D71C
-	JSR L_D77A
-	BIT $3A
+	JSR switch_thread
+	JSR xymenu_move
+	JSR xymenu_set_xy
+	BIT JOYPAD_PRESS
 	BVC @Loop34
 	JMP @Loop72
 @Loop34:
 	BPL @Loop33
-	JSR L_D78E
+	JSR xymenu_get_spot
 	ASL
 	TAX
 	LDA @Loop35+1,X
 	PHA
-	LDA @Loop35,X
+	LDA @Loop35+0,X
 	PHA
 	RTS
 @Loop35:	.WORD @Loop36-1, @Loop39-1, @Loop46-1, @Loop45-1, @Loop40-1, @Loop65-1
@@ -1424,9 +1440,9 @@ L_17_88AF:
 	LDA #$18 ; BANK25
 	LDY #<L_25_8003
 	LDX #>L_25_8003
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDX #$11 ; BANK18
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA $AD
 	STA $6E
 	JSR L_17_8D62
@@ -1463,13 +1479,13 @@ L_17_88AF:
 	LDY #<PRO_BOWL_RESET_SELECT
 	LDX #>PRO_BOWL_RESET_SELECT
 	LDA #$02
-	JSR L_D702
+	JSR set_xymenu_arrow
 @Loop41:
 	LDA #$01
-	JSR L_CC9A
-	JSR L_D71C
-	JSR L_D77A
-	BIT $3A
+	JSR switch_thread
+	JSR xymenu_move
+	JSR xymenu_set_xy
+	BIT JOYPAD_PRESS
 	BVS @Loop44
 	BPL @Loop41
 	LDA $E2
@@ -1480,13 +1496,13 @@ L_17_88AF:
 	LDA #$19 ; BANK26
 	LDY #<L_26_8012
 	LDX #>L_26_8012
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	JMP @Loop43
 @Loop42:
 	LDA #$19 ; BANK26
 	LDY #<L_26_8015
 	LDX #>L_26_8015
-	JSR L_C454
+	JSR bank_swap_8000_jump
 @Loop43:
 	LDA #$00
 	STA $E2
@@ -1505,7 +1521,7 @@ L_17_88AF:
 	LDA #$19 ; BANK26
 	LDY #<L_26_801B
 	LDX #>L_26_801B
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	JMP @Loop31
 @Loop46:
 	LDA #$00
@@ -1548,8 +1564,8 @@ L_17_88AF:
 	LDA #$18 ; BANK25
 	LDY #<L_25_8006
 	LDX #>L_25_8006
-	JSR L_C454
-	JSR L_D78E
+	JSR bank_swap_8000_jump
+	JSR xymenu_get_spot
 	ASL
 	TAX
 	LDA L_17_9536,X
@@ -1579,12 +1595,12 @@ L_17_88AF:
 	LDA L_17_957A-1,X
 	TAX
 	LDA #$02
-	JSR L_D68A
+	JSR set_ymenu_arrow
 @Loop53:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 @Loop54:
-	JSR L_D6B4
+	JSR ymenu_up_down
 	LDA $E1
 	ASL
 	TAX
@@ -1607,7 +1623,7 @@ L_17_88AF:
 	STA $66D0,X
 	LDA $00A7,Y
 	STA $66D1,X
-	JSR L_C4B3
+	JSR store_sram_checksum
 	LDA #$C0
 	STA PRG_RAM_PROTECT
 	JSR L_17_8E6B
@@ -1617,14 +1633,14 @@ L_17_88AF:
 	STA $0200
 @Loop56:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR @Loop57
 	BCC @Loop56
 	JMP @Loop51
 @Loop57:
-	BIT $3A
+	BIT JOYPAD_PRESS
 	BVS @Loop62
-	LDA $3A
+	LDA JOYPAD_PRESS
 	LSR
 	BCS @Loop59
 	LSR
@@ -1708,7 +1724,7 @@ L_17_88AF:
 	INY
 	BNE @Loop70
 @Loop71:
-	JSR L_C4B3
+	JSR store_sram_checksum
 	LDA #$C0
 	STA PRG_RAM_PROTECT
 	LDA #$02
@@ -1750,13 +1766,13 @@ L_17_8D7C:
 	LDY #<PRO_BOWL_PLAYER_SELECT
 	LDX #>PRO_BOWL_PLAYER_SELECT
 	LDA #$02
-	JSR L_D702
+	JSR set_xymenu_arrow
 @Loop1:
 	LDA #$01
-	JSR L_CC9A
-	JSR L_D71C
-	JSR L_D77A
-	BIT $3A
+	JSR switch_thread
+	JSR xymenu_move
+	JSR xymenu_set_xy
+	BIT JOYPAD_PRESS
 	BVS @Loop2
 	BPL @Loop1
 	CLC
@@ -1853,7 +1869,7 @@ L_17_8D9A:
 	LDA $6F
 	STA $6E
 	LDX #$11 ; BANK18
-	JSR L_D8E3
+	JSR bank_swap_A000
 	RTS
 
 L_17_8E48:
@@ -1908,7 +1924,7 @@ L_17_8E6B:
 	STA $91
 	JSR L_17_8EB0
 	LDX #$11 ; BANK18
-	JSR L_D8E3
+	JSR bank_swap_A000
 	RTS
 
 L_17_8EA6:
@@ -2076,7 +2092,7 @@ L_17_8FAC:
 	LDA #$19 ; BANK26
 	LDY #<L_26_8018
 	LDX #>L_26_8018
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	JSR L_17_A877
 	LDX $E2
 	LDA L_17_BFAA,X
@@ -2100,9 +2116,9 @@ L_17_8FD0:
 	LDA #$13 ; BANK20
 	LDY #<L_20_8803
 	LDX #>L_20_8803
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDX #$11 ; BANK18
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA #$00
 	STA $030B
 	LDA $6E
@@ -2121,20 +2137,20 @@ L_17_8FD0:
 	LDX #$30
 	JSR L_D1D5
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$0D
 	JSR L_C3FB
 	LDY #<PLAYBOOK_SELECT
 	LDX #>PLAYBOOK_SELECT
 	LDA #$02
-	JSR L_D702
+	JSR set_xymenu_arrow
 	JMP @Loop3
 @Loop2:
 	LDA #$01
-	JSR L_CC9A
-	JSR L_D71C
+	JSR switch_thread
+	JSR xymenu_move
 	BCC @Loop6
-	JSR L_D77A
+	JSR xymenu_set_xy
 	LDA $E1
 	CMP #$02
 	BCS @Loop4
@@ -2146,9 +2162,9 @@ L_17_8FD0:
 	LDA #$13 ; BANK20
 	LDY #<L_20_8809
 	LDX #>L_20_8809
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDX #$11 ; BANK18
-	JSR L_D8E3
+	JSR bank_swap_A000
 	JSR L_17_AD59
 	JMP @Loop6
 @Loop4:
@@ -2170,7 +2186,7 @@ L_17_8FD0:
 	CPX #$20
 	BCC @Loop5
 @Loop6:
-	BIT $3A
+	BIT JOYPAD_PRESS
 	BVC @Loop7
 	JMP @Loop21
 @Loop7:
@@ -2256,14 +2272,14 @@ L_17_8FD0:
 	LDA #$13 ; BANK20
 	LDY #<L_20_880C
 	LDX #>L_20_880C
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDX #$11 ; BANK18
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA #$02
 	STA $42
 @Loop11:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $37
 	LSR
 	BCS @Loop12
@@ -2291,13 +2307,13 @@ L_17_8FD0:
 	LDA #$13 ; BANK20
 	LDY #<L_20_880C
 	LDX #>L_20_880C
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDX #$11 ; BANK18
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDX #$10
 @Loop15:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $030C
 	CLC
 	ADC $40
@@ -2344,7 +2360,7 @@ L_17_8FD0:
 	LDA #$19 ; BANK26
 	LDY #<L_26_800F
 	LDX #>L_26_800F
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDA $6E
 	CMP #$1C
 	BCS @Loop20

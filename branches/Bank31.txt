@@ -2468,7 +2468,7 @@ L_CD05:
 	BMI @Loop3
 	LDY $65
 	LDX $66
-	JSR L_D29A
+	JSR buffer_add
 	AND #$3F
 	STA $68
 	LDY #$01
@@ -2487,7 +2487,7 @@ L_CD05:
 	LDA $3F
 	ADC #$00
 	STA $3F
-	JSR L_D2C8
+	JSR buffer_end
 	JMP @Loop1
 @Loop3:
 	CMP #$FF
@@ -2506,7 +2506,7 @@ L_CD05:
 	SBC #$80
 	LDY $65
 	LDX $66
-	JSR L_D29A
+	JSR buffer_add
 	STA $68
 	LDY #$01
 	LDA ($3E),Y
@@ -2516,7 +2516,7 @@ L_CD05:
 	INC $65
 	DEC $68
 	BNE @Loop4
-	JSR L_D2C8
+	JSR buffer_end
 	LDA $3E
 	CLC
 	ADC #$02
@@ -2726,7 +2726,7 @@ L_CEB9:
 	LDY $65
 	LDX $66
 	LDA $68
-	JSR L_D29A
+	JSR buffer_add
 	LDY #$00
 @Loop2:
 	LDA ($3E),Y
@@ -2735,7 +2735,7 @@ L_CEB9:
 	INY
 	CPY $68
 	BNE @Loop2
-	JSR L_D2C8
+	JSR buffer_end
 	LDA $65
 	CLC
 	ADC #$20
@@ -2772,7 +2772,7 @@ L_CF24:
 	ASL
 	LDY $65
 	LDX $66
-	JSR L_D29A
+	JSR buffer_add
 	LDA $67
 	STA $41
 	LDA #$00
@@ -2799,7 +2799,7 @@ L_CF24:
 	INC $40
 	DEC $41
 	BNE @Loop1
-	JMP L_D2C8
+	JMP buffer_end
 
 L_CF61:
 	PHA
@@ -2821,7 +2821,7 @@ L_CF61:
 	STA $3E
 	LDY $65
 	LDX $66
-	JSR L_D29A
+	JSR buffer_add
 	LDY #$00
 @Loop1:
 	LDA ($67),Y
@@ -2830,7 +2830,7 @@ L_CF61:
 	INX
 	DEC $3E
 	BNE @Loop1
-	JSR L_D2C8
+	JSR buffer_end
 	JSR L_D2EA
 	LDX $3F
 	JMP bank_swap_A000
@@ -2863,7 +2863,7 @@ L_CFA2:
 	LDY $65
 	LDX $66
 	LDA $45
-	JSR L_D29A
+	JSR buffer_add
 	STX $41
 	LDY $45
 	LDA #$00
@@ -2892,7 +2892,7 @@ L_CFA2:
 	DEC $3E
 	BNE @Loop4
 	LDX $40
-	JSR L_D2C8
+	JSR buffer_end
 	JSR L_D2EA
 	LDA $3F
 	AND #$7F
@@ -2986,7 +2986,7 @@ L_D09D:
 	LDA $3E
 	LDY $65
 	LDX $66
-	JSR L_D29A
+	JSR buffer_add
 	LDY $3E
 	LDA $41
 @Loop2:
@@ -2994,7 +2994,7 @@ L_D09D:
 	INX
 	DEY
 	BNE @Loop2
-	JSR L_D2C8
+	JSR buffer_end
 	LDA $C8
 	BEQ @Loop3
 	JSR switch_thread
@@ -3079,7 +3079,7 @@ L_D140:
 	BCS @Loop3
 	INC $53
 @Loop3:
-	JSR L_D1FD
+	JSR buffer_palette
 	LDA #$01
 	JSR switch_thread
 	LDA $52
@@ -3097,7 +3097,7 @@ L_D162:
 	CMP #$0F
 	BCS @Loop2
 	INC $52
-	JSR L_D1FD
+	JSR buffer_palette
 	LDA #$01
 	JSR switch_thread
 	JMP @Loop1
@@ -3112,7 +3112,7 @@ L_D17B:
 	CMP #$0F
 	BCS @Loop2
 	INC $53
-	JSR L_D1FD
+	JSR buffer_palette
 	LDA #$01
 	JSR switch_thread
 	JMP @Loop1
@@ -3131,7 +3131,7 @@ L_D194:
 	BEQ @Loop2
 	DEC $53
 @Loop2:
-	JSR L_D1FD
+	JSR buffer_palette
 	LDA #$01
 	JSR switch_thread
 	JMP L_D194
@@ -3142,7 +3142,7 @@ L_D1B1:
 	LDA $52
 	BEQ @Loop1
 	DEC $52
-	JSR L_D1FD
+	JSR buffer_palette
 	LDA #$01
 	JSR switch_thread
 	JMP L_D1B1
@@ -3153,7 +3153,7 @@ L_D1C3:
 	LDA $53
 	BEQ @Loop1
 	DEC $53
-	JSR L_D1FD
+	JSR buffer_palette
 	LDA #$01
 	JSR switch_thread
 	JMP L_D1C3
@@ -3168,53 +3168,59 @@ L_D1D9:
 	JSR L_D23A
 L_D1DF:
 	LDA #$0F
-	STA $52
-	STA $53
-	JMP L_D1FD
-
+	STA BG_PALETTE_FADE
+	STA SPRITE_PALETTE_FADE
+	JMP buffer_palette
 L_D1E8:
 	STA $50
 	JSR L_D236
 	LDA #$0F
-	STA $52
-	JMP L_D1FD
-
+	STA BG_PALETTE_FADE
+	JMP buffer_palette
 L_D1F4:
 	STA $51
 	JSR L_D23A
 	LDA #$0F
-	STA $53
-L_D1FD:
+	STA SPRITE_PALETTE_FADE
+buffer_palette:
 	LDA #$20
 	LDY #<$3F00
 	LDX #>$3F00
-	JSR L_D29A
+	JSR buffer_add
 	STX TEMP3F
 	LDY #$00
-@Loop1:
-	LDA $031A,Y
+@more:
+	LDA PALETTE,Y
 	AND #$30
+; Check for BG or Sprite Color
 	CPY #$10
-	BCS @Loop2
+	BCS @sprite
+; Set BG Fade Amount
 	CLC
-	ADC $52
-	JMP @Loop3
-@Loop2:
+	ADC BG_PALETTE_FADE
+	JMP @set
+@sprite:
+; Set Sprite Fade Amount
 	CLC
-	ADC $53
-@Loop3:
+	ADC SPRITE_PALETTE_FADE
+@set:
+; Get Fade Color
 	TAX
-	LDA $031A,Y
+	LDA PALETTE,Y
 	AND #$0F
-	ORA L_D941,X
-	LDX $3F
-	STA $033A,X
-	INC $3F
+	ORA PALETTE_FADE,X
+; Store Color in Buffer
+	LDX TEMP3F
+	STA BUFFER,X
+; Increase Buffer Length
+	INC TEMP3F
+; Check for end
 	INY
 	CPY #$20
-	BCC @Loop1
-	LDX $3F
-	JMP L_D2C8
+	BCC @more
+; Get Buffer Length
+	LDX TEMP3F
+	JMP buffer_end
 
 L_D236:
 	LDA #$00
@@ -3223,7 +3229,7 @@ L_D23A:
 	LDA #$01
 L_D23C:
 	STA $3F
-	LDA $2F
+	LDA BANK_A000
 	STA $41
 	LDX #$0D ; BANK14
 	JSR bank_swap_A000
@@ -3273,12 +3279,12 @@ L_D28B:
 L_D28D:
 	STA $52
 	STA $53
-	JSR L_D1FD
+	JSR buffer_palette
 	LDA #$01
 	JSR switch_thread
 	RTS
 
-L_D29A:
+buffer_add:
 	PHA
 	BIT $2B
 	BPL @ready
@@ -3286,31 +3292,38 @@ L_D29A:
 	LDA #$01
 	JSR switch_thread
 	PLA
-	JMP L_D29A
+	JMP buffer_add
 @ready:
+; Check Buffer has enough size left
 	AND #$3F
 	CLC
-	ADC $037D
+	ADC BUFFER_SIZE
 	CMP #$3F
 	BCS @wait
+; Set Not Ready
 	SEC
 	ROR $2B
+; Store VRAM Address
 	TXA
-	LDX $037D
-	STA $033C,X
+	LDX BUFFER_SIZE
+	STA BUFFER_HI,X
 	TYA
-	STA $033B,X
+	STA BUFFER_LO,X
+; Store Buffer Length
 	PLA
-	STA $033A,X
+	STA BUFFER_LENGTH,X
 	INX
 	INX
 	INX
 	RTS
 
-L_D2C8:
+buffer_end:
+; Store Buffer End
 	LDA #$00
-	STA $033A,X
-	STX $037D
+	STA BUFFER,X
+; Store Buffer Size
+	STX BUFFER_SIZE
+; Set to Ready
 	LSR $2B
 	RTS
 
@@ -3434,9 +3447,9 @@ L_D38E:
 	LDY $40
 	LDX $41
 	LDA #$02
-	JSR L_D29A
+	JSR buffer_add
 	JSR L_D4B7
-	JSR L_D2C8
+	JSR buffer_end
 	LDA $40
 	CLC
 	ADC #$03
@@ -3449,7 +3462,7 @@ L_D38E:
 L_D3BA:
 	LDA #$0A
 L_D3BC:
-	JSR L_D29A
+	JSR buffer_add
 	STX $41
 	LDA $45
 	LDX $44
@@ -3461,7 +3474,7 @@ L_D3BC:
 	JMP L_D3F2
 L_D3D4:
 	LDA #$0B
-	JSR L_D29A
+	JSR buffer_add
 	STX $41
 	LDA $45
 	LDX $44
@@ -3497,7 +3510,7 @@ L_D3F2:
 	DEC $41
 	BNE @Loop3
 @Loop4:
-	JSR L_D2C8
+	JSR buffer_end
 	LDX $43
 	JMP bank_swap_8000
 
@@ -3714,7 +3727,7 @@ clear_sprites:
 
 L_D57F:
 	STA $40
-	JSR L_D29A
+	JSR buffer_add
 	LDA $40
 	AND #$3F
 	STA $40
@@ -3730,41 +3743,41 @@ L_D57F:
 	INX
 	DEC $40
 	BNE @Loop1
-	JMP L_D2C8
+	JMP buffer_end
 
 L_D5A0:
 	STA $45
 	LDA #$02
-	JSR L_D29A
+	JSR buffer_add
 	CLC
 	LDA $45
 	JSR L_D5F8
 	LDA $45
 	JSR L_D605
-	JMP L_D2C8
+	JMP buffer_end
 
 L_D5B5:
 	STA $45
 	LDA #$02
-	JSR L_D29A
+	JSR buffer_add
 	LDA $45
 	AND #$F0
 	BEQ @Loop1
 	JSR L_D5F8
 	LDA $45
 	JSR L_D605
-	JMP L_D2C8
+	JMP buffer_end
 @Loop1:
 	LDA $45
 	JSR L_D605
 	LDA #$00
 	STA $033A,X
 	INX
-	JMP L_D2C8
+	JMP buffer_end
 
 L_D5DB:
 	LDA #$04
-	JSR L_D29A
+	JSR buffer_add
 	CLC
 	LDA $45
 	JSR L_D5F8
@@ -3774,7 +3787,7 @@ L_D5DB:
 	JSR L_D5F8
 	LDA $44
 	JSR L_D605
-	JMP L_D2C8
+	JMP buffer_end
 
 L_D5F8:
 	PHP
@@ -4373,10 +4386,12 @@ update_random_3D:
 	STA RANDOM_3D
 	RTS
 
-L_D941:	.BYTE $0F, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-		.BYTE $0F, $00, $00, $00, $00, $00, $00, $00, $10, $10, $10, $10, $10, $10, $10, $10
-		.BYTE $0F, $00, $00, $00, $00, $00, $10, $10, $10, $10, $10, $10, $20, $20, $20, $20
-		.BYTE $0F, $00, $00, $00, $10, $10, $10, $10, $20, $20, $20, $20, $30, $30, $30, $30
+PALETTE_FADE: 
+	.BYTE $0F, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.BYTE $0F, $00, $00, $00, $00, $00, $00, $00, $10, $10, $10, $10, $10, $10, $10, $10
+	.BYTE $0F, $00, $00, $00, $00, $00, $10, $10, $10, $10, $10, $10, $20, $20, $20, $20
+	.BYTE $0F, $00, $00, $00, $10, $10, $10, $10, $20, $20, $20, $20, $30, $30, $30, $30
+
 L_D981:	.BYTE $00
 L_D982:	.BYTE $00
 	.BYTE $85

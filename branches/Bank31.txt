@@ -170,11 +170,13 @@ NMI:
 	JSR L_C2E6
 	JMP L_CB3F
 @Loop1:
+; Update Sprites
 	LDA #$00
 	STA OAMADDR
-	LDA #$02
+	LDA #>SPRITE
 	STA OAM_DMA
-	LDA $32
+;
+	LDA SOFT_PPUMASK
 	STA PPUMASK
 	LDA PPUSTATUS
 	LDA $5B
@@ -197,9 +199,9 @@ NMI:
 	BMI @Loop8
  ; Check for Buffer
 	LDX #$00
-@next:
-	LDA $033A,X
-	BEQ @Loop7
+@next_buffer:
+	LDA BUFFER,X
+	BEQ @exit_buffer
 ; Set VRAM Increment
 	AND #%01000000
 	LSR
@@ -208,29 +210,33 @@ NMI:
 	LSR
 	STA PPUCTRL
 ; Get Buffer Length
-	LDA $033A,X
+	LDA BUFFER_LENGTH,X
 	AND #%00111111
 	TAY
-	LDA $033C,X
+; Set VRAM Address
+	LDA BUFFER_HI,X
 	STA PPUADDR
-	LDA $033B,X
+	LDA BUFFER_LO,X
 	STA PPUADDR
-@more:
-	LDA $033D,X
+@more_buffer:
+; Store Buffer in VRAM
+	LDA BUFFER_DATA,X
 	STA PPUDATA
 	INX
 	DEY
-	BNE @more
+	BNE @more_buffer
 	INX
 	INX
 	INX
-	BNE @next
-@Loop7:
+	BNE @next_buffer
+@exit_buffer:
+; Clear Buffer Size
 	LDA #$00
-	STA $037D
-	LDA #$3F
+	STA BUFFER_SIZE
+;
+	LDA #>$3F00
 	STA PPUADDR
-	LDA #$00
+	LDA #<$3F00
 	STA PPUADDR
 	STA PPUADDR
 	STA PPUADDR

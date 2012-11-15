@@ -1823,11 +1823,11 @@ L_17_8D9A:
 	INY
 	INY
 	LDA #$01
-	JSR L_D29A
+	JSR buffer_add
 	LDA #$00
 	STA $033A,X
 	INX
-	JSR L_D2C8
+	JSR buffer_end
 	JSR L_17_8E48
 	BCC @Loop3
 	LDX $94
@@ -4763,7 +4763,7 @@ L_17_A350:
 	LDY #$4D
 	LDX #$20
 	LDA #$05
-	JSR L_D29A
+	JSR buffer_add
 	LDA $6B
 	LSR
 	LSR
@@ -4788,7 +4788,7 @@ L_17_A350:
 	JSR L_17_A38B
 	LDA $6A
 	JSR L_17_A38B
-	JMP L_D2C8
+	JMP buffer_end
 
 L_17_A38B:
 	AND #$0F
@@ -5248,7 +5248,7 @@ L_17_A6BC:
 	LDY $42
 	LDX $43
 	LDA #$02
-	JSR L_D29A
+	JSR buffer_add
 	LDY $44
 	LDA MINI_HELMETS,Y
 	STA $033A,X
@@ -5256,7 +5256,7 @@ L_17_A6BC:
 	LDA MINI_HELMETS+1,Y
 	STA $033A,X
 	INX
-	JSR L_D2C8
+	JSR buffer_end
 	LDA $42
 	CLC
 	ADC #$20
@@ -5265,7 +5265,7 @@ L_17_A6BC:
 	ADC #$00
 	TAX
 	LDA #$02
-	JSR L_D29A
+	JSR buffer_add
 	LDY $44
 	LDA MINI_HELMETS+2,Y
 	STA $033A,X
@@ -5273,7 +5273,7 @@ L_17_A6BC:
 	LDA MINI_HELMETS+3,Y
 	STA $033A,X
 	INX
-	JSR L_D2C8
+	JSR buffer_end
 	LDA #$80
 	STA PRG_RAM_PROTECT
 	LDA $3E
@@ -6454,14 +6454,14 @@ L_17_AFCC:
 	LDA #$20
 	JSR L_17_B148
 	LDA #$01
-	JSR L_D29A
+	JSR buffer_add
 	LDA $8E
 	AND #$0F
 	CLC
 	ADC #$30
 	STA $033A,X
 	INX
-	JSR L_D2C8
+	JSR buffer_end
 	LDA #$42
 	JSR L_17_B148
 	LDA $91
@@ -6553,7 +6553,7 @@ L_17_AFCC:
 	LDA #$2F
 	JSR L_17_B148
 	LDA #$05
-	JSR L_D29A
+	JSR buffer_add
 	CLC
 	LDA $41
 	JSR L_D5F8
@@ -6567,7 +6567,7 @@ L_17_AFCC:
 	JSR L_D5F8
 	LDA $40
 	JSR L_D605
-	JSR L_D2C8
+	JSR buffer_end
 	LDA $91
 	AND #$7F
 	LDX #$00

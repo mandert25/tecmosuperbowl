@@ -3920,7 +3920,7 @@ ymenu_up_down:
 	LDY MENU_JOYPAD
 	LDA JOYPAD1_RAW,Y
 	AND #%00001100
-	BEQ @no_updown
+	BEQ @no_move
 ; Check for Wait
 	LDY MENU_WAIT
 	BNE @wait
@@ -3961,7 +3961,7 @@ ymenu_up_down:
 	SEC
 	RTS
 ; Not Up or Down
-@no_updown:
+@no_move:
 	LDA #$00
 	STA MENU_WAIT
 @no_set:
@@ -3975,107 +3975,122 @@ ymenu_set_y:
 	STA $0200
 	RTS
 
-L_D702:
-	STY $E3
-	STX $E4
-	STA $E5
+set_xymenu_arrow:
+	STY MENU_LO
+	STX MENU_HI
+	STA MENU_JOYPAD
+; Store Arrow Tile #
 	LDY #$00
-	LDA ($E3),Y
+	LDA (MENU),Y
 	STA $0201
+; Store Arrow Attributes
 	INY
-	LDA ($E3),Y
+	LDA (MENU),Y
 	STA $0202
+; Store Arrow Wait
 	LDA #$00
-	STA $E6
-	JMP L_D77A
+	STA MENU_WAIT
+	JMP xymenu_set_xy
 
-L_D71C:
-	LDX $E5
-	LDA $35,X
-	AND #$0F
-	BEQ @Loop6
-	LDA $E6
-	BNE @Loop1
+xymenu_move:
+; Check for Up, Down, Left, Right
+	LDX MENU_JOYPAD
+	LDA JOYPAD1_RAW,X
+	AND #%00001111
+	BEQ @no_move
+	LDA MENU_WAIT
+	BNE @wait
 	LDA #$14
-	STA $E6
-	JMP @Loop2
-@Loop1:
-	DEC $E6
-	BNE @Loop7
+	STA MENU_WAIT
+	JMP @move
+@wait:
+	DEC MENU_WAIT
+	BNE @no_set
 	LDA #$08
-	STA $E6
-@Loop2:
-	LDX $E5
-	LDA $35,X
+	STA MENU_WAIT
+@move:
+; Up, Down, Left, or Right?
+	LDX MENU_JOYPAD
+	LDA JOYPAD1_RAW,X
 	LDX #$01
 	LDY #$03
 	LSR
-	BCS @Loop4
+	BCS @down_right
 	LSR
-	BCS @Loop3
+	BCS @up_left
 	DEX
 	DEY
 	LSR
-	BCS @Loop4
-@Loop3:
-	DEC $E1,X
-	BPL @Loop5
-	LDA ($E3),Y
+	BCS @down_right
+; Move Up or Left
+@up_left:
+	DEC Y_MENU_OPTION,X
+; Check for Top / Left Side
+	BPL @set
+	LDA (MENU),Y
 	SEC
 	SBC #$01
-	STA $E1,X
-	JMP @Loop5
-@Loop4:
-	INC $E1,X
-	LDA $E1,X
-	CMP ($E3),Y
-	BCC @Loop5
+	STA Y_MENU_OPTION,X
+	JMP @set
+; Move Down or Right
+@down_right:
+	INC Y_MENU_OPTION,X
+; Check for Bottom / Right Side
+	LDA Y_MENU_OPTION,X
+	CMP (MENU),Y
+	BCC @set
 	LDA #$00
-	STA $E1,X
-@Loop5:
-	JSR L_D78E
+	STA Y_MENU_OPTION,X
+@set:
+; Get XY Option
+	JSR xymenu_get_spot
 	ASL
 	CLC
 	ADC #$04
+; Check for Unavailable Option
 	TAY
-	LDA ($E3),Y
+	LDA (MENU),Y
 	CMP #$FF
-	BEQ @Loop2
+	BEQ @move
 	SEC
 	RTS
-@Loop6:
+@no_move:
 	LDA #$00
-	STA $E6
-@Loop7:
+	STA MENU_WAIT
+@no_set:
 	CLC
 	RTS
 
-L_D77A:
-	JSR L_D78E
+xymenu_set_xy:
+; Get XY Option
+	JSR xymenu_get_spot
 	ASL
 	CLC
 	ADC #$04
+; Store Arrow Y Position
 	TAY
-	LDA ($E3),Y
+	LDA (MENU),Y
 	STA $0200
+; Store Arrow X Position
 	INY
-	LDA ($E3),Y
+	LDA (MENU),Y
 	STA $0203
 	RTS
 
-L_D78E:
+xymenu_get_spot:
+; A = Y * Width + X
 	LDY #$03
 	LDA #$00
-	LDX $E1
-	BEQ @Loop2
-@Loop1:
+	LDX Y_MENU_OPTION
+	BEQ @x
+@y:
 	CLC
-	ADC ($E3),Y
+	ADC (MENU),Y
 	DEX
-	BNE @Loop1
-@Loop2:
+	BNE @y
+@x:
 	CLC
-	ADC $E2
+	ADC X_MENU_OPTION
 	RTS
 
 L_D7A0:

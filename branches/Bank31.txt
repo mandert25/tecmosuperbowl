@@ -582,22 +582,22 @@ L_C431:
 	LDA $2E
 	STA $3F
 	LDX #$16 ; BANK23
-	JSR L_D8DD
+	JSR bank_swap_8000
 	JSR L_23_8000
 	LDX $3F
-	JMP L_D8DD
+	JMP bank_swap_8000
 
 L_C442:
 	TAY
 	LDA $2E
 	PHA
 	LDX #$17 ; BANK24
-	JSR L_D8DD
+	JSR bank_swap_8000
 	TYA
 	JSR L_24_800F
 	PLA
 	TAX
-	JMP L_D8DD
+	JMP bank_swap_8000
 
 bank_swap_8000_jump:
 	STY TEMP44_LO
@@ -797,40 +797,40 @@ L_C591:
 	LDA $2F
 	STA $0394
 	LDX #$0B ; BANK12
-	JSR L_D8DD
+	JSR bank_swap_8000
 	LDX #$0C ; BANK13
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA $3F
 	LDX $3E
 	RTS
 
 L_C5AE:
 	LDX $0393
-	JSR L_D8DD
+	JSR bank_swap_8000
 	LDX $0394
-	JSR L_D8E3
+	JSR bank_swap_A000
 	RTS
 
 L_C5BB:
 	LDX #$0B ; BANK12
-	JSR L_D8DD
+	JSR bank_swap_8000
 	LDX #$0C ; BANK13
-	JSR L_D8E3
+	JSR bank_swap_A000
 	RTS
 
 L_C5C6:
 	LDX #$12 ; BANK19
-	JSR L_D8DD
+	JSR bank_swap_8000
 	LDX #$13 ; BANK20
-	JSR L_D8E3
+	JSR bank_swap_A000
 	JSR L_19_8003
 	JMP L_C5BB
 
 L_C5D6:
 	LDX #$10 ; BANK17
-	JSR L_D8DD
+	JSR bank_swap_8000
 	LDX #$11 ; BANK18
-	JSR L_D8E3
+	JSR bank_swap_A000
 	JSR L_17_800C
 	JMP L_C5BB
 
@@ -2551,7 +2551,7 @@ L_CD05:
 	JMP @Loop1
 @Loop9:
 	LDA $C8
-	JSR L_CC9A
+	JSR switch_thread
 	INC $3E
 	BNE @Loop10
 	INC $3F
@@ -2810,7 +2810,7 @@ L_CF61:
 	LDA $2F
 	STA $3F
 	LDX #$0F ; BANK16
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA TEAM_NAME_POINTERS,Y
 	STA $67
 	LDA TEAM_NAME_POINTERS+1,Y
@@ -2833,7 +2833,7 @@ L_CF61:
 	JSR L_D2C8
 	JSR L_D2EA
 	LDX $3F
-	JMP L_D8E3
+	JMP bank_swap_A000
 
 L_CFA2:
 	CLC
@@ -2851,7 +2851,7 @@ L_CFA2:
 	ORA $2F
 	STA $3F
 	LDX #$0F ; BANK16
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA TEAM_NAME_POINTERS,Y
 	STA $67
 	LDA TEAM_NAME_POINTERS+1,Y
@@ -2897,7 +2897,7 @@ L_CFA2:
 	LDA $3F
 	AND #$7F
 	TAX
-	JMP L_D8E3
+	JMP bank_swap_A000
 
 L_D012:
 	ASL
@@ -2906,7 +2906,7 @@ L_D012:
 	LDA $2F
 	PHA
 	LDX #$0F ; BANK16
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDX $40
 	LDA TEAM_NAME_POINTERS,X
 	STA $3E
@@ -2919,7 +2919,7 @@ L_D012:
 	JSR L_CF03
 	PLA
 	TAX
-	JMP L_D8E3
+	JMP bank_swap_A000
 
 L_D03B:
 	ASL
@@ -2929,7 +2929,7 @@ L_D03B:
 	LDA $2F
 	PHA
 	LDX #$0F ; BANK16
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDX $3F
 	LDA TEAM_NAME_POINTERS,X
 	STA $3E
@@ -2947,7 +2947,7 @@ L_D03B:
 	LDA $2F
 	PHA
 	LDX #$0F ; BANK16
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDX $3F
 	LDA TEAM_NAME_POINTERS,X
 	STA $3E
@@ -2972,7 +2972,7 @@ L_D081:
 	JSR L_CF03
 	PLA
 	TAX
-	JMP L_D8E3
+	JMP bank_swap_A000
 
 L_D09B:
 	LDA #$00
@@ -2997,7 +2997,7 @@ L_D09D:
 	JSR L_D2C8
 	LDA $C8
 	BEQ @Loop3
-	JSR L_CC9A
+	JSR switch_thread
 @Loop3:
 	LDA $65
 	CLC
@@ -3081,7 +3081,7 @@ L_D140:
 @Loop3:
 	JSR L_D1FD
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $52
 	CLC
 	ADC $53
@@ -3099,7 +3099,7 @@ L_D162:
 	INC $52
 	JSR L_D1FD
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JMP @Loop1
 @Loop2:
 	RTS
@@ -3114,7 +3114,7 @@ L_D17B:
 	INC $53
 	JSR L_D1FD
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JMP @Loop1
 @Loop2:
 	RTS
@@ -3133,7 +3133,7 @@ L_D194:
 @Loop2:
 	JSR L_D1FD
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JMP L_D194
 @Loop3:
 	RTS
@@ -3144,7 +3144,7 @@ L_D1B1:
 	DEC $52
 	JSR L_D1FD
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JMP L_D1B1
 @Loop1:
 	RTS
@@ -3155,7 +3155,7 @@ L_D1C3:
 	DEC $53
 	JSR L_D1FD
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JMP L_D1C3
 @Loop1:
 	RTS
@@ -3226,7 +3226,7 @@ L_D23C:
 	LDA $2F
 	STA $41
 	LDX #$0D ; BANK14
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA $3F
 	TAY
 	ASL
@@ -3261,7 +3261,7 @@ L_D23C:
 	CPY #$10
 	BNE @Loop1
 	LDX $41
-	JMP L_D8E3
+	JMP bank_swap_A000
 	RTS
 @Loop2:	.WORD $A000,$A600
 
@@ -3318,7 +3318,7 @@ L_D2D3:
 	LDA $64
 	BPL @Loop1
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JMP L_D2D3
 @Loop1:
 	ORA #$80
@@ -3343,7 +3343,7 @@ L_D2F1:
 	BEQ @Loop3
 @Loop2:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JMP @Loop1
 @Loop3:
 	SEC
@@ -3383,7 +3383,7 @@ L_D2F1:
 	LSR $2B
 @Loop6:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	BIT $037D
 	BVC @Loop6
 	LDX #$00
@@ -3499,7 +3499,7 @@ L_D3F2:
 @Loop4:
 	JSR L_D2C8
 	LDX $43
-	JMP L_D8DD
+	JMP bank_swap_8000
 
 L_D41D:
 	STY $40
@@ -3548,7 +3548,7 @@ L_D44A:
 @Loop2:
 	JSR L_D553
 	LDX $43
-	JMP L_D8DD
+	JMP bank_swap_8000
 
 L_D47C:
 	STA $3F
@@ -3556,9 +3556,9 @@ L_D47C:
 	LDA $2E
 	STA $43
 	LDX #$00 ; BANK1
-	JSR L_D8DD
+	JSR bank_swap_8000
 	LDX #$01 ; BANK2
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDX $3E
 	LDA $3F
 	ASL
@@ -3655,7 +3655,7 @@ L_D519:
 	JSR L_D53E
 	JSR L_D4D4
 	LDX $43
-	JMP L_D8DD
+	JMP bank_swap_8000
 
 L_D52F:
 	JSR L_D47C
@@ -3663,7 +3663,7 @@ L_D52F:
 	LDA ($3E),Y
 	TAY
 	LDX $43
-	JSR L_D8DD
+	JSR bank_swap_8000
 	TYA
 	RTS
 
@@ -3671,7 +3671,7 @@ L_D53E:
 	LDA $037E
 	BPL @Loop1
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JMP L_D53E
 @Loop1:
 	ORA #$80
@@ -4282,10 +4282,10 @@ L_D8B7:
 	STA $45
 	LDA #$0A
 	STA $44
-	JSR L_D819
+	JSR divide_8
 	LDA $42
 	STA $43
-	JSR L_D819
+	JSR divide_8
 	LDA $42
 	ASL
 	ASL
@@ -4293,7 +4293,7 @@ L_D8B7:
 	ASL
 	ORA $43
 	STA $43
-	JSR L_D819
+	JSR divide_8
 	LDA $42
 	STA $45
 	LDA $43
@@ -4348,7 +4348,7 @@ L_D91C:
 	STA $44
 	JSR L_D8F7
 	STA $45
-	JSR L_D819
+	JSR divide_8
 	LDA $42
 	RTS
 
@@ -4618,13 +4618,13 @@ L_DA6D:
 	LDX #$39
 	TXS
 	LDX #$1A ; BANK27
-	JSR L_D8DD
+	JSR bank_swap_8000
 	JSR L_27_8012
 	LDX #$14 ; BANK21
-	JSR L_D8DD
+	JSR bank_swap_8000
 L_DA7D:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$9F
 	STA $AE
 	LDA #$03
@@ -5103,7 +5103,7 @@ L_DDAA:
 	LDA $2F
 	STA $44
 	LDX #$01 ; BANK2
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA $45
 	BMI @Loop1
 	PLP
@@ -5150,7 +5150,7 @@ L_DDAA:
 @Loop6:
 	TAY
 	LDX $44
-	JSR L_D8E3
+	JSR bank_swap_A000
 	TYA
 	RTS
 

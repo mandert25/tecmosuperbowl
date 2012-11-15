@@ -25,7 +25,7 @@ L_24_8015:
 	JSR L_CCDD
 	LDX #$11
 	JSR L_CCDD
-	JMP L_CC50
+	JMP destroy_thread
 
 L_24_8040:
 	STA $C2

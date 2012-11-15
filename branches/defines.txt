@@ -41,10 +41,15 @@
 ; $04,X = $A000 BANK
 
 ; Thread Status Values
-.define WAIT_THREAD    $11
+.define PAUSE_THREAD   $11
 .define CURRENT_THREAD $12
-.define READY_THREAD   $13
+.define START_THREAD   $13
 .define NEW_THREAD     $14
+
+; Player Type Values
+; 0 = MAN
+; 1 = COA
+; 2 = COM
 
 ; Bank Values
 .define BANK17 $10
@@ -92,6 +97,18 @@
 .define JOYPAD_DATA    $46
 .define JOYPAD_CHECK   $47
 .define JOYPAD_CONFIRM $48
+.define CHAR_1000      $4B
+.define CHAR_1400      $4C
+.define CHAR_1800      $4D
+.define CHAR_1C00      $4E
+.define player_type    $75
+.define Y_MENU_OPTION  $E1
+.define X_MENU_OPTION  $E2
+.define MENU           $E3
+.define MENU_LO        $E3
+.define MENU_HI        $E4
+.define MENU_JOYPAD    $E5
+.define MENU_WAIT      $E6
 
 .segment "SPRITE": absolute
 .define SPRITE $0200
@@ -119,6 +136,7 @@
 .define WEEK_SCHEDULE    $675A
 
 ; Subroutine Defines
+.define preseason_menu         L_17_80E7
 .define store_week_games       L_26_81D1
 .define store_default_sram     L_26_8245
 .define store_default_players  L_26_82A4
@@ -143,6 +161,9 @@
 .define clear_sprites          L_D571
 .define clear_ram_size         L_D60E
 .define wait_interrupt         L_D680
+.define set_ymenu_arrow        L_D68A
+.define ymenu_up_down          L_D6B4
+.define ymenu_set_y            L_D6F9
 .define divide_8               L_D819
 .define bank_swap_8000         L_D8DD
 .define bank_swap_A000         L_D8E3

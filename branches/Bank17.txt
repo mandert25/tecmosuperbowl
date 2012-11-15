@@ -89,18 +89,22 @@ L_17_80B2:
 	LDY #<NORMAL_MENU_SELECT
 	LDX #>NORMAL_MENU_SELECT
 	LDA #$02
-	JSR L_D68A
-@Loop1:
+	JSR set_ymenu_arrow
+@not_selected:
 	LDA #$01
 	JSR switch_thread
-	JSR L_D6B4
-	JSR L_D6F9
-	LDA $3A
-	BPL @Loop1
+; Check for Arrow Movement
+	JSR ymenu_up_down
+	JSR ymenu_set_y
+; Check for A Button
+	LDA JOYPAD_PRESS
+	BPL @not_selected
 	JSR L_17_94F4
+; Clear Arrow
 	LDA #$F0
 	STA $0200
-	LDA $E1
+; Go to Menu Selection
+	LDA Y_MENU_OPTION
 	ASL
 	TAX
 	LDA @Loop2+1,X
@@ -108,9 +112,9 @@ L_17_80B2:
 	LDA @Loop2+0,X
 	PHA
 	RTS
-@Loop2:	.WORD L_17_80E7-1, L_17_81F8-1, L_17_87A2-1, L_17_88A5-1
+@Loop2:	.WORD preseason_menu-1, L_17_81F8-1, L_17_87A2-1, L_17_88A5-1
 
-L_17_80E7:
+preseason_menu:
 	LDA $2D
 	AND #$FC
 	STA $2D
@@ -119,31 +123,34 @@ L_17_80E7:
 	LDY #<PRESEASON_MENU_SELECT
 	LDX #>PRESEASON_MENU_SELECT
 	LDA #$02
-	JSR L_D68A
-@Loop2:
+	JSR set_ymenu_arrow
+@not_selected:
 	LDA #$01
-	JSR L_CC9A
-	JSR L_D6B4
-	JSR L_D6F9
-	BIT $3A
-	BVC @Loop3
-	JMP @Loop17
-@Loop3:
-	BPL @Loop2
+	JSR switch_thread
+; Check for Arrow Movement
+	JSR ymenu_up_down
+	JSR ymenu_set_y
+; Check for A or B Button
+	BIT JOYPAD_PRESS
+	BVC @check_a
+	JMP @previous
+@check_a:
+	BPL @not_selected
 	JSR L_17_94F4
 	JSR L_D28B
-	LDA $E1
+	LDA Y_MENU_OPTION
 	ASL
 	TAX
-	LDA @Loop4+1,X
+	LDA @options+1,X
 	PHA
-	LDA @Loop4,X
+	LDA @options+0,X
 	PHA
 	RTS
-@Loop4:	.WORD @Loop5-1, @Loop7-1, @Loop13-1, @Loop9-1, @Loop11-1, @Loop15-1
-@Loop5:
+@options:	.WORD @man_vs_com-1, @man_vs_man-1, @man_vs_coa-1, @coa_vs_com-1, @coa_vs_coa-1, @com_vs_com-1
+
+@man_vs_com:
 	LDA #$02
-	STA $75
+	STA player_type
 	JSR L_17_AB44
 	JSR L_17_A9D2
 	BCS @Loop6
@@ -152,22 +159,24 @@ L_17_80E7:
 	JMP L_17_9278
 @Loop6:
 	LDA #$00
-	STA $E1
+	STA Y_MENU_OPTION
 	JMP @Loop18
-@Loop7:
+
+@man_vs_man:
 	LDA #$00
-	STA $75
+	STA player_type
 	JSR L_17_AB44
 	JSR L_17_AA7D
 	BCS @Loop8
 	JMP L_17_9278
 @Loop8:
 	LDA #$01
-	STA $E1
+	STA Y_MENU_OPTION
 	JMP @Loop18
-@Loop9:
+
+@coa_vs_com:
 	LDA #$12
-	STA $75
+	STA player_type
 	JSR L_17_AB44
 	JSR L_17_A9D2
 	BCS @Loop10
@@ -176,22 +185,24 @@ L_17_80E7:
 	JMP L_17_9278
 @Loop10:
 	LDA #$03
-	STA $E1
+	STA Y_MENU_OPTION
 	JMP @Loop18
-@Loop11:
+
+@coa_vs_coa:
 	LDA #$11
-	STA $75
+	STA player_type
 	JSR L_17_AB44
 	JSR L_17_AA7D
 	BCS @Loop12
 	JMP L_17_9278
 @Loop12:
 	LDA #$04
-	STA $E1
+	STA Y_MENU_OPTION
 	JMP @Loop18
-@Loop13:
+
+@man_vs_coa:
 	LDA #$01
-	STA $75
+	STA player_type
 	JSR L_17_AB44
 	JSR L_17_A9D2
 	BCS @Loop14
@@ -200,11 +211,12 @@ L_17_80E7:
 	JMP L_17_9278
 @Loop14:
 	LDA #$02
-	STA $E1
+	STA Y_MENU_OPTION
 	JMP @Loop18
-@Loop15:
+
+@com_vs_com:
 	LDA #$22
-	STA $75
+	STA player_type
 	JSR L_17_AB44
 	JSR L_17_A9D2
 	BCS @Loop16
@@ -213,9 +225,10 @@ L_17_80E7:
 	JMP L_17_9278
 @Loop16:
 	LDA #$05
-	STA $E1
+	STA Y_MENU_OPTION
 	JMP @Loop18
-@Loop17:
+
+@previous:
 	LDA #$F0
 	STA $0200
 	LDY #$45
@@ -226,8 +239,9 @@ L_17_80E7:
 	STA $3F
 	JSR L_CCFC
 	LDA #$00
-	STA $E1
+	STA Y_MENU_OPTION
 	JMP L_17_80B2
+
 @Loop18:
 	JSR L_D28B
 	JSR L_D10E
@@ -245,30 +259,32 @@ L_17_81F8:
 	ORA #$02
 	STA $2D
 	LDA #$00
-	STA $E1
+	STA Y_MENU_OPTION
 	JSR L_17_86EA
 L_17_8207:
 	LDY #<SEASON_MENU_SELECT
 	LDX #>SEASON_MENU_SELECT
 	LDA #$02
-	JSR L_D68A
-@Loop1:
+	JSR set_ymenu_arrow
+@not_selected:
 	LDA #$01
-	JSR L_CC9A
-	JSR L_D6B4
-	JSR L_D6F9
-	BIT $3A
-	BVC @Loop2
+	JSR switch_thread
+; Check for Arrow Movement
+	JSR ymenu_up_down
+	JSR ymenu_set_y
+; Check for A or B Button
+	BIT JOYPAD_PRESS
+	BVC @check_a
 	JMP L_17_86D9
-@Loop2:
-	BPL @Loop1
+@check_a:
+	BPL @not_selected
 	JSR L_17_94F4
-	LDA $E1
+	LDA Y_MENU_OPTION
 	ASL
 	TAX
 	LDA @Loop3+1,X
 	PHA
-	LDA @Loop3,X
+	LDA @Loop3+0,X
 	PHA
 	RTS
 @Loop3:	.WORD L_17_8242-1, L_17_828F-1, L_17_9294-1, L_17_8507-1, L_17_85E0-1, L_17_8674-1, L_17_86C7-1

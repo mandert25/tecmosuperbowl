@@ -13,6 +13,7 @@
 .define OAM_DMA     $4014
 .define APU_CONTROL $4015
 .define STROBE      $4016
+.define JOYPAD      $4016
 .define APU_COUNTER $4017
 
 ; MMC3 Registers
@@ -25,33 +26,83 @@
 .define IRQ_DISABLE     $E000
 .define IRQ_ENABLE      $E001
 
+; Thread Create
+; $00,X = STATUS
+; $01,X = WAIT TIME
+; $02,X = ADDRESS_LO
+; $03,X = ADDRESS_HI
+; $04,X = ADDRESS_BANK
+
+; Thread Storage
+; $00,X = STATUS
+; $01,X = WAIT TIME
+; $02,X = STACK POINTER
+; $03,X = $8000 BANK
+; $04,X = $A000 BANK
+
+; Thread Status Values
+.define PAUSE_THREAD   $11
+.define CURRENT_THREAD $12
+.define START_THREAD   $13
+.define NEW_THREAD     $14
+
+; Bank Values
+.define BANK17 $10
+.define BANK26 $19
+
 ; Team Values
 .define BUFFALO $00
 .define AFC     $1C
 .define NFC     $1D
 
 .segment "ZEROPAGE": zeropage
-.define SOFT_PPUCTRL $31
-.define SOFT_PPUMASK $32
-.define RANDOM_3B    $3B
-.define RANDOM_3C    $3C
-.define RANDOM_3D    $3D
-.define TEMP3E       $3E
-.define TEMP3E_LO    $3E
-.define TEMP3E_HI    $3F
-.define TEMP3F       $3F
-.define TEMP40       $40
-.define TEMP40_LO    $40
-.define TEMP40_HI    $41
-.define TEMP42       $42
-.define TEMP43       $43
-.define TEMP44       $44
-.define TEMP44_LO    $44
-.define TEMP44_HI    $45
-.define TEMP45       $45
+.define CURRENT_THREAD $00
+; FIND OUT .define THREAD_TRANSFER $2A
+; FIND OUT .define BUFFER_FLAG     $2B
+; FIND OUT .define BANK_TRANSFER   $2C
+.define BANK_8000      $2E
+.define BANK_A000      $2F
+.define FRAME_COUNT    $30
+.define SOFT_PPUCTRL   $31
+.define SOFT_PPUMASK   $32
+.define MODE_8000      $33
+.define SOFT_8000      $34
+.define JOYPAD1_RAW    $35
+.define JOYPAD2_RAW    $36
+.define JOYPAD_RAW     $37
+.define JOYPAD1_PRESS  $38
+.define JOYPAD2_PRESS  $39
+.define JOYPAD_PRESS   $3A
+.define RANDOM_3B      $3B
+.define RANDOM_3C      $3C
+.define RANDOM_3D      $3D
+.define TEMP3E         $3E
+.define TEMP3E_LO      $3E
+.define TEMP3E_HI      $3F
+.define TEMP3F         $3F
+.define TEMP40         $40
+.define TEMP40_LO      $40
+.define TEMP40_HI      $41
+.define TEMP42         $42
+.define TEMP43         $43
+.define TEMP44         $44
+.define TEMP44_LO      $44
+.define TEMP44_HI      $45
+.define TEMP45         $45
+.define JOYPAD_DATA    $46
+.define JOYPAD_CHECK   $47
+.define JOYPAD_CONFIRM $48
 
 .segment "SPRITE": absolute
 .define SPRITE $0200
+
+.segment "BUFFER": absolute
+.define BUFFER        $033A
+.define BUFFER_LENGTH $033A
+.define BUFFER_LO     $033B
+.define BUFFER_HI     $033C
+.define BUFFER_DATA   $033D
+.define BUFFER_SIZE   $037D
 
 .segment "SRAM": absolute
 .define SRAM_CHECK       $66B7
@@ -76,12 +127,22 @@
 .define default_nfc_players    L_26_8380
 .define default_afc_starters   L_26_83AE
 .define default_nfc_starters   L_26_83BA
+.define bank_swap_8000_jump    L_C454
+.define bank_swap_8000_return  L_C468
 .define update_randoms         L_C46D
 .define store_sram_checksum    L_C4B3
 .define sram_checksum          L_C4BD
 .define add_size               L_C4F5
+.define start_all_threads      L_CB4E
+.define next_thread            L_CB5B
+.define do_thread              L_CB66
+.define thread_first_run       L_CBE2
+.define create_thread          L_CC45
+.define destroy_thread         L_CC50
+.define switch_thread          L_CC9A
 .define clear_sprites          L_D571
 .define clear_ram_size         L_D60E
+.define wait_interrupt         L_D680
 .define divide_8               L_D819
 .define bank_swap_8000         L_D8DD
 .define bank_swap_A000         L_D8E3

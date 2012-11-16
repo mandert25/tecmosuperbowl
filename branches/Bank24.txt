@@ -1686,7 +1686,7 @@ L_24_8C70:
 	LDY #<(L_24_8D5B-1)
 	LDA #>(L_24_8D5B-1)
 	LDX #$1B
-	JSR L_CC45
+	JSR create_thread
 L_24_8C90:
 	LDY #$01
 	LDA ($C2),Y
@@ -1757,7 +1757,7 @@ L_24_8CF2:
 	LDY #<(L_24_8D10-1)
 	LDA #>(L_24_8D10-1)
 	LDX #$1B
-	JSR L_CC45
+	JSR create_thread
 	RTS
 L_24_8D06:
 	LDX #$1B
@@ -2526,7 +2526,7 @@ L_24_92D3:
 	LDY #<(L_24_92EA-1)
 	LDA #>(L_24_92EA-1)
 	LDX #$11
-	JSR L_CC45
+	JSR create_thread
 	LDA #$04
 	JSR L_CC9A
 	RTS
@@ -2833,7 +2833,7 @@ L_24_94BC:
 	LDY #<(L_24_9501-1)
 	LDA #>(L_24_9501-1)
 	LDX #$11
-	JSR L_CC45
+	JSR create_thread
 	RTS
 
 L_24_9501:
@@ -3086,7 +3086,7 @@ L_24_961C:
 	LDY #<(L_24_96C4-1)
 	LDA #>(L_24_96C4-1)
 	LDX #$16
-	JSR L_CC45
+	JSR create_thread
 	LDX $45
 	JSR L_D8E3
 	RTS

@@ -678,7 +678,7 @@ L_24_8538:
 	LDA ($C2),Y
 	AND #$7F
 	STA $50
-	JSR L_D236
+	JSR get_background_palette
 	LDY #$01
 	LDA ($C2),Y
 	BPL @Loop2
@@ -712,7 +712,7 @@ L_24_8564:
 	LDA ($C2),Y
 	AND #$7F
 	STA $50
-	JSR L_D236
+	JSR get_background_palette
 	JSR L_D286
 	LDA #$02
 	JMP L_24_8C48
@@ -925,8 +925,8 @@ L_24_86ED:
 	INY
 	LDA ($C2),Y
 	STA $51
-	JSR L_D236
-	JSR L_D23A
+	JSR get_background_palette
+	JSR get_sprite_palette
 	LDA #$0F
 	STA $52
 	STA $53
@@ -1540,7 +1540,7 @@ L_24_8B7A:
 	STA $0339
 	LDA #$00
 	STA $50
-	JSR L_D236
+	JSR get_background_palette
 	LDA #$02
 	JMP L_24_8C48
 

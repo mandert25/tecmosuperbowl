@@ -2368,7 +2368,7 @@ L_19_92BF:
 	STA $0589,Y
 	INY
 	BNE @Loop1
-	JSR L_D571
+	JSR clear_sprites
 	LDA #$C0
 	LDX #$02
 	LDY #$9F
@@ -4355,7 +4355,7 @@ L_19_A000:
 	LDX #>L_19_A7D8
 	JSR L_C481
 	JSR L_D10E
-	JSR L_D571
+	JSR clear_sprites
 	LDA $B7
 	ASL
 	TAX
@@ -4381,7 +4381,7 @@ L_19_A000:
 	LDA #$01
 	JSR switch_thread
 	JSR L_D10E
-	JSR L_D571
+	JSR clear_sprites
 	LDA #$80
 	STA PRG_RAM_PROTECT
 	LDY #$10
@@ -4513,13 +4513,13 @@ L_19_A1C5:
 	JSR L_CCDD
 	JSR L_D28B
 	JSR L_D10E
-	JSR L_D571
+	JSR clear_sprites
 	LDA $C2
 	LDX #$06 ; BANK7
 	JSR L_C3A2
 	JSR L_D28B
 	JSR L_D10E
-	JSR L_D571
+	JSR clear_sprites
 	LDA #$00
 	STA $57
 	STA $58
@@ -4643,7 +4643,7 @@ L_19_A2B7:
 	JMP @Loop13
 @Loop1:
 	JSR L_D28B
-	JSR L_D571
+	JSR clear_sprites
 	LDA #$34
 	STA $4C
 	LDA #$07

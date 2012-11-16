@@ -78,7 +78,7 @@ L_17_8089:
 	STA ARROW_X
 L_17_809C:
 	JSR set_palette_fade_to_in
-	JSR L_D559
+	JSR set_vertical_mirroring
 	JSR clear_nametables
 	JSR clear_sprites
 	JSR L_17_9443
@@ -724,7 +724,7 @@ L_17_8507:
 	STA $0200
 	LDA #$00
 	JSR L_17_8768
-	JSR L_D559
+	JSR set_vertical_mirroring
 	LDY #$00
 	LDX #$24
 	LDA #$03
@@ -5208,7 +5208,7 @@ L_17_A674:
 	STA $4D
 	LDA #$7B
 	STA $4E
-	JSR L_D559
+	JSR set_vertical_mirroring
 	LDA #$10
 	STA $B8
 	RTS

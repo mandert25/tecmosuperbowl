@@ -828,13 +828,13 @@ L_24_8648:
 	JMP L_24_8C48
 
 L_24_8651:
-	LDY #$40
-	LDX #$24
+	LDY #<$2440
+	LDX #>$2440
 	LDA #$02
 	STA $3F
 	LDA #$20
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	LDA #$01
 	JMP L_24_8C48
 

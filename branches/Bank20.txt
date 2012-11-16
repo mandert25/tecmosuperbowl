@@ -85,7 +85,7 @@ L_20_8825:
 	LDY #<(L_20_8E6C-1)
 	LDA #>(L_20_8E6C-1)
 	LDX #$1B
-	JSR L_CC45
+	JSR create_thread
 	LDA $70
 	BPL @Loop2
 	LDA #$13
@@ -93,7 +93,7 @@ L_20_8825:
 	LDY #<(@Loop26-1)
 	LDA #>(@Loop26-1)
 	LDX #$0C
-	JSR L_CC45
+	JSR create_thread
 	JMP @Loop41
 @Loop2:
 	LDA #$13
@@ -101,7 +101,7 @@ L_20_8825:
 	LDY #<(L_20_8D34-1)
 	LDA #>(L_20_8D34-1)
 	LDX #$0C
-	JSR L_CC45
+	JSR create_thread
 	LDA $75
 	AND #$E0
 	BNE @Loop5

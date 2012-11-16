@@ -5632,8 +5632,8 @@ L_17_A9C4:
 	STA $50
 	LDA #$2E
 	STA $51
-	JSR L_D236
-	JMP L_D23A
+	JSR get_background_palette
+	JMP get_sprite_palette
 
 L_17_A9D2:
 	LDA #$00

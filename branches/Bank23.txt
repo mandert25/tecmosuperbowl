@@ -1696,7 +1696,7 @@ L_23_94E9:
 	JSR L_23_9509
 	LDA $6A
 	JSR L_23_9509
-	JMP L_D2C8
+	JMP buffer_end
 
 L_23_9509:
 	AND #$0F

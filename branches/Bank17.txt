@@ -2446,7 +2446,7 @@ L_17_9249:
 L_17_9278:
 	JSR L_17_9D69
 	JSR L_17_9CAA
-	JSR L_D194
+	JSR palette_fade_out
 	LDA #$34
 	LDX #$07 ; BANK8
 	JSR L_17_B472
@@ -2468,12 +2468,12 @@ L_17_9294:
 	LDA #$C0
 	STA PRG_RAM_PROTECT
 @Loop1:
-	JSR L_D194
+	JSR palette_fade_out
 	LDA $6758
 	CMP #$11
 	BCS @Loop3
 	JSR L_17_9492
-	JSR L_D194
+	JSR palette_fade_out
 	JSR L_17_9D69
 	JSR L_17_A432
 	JSR L_17_9CAA
@@ -2505,7 +2505,7 @@ L_17_9294:
 	LDA $6777,X
 	STA $6D
 	JSR L_17_94A1
-	JSR L_D194
+	JSR palette_fade_out
 	JSR L_17_9D69
 	JSR L_17_A432
 	JSR L_17_9CAA
@@ -2641,7 +2641,7 @@ L_17_9404:
 	LDA #$C0
 	STA PRG_RAM_PROTECT
 	JSR L_17_8ED5
-	JSR L_D194
+	JSR palette_fade_out
 	LDA #$35
 	LDX #$07 ; BANK8
 	JSR L_17_B472
@@ -4414,7 +4414,7 @@ L_17_A053:
 	JSR L_17_B39F
 	LDX #$78
 	JSR L_17_B49D
-	JSR L_D194
+	JSR palette_fade_out
 	JSR L_17_B489
 	LDA #$0A
 	JSR switch_thread
@@ -4594,7 +4594,7 @@ L_17_A053:
 	JSR L_17_9E47
 	LDA #$14
 	JSR switch_thread
-	JSR L_D194
+	JSR palette_fade_out
 	RTS
 
 L_17_A236:
@@ -5140,7 +5140,7 @@ L_17_A4B4:
 	JSR L_C41F
 	LDA #$F0
 	JSR switch_thread
-	JSR L_D194
+	JSR palette_fade_out
 	LDA #$80
 	STA PRG_RAM_PROTECT
 	LDA #$00
@@ -5159,7 +5159,7 @@ L_17_A64A:
 	JSR switch_thread
 	LDA #$3C
 	JSR switch_thread
-	JSR L_D194
+	JSR palette_fade_out
 	LDA #$0A
 	JSR switch_thread
 	RTS
@@ -7095,7 +7095,7 @@ L_17_B49D:
 	BVS @Loop1
 	DEX
 	BNE L_17_B49D
-	JSR L_D194
+	JSR palette_fade_out
 	RTS
 @Loop1:
 	JSR L_17_94F4

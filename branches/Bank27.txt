@@ -24,7 +24,7 @@ L_27_802D:
 	STA $E1
 @Loop1:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $38
 	AND #$10
 	BNE @Loop5
@@ -38,7 +38,7 @@ L_27_802D:
 	LDX #$14
 @Loop2:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $35
 	AND #$0C
 	BEQ @Loop1
@@ -63,7 +63,7 @@ L_27_802D:
 	JSR L_CCDD
 	JSR L_D194
 	LDA #$04
-	JSR L_CC9A
+	JSR switch_thread
 	RTS
 
 L_27_8093:
@@ -1123,7 +1123,7 @@ L_27_86FD:
 	BNE @Loop3
 @Loop4:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $38
 	BMI @Loop5
 	AND #$10

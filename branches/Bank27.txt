@@ -1066,7 +1066,7 @@ L_27_86FD:
 	STA $8E
 	STA $90
 @Loop2:
-	JSR L_D28B
+	JSR set_palette_fade_to_in
 	JSR L_D10E
 	LDA #$00
 	LDX #$00
@@ -1162,7 +1162,7 @@ L_27_87E6:
 	LDA $02
 	AND #$0F
 	STA $02
-	JSR L_D28B
+	JSR set_palette_fade_to_in
 	JSR L_D10E
 	JSR clear_sprites
 	LDA #$00
@@ -1229,7 +1229,7 @@ L_27_87E6:
 	LDA $3A
 	AND #$C0
 	BEQ @Loop3
-	JSR L_D28B
+	JSR set_palette_fade_to_in
 	LDX #$02
 	JSR L_CC8F
 	LDA #$20

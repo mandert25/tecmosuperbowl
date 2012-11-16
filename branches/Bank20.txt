@@ -431,7 +431,7 @@ L_20_8825:
 	LDA #>L_20_94C8
 	STA $3F
 	JSR L_CCFC
-	JMP L_CC50
+	JMP destroy_thread
 @Loop41:
 	LDA $75
 	AND #$0E
@@ -769,7 +769,7 @@ L_20_8D34:
 	LDA #>L_20_94C8
 	STA $3F
 	JSR L_CCFC
-	JMP L_CC50
+	JMP destroy_thread
 
 L_20_8E30:
 	LDA $35

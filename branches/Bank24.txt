@@ -1807,7 +1807,7 @@ L_24_8D39:
 L_24_8D54:
 	LDA #$00
 	STA $DA
-	JMP L_CC50
+	JMP destroy_thread
 
 L_24_8D5B:
 	LDX #$51
@@ -2693,7 +2693,7 @@ L_24_92EA:
 	LDA #$00
 	STA $D4
 	STA $D5
-	JMP L_CC50
+	JMP destroy_thread
 
 L_24_9417:
 	LDX #$02 ; BANK3
@@ -2959,7 +2959,7 @@ L_24_9501:
 	LDA #$00
 	STA $59
 	STA $5A
-	JMP L_CC50
+	JMP destroy_thread
 
 L_24_95E9:
 	ASL

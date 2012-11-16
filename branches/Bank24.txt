@@ -846,7 +846,7 @@ L_24_8665:
 
 L_24_866F:
 	LDA ($C2),Y
-	JSR L_D17B
+	JSR get_sprite_palette_fade_in
 	LDA #$02
 	JMP L_24_8C48
 

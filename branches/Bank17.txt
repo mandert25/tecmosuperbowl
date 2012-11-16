@@ -5471,7 +5471,7 @@ L_17_A877:
 	LDY #$C4
 	LDX #$C4
 	JSR L_17_A8F4
-	JMP L_D286
+	JMP set_palette_fade_to_out
 
 L_17_A891:
 	JSR L_17_A9C4

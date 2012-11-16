@@ -1792,7 +1792,7 @@ L_24_8D28:
 	JMP L_24_8D28
 L_24_8D39:
 	STY $43
-	JSR L_D1DF
+	JSR palette_no_fade
 	LDY $43
 	LDA ($44),Y
 	CMP #$FE

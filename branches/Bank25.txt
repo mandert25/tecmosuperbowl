@@ -1263,7 +1263,7 @@ L_25_89EA:
 @Loop1:
 	LDA #$01
 	JSR switch_thread
-	JSR L_D6B4
+	JSR ymenu_up_down
 	JSR L_D6F9
 	BIT $3A
 	BVS L_25_8A38

@@ -4,7 +4,7 @@ L_25_8003:	JMP L_25_8A78
 L_25_8006:	JMP L_25_8FD6
 
 L_25_8009:
-	JSR L_D559
+	JSR set_vertical_mirroring
 	LDA $E1
 	STA $45
 	LDA #$03

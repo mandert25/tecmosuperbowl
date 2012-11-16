@@ -1598,17 +1598,17 @@ L_23_9459:
 	JMP L_23_91D1
 
 L_23_9460:
-	LDX #$20
+	LDX #>$2040
 	JMP L_23_9467
 L_23_9465:
-	LDX #$24
+	LDX #>$2440
 L_23_9467:
 	LDY #$40
 	LDA #$02
 	STA $3F
 	LDA #$20
 	STA $3E
-	JMP L_D09B
+	JMP clear_vram_size
 
 L_23_9474:
 	JSR L_D53E
@@ -1726,13 +1726,13 @@ L_23_9513:
 	LDX #$20
 	JMP L_D3D4
 L_23_9538:
-	LDY #$41
-	LDX #$20
+	LDY #<$2041
+	LDX #>$2041
 	LDA #$01
 	STA $3F
 	LDA #$0B
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	LDA #$80
 	STA $88
 	RTS
@@ -1754,13 +1754,13 @@ L_23_954C:
 	LDX #$20
 	JMP L_D3D4
 L_23_956D:
-	LDY #$54
-	LDX #$20
+	LDY #<$2054
+	LDX #>$2054
 	LDA #$01
 	STA $3F
 	LDA #$0B
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	LDA #$80
 	STA $89
 L_23_9580:

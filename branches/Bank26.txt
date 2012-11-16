@@ -151,7 +151,7 @@ L_26_80E4:
 @Loop1:
 	INY
 	LDA #$01
-	JSR L_D29A
+	JSR buffer_add
 	LDA $44
 	CLC
 	ADC #$30
@@ -161,7 +161,7 @@ L_26_80E4:
 
 L_26_8139:
 	LDA #$07
-	JSR L_D29A
+	JSR buffer_add
 	LDA $45
 	JSR L_26_8151
 	LDA #$E4

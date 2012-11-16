@@ -1495,7 +1495,7 @@ L_20_934F:
 	LDA #$20
 	STA $3E
 	JSR L_D09B
-	JMP L_D571
+	JMP clear_sprites
 
 L_20_9370:
 	TAX

@@ -893,7 +893,7 @@ L_24_86B6:
 
 L_24_86C0:
 	LDA ($C2),Y
-	JSR L_D1F4
+	JSR get_sprite_palette_no_fade
 	LDA #$02
 	JMP L_24_8C48
 

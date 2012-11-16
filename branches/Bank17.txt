@@ -2561,7 +2561,7 @@ L_17_9294:
 	LDA #$80
 	STA PRG_RAM_PROTECT
 	INC $6759
-	JSR L_C4B3
+	JSR store_sram_checksum
 	LDA #$C0
 	STA PRG_RAM_PROTECT
 	LDA $6759
@@ -3746,7 +3746,7 @@ L_17_9B51:
 	INX
 	CPX #$10
 	BCC @Loop3
-	JSR L_C4B3
+	JSR store_sram_checksum
 	JSR L_17_8ED5
 @Loop7:
 	LDA $91
@@ -4063,7 +4063,7 @@ L_17_9DBA:
 	LDY #$FD
 	LDX #$65
 	JSR L_17_9DDA
-	JSR L_C4B3
+	JSR store_sram_checksum
 	LDA #$C0
 	STA PRG_RAM_PROTECT
 	RTS
@@ -5106,7 +5106,7 @@ L_17_A4B4:
 	LDX #>L_26_8006
 	JSR bank_swap_8000_jump
 @Loop4:
-	JSR L_C4B3
+	JSR store_sram_checksum
 	LDA #$C0
 	STA PRG_RAM_PROTECT
 	RTS
@@ -6320,7 +6320,7 @@ L_17_AE5D:
 	LDA $90
 	STA $67A2,X
 	STA $6E
-	JSR L_C4B3
+	JSR store_sram_checksum
 	LDA #$C0
 	STA PRG_RAM_PROTECT
 	LDA #$56
@@ -6795,7 +6795,7 @@ L_17_B1DA:
 	LDA $9B
 	STA $6783
 	STA $67AD
-	JSR L_C4B3
+	JSR store_sram_checksum
 	LDA #$C0
 	STA PRG_RAM_PROTECT
 	RTS
@@ -6819,7 +6819,7 @@ L_17_B2A4:
 	LDA $97
 	STA $67A2,X
 	STA $6E
-	JSR L_C4B3
+	JSR store_sram_checksum
 	LDA #$C0
 	STA PRG_RAM_PROTECT
 	LDA #$56

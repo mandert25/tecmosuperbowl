@@ -149,7 +149,7 @@ L_25_8009:
 	STA $3F
 	LDA #$0C
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 @Loop13:
 	JSR L_25_910A
 	DEC $AB
@@ -1089,14 +1089,14 @@ L_25_88C0:
 	STA $3F
 	LDA #$1E
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	LDX #$44
 	JSR L_25_892E
 	LDA #$01
 	STA $3F
 	LDA #$1C
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	SEC
 	RTS
 L_25_88E9:
@@ -1109,7 +1109,7 @@ L_25_88E9:
 	STA $3F
 	LDA #$1E
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	SEC
 	RTS
 L_25_8902:
@@ -1315,20 +1315,20 @@ L_25_8A4B:
 	LDA #$00
 	STA $0307
 	STA $0308
-	LDY #$80
-	LDX #$20
+	LDY #<$2080
+	LDX #>$2080
 	LDA #$18
 	STA $3F
 	LDA #$20
 	STA $3E
-	JSR L_D09B
-	LDY #$C8
-	LDX #$23
+	JSR clear_vram_size
+	LDY #<$23C8
+	LDX #>$23C8
 	LDA #$06
 	STA $3F
 	LDA #$08
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	JSR set_palette_fade_to_out
 	RTS
 

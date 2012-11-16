@@ -14,7 +14,7 @@ L_20_8812:
 	LDA $0307
 	BEQ L_20_8825
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JMP @Loop1
 L_20_8825:
 	JSR L_20_934F
@@ -40,7 +40,7 @@ L_20_8825:
 	ADC #$40
 	JSR L_CF61
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_9183
 	LDA #$F0
 	STA $0208
@@ -73,7 +73,7 @@ L_20_8825:
 	LDA #$0F
 	STA $4B
 	LDA #$02
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$0F
 	LDX #$01
 	JSR L_D136
@@ -111,7 +111,7 @@ L_20_8825:
 	JMP @Loop11
 @Loop3:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_944C
 	JSR L_20_8E30
 	BCC @Loop4
@@ -137,16 +137,16 @@ L_20_8825:
 	LDX #$3C
 @Loop6:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_944C
 	DEX
 	BNE @Loop6
 	JSR L_20_9019
 	LDA #$08
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_8F7E
 	LDA #$08
-	JSR L_CC9A
+	JSR switch_thread
 @Loop7:
 	LDA $8E
 	CMP #$08
@@ -159,7 +159,7 @@ L_20_8825:
 	LDX #$1E
 @Loop8:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_944C
 	DEX
 	BNE @Loop8
@@ -174,7 +174,7 @@ L_20_8825:
 	TAX
 @Loop10:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_944C
 	DEX
 	BNE @Loop10
@@ -191,7 +191,7 @@ L_20_8825:
 	JSR L_D68A
 @Loop13:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_944C
 	JSR L_D6B4
 	JSR L_D6F9
@@ -223,7 +223,7 @@ L_20_8825:
 	LDX #$78
 @Loop18:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_944C
 	LDA $38
 	AND #$C0
@@ -271,14 +271,14 @@ L_20_8825:
 	STA CLOCK
 @Loop24:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_944C
 	LDA PLAYER2_PLAY_CALL
 	BMI @Loop24
 	LDX #$1B
 	JSR L_CCDD
 	LDA #$3C
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D194
 	LDA #$F0
 	STA $0208
@@ -305,7 +305,7 @@ L_20_8825:
 	STA $3E
 	JSR L_D09B
 	LDA #$3C
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D194
 	LDA #$F0
 	STA $0208
@@ -318,7 +318,7 @@ L_20_8825:
 	BNE @Loop29
 @Loop27:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_8E30
 	BCC @Loop28
 	JMP @Loop40
@@ -341,19 +341,19 @@ L_20_8825:
 	LDA #$F0
 	STA $0200
 	LDA #$78
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_9019
 	LDA #$08
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_8F7E
 	LDA #$08
-	JSR L_CC9A
+	JSR switch_thread
 @Loop30:
 	LDA $3B
 	AND #$07
 	CLC
 	ADC #$1E
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $8E
 	JMP @Loop40
 @Loop31:
@@ -367,7 +367,7 @@ L_20_8825:
 	JSR L_D68A
 @Loop33:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D6B4
 	JSR L_D6F9
 	BIT $38
@@ -398,7 +398,7 @@ L_20_8825:
 	LDX #$78
 @Loop38:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $38
 	AND #$C0
 	BNE @Loop39
@@ -442,7 +442,7 @@ L_20_8825:
 	JMP @Loop50
 @Loop42:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_944C
 	JSR L_20_8E4E
 	BCC @Loop43
@@ -468,16 +468,16 @@ L_20_8825:
 	LDX #$3C
 @Loop45:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_944C
 	DEX
 	BNE @Loop45
 	JSR L_20_916B
 	LDA #$08
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_90D0
 	LDA #$08
-	JSR L_CC9A
+	JSR switch_thread
 @Loop46:
 	LDA $8F
 	CMP #$08
@@ -490,7 +490,7 @@ L_20_8825:
 	LDX #$1E
 @Loop47:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_944C
 	DEX
 	BNE @Loop47
@@ -505,7 +505,7 @@ L_20_8825:
 	TAX
 @Loop49:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_944C
 	DEX
 	BNE @Loop49
@@ -524,7 +524,7 @@ L_20_8825:
 	JSR L_20_92C9
 @Loop52:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_944C
 	JSR L_20_92C2
 	JSR L_D6B4
@@ -558,7 +558,7 @@ L_20_8825:
 	LDX #$78
 @Loop57:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_944C
 	LDA $39
 	AND #$C0
@@ -606,14 +606,14 @@ L_20_8825:
 	STA CLOCK
 @Loop63:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_944C
 	LDA PLAYER1_PLAY_CALL
 	BMI @Loop63
 	LDX #$1B
 	JSR L_CCDD
 	LDA #$3C
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D194
 	LDA #$F0
 	STA $0208
@@ -640,7 +640,7 @@ L_20_8825:
 	STA $3E
 	JSR L_D09B
 	LDA #$3C
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D194
 	LDA #$F0
 	STA $0208
@@ -654,7 +654,7 @@ L_20_8D34:
 	BNE @Loop3
 @Loop1:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_8E4E
 	BCC @Loop2
 	JMP @Loop14
@@ -677,19 +677,19 @@ L_20_8D34:
 	LDA #$F0
 	STA $0200
 	LDA #$78
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_916B
 	LDA #$08
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_90D0
 	LDA #$08
-	JSR L_CC9A
+	JSR switch_thread
 @Loop4:
 	LDA $3C
 	AND #$07
 	CLC
 	ADC #$1E
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $8F
 	JMP @Loop14
 @Loop5:
@@ -705,7 +705,7 @@ L_20_8D34:
 	JSR L_20_92C9
 @Loop7:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_92C2
 	JSR L_D6B4
 	JSR L_D6F9
@@ -738,7 +738,7 @@ L_20_8D34:
 	LDX #$78
 @Loop12:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $39
 	AND #$C0
 	BNE @Loop13
@@ -822,7 +822,7 @@ L_20_8E6C:
 	TXS
 @Loop1:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $30
 	AND #$04
 	BEQ @Loop2
@@ -897,7 +897,7 @@ L_20_8EE5:
 	LDA #$00
 	JSR L_D68A
 	LDA #$14
-	JSR L_CC9A
+	JSR switch_thread
 	INC $E1
 	DEC $45
 	BNE @Loop1
@@ -907,7 +907,7 @@ L_20_8F02:
 	LDA #$1E
 	JSR L_C41F
 	LDA #$04
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_92F4
 	LDA #$80
 	STA PRG_RAM_PROTECT
@@ -936,7 +936,7 @@ L_20_8F40:
 	LDA #$1E
 	JSR L_C41F
 	LDA #$04
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_92F4
 	LDA #$80
 	STA PRG_RAM_PROTECT
@@ -1063,7 +1063,7 @@ L_20_9031:
 	JSR L_D68A
 	JSR L_20_92C9
 	LDA #$14
-	JSR L_CC9A
+	JSR switch_thread
 	INC $E7
 	DEC $45
 	BNE @Loop1
@@ -1073,7 +1073,7 @@ L_20_9054:
 	LDA #$1E
 	JSR L_C41F
 	LDA #$04
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_92F4
 	LDA #$80
 	STA PRG_RAM_PROTECT
@@ -1102,7 +1102,7 @@ L_20_9092:
 	LDA #$1E
 	JSR L_C41F
 	LDA #$04
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_20_92F4
 	LDA #$80
 	STA PRG_RAM_PROTECT
@@ -1430,7 +1430,7 @@ L_20_92F4:
 	LDA $64
 	BPL @Loop1
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JMP L_20_92F4
 @Loop1:
 	LDA $1B
@@ -1442,7 +1442,7 @@ L_20_9307:
 	LDA $64
 	BPL @Loop1
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JMP L_20_9307
 @Loop1:
 	LDX #$0C
@@ -1503,7 +1503,7 @@ L_20_9370:
 	LDA $7C
 	BEQ @Loop2
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JMP @Loop1
 @Loop2:
 	STX $7C

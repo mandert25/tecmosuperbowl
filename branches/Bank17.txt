@@ -538,7 +538,7 @@ L_17_828F:
 	LDY #<SCHEDULE_RESET_MENU_SELECT
 	LDX #>SCHEDULE_RESET_MENU_SELECT
 	LDA #$02
-	JSR L_D68A
+	JSR set_ymenu_arrow
 @Loop19:
 	LDA #$01
 	JSR switch_thread
@@ -571,7 +571,7 @@ L_17_828F:
 	LDY #<SCHEDULE_RESET_VERIFY_SELECT
 	LDX #>SCHEDULE_RESET_VERIFY_SELECT
 	LDA #$02
-	JSR L_D68A
+	JSR set_ymenu_arrow
 @Loop22:
 	LDA #$01
 	JSR switch_thread
@@ -3069,7 +3069,7 @@ L_17_9632:
 	LDY #<STARTER_RESET_SELECT
 	LDX #>STARTER_RESET_SELECT
 	LDA #$02
-	JSR L_D68A
+	JSR set_ymenu_arrow
 @Loop10:
 	LDA #$01
 	JSR switch_thread
@@ -3198,7 +3198,7 @@ L_17_9632:
 	LDY $E7
 	LDX $E8
 	LDA #$02
-	JSR L_D68A
+	JSR set_ymenu_arrow
 	LDA #$01
 	STA $ED
 	JSR L_17_9C48
@@ -3849,7 +3849,7 @@ L_17_9C54:
 	LDA STARTER_SELECT+1,X
 	TAX
 	LDA #$02
-	JSR L_D68A
+	JSR set_ymenu_arrow
 	RTS
 
 L_17_9C6C:
@@ -3860,7 +3860,7 @@ L_17_9C6C:
 	LDA RESERVE_SELECT+1,X
 	TAX
 	LDA #$02
-	JSR L_D68A
+	JSR set_ymenu_arrow
 	RTS
 
 L_17_9C7D:

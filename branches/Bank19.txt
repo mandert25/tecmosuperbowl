@@ -61,13 +61,13 @@ L_19_8019:
 	BEQ @Loop3
 	LDA #$0A
 	JSR switch_thread
-	LDY #$44
-	LDX #$20
+	LDY #<$2044
+	LDX #>$2044
 	LDA #$01
 	STA $3F
 	LDA #$0E
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	LDA #$04
 	JSR switch_thread
 	LDA #$09
@@ -961,13 +961,13 @@ L_19_87A1:
 	BEQ @Loop3
 	LDA #$0A
 	JSR switch_thread
-	LDY #$50
-	LDX #$20
+	LDY #<$2050
+	LDX #>$2050
 	LDA #$01
 	STA $3F
 	LDA #$0E
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	LDA #$04
 	JSR switch_thread
 	LDA #$09

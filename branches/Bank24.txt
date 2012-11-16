@@ -966,7 +966,7 @@ L_24_8728:
 	JMP L_24_8C48
 
 L_24_8742:
-	JSR L_D565
+	JSR set_horizontal_mirroring
 	LDA #$01
 	JMP L_24_8C48
 

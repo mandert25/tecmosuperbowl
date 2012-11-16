@@ -421,16 +421,16 @@ L_21_8373:
 L_21_837E:
 	LDA #$08
 	JSR L_DACB
-	JSR L_D929
+	JSR update_random_3B
 	JSR L_DACB
-	JSR L_D931
+	JSR update_random_3C
 	JSR L_DACB
-	JSR L_D939
+	JSR update_random_3D
 	AND #$3F
 	JSR L_DACB
-	JSR L_D929
+	JSR update_random_3B
 	BMI L_21_83BD
-	JSR L_D931
+	JSR update_random_3C
 	AND #$3F
 	JSR L_DACB
 	JSR L_21_B190
@@ -460,12 +460,12 @@ L_21_83CF:
 	JSR L_21_B14C
 	LDA #$08
 	JSR L_DACB
-	JSR L_D939
+	JSR update_random_3D
 	CMP #$AA
 	BCC L_21_83E9
 	JMP L_21_837E
 L_21_83E9:
-	JSR L_D929
+	JSR update_random_3B
 	AND #$3F
 	CLC
 	ADC #$10
@@ -490,14 +490,14 @@ L_21_840F:
 	JSR L_21_B14C
 	LDA #$08
 	JSR L_DACB
-	JSR L_D939
+	JSR update_random_3D
 	CMP #$CD
 	BCS L_21_8442
 	JSR L_21_B190
 	LDY #<(L_21_8574-1)
 	LDX #>(L_21_8574-1)
 	JSR L_21_B1C9
-	JSR L_D929
+	JSR update_random_3B
 	CMP #$33
 	BCC L_21_843A
 	JMP L_21_8723
@@ -517,13 +517,13 @@ L_21_844A:
 	JSR L_21_B14C
 	LDA #$08
 	JSR L_DACB
-	JSR L_D939
+	JSR update_random_3D
 	CMP #$AA
 	BCC L_21_8464
 	JMP L_21_837E
 L_21_8464:
 	JSR L_21_B190
-	JSR L_D931
+	JSR update_random_3C
 	CMP #$55
 	BCS L_21_8475
 	LDY #<(L_21_85A3-1)
@@ -545,11 +545,11 @@ L_21_8484:
 	JSR L_21_B14C
 	LDA #$08
 	JSR L_DACB
-	JSR L_D939
+	JSR update_random_3D
 	CMP #$CD
 	BCS L_21_8442
 	JSR L_21_B190
-	JSR L_D931
+	JSR update_random_3C
 	CMP #$33
 	BCS L_21_84AC
 	LDY #<(L_21_85A3-1)
@@ -638,7 +638,7 @@ L_21_8542:
 	JMP L_21_85A3
 
 L_21_8551:
-	JSR L_D929
+	JSR update_random_3B
 	CMP #$55
 	BCC L_21_8598
 	CMP #$AB
@@ -646,7 +646,7 @@ L_21_8551:
 	JMP L_21_85D5
 
 L_21_855F:
-	JSR L_D931
+	JSR update_random_3C
 	CMP #$40
 	BCC L_21_85BA
 	CMP #$80
@@ -659,7 +659,7 @@ L_21_8571:
 	JMP L_21_8605
 
 L_21_8574:
-	JSR L_D939
+	JSR update_random_3D
 	CMP #$55
 	BCC L_21_85D5
 	CMP #$AB
@@ -667,7 +667,7 @@ L_21_8574:
 	JMP L_21_8605
 
 L_21_8582:
-	JSR L_D931
+	JSR update_random_3C
 	CMP #$33
 	BCC L_21_8598
 	CMP #$66

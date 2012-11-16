@@ -8395,7 +8395,7 @@ L_21_BA4D:
 	LDY #<(L_23_900F-1)
 	LDA #>(L_23_900F-1)
 	LDX #$16
-	JSR L_CC45
+	JSR create_thread
 	RTS
 
 L_21_BA5B:
@@ -8408,7 +8408,7 @@ L_21_BA61:
 	LDY #<(L_23_900C-1)
 	LDA #>(L_23_900C-1)
 	LDX #$16
-	JSR L_CC45
+	JSR create_thread
 	RTS
 
 L_21_BA6F:	.BYTE $FE

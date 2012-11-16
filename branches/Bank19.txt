@@ -4482,7 +4482,7 @@ L_19_A000:
 	LDA $B7
 	CMP #$FF
 	BEQ @Loop18
-	JSR L_D1DF
+	JSR palette_no_fade
 	LDA #$02
 	JSR switch_thread
 @Loop18:

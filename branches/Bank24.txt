@@ -682,7 +682,7 @@ L_24_8538:
 	LDY #$01
 	LDA ($C2),Y
 	BPL @Loop2
-	JSR L_D286
+	JSR set_palette_fade_to_out
 	LDA #$02
 	JMP L_24_8C48
 @Loop2:
@@ -713,7 +713,7 @@ L_24_8564:
 	AND #$7F
 	STA $50
 	JSR get_background_palette
-	JSR L_D286
+	JSR set_palette_fade_to_out
 	LDA #$02
 	JMP L_24_8C48
 
@@ -909,7 +909,7 @@ L_24_86CA:
 	JMP L_24_8C48
 
 L_24_86DA:
-	JSR L_D286
+	JSR set_palette_fade_to_out
 	LDA #$01
 	JMP L_24_8C48
 

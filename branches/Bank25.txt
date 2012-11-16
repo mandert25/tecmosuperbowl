@@ -1311,7 +1311,7 @@ L_25_8A40:
 	JMP L_CCFC
 
 L_25_8A4B:
-	JSR L_D28B
+	JSR set_palette_fade_to_in
 	LDA #$00
 	STA $0307
 	STA $0308

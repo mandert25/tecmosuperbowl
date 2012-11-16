@@ -673,7 +673,7 @@ L_17_8507:
 @Loop2:
 	LDA #$01
 	JSR switch_thread
-	JSR L_D71C
+	JSR xymenu_move
 	JSR L_D77A
 	BIT $3A
 	BVC @Loop3
@@ -782,7 +782,7 @@ L_17_85E0:
 @Loop2:
 	LDA #$01
 	JSR switch_thread
-	JSR L_D71C
+	JSR xymenu_move
 	JSR L_D77A
 	BIT $3A
 	BVS @Loop3
@@ -842,7 +842,7 @@ L_17_8674:
 @Loop2:
 	LDA #$01
 	JSR switch_thread
-	JSR L_D71C
+	JSR xymenu_move
 	JSR L_D77A
 	BIT $3A
 	BVS @Loop3
@@ -5651,7 +5651,7 @@ L_17_A9D2:
 @Loop1:
 	LDA #$01
 	JSR switch_thread
-	JSR L_D71C
+	JSR xymenu_move
 	JSR L_D77A
 	JSR L_17_AC44
 	BIT $3A
@@ -5697,7 +5697,7 @@ L_17_AA16:
 @Loop3:
 	LDA #$01
 	JSR switch_thread
-	JSR L_D71C
+	JSR xymenu_move
 	JSR L_D78E
 	JSR L_17_ABFE
 	CMP $6C
@@ -5757,7 +5757,7 @@ L_17_AA7D:
 	JSR switch_thread
 	LDA $6C
 	BPL @Loop4
-	JSR L_D71C
+	JSR xymenu_move
 	JSR L_17_ACAB
 	JSR L_D77A
 	JSR L_17_AC44
@@ -5771,7 +5771,7 @@ L_17_AA7D:
 	LDA $6D
 	BPL @Loop6
 	JSR L_17_AB1F
-	JSR L_D71C
+	JSR xymenu_move
 	JSR L_17_ACAB
 	LDA #$2C
 	STA $0201

@@ -157,7 +157,7 @@ L_26_80E4:
 	ADC #$30
 	STA $033A,X
 	INX
-	JMP L_D2C8
+	JMP buffer_end
 
 L_26_8139:
 	LDA #$07
@@ -169,7 +169,7 @@ L_26_8139:
 	INX
 	LDA $44
 	JSR L_26_8151
-	JMP L_D2C8
+	JMP buffer_end
 
 L_26_8151:
 	ASL

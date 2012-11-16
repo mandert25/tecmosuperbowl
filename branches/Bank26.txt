@@ -708,7 +708,7 @@ L_26_851B:
 	AND #$03
 	ORA $45
 	STA $0202
-	JSR L_D77A
+	JSR xymenu_set_xy
 	BIT $3A
 	BVC @Loop3
 	JMP @Loop4

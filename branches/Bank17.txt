@@ -4511,13 +4511,13 @@ L_17_A053:
 	LDY #<(L_19_8000-1)
 	LDA #>(L_19_8000-1)
 	LDX #$07
-	JSR L_CC45
+	JSR create_thread
 	LDA #$16
 	STA $15
 	LDY #<(L_23_9003-1)
 	LDA #>(L_23_9003-1)
 	LDX #$11
-	JSR L_CC45
+	JSR create_thread
 @Loop12:
 	LDA #$01
 	JSR L_CC9A
@@ -4612,7 +4612,7 @@ L_17_A236:
 	LDY #<(L_19_8000-1)
 	LDA #>(L_19_8000-1)
 	LDX #$07
-	JSR L_CC45
+	JSR create_thread
 	JMP @Loop2
 @Loop1:
 	LDX #$07
@@ -4623,7 +4623,7 @@ L_17_A236:
 	LDY #<(L_23_9003-1)
 	LDA #>(L_23_9003-1)
 	LDX #$11
-	JSR L_CC45
+	JSR create_thread
 @Loop3:
 	LDA #$01
 	JSR L_CC9A

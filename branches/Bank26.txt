@@ -81,7 +81,7 @@ L_26_803C:
 	STA $3F
 	LDA #$07
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 @Loop6:
 	INC $94
 	INC $91
@@ -100,13 +100,13 @@ L_26_803C:
 @Loop7:
 	JMP @Loop9
 @Loop8:
-	LDY #$40
-	LDX #$21
+	LDY #<$2140
+	LDX #>$2140
 	LDA #$12
 	STA $3F
 	LDA #$20
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 @Loop9:
 	LDX #$11 ; BANK18
 	JSR bank_swap_A000
@@ -220,7 +220,7 @@ L_26_816B:
 	STA $3F
 	LDA #$07
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	RTS
 @Loop1:
 	LDX #$0F ; BANK16
@@ -632,27 +632,27 @@ L_26_83FD:
 	JSR bank_swap_A000
 	LDA #$02
 	JSR switch_thread
-	LDY #$B4
-	LDX #$21
+	LDY #<$21B4
+	LDX #>$21B4
 	LDA #$03
 	STA $3F
 	LDA #$01
 	STA $3E
-	JSR L_D09B
-	LDY #$2A
-	LDX #$22
+	JSR clear_vram_size
+	LDY #<$222A
+	LDX #>$222A
 	LDA #$04
 	STA $3F
 	LDA #$01
 	STA $3E
-	JSR L_D09B
-	LDY #$10
-	LDX #$23
+	JSR clear_vram_size
+	LDY #<$2310
+	LDX #>$2310
 	LDA #$04
 	STA $3F
 	LDA #$01
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	LDA #$20
 	STA $4B
 	LDA #$21

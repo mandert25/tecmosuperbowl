@@ -76,7 +76,7 @@ L_20_8825:
 	JSR switch_thread
 	LDA #$0F
 	LDX #$01
-	JSR L_D136
+	JSR get_palette_fade_in
 	LDA #$80
 	STA PLAYER1_PLAY_CALL
 	STA PLAYER2_PLAY_CALL

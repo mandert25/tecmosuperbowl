@@ -3728,7 +3728,7 @@ L_D553:
 	STA $037E
 	RTS
 
-L_D559:
+set_vertical_mirroring:
 	LDA #$00
 	STA MIRRORING
 	LDA $2D
@@ -3736,7 +3736,7 @@ L_D559:
 	STA $2D
 	RTS
 
-L_D565:
+set_horizontal_mirroring:
 	LDA #$01
 	STA MIRRORING
 	LDA $2D

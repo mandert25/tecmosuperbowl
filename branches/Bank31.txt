@@ -3063,22 +3063,22 @@ L_D129:
 	STA $3E
 	JMP L_D09B
 
-L_D136:
+get_palette_fade_in:
 	STA BG_PALETTE
 	STX SPRITE_PALETTE
 	JSR get_background_palette
 	JSR get_sprite_palette
-L_D140:
+palette_fade_in:
 	LDA BG_PALETTE_FADE
 	CMP #$0F
-	BCS @Loop2
+	BCS @sprite
 	INC BG_PALETTE_FADE
-@Loop2:
+@sprite:
 	LDA SPRITE_PALETTE_FADE
 	CMP #$0F
-	BCS @Loop3
+	BCS @buffer
 	INC SPRITE_PALETTE_FADE
-@Loop3:
+@buffer:
 	JSR buffer_palette
 	LDA #$01
 	JSR switch_thread
@@ -3086,102 +3086,105 @@ L_D140:
 	CLC
 	ADC SPRITE_PALETTE_FADE
 	CMP #$1E
-	BCC L_D140
+	BCC palette_fade_in
 	RTS
 
-L_D162:
+get_bg_palette_fade_in:
 	STA BG_PALETTE
 	JSR get_background_palette
-@Loop1:
+@more:
 	LDA BG_PALETTE_FADE
 	CMP #$0F
-	BCS @Loop2
+	BCS @exit
 	INC BG_PALETTE_FADE
 	JSR buffer_palette
 	LDA #$01
 	JSR switch_thread
-	JMP @Loop1
-@Loop2:
+	JMP @more
+@exit:
 	RTS
 
-L_D17B:
+get_sprite_palette_fade_in:
 	STA SPRITE_PALETTE
 	JSR get_sprite_palette
-@Loop1:
+@more:
 	LDA SPRITE_PALETTE_FADE
 	CMP #$0F
-	BCS @Loop2
+	BCS @exit
 	INC SPRITE_PALETTE_FADE
 	JSR buffer_palette
 	LDA #$01
 	JSR switch_thread
-	JMP @Loop1
-@Loop2:
+	JMP @more
+@exit:
 	RTS
 
-L_D194:
-	LDA $52
-	ORA $53
-	BEQ @Loop3
+palette_fade_out:
+	LDA BG_PALETTE_FADE
+	ORA SPRITE_PALETTE_FADE
+	BEQ @exit
 	TAX
-	BEQ @Loop1
-	DEC $52
-@Loop1:
-	LDA $53
-	BEQ @Loop2
-	DEC $53
-@Loop2:
+	BEQ @sprite
+	DEC BG_PALETTE_FADE
+@sprite:
+	LDA SPRITE_PALETTE_FADE
+	BEQ @buffer
+	DEC SPRITE_PALETTE_FADE
+@buffer:
 	JSR buffer_palette
 	LDA #$01
 	JSR switch_thread
-	JMP L_D194
-@Loop3:
+	JMP palette_fade_out
+@exit:
 	RTS
 
-L_D1B1:
-	LDA $52
-	BEQ @Loop1
-	DEC $52
+bg_palette_fade_out:
+	LDA BG_PALETTE_FADE
+	BEQ @exit
+	DEC BG_PALETTE_FADE
 	JSR buffer_palette
 	LDA #$01
 	JSR switch_thread
-	JMP L_D1B1
-@Loop1:
+	JMP bg_palette_fade_out
+@exit:
 	RTS
 
-L_D1C3:
-	LDA $53
-	BEQ @Loop1
-	DEC $53
+sprite_palette_fade_out:
+	LDA SPRITE_PALETTE_FADE
+	BEQ @exit
+	DEC SPRITE_PALETTE_FADE
 	JSR buffer_palette
 	LDA #$01
 	JSR switch_thread
-	JMP L_D1C3
-@Loop1:
+	JMP sprite_palette_fade_out
+@exit:
 	RTS
 
-L_D1D5:
+new_palette_no_fade:
 	STA BG_PALETTE
 	STX SPRITE_PALETTE
-L_D1D9:
+get_palette_no_fade:
 	JSR get_background_palette
 	JSR get_sprite_palette
-L_D1DF:
+palette_no_fade:
 	LDA #$0F
 	STA BG_PALETTE_FADE
 	STA SPRITE_PALETTE_FADE
 	JMP buffer_palette
-L_D1E8:
+
+get_bg_palette_no_fade:
 	STA BG_PALETTE
 	JSR get_background_palette
 	LDA #$0F
 	STA BG_PALETTE_FADE
 	JMP buffer_palette
-L_D1F4:
+
+get_sprite_palette_no_fade:
 	STA SPRITE_PALETTE
 	JSR get_sprite_palette
 	LDA #$0F
 	STA SPRITE_PALETTE_FADE
+
 buffer_palette:
 	LDA #$20
 	LDY #<$3F00
@@ -3274,14 +3277,14 @@ get_palette:
 	LDX TEMP41
 	JMP bank_swap_A000
 	RTS
-@location:	.WORD $A000,$A600
+@location:	.WORD $A000,$A600 ; BANK14
 
-L_D286:
+set_palette_fade_to_out:
 	LDA #$0F
-	JMP L_D28D
-L_D28B:
+	JMP set_palette_fade
+set_palette_fade_to_in:
 	LDA #$00
-L_D28D:
+set_palette_fade:
 	STA BG_PALETTE_FADE
 	STA SPRITE_PALETTE_FADE
 	JSR buffer_palette

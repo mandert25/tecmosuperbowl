@@ -68,7 +68,7 @@ L_23_8056:
 	JSR bank_swap_8000_jump
 	LDX #$16 ; BANK23
 	JSR bank_swap_A000
-	JSR L_C38A
+	JSR enable_nmi
 	LDY #<L_23_8419
 	LDX #>L_23_8419
 	JSR L_C481

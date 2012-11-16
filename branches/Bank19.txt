@@ -2374,7 +2374,7 @@ L_19_92BF:
 	LDY #$9F
 	STY $44
 	LDY #$03
-	JSR L_D60E
+	JSR clear_ram_size
 	LDA #$9F
 	STA $84
 	LDA #$03

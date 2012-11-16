@@ -1388,7 +1388,7 @@ L_20_928D:
 	INY
 	CPY #$0F
 	BCC @Loop1
-	JMP L_D2C8
+	JMP buffer_end
 
 L_20_92BD:
 	LDA $43

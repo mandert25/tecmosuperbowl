@@ -840,7 +840,7 @@ L_24_8651:
 
 L_24_8665:
 	LDA ($C2),Y
-	JSR L_D162
+	JSR get_bg_palette_fade_in
 	LDA #$02
 	JMP L_24_8C48
 

@@ -2523,7 +2523,7 @@ L_19_93DF:
 	LDY #<(L_DA6D-1)
 	LDA #>(L_DA6D-1)
 	LDX #$20
-	JSR L_CC45
+	JSR create_thread
 	LDA #$02
 	JSR L_CC9A
 	RTS
@@ -3507,7 +3507,7 @@ L_19_9AC6:
 	LDY #<(L_23_8003-1)
 	LDA #>(L_23_8003-1)
 	LDX #$0C
-	JSR L_CC45
+	JSR create_thread
 	LDA #$04
 	JSR L_CC9A
 	RTS
@@ -4452,13 +4452,13 @@ L_19_A000:
 	LDY #<(L_23_9003-1)
 	LDA #>(L_23_9003-1)
 	LDX #$11
-	JSR L_CC45
+	JSR create_thread
 	LDA #$16
 	STA $1F
 	LDY #<(L_23_9006-1)
 	LDA #>(L_23_9006-1)
 	LDX #$1B
-	JSR L_CC45
+	JSR create_thread
 	LSR $2A
 	LDA #$02
 	JSR L_CC9A
@@ -4528,7 +4528,7 @@ L_19_A1C5:
 	LDY #<(L_23_9003-1)
 	LDA #>(L_23_9003-1)
 	LDX #$11
-	JSR L_CC45
+	JSR create_thread
 	LDA #$01
 	JSR L_CC9A
 	LDX #$02

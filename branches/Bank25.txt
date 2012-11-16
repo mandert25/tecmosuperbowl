@@ -1329,7 +1329,7 @@ L_25_8A4B:
 	LDA #$08
 	STA $3E
 	JSR L_D09B
-	JSR L_D286
+	JSR set_palette_fade_to_out
 	RTS
 
 L_25_8A78:
@@ -1696,7 +1696,7 @@ L_25_8A78:
 	STA $032E
 	STA $0332
 	STA $0336
-	JSR L_D286
+	JSR set_palette_fade_to_out
 	LDA $6F
 	STA $6E
 @Loop14:

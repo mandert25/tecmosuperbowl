@@ -631,7 +631,7 @@ L_26_83FD:
 	LDX #$11 ; BANK18
 	JSR L_D8E3
 	LDA #$02
-	JSR L_CC9A
+	JSR switch_thread
 	LDY #$B4
 	LDX #$21
 	LDA #$03
@@ -662,7 +662,7 @@ L_26_83FD:
 	JSR L_D1D5
 @Loop4:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $3A
 	AND #$C0
 	BEQ @Loop4
@@ -688,7 +688,7 @@ L_26_851B:
 	LDX #$23
 	JSR L_D1D5
 	LDA #$02
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$00
 	STA $E1
 	STA $E2
@@ -698,7 +698,7 @@ L_26_851B:
 	JSR L_D702
 @Loop2:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D71C
 	LDA $0202
 	AND #$FC

@@ -317,7 +317,7 @@ L_24_8225:
 	INY
 @Loop10:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $42
 	CLC
 	ADC $44
@@ -542,7 +542,7 @@ L_24_8450:
 	LDA $11
 	BEQ @Loop1
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JMP L_24_8450
 @Loop1:
 	BIT $2D
@@ -1188,7 +1188,7 @@ L_24_88FD:
 	LDA $6002
 	BPL @Loop1
 	LDA #$3C
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $37
 	BPL @Loop2
 	LDA #$80
@@ -1200,7 +1200,7 @@ L_24_88FD:
 	STA PRG_RAM_PROTECT
 @Loop1:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $3A
 	AND #$C0
 	BEQ @Loop1
@@ -1225,7 +1225,7 @@ L_24_8933:
 	BCS L_24_89B7
 L_24_8948:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $38
 	AND #$08
 	BEQ L_24_895C
@@ -1262,7 +1262,7 @@ L_24_8978:
 	BCS L_24_89B7
 L_24_898D:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $39
 	AND #$08
 	BEQ L_24_89A1
@@ -1284,7 +1284,7 @@ L_24_89B0:
 	JMP L_24_89BC
 L_24_89B7:
 	LDA #$3C
-	JSR L_CC9A
+	JSR switch_thread
 L_24_89BC:
 	LDA $45
 	AND #$10
@@ -1607,7 +1607,7 @@ L_24_8BD9:
 
 L_24_8C0E:
 	LDA ($C2),Y
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$02
 	JMP L_24_8C48
 
@@ -1801,7 +1801,7 @@ L_24_8D39:
 	BEQ L_24_8D54
 	SEC
 	SBC #$20
-	JSR L_CC9A
+	JSR switch_thread
 	INY
 	JMP L_24_8D28
 L_24_8D54:
@@ -1820,7 +1820,7 @@ L_24_8D62:
 	BNE L_24_8D62
 L_24_8D68:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDY #$00
 	LDX #$00
 L_24_8D71:
@@ -2528,7 +2528,7 @@ L_24_92D3:
 	LDX #$11
 	JSR create_thread
 	LDA #$04
-	JSR L_CC9A
+	JSR switch_thread
 	RTS
 
 L_24_92EA:
@@ -2640,7 +2640,7 @@ L_24_92EA:
 @Loop6:
 	JSR L_24_9417
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	DEC $42
 	BNE @Loop6
 	JSR L_24_949E
@@ -2801,7 +2801,7 @@ L_24_94BC:
 	ORA $D5
 	BEQ @Loop1
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JMP L_24_9501
 @Loop1:
 	LDY #$01
@@ -2846,7 +2846,7 @@ L_24_9501:
 	STA $41
 @Loop1:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $D6
 	JSR L_24_9604
 	LDA $44
@@ -2955,7 +2955,7 @@ L_24_9501:
 	JMP @Loop1
 @Loop9:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$00
 	STA $59
 	STA $5A
@@ -3105,7 +3105,7 @@ L_24_96C4:
 	STA $31
 @Loop1:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$00
 	STA $CE
 	LDA $D2

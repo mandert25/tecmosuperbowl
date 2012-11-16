@@ -254,7 +254,7 @@ L_20_8825:
 	JSR bank_swap_8000_jump
 	LDX #$02
 	JSR L_CC8F
-	JSR L_D28B
+	JSR set_palette_fade_to_in
 	JMP L_20_8800
 @Loop23:
 	STA PLAYER1_PLAY_CALL
@@ -589,7 +589,7 @@ L_20_8825:
 	JSR bank_swap_8000_jump
 	LDX #$02
 	JSR L_CC8F
-	JSR L_D28B
+	JSR set_palette_fade_to_in
 	JMP L_20_8800
 @Loop62:
 	STA PLAYER2_PLAY_CALL

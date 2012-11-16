@@ -2340,7 +2340,7 @@ L_23_9963:
 	LDA $8E
 	AND #$6F
 	STA $8E
-	JMP L_CC50
+	JMP destroy_thread
 L_23_9972:
 	LDA $4D
 	CMP #$0E
@@ -2368,7 +2368,7 @@ L_23_9990:
 	LDA $8E
 	AND #$6F
 	STA $8E
-	JMP L_CC50
+	JMP destroy_thread
 L_23_99A5:
 	LDA $4D
 	CMP #$0E

@@ -1259,7 +1259,7 @@ L_25_89EA:
 	LDA #$00
 	STA $E1
 	LDA #$02
-	JSR L_D68A
+	JSR set_ymenu_arrow
 @Loop1:
 	LDA #$01
 	JSR switch_thread

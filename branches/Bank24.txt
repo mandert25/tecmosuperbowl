@@ -449,7 +449,7 @@ L_24_8395:
 @Loop1:	.WORD @Loop2-1, @Loop3-1, @Loop5-1, @Loop6-1, @Loop7-1
 
 @Loop2:
-	JSR L_D127
+	JSR clear_2000_nametable
 	LDA #$02
 	JMP L_24_8C48
 

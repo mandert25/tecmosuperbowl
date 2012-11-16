@@ -5402,13 +5402,13 @@ L_21_A6AD:
 	JMP buffer_end
 
 L_21_A6BA:
-	LDY #$40
-	LDX #$20
+	LDY #<$2040
+	LDX #>$2040
 	LDA #$02
 	STA $3F
 	LDA #$20
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	LDA #$00
 	LDY #$1D
 	STA ($AE),Y

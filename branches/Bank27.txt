@@ -101,7 +101,7 @@ L_27_80C8:
 	LDA #$80
 	STA PRG_RAM_PROTECT
 	LDX #$0E ; BANK15
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA $2D
 	AND #$03
 	CMP #$02
@@ -164,7 +164,7 @@ L_27_80C8:
 	LDA #$C0
 	STA PRG_RAM_PROTECT
 	LDX #$11 ; BANK18
-	JSR L_D8E3
+	JSR bank_swap_A000
 	RTS
 
 L_27_8158:
@@ -274,7 +274,7 @@ L_27_816D:
 	STA $032C
 	STA $0334
 	LDX $43
-	JMP L_D8E3
+	JMP bank_swap_A000
 @Loop13:
 	.BYTE $80, $40, $20, $10, $08, $04, $02, $01
 @Loop14:

@@ -404,11 +404,11 @@ L_C2E6:
 	CMP #$20
 	BCS @Loop1
 	STY $49
-	LDA $31
-	AND #$FC
+	LDA SOFT_PPUCTRL
+	AND #%11111100
 	ORA $0308,X
 	ORA $4A
-	STA $31
+	STA SOFT_PPUCTRL
 	TAY
 	LDA $0307,X
 	STA PPUSCROLL
@@ -630,21 +630,21 @@ update_randoms:
 	RTS
 
 L_C481:
-	STY $44
-	STX $45
+	STY TEMP44_LO
+	STX TEMP44_HI
 	STA IRQ_DISABLE
 	LDY #$00
 @Loop1:
 	LDX #$04
 @Loop2:
-	LDA ($44),Y
+	LDA (TEMP44),Y
 	STA $0307,Y
 	INY
 	DEX
 	BNE @Loop2
 	CPY #$13
 	BCS @Loop3
-	LDA ($44),Y
+	LDA (TEMP44),Y
 	STA $0307,Y
 	INY
 	TAX
@@ -3064,39 +3064,39 @@ L_D129:
 	JMP L_D09B
 
 L_D136:
-	STA $50
-	STX $51
-	JSR L_D236
-	JSR L_D23A
+	STA BG_PALETTE
+	STX SPRITE_PALETTE
+	JSR get_background_palette
+	JSR get_sprite_palette
 L_D140:
-	LDA $52
+	LDA BG_PALETTE_FADE
 	CMP #$0F
 	BCS @Loop2
-	INC $52
+	INC BG_PALETTE_FADE
 @Loop2:
-	LDA $53
+	LDA SPRITE_PALETTE_FADE
 	CMP #$0F
 	BCS @Loop3
-	INC $53
+	INC SPRITE_PALETTE_FADE
 @Loop3:
 	JSR buffer_palette
 	LDA #$01
 	JSR switch_thread
-	LDA $52
+	LDA BG_PALETTE_FADE
 	CLC
-	ADC $53
+	ADC SPRITE_PALETTE_FADE
 	CMP #$1E
 	BCC L_D140
 	RTS
 
 L_D162:
-	STA $50
-	JSR L_D236
+	STA BG_PALETTE
+	JSR get_background_palette
 @Loop1:
-	LDA $52
+	LDA BG_PALETTE_FADE
 	CMP #$0F
 	BCS @Loop2
-	INC $52
+	INC BG_PALETTE_FADE
 	JSR buffer_palette
 	LDA #$01
 	JSR switch_thread
@@ -3105,13 +3105,13 @@ L_D162:
 	RTS
 
 L_D17B:
-	STA $51
-	JSR L_D23A
+	STA SPRITE_PALETTE
+	JSR get_sprite_palette
 @Loop1:
-	LDA $53
+	LDA SPRITE_PALETTE_FADE
 	CMP #$0F
 	BCS @Loop2
-	INC $53
+	INC SPRITE_PALETTE_FADE
 	JSR buffer_palette
 	LDA #$01
 	JSR switch_thread
@@ -3161,25 +3161,25 @@ L_D1C3:
 	RTS
 
 L_D1D5:
-	STA $50
-	STX $51
+	STA BG_PALETTE
+	STX SPRITE_PALETTE
 L_D1D9:
-	JSR L_D236
-	JSR L_D23A
+	JSR get_background_palette
+	JSR get_sprite_palette
 L_D1DF:
 	LDA #$0F
 	STA BG_PALETTE_FADE
 	STA SPRITE_PALETTE_FADE
 	JMP buffer_palette
 L_D1E8:
-	STA $50
-	JSR L_D236
+	STA BG_PALETTE
+	JSR get_background_palette
 	LDA #$0F
 	STA BG_PALETTE_FADE
 	JMP buffer_palette
 L_D1F4:
-	STA $51
-	JSR L_D23A
+	STA SPRITE_PALETTE
+	JSR get_sprite_palette
 	LDA #$0F
 	STA SPRITE_PALETTE_FADE
 buffer_palette:
@@ -3190,7 +3190,7 @@ buffer_palette:
 	STX TEMP3F
 	LDY #$00
 @more:
-	LDA PALETTE,Y
+	LDA PALETTE_BUFFER,Y
 	AND #$30
 ; Check for BG or Sprite Color
 	CPY #$10
@@ -3206,7 +3206,7 @@ buffer_palette:
 @set:
 ; Get Fade Color
 	TAX
-	LDA PALETTE,Y
+	LDA PALETTE_BUFFER,Y
 	AND #$0F
 	ORA PALETTE_FADE,X
 ; Store Color in Buffer
@@ -3222,54 +3222,59 @@ buffer_palette:
 	LDX TEMP3F
 	JMP buffer_end
 
-L_D236:
+get_background_palette:
 	LDA #$00
-	BEQ L_D23C
-L_D23A:
+	BEQ get_palette
+get_sprite_palette:
 	LDA #$01
-L_D23C:
-	STA $3F
+get_palette:
+; Store Palette Type
+	STA TEMP3F
+; Store A000 Bank
 	LDA BANK_A000
-	STA $41
+	STA TEMP41
+; Get Palette Location
 	LDX #$0D ; BANK14
 	JSR bank_swap_A000
-	LDA $3F
+	LDA TEMP3F
 	TAY
 	ASL
 	TAX
-	LDA $0050,Y
+	LDA PALETTE,Y
 	LDY #$00
-	STY $3F
+	STY TEMP3E_HI
 	ASL
-	ROL $3F
+	ROL TEMP3E_HI
 	ASL
-	ROL $3F
+	ROL TEMP3E_HI
 	ASL
-	ROL $3F
+	ROL TEMP3E_HI
 	ASL
-	ROL $3F
+	ROL TEMP3E_HI
 	CLC
-	ADC @Loop2,X
-	STA $3E
-	LDA $3F
-	ADC @Loop2+1,X
-	STA $3F
+	ADC @location+0,X
+	STA TEMP3E_LO
+	LDA TEMP3E_HI
+	ADC @location+1,X
+	STA TEMP3E_HI
 	TXA
 	ASL
 	ASL
 	ASL
 	TAX
-@Loop1:
-	LDA ($3E),Y
-	STA $031A,X
+; Store Palette
+@more:
+	LDA (TEMP3E),Y
+	STA PALETTE_BUFFER,X
 	INX
 	INY
 	CPY #$10
-	BNE @Loop1
-	LDX $41
+	BNE @more
+; Return A000 Bank
+	LDX TEMP41
 	JMP bank_swap_A000
 	RTS
-@Loop2:	.WORD $A000,$A600
+@location:	.WORD $A000,$A600
 
 L_D286:
 	LDA #$0F
@@ -3277,8 +3282,8 @@ L_D286:
 L_D28B:
 	LDA #$00
 L_D28D:
-	STA $52
-	STA $53
+	STA BG_PALETTE_FADE
+	STA SPRITE_PALETTE_FADE
 	JSR buffer_palette
 	LDA #$01
 	JSR switch_thread

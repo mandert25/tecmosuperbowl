@@ -46,6 +46,13 @@
 .define START_THREAD   $13
 .define NEW_THREAD     $14
 
+; NMI $2B Flag
+; Positive = Ready to Write
+; Negative = Wait to Write
+
+; Palette Fade Values
+; 0 = Dark and F = Actual
+
 ; Player Type Values
 ; 0 = MAN
 ; 1 = COA
@@ -67,60 +74,63 @@
 .define NFC     $1D
 
 .segment "ZEROPAGE": zeropage
-.define CURRENT_THREAD $00
+.define CURRENT_THREAD      $00
 ; FIND OUT .define THREAD_TRANSFER $2A
 ; FIND OUT .define BUFFER_FLAG     $2B
 ; FIND OUT .define BANK_TRANSFER   $2C
-.define GAME_TYPE      $2D
-.define BANK_8000      $2E
-.define BANK_A000      $2F
-.define FRAME_COUNT    $30
-.define SOFT_PPUCTRL   $31
-.define SOFT_PPUMASK   $32
-.define MODE_8000      $33
-.define SOFT_8000      $34
-.define JOYPAD1_RAW    $35
-.define JOYPAD2_RAW    $36
-.define JOYPAD_RAW     $37
-.define JOYPAD1_PRESS  $38
-.define JOYPAD2_PRESS  $39
-.define JOYPAD_PRESS   $3A
-.define RANDOM_3B      $3B
-.define RANDOM_3C      $3C
-.define RANDOM_3D      $3D
-.define TEMP3E         $3E
-.define TEMP3E_LO      $3E
-.define TEMP3E_HI      $3F
-.define TEMP3F         $3F
-.define TEMP40         $40
-.define TEMP40_LO      $40
-.define TEMP40_HI      $41
-.define TEMP42         $42
-.define TEMP43         $43
-.define TEMP44         $44
-.define TEMP44_LO      $44
-.define TEMP44_HI      $45
-.define TEMP45         $45
-.define JOYPAD_DATA    $46
-.define JOYPAD_CHECK   $47
-.define JOYPAD_CONFIRM $48
-.define CHAR_1000      $4B
-.define CHAR_1400      $4C
-.define CHAR_1800      $4D
-.define CHAR_1C00      $4E
-.define PLAYER_TYPE    $75
-.define Y_MENU_OPTION  $E1
-.define X_MENU_OPTION  $E2
-.define MENU           $E3
-.define MENU_LO        $E3
-.define MENU_HI        $E4
-.define MENU_JOYPAD    $E5
-.define MENU_WAIT      $E6
+.define GAME_TYPE           $2D
+.define BANK_8000           $2E
+.define BANK_A000           $2F
+.define FRAME_COUNT         $30
+.define SOFT_PPUCTRL        $31
+.define SOFT_PPUMASK        $32
+.define MODE_8000           $33
+.define SOFT_8000           $34
+.define JOYPAD1_RAW         $35
+.define JOYPAD2_RAW         $36
+.define JOYPAD_RAW          $37
+.define JOYPAD1_PRESS       $38
+.define JOYPAD2_PRESS       $39
+.define JOYPAD_PRESS        $3A
+.define RANDOM_3B           $3B
+.define RANDOM_3C           $3C
+.define RANDOM_3D           $3D
+.define TEMP3E              $3E
+.define TEMP3E_LO           $3E
+.define TEMP3E_HI           $3F
+.define TEMP3F              $3F
+.define TEMP40              $40
+.define TEMP40_LO           $40
+.define TEMP40_HI           $41
+.define TEMP42              $42
+.define TEMP43              $43
+.define TEMP44              $44
+.define TEMP44_LO           $44
+.define TEMP44_HI           $45
+.define TEMP45              $45
+.define JOYPAD_DATA         $46
+.define JOYPAD_CHECK        $47
+.define JOYPAD_CONFIRM      $48
+.define CHAR_1000           $4B
+.define CHAR_1400           $4C
+.define CHAR_1800           $4D
+.define CHAR_1C00           $4E
+.define BG_PALETTE_FADE     $52
+.define SPRITE_PALETTE_FADE $53
+.define PLAYER_TYPE         $75
+.define Y_MENU_OPTION       $E1
+.define X_MENU_OPTION       $E2
+.define MENU                $E3
+.define MENU_LO             $E3
+.define MENU_HI             $E4
+.define MENU_JOYPAD         $E5
+.define MENU_WAIT           $E6
 
 .segment "SPRITE": absolute
 .define SPRITE $0200
 
 .segment "BUFFER": absolute
+.define PALETTE       $031A
 .define BUFFER        $033A
 .define BUFFER_LENGTH $033A
 .define BUFFER_LO     $033B
@@ -168,6 +178,9 @@
 .define create_thread          L_CC45
 .define destroy_thread         L_CC50
 .define switch_thread          L_CC9A
+.define buffer_palette         L_D1FD
+.define buffer_add             L_D29A
+.define buffer_end             L_D2C8
 .define clear_sprites          L_D571
 .define clear_ram_size         L_D60E
 .define wait_interrupt         L_D680

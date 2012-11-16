@@ -1507,7 +1507,7 @@ L_24_8B4E:
 L_24_8B56:
 	STA $45
 	LDA #$02
-	JSR L_D29A
+	JSR buffer_add
 	LDA $45
 	LSR
 	LSR
@@ -1935,7 +1935,7 @@ L_24_8E27:
 	LDA $68
 	LDY $65
 	LDX $66
-	JSR L_D29A
+	JSR buffer_add
 	LDY $67
 	LDA TEAM_LOCATION_POINTERS,Y
 	STA $65
@@ -2260,7 +2260,7 @@ L_24_90C1:
 	LDY $40
 	LDX $41
 	LDA #$02
-	JSR L_D29A
+	JSR buffer_add
 	LDA $0380
 	STA $033A,X
 	INX

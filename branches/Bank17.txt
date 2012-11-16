@@ -6591,7 +6591,7 @@ L_17_AFCC:
 	STA $3E
 	STA $3F
 	LDA $45
-	JMP L_D09D
+	JMP set_vram_size
 @Loop6:
 	LDA #$27
 	JSR L_17_B148

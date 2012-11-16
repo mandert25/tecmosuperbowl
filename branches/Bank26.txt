@@ -659,7 +659,7 @@ L_26_83FD:
 	STA $4C
 	LDA #$2E
 	LDX #$01
-	JSR L_D1D5
+	JSR new_palette_no_fade
 @Loop4:
 	LDA #$01
 	JSR switch_thread
@@ -686,7 +686,7 @@ L_26_851B:
 	BNE @Loop1
 	LDA #$14
 	LDX #$23
-	JSR L_D1D5
+	JSR new_palette_no_fade
 	LDA #$02
 	JSR switch_thread
 	LDA #$00

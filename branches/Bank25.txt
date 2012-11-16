@@ -946,7 +946,7 @@ L_25_8009:
 	JSR L_25_8953
 @Loop96:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	BIT $3A
 	BVS @Loop98
 	LDA $3A
@@ -1208,7 +1208,7 @@ L_25_8996:
 	STX $43
 @Loop1:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	BIT $3A
 	BVS @Loop4
 	LDA $3A
@@ -1237,7 +1237,7 @@ L_25_8996:
 	RTS
 @Loop3:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $0307
 	CLC
 	ADC #$04
@@ -1262,7 +1262,7 @@ L_25_89EA:
 	JSR L_D68A
 @Loop1:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D6B4
 	JSR L_D6F9
 	BIT $3A
@@ -1276,7 +1276,7 @@ L_25_8A0A:
 	STA $0200
 @Loop1:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $0307
 	SEC
 	SBC #$04
@@ -1701,7 +1701,7 @@ L_25_8A78:
 	STA $6E
 @Loop14:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $3A
 	AND #$C0
 	BEQ @Loop14

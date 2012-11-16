@@ -2013,7 +2013,7 @@ L_24_8EB8:
 	INY
 	DEC $037F
 	BNE L_24_8EB8
-	JSR L_C38A
+	JSR enable_nmi
 	JSR L_D553
 	PLA
 	TAX
@@ -2686,7 +2686,7 @@ L_24_92EA:
 	JSR L_24_949E
 	DEC $45
 	BNE @Loop8
-	JSR L_C38A
+	JSR enable_nmi
 	LDX #$0C
 	JSR L_CC8F
 @Loop11:

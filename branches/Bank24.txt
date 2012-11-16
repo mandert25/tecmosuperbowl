@@ -426,13 +426,13 @@ L_24_837A:
 	JMP L_24_8C48
 
 L_24_8382:
-	JSR L_D571
+	JSR clear_sprites
 	LDA #$01
 	JMP L_24_8C48
 
 L_24_838A:
 	JSR L_D10E
-	JSR L_D571
+	JSR clear_sprites
 	LDA #$01
 	JMP L_24_8C48
 
@@ -478,7 +478,7 @@ L_24_8395:
 	JMP @Loop2
 
 @Loop7:
-	JSR L_D571
+	JSR clear_sprites
 	LDY #$02
 	LDA ($C2),Y
 	STA $45
@@ -2998,7 +2998,7 @@ L_24_9604:
 	RTS
 
 L_24_961C:
-	JSR L_D571
+	JSR clear_sprites
 	LDA #$00
 	LDY #$A0
 @Loop1:

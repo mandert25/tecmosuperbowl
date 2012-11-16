@@ -22,7 +22,7 @@ L_26_8039:	JMP L_26_8039
 
 L_26_803C:
 	LDX #$0F ; BANK16
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA #$00
 	STA $92
 	STA $94
@@ -109,7 +109,7 @@ L_26_803C:
 	JSR L_D09B
 @Loop9:
 	LDX #$11 ; BANK18
-	JSR L_D8E3
+	JSR bank_swap_A000
 	RTS
 
 L_26_80E4:
@@ -224,7 +224,7 @@ L_26_816B:
 	RTS
 @Loop1:
 	LDX #$0F ; BANK16
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA $6759
 	ASL
 	TAX
@@ -236,7 +236,7 @@ L_26_816B:
 	LDX $3F
 	JSR L_26_8139
 	LDX #$11 ; BANK18
-	JSR L_D8E3
+	JSR bank_swap_A000
 @Loop2:
 	RTS
 
@@ -629,7 +629,7 @@ L_26_83FD:
 	CMP #$0B
 	BCC @Loop2
 	LDX #$11 ; BANK18
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA #$02
 	JSR switch_thread
 	LDY #$B4

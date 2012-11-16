@@ -2397,7 +2397,7 @@ L_19_9301:
 	LDA #$14
 	JSR switch_thread
 @Loop1:
-	JSR L_D194
+	JSR palette_fade_out
 L_19_9314:
 	LDX #$1B
 	JSR L_CCDD
@@ -4800,7 +4800,7 @@ L_19_A2B7:
 @Loop12:
 	LDA #$3C
 	JSR switch_thread
-	JSR L_D194
+	JSR palette_fade_out
 	LDA #$37
 	JSR L_19_A1C5
 	RTS
@@ -4808,7 +4808,7 @@ L_19_A2B7:
 	LDA $6758
 	CMP $669A
 	BCC @Loop14
-	JSR L_D194
+	JSR palette_fade_out
 	LDA #$2B
 	JSR L_C41F
 	LDA #$37

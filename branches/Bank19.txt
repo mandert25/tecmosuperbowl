@@ -4539,21 +4539,21 @@ L_19_A209:
 	LDA #$00
 	STA $B6
 	STA $B7
-	JSR L_D929
+	JSR update_random_3B
 	CMP #$1E
 	BCS @Loop1
 	LDA $B6
 	ORA #$80
 	STA $B6
 @Loop1:
-	JSR L_D931
+	JSR update_random_3C
 	CMP #$3F
 	BCS @Loop2
 	LDA $B6
 	ORA #$40
 	STA $B6
 @Loop2:
-	JSR L_D939
+	JSR update_random_3D
 	CMP #$3F
 	BCS @Loop3
 	LDA $B6

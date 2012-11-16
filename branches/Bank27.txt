@@ -816,13 +816,13 @@ L_27_8514:
 	LDY #<(L_23_9006-1)
 	LDA #>(L_23_9006-1)
 	LDX #$1B
-	JSR L_CC45
+	JSR create_thread
 	LDA #$16 ; BANK23
 	STA $29
 	LDY #<(L_23_9000-1)
 	LDA #>(L_23_9000-1)
 	LDX #$25
-	JSR L_CC45
+	JSR create_thread
 	LDA #$06
 	STA $63
 	LDA #$08

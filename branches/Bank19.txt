@@ -52,7 +52,7 @@ L_19_8019:
 	LDA #$A8
 	JSR L_19_9AB3
 	JSR L_19_93DF
-	JSR L_D140
+	JSR palette_fade_in
 @Loop3:
 	LDA #$01
 	JSR switch_thread
@@ -162,7 +162,7 @@ L_19_8123:
 	JSR L_19_9AB3
 	JSR L_19_93DF
 	JSR L_19_A44E
-	JSR L_D140
+	JSR palette_fade_in
 	LDA #$8F
 	JSR L_19_9332
 	LDA #$3C
@@ -418,7 +418,7 @@ L_19_835C:	LDA #$0C
 	LDA #$58
 	JSR L_19_9AB3
 	JSR L_19_93DF
-	JSR L_D140
+	JSR palette_fade_in
 	LDA #$02
 	JSR switch_thread
 	JSR L_19_9580
@@ -520,7 +520,7 @@ L_19_8451:
 	JSR L_19_9AB3
 	JSR L_19_93DF
 	JSR L_19_A44E
-	JSR L_D140
+	JSR palette_fade_in
 	LDA #$92
 	JSR L_19_9332
 	LDA #$3C
@@ -812,7 +812,7 @@ L_19_8689:
 	JSR L_19_93DF
 	LDA #$89
 	JSR L_19_9332
-	JSR L_D140
+	JSR palette_fade_in
 	LDA #$08
 	JSR switch_thread
 	JSR L_19_94BF
@@ -952,7 +952,7 @@ L_19_87A1:
 	LDA #$58
 	JSR L_19_9AB3
 	JSR L_19_93DF
-	JSR L_D140
+	JSR palette_fade_in
 @Loop3:
 	LDA #$01
 	JSR switch_thread
@@ -1062,7 +1062,7 @@ L_19_87A1:
 	JSR L_19_9AB3
 	JSR L_19_93DF
 	JSR L_19_A44E
-	JSR L_D140
+	JSR palette_fade_in
 	LDA #$0F
 	JSR L_19_9332
 	LDA #$3C
@@ -1320,7 +1320,7 @@ L_19_87A1:
 	LDA #$A8
 	JSR L_19_9AB3
 	JSR L_19_93DF
-	JSR L_D140
+	JSR palette_fade_in
 	LDA #$02
 	JSR switch_thread
 	JSR L_19_958E
@@ -1431,7 +1431,7 @@ L_19_87A1:
 	JSR L_19_9AB3
 	JSR L_19_93DF
 	JSR L_19_A44E
-	JSR L_D140
+	JSR palette_fade_in
 	LDA #$12
 	JSR L_19_9332
 	LDA #$3C
@@ -1718,7 +1718,7 @@ L_19_8E11:
 	JSR L_19_93DF
 	LDA #$09
 	JSR L_19_9332
-	JSR L_D140
+	JSR palette_fade_in
 	LDA #$08
 	JSR switch_thread
 	JSR L_19_93FB
@@ -4723,7 +4723,7 @@ L_19_A2B7:
 	STA $0243
 	LDA #$0A
 	JSR switch_thread
-	JSR L_D140
+	JSR palette_fade_in
 	LDA #$2B
 	JSR L_C41F
 	LDA #$00

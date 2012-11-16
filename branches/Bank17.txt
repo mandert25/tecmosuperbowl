@@ -4357,7 +4357,7 @@ L_17_A000:
 	CLC
 	ADC #$40
 	JSR L_D03B
-	JSR L_D140
+	JSR palette_fade_in
 	LDX #$78
 	JSR L_17_B49D
 L_17_A053:

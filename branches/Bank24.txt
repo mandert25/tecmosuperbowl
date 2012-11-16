@@ -3320,7 +3320,7 @@ L_24_96C4:
 	LDY #$01
 	LDA ($C9),Y
 	STA $51
-	JSR L_D1D9
+	JSR get_palette_no_fade
 	LDA #$02
 	JMP @Loop50
 

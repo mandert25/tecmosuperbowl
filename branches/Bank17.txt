@@ -84,7 +84,7 @@ L_17_809C:
 	JSR L_17_9443
 	LDA #$13
 	LDX #$24
-	JSR L_D1D5
+	JSR new_palette_no_fade
 L_17_80B2:
 	LDY #<NORMAL_MENU_SELECT
 	LDX #>NORMAL_MENU_SELECT
@@ -251,7 +251,7 @@ preseason_menu:
 	JSR L_17_9456
 	LDA #$13
 	LDX #$24
-	JSR L_D1D5
+	JSR new_palette_no_fade
 	JMP @Loop1
 
 season_menu:
@@ -311,7 +311,7 @@ L_17_8265:
 	JSR L_17_8272
 	LDA #$13
 	LDX #$24
-	JSR L_D1D5
+	JSR new_palette_no_fade
 	JMP L_17_8207
 
 L_17_8272:
@@ -352,7 +352,7 @@ L_17_828F:
 	JSR bank_swap_8000_jump
 	LDA #$15
 	LDX #$25
-	JSR L_D1D5
+	JSR new_palette_no_fade
 @Loop2:
 	LDA #$01
 	JSR switch_thread
@@ -717,7 +717,7 @@ L_17_8507:
 	JSR switch_thread
 	LDA #$13
 	LDX #$24
-	JSR L_D1D5
+	JSR new_palette_no_fade
 	JMP @Loop1
 @Loop7:
 	LDA #$F0
@@ -802,7 +802,7 @@ L_17_85E0:
 	STA $E2
 	LDA #$13
 	LDX #$24
-	JSR L_D1D5
+	JSR new_palette_no_fade
 	JMP @Loop1
 @Loop3:
 	LDA #$F0
@@ -1126,7 +1126,7 @@ pro_bowl_menu:
 	JSR L_17_9474
 	LDA #$13
 	LDX #$24
-	JSR L_D1D5
+	JSR new_palette_no_fade
 	JMP @Loop1
 
 team_data_menu:
@@ -1148,7 +1148,7 @@ L_17_88AF:
 	JSR L_17_A83D
 	LDA #$14
 	LDX #$23
-	JSR L_D1D5
+	JSR new_palette_no_fade
 	LDY #<TEAM_DATA_ARROW
 	LDX #>TEAM_DATA_ARROW
 	LDA #$02
@@ -1759,7 +1759,7 @@ L_17_8D62:
 	STA $4B
 	LDA #$30
 	LDX #$30
-	JSR L_D1D5
+	JSR new_palette_no_fade
 	RTS
 
 L_17_8D7C:
@@ -2135,7 +2135,7 @@ L_17_8FD0:
 	STA $4D
 	LDA #$2F
 	LDX #$30
-	JSR L_D1D5
+	JSR new_palette_no_fade
 	LDA #$01
 	JSR switch_thread
 	LDA #$0D
@@ -3004,7 +3004,7 @@ L_17_9632:
 	STA $030B
 	LDA #$2E
 	LDX #$2F
-	JSR L_D1D5
+	JSR new_palette_no_fade
 	LDA #$03
 	JSR L_C3FB
 	BIT $6F
@@ -5833,7 +5833,7 @@ L_17_AB44:
 	JSR L_17_A83D
 	LDA #$14
 	LDX #$23
-	JSR L_D1D5
+	JSR new_palette_no_fade
 	RTS
 
 L_17_AB5E:
@@ -6905,7 +6905,7 @@ L_17_B34C:
 	JSR L_C3A2
 	LDA #$14
 	LDX #$23
-	JSR L_D1D5
+	JSR new_palette_no_fade
 	JMP @Loop2
 @Loop1:
 	LDA #$11
@@ -7129,7 +7129,7 @@ L_17_B4B3:
 	JSR L_17_A81E
 	LDA #$14
 	LDX #$23
-	JSR L_D1D5
+	JSR new_palette_no_fade
 	RTS
 
 L_17_B4EE:
@@ -7234,7 +7234,7 @@ L_17_B573:
 	BNE @Loop1
 	LDA #$14
 	LDX #$23
-	JSR L_D1D5
+	JSR new_palette_no_fade
 	LDA $8E
 	ASL
 	ASL

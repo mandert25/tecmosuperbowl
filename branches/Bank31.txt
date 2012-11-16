@@ -464,7 +464,7 @@ L_C2E6:
 	STA $0306
 	RTS
 
-L_C378:
+disable_nmi:
 	STA IRQ_DISABLE
 	LDA SOFT_PPUCTRL
 	AND #%01111111
@@ -474,7 +474,7 @@ L_C378:
 	STA PPUMASK
 	RTS
 
-L_C38A:
+enable_nmi:
 	LDA SOFT_PPUCTRL
 	STA PPUCTRL
 	RTS
@@ -2562,7 +2562,7 @@ L_CD05:
 
 L_CDBF:
 	JSR L_D2D3
-	JSR L_C378
+	JSR disable_nmi
 	LDA PPUSTATUS
 	LDA $65
 	STA $67
@@ -2667,7 +2667,7 @@ L_CDBF:
 @Loop10:
 	JMP @Loop1
 @Loop11:
-	JSR L_C38A
+	JSR enable_nmi
 	JMP L_D2EA
 
 L_CE83:
@@ -3019,7 +3019,7 @@ set_vram_size:
 ; Direct Write to PPU
 @direct:
 	JSR L_D2D3
-	JSR L_C378
+	JSR disable_nmi
 @direct_next:
 	LDA PPUSTATUS
 ; Set to VRAM Adress
@@ -3045,7 +3045,7 @@ set_vram_size:
 ; Check for another write
 	DEC TEMP3F
 	BNE @direct_next
-	JSR L_C38A
+	JSR enable_nmi
 	JMP L_D2EA
 
 clear_nametables:

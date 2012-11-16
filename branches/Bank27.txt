@@ -1070,7 +1070,7 @@ L_27_86FD:
 	JSR L_D10E
 	LDA #$00
 	LDX #$00
-	JSR L_D1D5
+	JSR new_palette_no_fade
 	LDA $6F
 	LDY #$CA
 	LDX #$20

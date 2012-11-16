@@ -19,7 +19,7 @@ L_23_8010:
 	LDX #>L_28_8000
 	JSR bank_swap_8000_jump
 	LDX #$16 ; BANK23
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA $54
 	SEC
 	SBC #$60
@@ -67,7 +67,7 @@ L_23_8056:
 	LDX #>L_28_8000
 	JSR bank_swap_8000_jump
 	LDX #$16 ; BANK23
-	JSR L_D8E3
+	JSR bank_swap_A000
 	JSR L_C38A
 	LDY #<L_23_8419
 	LDX #>L_23_8419

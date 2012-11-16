@@ -1980,7 +1980,7 @@ L_24_8E76:
 	LDA $45
 	LDX $44
 	JSR L_D519
-	JSR L_C378
+	JSR disable_nmi
 	LDA PPUSTATUS
 	LDA $41
 	STA PPUADDR
@@ -2651,7 +2651,7 @@ L_24_92EA:
 	LDA $0C
 	AND #$0F
 	STA $0C
-	JSR L_C378
+	JSR disable_nmi
 	LDA #$18
 	STA $44
 @Loop8:

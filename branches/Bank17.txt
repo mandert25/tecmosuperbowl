@@ -2631,13 +2631,13 @@ L_17_9404:
 	LDY #$06
 	STY $44
 	LDY #$64
-	JSR L_D60E
+	JSR clear_ram_size
 	LDA #$05
 	LDX #$01
 	LDY #$0B
 	STY $44
 	LDY #$65
-	JSR L_D60E
+	JSR clear_ram_size
 	LDA #$C0
 	STA PRG_RAM_PROTECT
 	JSR L_17_8ED5

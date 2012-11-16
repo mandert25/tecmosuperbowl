@@ -2974,94 +2974,113 @@ L_D081:
 	TAX
 	JMP bank_swap_A000
 
-L_D09B:
+clear_vram_size:
+; Store Tile
 	LDA #$00
-L_D09D:
-	STA $41
-	LDA $52
-	ORA $53
-	BEQ @Loop4
+set_vram_size:
+	STA TEMP41
+; Check for Direct Write to PPU
+	LDA BG_PALETTE_FADE
+	ORA SPRITE_PALETTE_FADE
+	BEQ @direct
+; Write to Buffer
 	JSR L_D2D3
-@Loop1:
-	LDA $3E
-	LDY $65
-	LDX $66
+@next:
+	LDA TEMP3E
+	LDY TEMP65_LO
+	LDX TEMP65_HI
 	JSR buffer_add
-	LDY $3E
-	LDA $41
-@Loop2:
-	STA $033A,X
+; Store in Buffer
+	LDY TEMP3E
+	LDA TEMP41
+@more:
+	STA BUFFER,X
 	INX
 	DEY
-	BNE @Loop2
+	BNE @more
 	JSR buffer_end
+; Check for Wait
 	LDA $C8
-	BEQ @Loop3
+	BEQ @no_wait
 	JSR switch_thread
-@Loop3:
-	LDA $65
+@no_wait:
+; Update VRAM Address
+	LDA TEMP65_LO
 	CLC
 	ADC #$20
-	STA $65
-	LDA $66
+	STA TEMP65_LO
+	LDA TEMP65_HI
 	ADC #$00
-	STA $66
-	DEC $3F
-	BNE @Loop1
+	STA TEMP65_HI
+; Check for another buffer
+	DEC TEMP3F
+	BNE @next
 	JMP L_D2EA
-@Loop4:
+; Direct Write to PPU
+@direct:
 	JSR L_D2D3
 	JSR L_C378
-@Loop5:
+@direct_next:
 	LDA PPUSTATUS
-	LDA $66
+; Set to VRAM Adress
+	LDA TEMP65_HI
 	STA PPUADDR
-	LDA $65
+	LDA TEMP65_LO
 	STA PPUADDR
-	LDX $3E
-	LDA $41
-@Loop6:
+; Store in VRAM
+	LDX TEMP3E
+	LDA TEMP41
+@direct_more:
 	STA PPUDATA
 	DEX
-	BNE @Loop6
-	LDA $65
+	BNE @direct_more
+; Update VRAM Address
+	LDA TEMP65_LO
 	CLC
 	ADC #$20
-	STA $65
-	LDA $66
+	STA TEMP65_LO
+	LDA TEMP65_HI
 	ADC #$00
-	STA $66
-	DEC $3F
-	BNE @Loop5
+	STA TEMP65_HI
+; Check for another write
+	DEC TEMP3F
+	BNE @direct_next
 	JSR L_C38A
 	JMP L_D2EA
 
-L_D10E:
-	LDY #$00
-	LDX #$20
+clear_nametables:
+; Clear $2000-$2BFF
+; Set VRAM Address
+	LDY #<$2000
+	LDX #>$2000
+; Store Amount
 	LDA #$60
-	STA $3F
+	STA TEMP3F
+; Store Length
 	LDA #$20
-	STA $3E
-	JMP L_D09B
+	STA TEMP3E
+	JMP clear_vram_size
 
-L_D11D:
-	LDX #$28
-	JMP L_D129
-
-L_D122:
-	LDX #$24
-	JMP L_D129
-
-L_D127:
-	LDX #$20
-L_D129:
+clear_2800_nametable:
+; Clear $2800-$2BFF
+	LDX #>$2800
+	JMP clear_nametable
+clear_2400_nametable:
+; Clear $2400-$27FF
+	LDX #>$2400
+	JMP clear_nametable
+clear_2000_nametable:
+; Clear $2000-$23FF
+	LDX #>$2000
+clear_nametable:
 	LDY #$00
+; Store Amount
 	LDA #$20
-	STA $3F
+	STA TEMP3F
+; Store Length
 	LDA #$20
-	STA $3E
-	JMP L_D09B
+	STA TEMP3E
+	JMP clear_vram_size
 
 get_palette_fade_in:
 	STA BG_PALETTE
@@ -3336,17 +3355,21 @@ buffer_end:
 	RTS
 
 L_D2D3:
+; Check for ready
 	LDA $64
-	BPL @Loop1
+	BPL @ready
+; wait
 	LDA #$01
 	JSR switch_thread
 	JMP L_D2D3
-@Loop1:
+@ready:
+; Set to Not Ready
 	ORA #$80
 	ORA $00
 	STA $64
-	STY $65
-	STX $66
+; Store
+	STY TEMP65_LO
+	STX TEMP65_HI
 	RTS
 
 L_D2EA:

@@ -148,7 +148,7 @@ L_19_8123:
 	LDA #$13 ; BANK20
 	LDY #<L_20_8800
 	LDX #>L_20_8800
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDA $78
 	CMP #$08
 	BCC @Loop1
@@ -1048,7 +1048,7 @@ L_19_87A1:
 	LDA #$13 ; BANK20
 	LDY #<L_20_8800
 	LDX #>L_20_8800
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDA $79
 	CMP #$08
 	BCC @Loop11
@@ -3165,7 +3165,7 @@ L_19_9864:
 	LDA #$1A ; BANK27
 	LDY #<L_27_8018
 	LDX #>L_27_8018
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	RTS
 
 L_19_986E:
@@ -3179,7 +3179,7 @@ L_19_986E:
 	LDA #$1A ; BANK27
 	LDY #<L_27_801B
 	LDX #>L_27_801B
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	RTS
 
 L_19_9886:
@@ -4083,7 +4083,7 @@ L_19_9EB8:
 	LDA #$10 ; BANK17
 	LDY #<L_17_800F
 	LDX #>L_17_800F
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDA #$08
 	JSR L_CC9A
 	RTS
@@ -4091,7 +4091,7 @@ L_19_9EB8:
 	LDA #$10 ; BANK17
 	LDY #<L_17_8003
 	LDX #>L_17_8003
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDX #$13 ; BANK20
 	JSR L_D8E3
 @Loop4:
@@ -4162,7 +4162,7 @@ L_19_9F75:
 	LDA #$10 ; BANK17
 	LDY #<L_17_8009
 	LDX #>L_17_8009
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDX #$13 ; BANK20
 	JSR L_D8E3
 	JSR L_D28B

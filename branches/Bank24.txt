@@ -152,7 +152,7 @@ L_24_8185:
 	LDA ($C2),Y
 	LDY $C6
 	LDX $C7
-	JSR L_D09D
+	JSR set_vram_size
 	LDA #$04
 	JMP L_24_8C48
 
@@ -166,7 +166,7 @@ L_24_819F:
 	LDA ($C2),Y
 	LDY $C6
 	LDX $C7
-	JSR L_D09D
+	JSR set_vram_size
 	LDA #$04
 	JMP L_24_8C48
 
@@ -181,7 +181,7 @@ L_24_81B9:
 	LDA ($C2),Y
 	LDY $C6
 	LDX $C7
-	JSR L_D09D
+	JSR set_vram_size
 	LDA #$05
 	JMP L_24_8C48
 
@@ -193,7 +193,7 @@ L_24_81D4:
 	LDA ($C2),Y
 	LDY $C6
 	LDX $C7
-	JSR L_D09D
+	JSR set_vram_size
 	LDA #$03
 	JMP L_24_8C48
 
@@ -512,7 +512,7 @@ L_24_8395:
 	LDA #$20
 	STA $3E
 	LDA $45
-	JMP L_D09D
+	JMP set_vram_size
 
 L_24_8424:
 	LDA ($C2),Y

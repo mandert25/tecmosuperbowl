@@ -673,7 +673,7 @@ L_24_8538:
 	LDA #$1A ; BANK27
 	LDY #<L_27_8003
 	LDX #>L_27_8003
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDY #$01
 	LDA ($C2),Y
 	AND #$7F
@@ -703,7 +703,7 @@ L_24_8564:
 	LDA #$1A ; BANK27
 	LDY #<L_27_8003
 	LDX #>L_27_8003
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDA $40
 	STA $88
 	LDA $41
@@ -1531,7 +1531,7 @@ L_24_8B7A:
 	LDA #$16 ; BANK23
 	LDY #<L_23_8006
 	LDX #>L_23_8006
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDA #$0F
 	STA $0337
 	LDA #$36
@@ -1558,7 +1558,7 @@ L_24_8BAF:
 	LDA #$1A ; BANK27
 	LDY #<L_27_8006
 	LDX #>L_27_8006
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDA #$02
 	JMP L_24_8C48
 
@@ -1566,7 +1566,7 @@ L_24_8BBD:
 	LDA #$1A ; BANK27
 	LDY #<L_27_8009
 	LDX #>L_27_8009
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDA #$02
 	JMP L_24_8C48
 
@@ -1574,7 +1574,7 @@ L_24_8BCB:
 	LDA #$1A ; BANK27
 	LDY #<L_27_800C
 	LDX #>L_27_800C
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDA #$02
 	JMP L_24_8C48
 
@@ -2072,7 +2072,7 @@ L_24_8EEC:
 	LDA #$19 ; BANK26
 	LDY #<L_26_802A
 	LDX #>L_26_802A
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDY $8E
 	LDX $8F
 	JSR L_24_91FD
@@ -2082,7 +2082,7 @@ L_24_8EEC:
 	LDA #$19 ; BANK26
 	LDY #<L_26_802D
 	LDX #>L_26_802D
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDY $8E
 	LDX $8F
 	JSR L_24_91FD
@@ -2092,7 +2092,7 @@ L_24_8EEC:
 	LDA #$19 ; BANK26
 	LDY #<L_26_8030
 	LDX #>L_26_8030
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDY $8E
 	LDX $8F
 	JSR L_24_91FD
@@ -2102,7 +2102,7 @@ L_24_8EEC:
 	LDA #$19 ; BANK26
 	LDY #<L_26_8033
 	LDX #>L_26_8033
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDY $8E
 	LDX $8F
 	JSR L_24_91FD
@@ -2673,7 +2673,7 @@ L_24_92EA:
 	LDA #$1B ; BANK28
 	LDY #<L_28_8000
 	LDX #>L_28_8000
-	JSR L_C454
+	JSR bank_swap_8000_jump
 	LDX #$02 ; BANK3
 	JSR L_D8E3
 	PLA

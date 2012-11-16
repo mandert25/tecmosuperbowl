@@ -1778,7 +1778,7 @@ L_25_8E3E:
 	LDY $40
 	LDX $41
 	LDA #$0D
-	JSR L_D29A
+	JSR buffer_add
 	LDA #$F0
 	STA $033A,X
 	INX
@@ -1948,7 +1948,7 @@ L_25_8F6B:
 
 L_25_8F82:
 	LDA #$03
-	JSR L_D29A
+	JSR buffer_add
 	CLC
 	LDA $45
 	JSR L_D5FE
@@ -1959,19 +1959,19 @@ L_25_8F82:
 	JMP L_D2C8
 	STA $44
 	LDA #$01
-	JSR L_D29A
+	JSR buffer_add
 	LDA $44
 	JSR L_D605
 	JMP L_D2C8
 
 L_25_8FA9:
 	LDA #$04
-	JSR L_D29A
+	JSR buffer_add
 	CLC
 	JMP L_25_8FBD
 L_25_8FB2:
 	LDA #$05
-	JSR L_D29A
+	JSR buffer_add
 	CLC
 	LDA $45
 	JSR L_D5FE
@@ -2032,7 +2032,7 @@ L_25_8FDF:
 	LDA #$04
 	LDY $3E
 	LDX $3F
-	JSR L_D29A
+	JSR buffer_add
 	LDY $45
 	LDA #$04
 	STA $45
@@ -2132,7 +2132,7 @@ L_25_910A:
 L_25_911F:
 	STA $45
 	LDA #$01
-	JSR L_D29A
+	JSR buffer_add
 	LDA $45
 	STA $033A,X
 	INX

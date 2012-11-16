@@ -24,7 +24,7 @@ L_21_801B:
 	LDA #$00
 	ADC #$04 ; BANK5/6
 	TAX
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDY #$09
 	LDA ($AE),Y
 	STA $3E
@@ -63,7 +63,7 @@ L_21_801B:
 	STA ($AE),Y
 @Loop1:
 	LDX #$15 ; BANK22
-	JSR L_D8E3
+	JSR bank_swap_A000
 	PLA
 	TAX
 	LDA L_21_80AE+1,X
@@ -96,7 +96,7 @@ L_21_801B:
 	ADC $3F
 	STA ($AE),Y
 	LDX #$15 ; BANK22
-	JSR L_D8E3
+	JSR bank_swap_A000
 	PLA
 	TAX
 	LDA L_21_80C6+1,X
@@ -1144,7 +1144,7 @@ L_21_888C:
 	JMP L_21_888C
 L_21_889C:
 	LDX #$04 ; BANK5
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDY $DC
 	INY
 	INY
@@ -1172,7 +1172,7 @@ L_21_88B9:
 	AND #$0F
 	TAY
 	LDX #$15 ; BANK22
-	JSR L_D8E3
+	JSR bank_swap_A000
 	TYA
 	JSR L_21_A159
 	LDA $DC
@@ -4242,7 +4242,7 @@ L_21_9EFA:
 L_21_9EFD:
 	TAY
 	LDX #$0D ; BANK14
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA ($3E),Y
 	STA $44
 	INY
@@ -4261,7 +4261,7 @@ L_21_9EFD:
 	SBC #$00
 	STA ($AE),Y
 	LDX #$15 ; BANK22
-	JMP L_D8E3
+	JMP bank_swap_A000
 
 L_21_9F26:
 	LDY #$1E
@@ -4271,7 +4271,7 @@ L_21_9F26:
 	LDA ($AE),Y
 	STA $3F
 	LDX #$0D ; BANK14
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA #$00
 	STA $45
 	LDY #$1D
@@ -4349,10 +4349,10 @@ L_21_9FA0:
 	STA $B2
 	STY $45
 	LDX #$15 ; BANK22
-	JSR L_D8E3
+	JSR bank_swap_A000
 	JSR L_21_B6AF
 	LDX #$0D ; BANK14
-	JSR L_D8E3
+	JSR bank_swap_A000
 L_21_9FBD:
 	LDY #$1E
 	LDA $45
@@ -4364,12 +4364,12 @@ L_21_9FBD:
 	ADC $3F
 	STA ($AE),Y
 	LDX #$15 ; BANK22
-	JSR L_D8E3
+	JSR bank_swap_A000
 	CLC
 	RTS
 L_21_9FD4:
 	LDX #$15 ; BANK22
-	JSR L_D8E3
+	JSR bank_swap_A000
 	SEC
 	RTS
 

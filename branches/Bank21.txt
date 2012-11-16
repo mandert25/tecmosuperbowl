@@ -5325,7 +5325,7 @@ L_21_A62D:
 	LDA #$05
 	STA $033A,X
 	INX
-	JMP L_D2C8
+	JMP buffer_end
 L_21_A636:
 	LDY #$44
 	LDX #$20
@@ -5399,7 +5399,7 @@ L_21_A6AD:
 	CLC
 	ADC #$0E
 	TAX
-	JMP L_D2C8
+	JMP buffer_end
 
 L_21_A6BA:
 	LDY #$40

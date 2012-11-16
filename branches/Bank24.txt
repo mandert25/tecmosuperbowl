@@ -461,7 +461,7 @@ L_24_8395:
 	LDA #$02
 	JMP L_24_8C48
 @Loop4:
-	JSR L_D11D
+	JSR clear_2800_nametable
 	LDA #$02
 	JMP L_24_8C48
 

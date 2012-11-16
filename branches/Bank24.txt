@@ -457,7 +457,7 @@ L_24_8395:
 	LDA $2D
 	AND #$40
 	BNE @Loop4
-	JSR L_D122
+	JSR clear_2400_nametable
 	LDA #$02
 	JMP L_24_8C48
 @Loop4:

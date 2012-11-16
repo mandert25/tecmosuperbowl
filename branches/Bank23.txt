@@ -1671,7 +1671,7 @@ L_23_94D5:
 	LDY #$4D
 	LDX #$20
 	LDA #$05
-	JSR L_D29A
+	JSR buffer_add
 	LDA $6B
 	LSR
 	LSR

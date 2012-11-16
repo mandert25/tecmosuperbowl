@@ -695,7 +695,7 @@ L_26_851B:
 	LDY #<L_26_88DF
 	LDX #>L_26_88DF
 	LDA #$02
-	JSR L_D702
+	JSR set_xymenu_arrow
 @Loop2:
 	LDA #$01
 	JSR switch_thread

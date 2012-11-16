@@ -465,7 +465,7 @@ L_17_828F:
 	JMP @Loop13
 @Loop12:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D6B4
 	LDA $37
 	AND #$0C
@@ -506,7 +506,7 @@ L_17_828F:
 	LDX #$21
 	JSR L_D5B5
 	LDA #$1E
-	JSR L_CC9A
+	JSR switch_thread
 @Loop16:
 	JSR L_17_84DD
 	LDY #$C3
@@ -541,7 +541,7 @@ L_17_828F:
 	JSR L_D68A
 @Loop19:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D6B4
 	JSR L_D6F9
 	BIT $3A
@@ -574,7 +574,7 @@ L_17_828F:
 	JSR L_D68A
 @Loop22:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D6B4
 	JSR L_D6F9
 	BIT $3A
@@ -672,7 +672,7 @@ L_17_8507:
 	JSR L_D702
 @Loop2:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D71C
 	JSR L_D77A
 	BIT $3A
@@ -691,7 +691,7 @@ L_17_8507:
 	JSR L_17_AF18
 @Loop4:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $3A
 	AND #$C0
 	BEQ @Loop4
@@ -714,7 +714,7 @@ L_17_8507:
 	LDA $EC
 	STA $E2
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$13
 	LDX #$24
 	JSR L_D1D5
@@ -781,7 +781,7 @@ L_17_85E0:
 	JSR L_D702
 @Loop2:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D71C
 	JSR L_D77A
 	BIT $3A
@@ -841,7 +841,7 @@ L_17_8674:
 	JSR L_D702
 @Loop2:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D71C
 	JSR L_D77A
 	BIT $3A
@@ -910,7 +910,7 @@ L_17_86EA:
 	STA $3E
 @Loop2:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDX $3F
 	LDA $0307
 	SEC
@@ -964,7 +964,7 @@ L_17_8768:
 	STA $3E
 @Loop1:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $3F
 	JSR L_17_8783
 	DEC $3E
@@ -3014,7 +3014,7 @@ L_17_9632:
 	JSR L_17_9C54
 @Loop3:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D6B4
 	LDA $8E
 	LSR
@@ -3072,7 +3072,7 @@ L_17_9632:
 	JSR L_D68A
 @Loop10:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D6B4
 	JSR L_D6F9
 	BIT $3A
@@ -3140,7 +3140,7 @@ L_17_9632:
 	BNE @Loop19
 @Loop20:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	BIT $3A
 	BVS @Loop21
 	BPL @Loop20
@@ -3166,7 +3166,7 @@ L_17_9632:
 	JSR L_17_9C6C
 @Loop24:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 @Loop25:
 	JSR L_D6B4
 	LDA $E1
@@ -3206,7 +3206,7 @@ L_17_9632:
 	DEC $ED
 @Loop29:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_17_AC6D
 @Loop30:
 	JSR L_D6B4
@@ -3286,7 +3286,7 @@ L_17_9632:
 @Loop39:
 	JSR L_17_9C54
 	LDA #$1E
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $E1
 	STA $91
 	JSR L_17_9C8B
@@ -3366,7 +3366,7 @@ L_17_9632:
 @Loop49:
 	JSR L_D6F9
 	LDA #$3C
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$F0
 	STA $0204
 	JSR L_17_9B51
@@ -3381,14 +3381,14 @@ L_17_9632:
 	STA $E2
 	JSR L_17_9C54
 	LDA #$0A
-	JSR L_CC9A
+	JSR switch_thread
 	JMP @Loop40
 @Loop51:
 	LDA #$F0
 	STA $0200
 	STA $0204
 	LDA #$3C
-	JSR L_CC9A
+	JSR switch_thread
 	LDX #$1B
 	JSR L_CCDD
 	RTS
@@ -4101,7 +4101,7 @@ L_17_9DFA:
 L_17_9E0D:
 	JSR L_17_9E47
 	LDA #$08
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_17_A395
 	LDA $76
 	CMP #$04
@@ -4126,7 +4126,7 @@ L_17_9E0D:
 	INY
 	BNE @Loop2
 	LDA #$04
-	JSR L_CC9A
+	JSR switch_thread
 @Loop3:
 	RTS
 
@@ -4394,7 +4394,7 @@ L_17_A053:
 	JSR L_C3A2
 	JSR L_17_B4B3
 	LDA #$78
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $6759
 	CMP #$0A
 	BEQ @Loop4
@@ -4417,7 +4417,7 @@ L_17_A053:
 	JSR L_D194
 	JSR L_17_B489
 	LDA #$0A
-	JSR L_CC9A
+	JSR switch_thread
 @Loop6:
 	LDA $75
 	CMP #$33
@@ -4520,7 +4520,7 @@ L_17_A053:
 	JSR create_thread
 @Loop12:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $0399
 	CMP $039E
 	BEQ @Loop12
@@ -4529,7 +4529,7 @@ L_17_A053:
 	STA $2D
 @Loop13:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $2D
 	AND #$08
 	BNE @Loop13
@@ -4543,7 +4543,7 @@ L_17_A053:
 	LDX #$07 ; BANK8
 	JSR L_C3A2
 	LDA #$0A
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $2D
 	AND #$03
 	CMP #$03
@@ -4593,7 +4593,7 @@ L_17_A053:
 @Loop19:
 	JSR L_17_9E47
 	LDA #$14
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D194
 	RTS
 
@@ -4626,13 +4626,13 @@ L_17_A236:
 	JSR create_thread
 @Loop3:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $71
 	AND #$04
 	BEQ @Loop3
 @Loop4:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	BIT $69
 	BMI @Loop5
 	BVS @Loop9
@@ -4650,7 +4650,7 @@ L_17_A236:
 	LDX #$14
 @Loop7:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	BIT $69
 	BPL @Loop4
 	BVS @Loop9
@@ -4665,7 +4665,7 @@ L_17_A236:
 	BNE @Loop6
 @Loop8:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $71
 	AND #$04
 	BEQ @Loop8
@@ -4677,7 +4677,7 @@ L_17_A236:
 	LDX #$1E
 @Loop11:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	BIT $69
 	BPL @Loop4
 	BVC @Loop5
@@ -4696,7 +4696,7 @@ L_17_A236:
 	STA $2D
 @Loop13:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $2D
 	AND #$08
 	BNE @Loop13
@@ -5132,14 +5132,14 @@ L_17_A4B4:
 	JSR L_C3A2
 	JSR L_17_B4B3
 	LDA #$F0
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$01
 	LDX #$00
 	JSR L_17_B39F
 	LDA #$02
 	JSR L_C41F
 	LDA #$F0
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D194
 	LDA #$80
 	STA PRG_RAM_PROTECT
@@ -5148,7 +5148,7 @@ L_17_A4B4:
 	LDA #$C0
 	STA PRG_RAM_PROTECT
 	LDA #$1E
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$01
 	JSR L_C41F
 	RTS
@@ -5156,12 +5156,12 @@ L_17_A4B4:
 L_17_A64A:
 	JSR L_17_AF2A
 	LDA #$F0
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$3C
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D194
 	LDA #$0A
-	JSR L_CC9A
+	JSR switch_thread
 	RTS
 
 L_17_A660:
@@ -5535,7 +5535,7 @@ L_17_A8F4:
 	STA $C4
 	JSR L_C3E3
 	LDA #$03
-	JSR L_CC9A
+	JSR switch_thread
 	LDX #$16
 	JSR L_CCDD
 	LDA $3E
@@ -5650,7 +5650,7 @@ L_17_A9D2:
 	JSR L_17_AC4E
 @Loop1:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D71C
 	JSR L_D77A
 	JSR L_17_AC44
@@ -5659,7 +5659,7 @@ L_17_A9D2:
 	BPL @Loop1
 	JSR L_17_AC4E
 	LDA #$08
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D78E
 	JSR L_17_ABFE
 	STA $6C
@@ -5696,7 +5696,7 @@ L_17_AA16:
 	JSR L_17_AC4E
 @Loop3:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D71C
 	JSR L_D78E
 	JSR L_17_ABFE
@@ -5711,7 +5711,7 @@ L_17_AA16:
 	BPL @Loop3
 	JSR L_17_AC4E
 	LDA #$08
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_D78E
 	JSR L_17_ABFE
 	STA $6D
@@ -5754,7 +5754,7 @@ L_17_AA7D:
 	STA $EB
 @Loop3:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $6C
 	BPL @Loop4
 	JSR L_D71C
@@ -5794,7 +5794,7 @@ L_17_AA7D:
 	JMP @Loop3
 @Loop7:
 	LDA #$3C
-	JSR L_CC9A
+	JSR switch_thread
 	CLC
 	RTS
 @Loop8:
@@ -5841,7 +5841,7 @@ L_17_AB5E:
 	STA $45
 @Loop1:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	BIT $3A
 	BMI @Loop3
 	BVS @Loop6
@@ -5888,7 +5888,7 @@ L_17_AB5E:
 	STX $6C
 	STY $6D
 	LDA #$3C
-	JSR L_CC9A
+	JSR switch_thread
 	CLC
 	RTS
 @Loop6:
@@ -6422,7 +6422,7 @@ L_17_AF2A:
 @Loop7:
 	JSR L_17_A81E
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $90
 	CLC
 	ADC #$2C
@@ -6914,7 +6914,7 @@ L_17_B34C:
 	JSR L_17_B4B3
 @Loop2:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	BIT $3A
 	BVS @Loop4
 	LDA $37
@@ -6924,7 +6924,7 @@ L_17_B34C:
 	JSR L_17_B39D
 @Loop3:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	BIT $3A
 	BVS @Loop4
 	LDA $37
@@ -6943,7 +6943,7 @@ L_17_B39F:
 	STA $8F
 @Loop1:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $8F
 	CLC
 	ADC $0307
@@ -7067,7 +7067,7 @@ L_17_B472:
 	JSR L_C390
 @Loop1:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $0C
 	BEQ @Loop2
 	BIT $3A
@@ -7090,7 +7090,7 @@ L_17_B489:
 
 L_17_B49D:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	BIT $3A
 	BVS @Loop1
 	DEX
@@ -7253,7 +7253,7 @@ L_17_B573:
 	STA $AB
 @Loop2:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	BIT $3A
 	BVS L_17_B63E
 	LDA $3A

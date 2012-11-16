@@ -5660,7 +5660,7 @@ L_17_A9D2:
 	JSR L_17_AC4E
 	LDA #$08
 	JSR switch_thread
-	JSR L_D78E
+	JSR xymenu_get_spot
 	JSR L_17_ABFE
 	STA $6C
 	CLC
@@ -5698,7 +5698,7 @@ L_17_AA16:
 	LDA #$01
 	JSR switch_thread
 	JSR xymenu_move
-	JSR L_D78E
+	JSR xymenu_get_spot
 	JSR L_17_ABFE
 	CMP $6C
 	BNE @Loop4
@@ -5712,7 +5712,7 @@ L_17_AA16:
 	JSR L_17_AC4E
 	LDA #$08
 	JSR switch_thread
-	JSR L_D78E
+	JSR xymenu_get_spot
 	JSR L_17_ABFE
 	STA $6D
 	CLC
@@ -5764,7 +5764,7 @@ L_17_AA7D:
 	BIT $38
 	BPL @Loop4
 	JSR L_17_AC4E
-	JSR L_D78E
+	JSR xymenu_get_spot
 	JSR L_17_ABFE
 	STA $6C
 @Loop4:
@@ -5780,7 +5780,7 @@ L_17_AA7D:
 	BIT $39
 	BPL @Loop5
 	JSR L_17_AC4E
-	JSR L_D78E
+	JSR xymenu_get_spot
 	JSR L_17_ABFE
 	STA $6D
 @Loop5:
@@ -5937,7 +5937,7 @@ L_17_AC44:
 	AND #$04
 	BEQ L_17_AC5B
 L_17_AC4E:
-	JSR L_D78E
+	JSR xymenu_get_spot
 	ASL
 	CLC
 	ADC #$04
@@ -6024,7 +6024,7 @@ L_17_ACC7:
 	LDA #$00
 	STA $E1
 @Loop5:
-	JSR L_D78E
+	JSR xymenu_get_spot
 	ASL
 	CLC
 	ADC #$04

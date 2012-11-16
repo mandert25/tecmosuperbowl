@@ -297,13 +297,13 @@ L_20_8825:
 	JSR L_C41F
 	LDA #$00
 	STA CLOCK
-	LDY #$76
-	LDX #$20
+	LDY #<$2076
+	LDX #>$2076
 	LDA #$01
 	STA $3F
 	LDA #$07
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	LDA #$3C
 	JSR switch_thread
 	JSR palette_fade_out
@@ -632,13 +632,13 @@ L_20_8825:
 	JSR L_C41F
 	LDA #$00
 	STA CLOCK
-	LDY #$63
-	LDX #$20
+	LDY #<$2063
+	LDX #>$2063
 	LDA #$01
 	STA $3F
 	LDA #$07
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	LDA #$3C
 	JSR switch_thread
 	JSR palette_fade_out
@@ -881,7 +881,7 @@ L_20_8EC2:
 	STA $3F
 	LDA #$06
 	STA $3E
-	JMP L_D09B
+	JMP clear_vram_size
 @Loop2:
 	RTS
 
@@ -1464,37 +1464,37 @@ L_20_9327:
 	JMP L_D5A0
 
 L_20_9330:
-	LDY #$41
-	LDX #$20
+	LDY #<$2041
+	LDX #>$2041
 	LDA #$02
 	STA $3F
 	LDA #$0B
 	STA $3E
-	JSR L_D09B
-	LDY #$54
-	LDX #$20
+	JSR clear_vram_size
+	LDY #<$2054
+	LDX #>$2054
 	LDA #$02
 	STA $3F
 	LDA #$0B
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	RTS
 
 L_20_934F:
-	LDY #$80
-	LDX #$20
+	LDY #<$2080
+	LDX #>$2080
 	LDA #$1C
 	STA $3F
 	LDA #$20
 	STA $3E
-	JSR L_D09B
-	LDY #$00
-	LDX #$24
+	JSR clear_vram_size
+	LDY #<$2400
+	LDX #>$2400
 	LDA #$20
 	STA $3F
 	LDA #$20
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	JMP clear_sprites
 
 L_20_9370:

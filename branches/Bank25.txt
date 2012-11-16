@@ -9,7 +9,7 @@ L_25_8009:
 	STA $45
 	LDA #$03
 	STA $44
-	JSR L_D819
+	JSR divide_8
 	LDA $42
 	STA $6F
 	BEQ @Loop2

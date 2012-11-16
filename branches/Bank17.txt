@@ -543,7 +543,7 @@ L_17_828F:
 	LDA #$01
 	JSR switch_thread
 	JSR ymenu_up_down
-	JSR L_D6F9
+	JSR ymenu_set_y
 	BIT $3A
 	BVC @Loop20
 	JMP @Loop25
@@ -576,7 +576,7 @@ L_17_828F:
 	LDA #$01
 	JSR switch_thread
 	JSR ymenu_up_down
-	JSR L_D6F9
+	JSR ymenu_set_y
 	BIT $3A
 	BVS @Loop24
 	BPL @Loop22
@@ -1606,7 +1606,7 @@ L_17_88AF:
 	TAX
 	LDA $A7,X
 	BMI @Loop54
-	JSR L_D6F9
+	JSR ymenu_set_y
 	JSR @Loop57
 	BCS @Loop51
 	LDA $3A
@@ -3026,7 +3026,7 @@ L_17_9632:
 @Loop4:
 	STA $0203
 @Loop5:
-	JSR L_D6F9
+	JSR ymenu_set_y
 	JSR L_17_9B1F
 	LDA $3A
 	AND #$10
@@ -3074,7 +3074,7 @@ L_17_9632:
 	LDA #$01
 	JSR switch_thread
 	JSR ymenu_up_down
-	JSR L_D6F9
+	JSR ymenu_set_y
 	BIT $3A
 	BVS @Loop14
 	BPL @Loop10
@@ -3174,7 +3174,7 @@ L_17_9632:
 	TAX
 	LDA $A5,X
 	BMI @Loop25
-	JSR L_D6F9
+	JSR ymenu_set_y
 	BIT $3A
 	BVC @Loop26
 	JMP @Loop33
@@ -3227,7 +3227,7 @@ L_17_9632:
 	INC $E1
 	JMP @Loop31
 @Loop32:
-	JSR L_D6F9
+	JSR ymenu_set_y
 	BIT $3A
 	BVS @Loop33
 	BPL @Loop29
@@ -3364,7 +3364,7 @@ L_17_9632:
 	LDY #$00
 	JSR L_17_9C29
 @Loop49:
-	JSR L_D6F9
+	JSR ymenu_set_y
 	LDA #$3C
 	JSR switch_thread
 	LDA #$F0

@@ -100,7 +100,7 @@ L_23_80B9:
 	STA $59
 L_23_80C3:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $54
 	AND #$E0
 	CMP $56
@@ -126,14 +126,14 @@ L_23_80E9:
 	STA $59
 	JSR L_23_814E
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDY #$06
 L_23_80F8:
 	JSR L_23_818C
 	LDA #$04
 	STA $5B
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	INC $3E
 	BNE L_23_810A
 	INC $3F
@@ -1107,7 +1107,7 @@ L_23_90CC:
 
 L_23_90CF:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$00
 	LDY #$F0
 L_23_90D8:
@@ -1273,7 +1273,7 @@ L_23_91CE:
 	TXS
 L_23_91D1:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_23_9513
 	LDA $7C
 	BEQ L_23_91D1
@@ -1287,7 +1287,7 @@ L_23_91D1:
 	BCC L_23_920D
 	JSR L_23_9465
 	LDA #$08
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $7C
 	AND #$7F
 	CLC
@@ -1295,7 +1295,7 @@ L_23_91D1:
 	LDX #$0F
 	JSR L_C3AF
 	LDA #$14
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$00
 	STA $7C
 	JMP L_23_91D1
@@ -1343,19 +1343,19 @@ L_23_925D:
 L_23_926A:
 	JSR L_23_9465
 	LDA #$08
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$5F
 	LDX #$0F
 	JSR L_C3AF
 	LDA #$1E
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_23_9465
 	LDA #$08
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $6C
 	JSR L_23_94C7
 	LDA #$1E
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$00
 	STA $7C
 	JSR L_23_9465
@@ -1379,19 +1379,19 @@ L_23_926A:
 L_23_92BC:
 	JSR L_23_9465
 	LDA #$08
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$5F
 	LDX #$0F
 	JSR L_C3AF
 	LDA #$1E
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_23_9465
 	LDA #$08
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $6D
 	JSR L_23_94C7
 	LDA #$1E
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$00
 	STA $7C
 	JSR L_23_9465
@@ -1422,7 +1422,7 @@ L_23_930E:
 
 L_23_931B:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $7C
 	BNE L_23_9328
 	DEX
@@ -1563,7 +1563,7 @@ L_23_9416:
 	LDX #$20
 L_23_941A:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $0307
 	SEC
 	SBC #$08
@@ -1581,7 +1581,7 @@ L_23_943C:
 	LDX #$20
 L_23_943E:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $0307
 	CLC
 	ADC #$08
@@ -1784,7 +1784,7 @@ L_23_9594:
 	STA $3F
 L_23_959A:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$02
 	STA $43
 L_23_95A3:
@@ -2083,7 +2083,7 @@ L_23_9785:
 	STA $92
 	STA $96
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	ASL $A9
 	ASL $A9
 	LDA $95
@@ -2146,7 +2146,7 @@ L_23_97FF:
 	STA $45
 	JSR L_D85A
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $44
 	BEQ L_23_9821
 	LDA L_C6ED
@@ -2230,7 +2230,7 @@ L_23_9899:
 	STA $41
 	JSR L_D85A
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $44
 	BEQ L_23_98BB
 	LDA L_C6ED
@@ -2388,7 +2388,7 @@ L_23_99AF:
 	STA $9A
 	STA $9C
 	LDA #$04
-	JSR L_CC9A
+	JSR switch_thread
 L_23_99CA:
 	LDA #$F0
 	STA $02E0
@@ -2396,7 +2396,7 @@ L_23_99CA:
 	ORA #$42
 	STA $8E
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $3D
 	AND #$3F
 	SEC
@@ -2423,20 +2423,20 @@ L_23_9A05:
 	STA $A2
 	STA $A3
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	DEC $3E
 	JSR L_23_9D2B
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	DEC $3E
 	JSR L_23_9D2B
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$08
 	STA $3F
 L_23_9A28:
 	LDA #$02
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_23_9D2B
 	DEC $3F
 	BNE L_23_9A28
@@ -2453,7 +2453,7 @@ L_23_9A28:
 	STA $A0
 L_23_9A4C:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_23_9D2B
 	JMP L_23_9A4C
 
@@ -2729,7 +2729,7 @@ L_23_9C15:
 
 L_23_9C2A:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_23_9D2B
 	JSR L_23_9E2C
 	BCC L_23_9C2A
@@ -2737,7 +2737,7 @@ L_23_9C2A:
 
 L_23_9C3A:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_23_9D2B
 L_23_9C42:
 	JSR L_23_9E6B
@@ -2762,7 +2762,7 @@ L_23_9C42:
 	BCC L_23_9C80
 L_23_9C6B:
 	LDA #$04
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$00
 	STA $69
 	LDA $73
@@ -2788,7 +2788,7 @@ L_23_9C92:
 	LDA #$30
 	STA $AB
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $3C
 	AND #$3F
 	CLC
@@ -2814,7 +2814,7 @@ L_23_9CBA:
 	STA $A6
 L_23_9CC9:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	JSR L_23_9D2B
 	LDA $3E
 	SEC
@@ -2843,7 +2843,7 @@ L_23_9CEC:
 	STA $4D
 L_23_9CFD:
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA #$40
 	STA $99
 	STA $9B
@@ -3090,7 +3090,7 @@ L_23_9EA1:
 	STX $41
 	JSR L_D85A
 	LDA #$01
-	JSR L_CC9A
+	JSR switch_thread
 	LDA $44
 	STA $AD
 	LSR

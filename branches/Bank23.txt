@@ -12,7 +12,7 @@ L_23_8010:
 	STA $FF46,Y
 	INY
 	BNE L_23_8010
-	JSR L_D559
+	JSR set_vertical_mirroring
 	JSR disable_nmi
 	LDA #$1B ; BANK28
 	LDY #<L_28_8000

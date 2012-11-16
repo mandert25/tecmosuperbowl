@@ -1264,7 +1264,7 @@ L_25_89EA:
 	LDA #$01
 	JSR switch_thread
 	JSR ymenu_up_down
-	JSR L_D6F9
+	JSR ymenu_set_y
 	BIT $3A
 	BVS L_25_8A38
 	LDA $3A

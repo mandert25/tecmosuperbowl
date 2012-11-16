@@ -481,13 +481,13 @@ L_17_828F:
 	JSR L_D5B5
 	JMP @Loop15
 @Loop14:
-	LDY #$0D
-	LDX #$21
+	LDY #<$210D
+	LDX #>$210D
 	LDA #$01
 	STA $3F
 	LDA #$02
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 @Loop15:
 	BIT $3A
 	BVS @Loop16
@@ -807,13 +807,13 @@ L_17_85E0:
 @Loop3:
 	LDA #$F0
 	STA $0200
-	LDY #$EB
-	LDX #$23
+	LDY #<$23EB
+	LDX #>$23EB
 	LDA #$01
 	STA $3F
 	LDA #$0B
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	LDY #$4D
 	LDX #$22
 	LDA #$03
@@ -1508,13 +1508,13 @@ L_17_88AF:
 	STA $E2
 	JMP @Loop31
 @Loop44:
-	LDY #$E7
-	LDX #$20
+	LDY #<$20E7
+	LDX #>$20E7
 	LDA #$01
 	STA $3F
 	LDA #$08
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	JMP @Loop32
 @Loop45:
 	JSR L_17_8ED5
@@ -1548,13 +1548,13 @@ L_17_88AF:
 	STA $0108,Y
 	INY
 	BNE @Loop50
-	LDY #$40
-	LDX #$20
+	LDY #<$2040
+	LDX #>$2040
 	LDA #$06
 	STA $3F
 	LDA #$20
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	JSR L_17_8F88
 	STY $43
 	LDA #$58
@@ -2168,13 +2168,13 @@ L_17_8FD0:
 	JSR L_17_AD59
 	JMP @Loop6
 @Loop4:
-	LDY #$62
-	LDX #$23
+	LDY #<$2362
+	LDX #>$2362
 	LDA #$01
 	STA $3F
 	LDA #$10
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	LDX #$00
 	LDA #$F0
 @Loop5:
@@ -2198,20 +2198,20 @@ L_17_8FD0:
 @Loop8:
 	CMP #$01
 	BEQ @Loop9
-	LDY #$00
-	LDX #$22
+	LDY #<$2200
+	LDX #>$2200
 	LDA #$0C
 	STA $3F
 	LDA #$20
 	STA $3E
-	JSR L_D09B
-	LDY #$00
-	LDX #$26
+	JSR clear_vram_size
+	LDY #<$2600
+	LDX #>$2600
 	LDA #$0C
 	STA $3F
 	LDA #$20
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	LDY #<L_17_BB8A
 	LDX #>L_17_BB8A
 	JSR L_C481
@@ -2226,20 +2226,20 @@ L_17_8FD0:
 	STA $3F
 	JMP @Loop10
 @Loop9:
-	LDY #$80
-	LDX #$20
+	LDY #<$2080
+	LDX #>$2080
 	LDA #$0C
 	STA $3F
 	LDA #$20
 	STA $3E
-	JSR L_D09B
-	LDY #$80
-	LDX #$24
+	JSR clear_vram_size
+	LDY #<$2480
+	LDX #>$2480
 	LDA #$0C
 	STA $3F
 	LDA #$20
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	LDY #<L_17_BB94
 	LDX #>L_17_BB94
 	JSR L_C481
@@ -4106,13 +4106,13 @@ L_17_9E0D:
 	LDA $76
 	CMP #$04
 	BCC @Loop3
-	LDY #$8A
-	LDX #$21
+	LDY #<$218A
+	LDX #>$218A
 	LDA #$03
 	STA $3F
 	LDA #$0B
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 	LDA #$00
 	LDY #$FC
 @Loop1:
@@ -7523,7 +7523,7 @@ L_17_B6FE:
 	STA $3F
 	LDA #$1E
 	STA $3E
-	JSR L_D09B
+	JSR clear_vram_size
 @Loop5:
 	LDA $94
 	CLC

@@ -29,7 +29,7 @@ L_24_8015:
 
 L_24_8040:
 	STA $C2
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA $2D
 	AND #$DF
 	STA $2D
@@ -729,7 +729,7 @@ L_24_859A:
 	JSR L_D38E
 	PLA
 	TAX
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA #$02
 	JMP L_24_8C48
 
@@ -745,7 +745,7 @@ L_24_85B6:
 	JSR L_24_8E76
 	PLA
 	TAX
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA #$02
 	JMP L_24_8C48
 
@@ -761,7 +761,7 @@ L_24_85D2:
 	JSR L_D41D
 	PLA
 	TAX
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA #$02
 	JMP L_24_8C48
 
@@ -1340,7 +1340,7 @@ L_24_8A07:
 	JSR L_D41D
 	PLA
 	TAX
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA #$02
 	JMP L_24_8C48
 
@@ -1407,7 +1407,7 @@ L_24_8A8C:
 	LDA $2F
 	STA $AD
 	LDX #$07 ; BANK8
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA #$0A
 	STA $45
 	LDA #$00
@@ -1490,7 +1490,7 @@ L_24_8B2E:
 	BNE L_24_8ACC
 L_24_8B40:
 	LDX $AD
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA #$02
 	JMP L_24_8C48
 
@@ -1601,7 +1601,7 @@ L_24_8BD9:
 	JSR L_D5A0
 	PLA
 	TAX
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA #$02
 	JMP L_24_8C48
 
@@ -1770,7 +1770,7 @@ L_24_8D10:
 	LDX #$51
 	TXS
 	LDX #$0D ; BANK14
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA $DA
 	ASL
 	TAX
@@ -1904,7 +1904,7 @@ L_24_8DDF:
 	ORA $2F
 	STA $3F
 	LDX #$0F ; BANK16
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDY $67
 	LDA TEAM_LOCATION_POINTERS+2,Y
 	SEC
@@ -1970,7 +1970,7 @@ L_24_8E5D:
 	LDA $3F
 	AND #$7F
 	TAX
-	JMP L_D8E3
+	JMP bank_swap_A000
 
 L_24_8E76:
 	LDA $2F
@@ -2017,7 +2017,7 @@ L_24_8EB8:
 	JSR L_D553
 	PLA
 	TAX
-	JMP L_D8E3
+	JMP bank_swap_A000
 
 L_24_8ECF:
 	STA PPUDATA
@@ -2245,7 +2245,7 @@ L_24_90AD:
 	JSR L_D43D
 	PLA
 	TAX
-	JMP L_D8E3
+	JMP bank_swap_A000
 
 L_24_90C1:
 	JSR L_24_9108
@@ -2281,7 +2281,7 @@ L_24_90C1:
 	JSR L_D3BA
 	PLA
 	TAX
-	JMP L_D8E3
+	JMP bank_swap_A000
 
 L_24_9108:
 	CMP #$1C
@@ -2539,7 +2539,7 @@ L_24_92EA:
 	STA $59
 	STA $5A
 	LDX #$02 ; BANK3
-	JSR L_D8E3
+	JSR bank_swap_A000
 	ASL $D4
 	LDA #$00
 	ROL
@@ -2675,7 +2675,7 @@ L_24_92EA:
 	LDX #>L_28_8000
 	JSR bank_swap_8000_jump
 	LDX #$02 ; BANK3
-	JSR L_D8E3
+	JSR bank_swap_A000
 	PLA
 	STA $45
 	LDA #$18
@@ -2697,7 +2697,7 @@ L_24_92EA:
 
 L_24_9417:
 	LDX #$02 ; BANK3
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA #$00
 	STA $61
 	LDY $43
@@ -3037,7 +3037,7 @@ L_24_961C:
 	LDA #$08
 	ADC #$00
 	TAX
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDX $44
 	LDA A:$CC,X
 	ASL
@@ -3088,7 +3088,7 @@ L_24_961C:
 	LDX #$16
 	JSR create_thread
 	LDX $45
-	JSR L_D8E3
+	JSR bank_swap_A000
 	RTS
 
 L_24_96C4:
@@ -3183,7 +3183,7 @@ L_24_96C4:
 	LDA #$08
 	ADC #$00
 	TAX
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDY #$02
 	LDA ($CB),Y
 	STA $C9
@@ -4172,7 +4172,7 @@ L_24_9DB0:
 	ADC #$4D
 	STA $51
 	LDX #$0E ; BANK15
-	JSR L_D8E3
+	JSR bank_swap_A000
 	LDA #$62
 	STA $4B
 	LDA #$63

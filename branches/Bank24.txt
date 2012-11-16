@@ -904,7 +904,7 @@ L_24_86CA:
 	LDA ($C2),Y
 	TAX
 	PLA
-	JSR L_D1D5
+	JSR new_palette_no_fade
 	LDA #$03
 	JMP L_24_8C48
 

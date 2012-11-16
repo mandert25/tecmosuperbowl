@@ -859,7 +859,7 @@ L_24_8679:
 	LDA ($C2),Y
 	TAX
 	PLA
-	JSR L_D136
+	JSR get_palette_fade_in
 	LDA #$03
 	JMP L_24_8C48
 @Loop1:

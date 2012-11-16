@@ -843,7 +843,7 @@ L_20_8E6C:
 	LDA L_20_94B8,X
 	STA $0324
 	STA $0328
-	JSR L_D1FD
+	JSR buffer_palette
 @Loop4:
 	LDA $75
 	AND #$E0

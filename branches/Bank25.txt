@@ -1823,7 +1823,7 @@ L_25_8E3E:
 	JSR L_D5F8
 	LDA L_25_914C,Y
 	JSR L_D605
-	JMP L_D2C8
+	JMP buffer_end
 
 L_25_8EAD:
 	STA $44
@@ -1956,13 +1956,13 @@ L_25_8F82:
 	JSR L_D5F8
 	LDA $44
 	JSR L_D605
-	JMP L_D2C8
+	JMP buffer_end
 	STA $44
 	LDA #$01
 	JSR buffer_add
 	LDA $44
 	JSR L_D605
-	JMP L_D2C8
+	JMP buffer_end
 
 L_25_8FA9:
 	LDA #$04
@@ -1986,7 +1986,7 @@ L_25_8FBD:
 	LDA $43
 	SEC
 	JSR L_D5F8
-	JMP L_D2C8
+	JMP buffer_end
 
 L_25_8FD6:
 	LDA $43
@@ -2043,7 +2043,7 @@ L_25_8FDF:
 	INY
 	DEC $45
 	BNE @Loop6
-	JSR L_D2C8
+	JSR buffer_end
 	RTS
 @Loop7:
 	.BYTE $01, $01, $01, $01, $02, $02, $02, $02, $03, $03
@@ -2136,7 +2136,7 @@ L_25_911F:
 	LDA $45
 	STA $033A,X
 	INX
-	JSR L_D2C8
+	JSR buffer_end
 	RTS
 
 L_25_9130:

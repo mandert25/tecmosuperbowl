@@ -80,7 +80,7 @@ L_17_809C:
 	JSR L_D28B
 	JSR L_D559
 	JSR L_D10E
-	JSR L_D571
+	JSR clear_sprites
 	JSR L_17_9443
 	LDA #$13
 	LDX #$24
@@ -246,7 +246,7 @@ preseason_menu:
 @Loop18:
 	JSR L_D28B
 	JSR L_D10E
-	JSR L_D571
+	JSR clear_sprites
 	JSR L_17_9443
 	JSR L_17_9456
 	LDA #$13
@@ -1121,7 +1121,7 @@ pro_bowl_menu:
 @Loop18:
 	JSR L_D28B
 	JSR L_D10E
-	JSR L_D571
+	JSR clear_sprites
 	JSR L_17_9443
 	JSR L_17_9474
 	LDA #$13
@@ -7086,7 +7086,7 @@ L_17_B489:
 	STA $0308
 	STA $030B
 	JSR L_D10E
-	JMP L_D571
+	JMP clear_sprites
 
 L_17_B49D:
 	LDA #$01

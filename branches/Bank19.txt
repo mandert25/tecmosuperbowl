@@ -4164,7 +4164,7 @@ L_19_9F75:
 	LDX #>L_17_8009
 	JSR bank_swap_8000_jump
 	LDX #$13 ; BANK20
-	JSR L_D8E3
+	JSR bank_swap_A000
 	JSR set_palette_fade_to_in
 	LDA $7A
 	STA $93

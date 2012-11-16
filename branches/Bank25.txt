@@ -1684,8 +1684,8 @@ L_25_8A78:
 	JSR bank_swap_A000
 	LDA #$2D
 	STA $50
-	JSR L_D236
-	JSR L_D23A
+	JSR get_background_palette
+	JSR get_sprite_palette
 	LDX $6F
 	LDA L_25_9130,X
 	STA $031A

@@ -279,7 +279,7 @@ L_20_8825:
 	JSR L_CCDD
 	LDA #$3C
 	JSR switch_thread
-	JSR L_D194
+	JSR palette_fade_out
 	LDA #$F0
 	STA $0208
 	JMP L_20_9330
@@ -306,7 +306,7 @@ L_20_8825:
 	JSR L_D09B
 	LDA #$3C
 	JSR switch_thread
-	JSR L_D194
+	JSR palette_fade_out
 	LDA #$F0
 	STA $0208
 	JMP L_20_9330
@@ -614,7 +614,7 @@ L_20_8825:
 	JSR L_CCDD
 	LDA #$3C
 	JSR switch_thread
-	JSR L_D194
+	JSR palette_fade_out
 	LDA #$F0
 	STA $0208
 	JMP L_20_9330
@@ -641,7 +641,7 @@ L_20_8825:
 	JSR L_D09B
 	LDA #$3C
 	JSR switch_thread
-	JSR L_D194
+	JSR palette_fade_out
 	LDA #$F0
 	STA $0208
 	JMP L_20_9330
@@ -1634,7 +1634,7 @@ L_20_944C:
 	PLA
 	PLA
 	JSR L_20_9307
-	JSR L_D194
+	JSR palette_fade_out
 	LDA $2D
 	AND #$F7
 	STA $2D

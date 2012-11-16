@@ -674,7 +674,7 @@ L_17_8507:
 	LDA #$01
 	JSR switch_thread
 	JSR xymenu_move
-	JSR L_D77A
+	JSR xymenu_set_xy
 	BIT $3A
 	BVC @Loop3
 	JMP @Loop7
@@ -783,7 +783,7 @@ L_17_85E0:
 	LDA #$01
 	JSR switch_thread
 	JSR xymenu_move
-	JSR L_D77A
+	JSR xymenu_set_xy
 	BIT $3A
 	BVS @Loop3
 	BPL @Loop2
@@ -843,7 +843,7 @@ L_17_8674:
 	LDA #$01
 	JSR switch_thread
 	JSR xymenu_move
-	JSR L_D77A
+	JSR xymenu_set_xy
 	BIT $3A
 	BVS @Loop3
 	BPL @Loop2
@@ -5652,7 +5652,7 @@ L_17_A9D2:
 	LDA #$01
 	JSR switch_thread
 	JSR xymenu_move
-	JSR L_D77A
+	JSR xymenu_set_xy
 	JSR L_17_AC44
 	BIT $3A
 	BVS @Loop2
@@ -5704,7 +5704,7 @@ L_17_AA16:
 	BNE @Loop4
 	JSR L_17_ACB7
 @Loop4:
-	JSR L_D77A
+	JSR xymenu_set_xy
 	JSR L_17_AC44
 	BIT $3A
 	BVS @Loop5
@@ -5759,7 +5759,7 @@ L_17_AA7D:
 	BPL @Loop4
 	JSR xymenu_move
 	JSR L_17_ACAB
-	JSR L_D77A
+	JSR xymenu_set_xy
 	JSR L_17_AC44
 	BIT $38
 	BPL @Loop4
@@ -5775,7 +5775,7 @@ L_17_AA7D:
 	JSR L_17_ACAB
 	LDA #$2C
 	STA $0201
-	JSR L_D77A
+	JSR xymenu_set_xy
 	JSR L_17_AC44
 	BIT $39
 	BPL @Loop5

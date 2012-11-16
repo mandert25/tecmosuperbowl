@@ -669,7 +669,7 @@ L_17_8507:
 	LDY #<STANDINGS_MENU_SELECT
 	LDX #>STANDINGS_MENU_SELECT
 	LDA #$02
-	JSR L_D702
+	JSR set_xymenu_arrow
 @Loop2:
 	LDA #$01
 	JSR switch_thread
@@ -778,7 +778,7 @@ L_17_85E0:
 	LDY #<RANKINGS_MENU_SELECT
 	LDX #>RANKINGS_MENU_SELECT
 	LDA #$02
-	JSR L_D702
+	JSR set_xymenu_arrow
 @Loop2:
 	LDA #$01
 	JSR switch_thread
@@ -838,7 +838,7 @@ L_17_8674:
 	LDY #<LEADERS_MENU_SELECT
 	LDX #>LEADERS_MENU_SELECT
 	LDA #$02
-	JSR L_D702
+	JSR set_xymenu_arrow
 @Loop2:
 	LDA #$01
 	JSR switch_thread
@@ -5642,7 +5642,7 @@ L_17_A9D2:
 	LDY #<TEAM_SELECT_ARROW
 	LDX #>TEAM_SELECT_ARROW
 	LDA #$02
-	JSR L_D702
+	JSR set_xymenu_arrow
 	LDA #$2F ; Arrow Right Side
 	STA $0205
 	LDA #$02
@@ -5686,7 +5686,7 @@ L_17_AA16:
 	LDY #<TEAM_SELECT_ARROW
 	LDX #>TEAM_SELECT_ARROW
 	LDA #$02
-	JSR L_D702
+	JSR set_xymenu_arrow
 	LDA #$2C
 	STA $0201
 	LDA #$2D
@@ -5728,7 +5728,7 @@ L_17_AA7D:
 	LDY #<TEAM_SELECT_ARROW
 	LDX #>TEAM_SELECT_ARROW
 	LDA #$00
-	JSR L_D702
+	JSR set_xymenu_arrow
 	LDA #$2F
 	STA $0205
 	LDA #$02

@@ -699,7 +699,7 @@ L_26_851B:
 @Loop2:
 	LDA #$01
 	JSR switch_thread
-	JSR L_D71C
+	JSR xymenu_move
 	LDA $0202
 	AND #$FC
 	STA $45

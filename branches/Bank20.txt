@@ -188,7 +188,7 @@ L_20_8825:
 	LDY #<L_20_949A
 	LDX #>L_20_949A
 	LDA #$00
-	JSR L_D68A
+	JSR set_ymenu_arrow
 @Loop13:
 	LDA #$01
 	JSR switch_thread
@@ -364,7 +364,7 @@ L_20_8825:
 	LDY #<L_20_94A9
 	LDX #>L_20_94A9
 	LDA #$00
-	JSR L_D68A
+	JSR set_ymenu_arrow
 @Loop33:
 	LDA #$01
 	JSR switch_thread
@@ -520,7 +520,7 @@ L_20_8825:
 	LDY #<L_20_94AF
 	LDX #>L_20_94AF
 	LDA #$01
-	JSR L_D68A
+	JSR set_ymenu_arrow
 	JSR L_20_92C9
 @Loop52:
 	LDA #$01
@@ -701,7 +701,7 @@ L_20_8D34:
 	LDY #<L_20_94A3
 	LDX #>L_20_94A3
 	LDA #$01
-	JSR L_D68A
+	JSR set_ymenu_arrow
 	JSR L_20_92C9
 @Loop7:
 	LDA #$01
@@ -895,7 +895,7 @@ L_20_8EE5:
 	LDY #<L_20_949A
 	LDX #>L_20_949A
 	LDA #$00
-	JSR L_D68A
+	JSR set_ymenu_arrow
 	LDA #$14
 	JSR switch_thread
 	INC $E1
@@ -1060,7 +1060,7 @@ L_20_9031:
 	LDY #<L_20_94AF
 	LDX #>L_20_94AF
 	LDA #$00
-	JSR L_D68A
+	JSR set_ymenu_arrow
 	JSR L_20_92C9
 	LDA #$14
 	JSR switch_thread

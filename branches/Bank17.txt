@@ -466,7 +466,7 @@ L_17_828F:
 @Loop12:
 	LDA #$01
 	JSR switch_thread
-	JSR L_D6B4
+	JSR ymenu_up_down
 	LDA $37
 	AND #$0C
 	BNE @Loop13
@@ -542,7 +542,7 @@ L_17_828F:
 @Loop19:
 	LDA #$01
 	JSR switch_thread
-	JSR L_D6B4
+	JSR ymenu_up_down
 	JSR L_D6F9
 	BIT $3A
 	BVC @Loop20
@@ -575,7 +575,7 @@ L_17_828F:
 @Loop22:
 	LDA #$01
 	JSR switch_thread
-	JSR L_D6B4
+	JSR ymenu_up_down
 	JSR L_D6F9
 	BIT $3A
 	BVS @Loop24
@@ -3015,7 +3015,7 @@ L_17_9632:
 @Loop3:
 	LDA #$01
 	JSR switch_thread
-	JSR L_D6B4
+	JSR ymenu_up_down
 	LDA $8E
 	LSR
 	BCS @Loop5
@@ -3073,7 +3073,7 @@ L_17_9632:
 @Loop10:
 	LDA #$01
 	JSR switch_thread
-	JSR L_D6B4
+	JSR ymenu_up_down
 	JSR L_D6F9
 	BIT $3A
 	BVS @Loop14
@@ -3168,7 +3168,7 @@ L_17_9632:
 	LDA #$01
 	JSR switch_thread
 @Loop25:
-	JSR L_D6B4
+	JSR ymenu_up_down
 	LDA $E1
 	ASL
 	TAX
@@ -3209,7 +3209,7 @@ L_17_9632:
 	JSR switch_thread
 	JSR L_17_AC6D
 @Loop30:
-	JSR L_D6B4
+	JSR ymenu_up_down
 @Loop31:
 	LDA $E2
 	ASL

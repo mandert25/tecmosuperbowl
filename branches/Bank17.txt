@@ -4823,7 +4823,7 @@ L_17_A395:
 	BEQ @Loop3
 	CMP #$03
 	BEQ @Loop4
-	JSR L_D929
+	JSR update_random_3B
 	AND #$02
 	SEC
 	SBC #$01

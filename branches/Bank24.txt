@@ -686,7 +686,7 @@ L_24_8538:
 	LDA #$02
 	JMP L_24_8C48
 @Loop2:
-	JSR L_D140
+	JSR palette_fade_in
 	LDA #$02
 	JMP L_24_8C48
 
@@ -863,7 +863,7 @@ L_24_8679:
 	LDA #$03
 	JMP L_24_8C48
 @Loop1:
-	JSR L_D140
+	JSR palette_fade_in
 	LDA #$02
 	JMP L_24_8C48
 

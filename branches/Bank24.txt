@@ -1525,7 +1525,7 @@ L_24_8B68:
 	ADC #$E0
 	STA $033A,X
 	INX
-	JMP L_D2C8
+	JMP buffer_end
 
 L_24_8B7A:
 	LDA #$16 ; BANK23
@@ -1965,7 +1965,7 @@ L_24_8E5D:
 	INX
 	DEC $40
 	BNE L_24_8E5D
-	JSR L_D2C8
+	JSR buffer_end
 	JSR L_D2EA
 	LDA $3F
 	AND #$7F
@@ -2267,7 +2267,7 @@ L_24_90C1:
 	LDA #$2E
 	STA $033A,X
 	INX
-	JSR L_D2C8
+	JSR buffer_end
 	JSR L_D553
 	LDA $8E
 	STA $45

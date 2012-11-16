@@ -5263,7 +5263,7 @@ L_21_A5AD:
 	LDY #$50
 	LDX #$20
 	LDA #$0E
-	JSR L_D29A
+	JSR buffer_add
 	LDA #$04
 	STA $033A,X
 	INX
@@ -5330,7 +5330,7 @@ L_21_A636:
 	LDY #$44
 	LDX #$20
 	LDA #$0E
-	JSR L_D29A
+	JSR buffer_add
 	TXA
 	CLC
 	ADC #$0D

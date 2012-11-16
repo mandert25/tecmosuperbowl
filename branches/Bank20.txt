@@ -193,7 +193,7 @@ L_20_8825:
 	LDA #$01
 	JSR switch_thread
 	JSR L_20_944C
-	JSR L_D6B4
+	JSR ymenu_up_down
 	JSR L_D6F9
 	BIT $38
 	BMI @Loop14
@@ -368,7 +368,7 @@ L_20_8825:
 @Loop33:
 	LDA #$01
 	JSR switch_thread
-	JSR L_D6B4
+	JSR ymenu_up_down
 	JSR L_D6F9
 	BIT $38
 	BMI @Loop34
@@ -527,7 +527,7 @@ L_20_8825:
 	JSR switch_thread
 	JSR L_20_944C
 	JSR L_20_92C2
-	JSR L_D6B4
+	JSR ymenu_up_down
 	JSR L_D6F9
 	JSR L_20_92C9
 	BIT $39
@@ -707,7 +707,7 @@ L_20_8D34:
 	LDA #$01
 	JSR switch_thread
 	JSR L_20_92C2
-	JSR L_D6B4
+	JSR ymenu_up_down
 	JSR L_D6F9
 	JSR L_20_92C9
 	BIT $39

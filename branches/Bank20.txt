@@ -1379,7 +1379,7 @@ L_20_928D:
 	LDY $3E
 	LDX $3F
 	LDA #$0F
-	JSR L_D29A
+	JSR buffer_add
 	LDY #$00
 @Loop1:
 	LDA ($44),Y

@@ -13,7 +13,7 @@ L_17_8012:
 	LDX #$11 ; BANK18
 	JSR bank_swap_A000
 	JSR set_palette_fade_to_in
-	JSR L_D10E
+	JSR clear_nametables
 	JSR clear_sprites
 	LDA #$01
 	JSR switch_thread
@@ -79,7 +79,7 @@ L_17_8089:
 L_17_809C:
 	JSR set_palette_fade_to_in
 	JSR L_D559
-	JSR L_D10E
+	JSR clear_nametables
 	JSR clear_sprites
 	JSR L_17_9443
 	LDA #$13
@@ -245,7 +245,7 @@ preseason_menu:
 
 @Loop18:
 	JSR set_palette_fade_to_in
-	JSR L_D10E
+	JSR clear_nametables
 	JSR clear_sprites
 	JSR L_17_9443
 	JSR L_17_9456
@@ -316,7 +316,7 @@ L_17_8265:
 
 L_17_8272:
 	JSR set_palette_fade_to_in
-	JSR L_D10E
+	JSR clear_nametables
 	JSR clear_sprites
 	LDA #$00
 	LDX #$0F ; BANK16
@@ -1120,7 +1120,7 @@ pro_bowl_menu:
 
 @Loop18:
 	JSR set_palette_fade_to_in
-	JSR L_D10E
+	JSR clear_nametables
 	JSR clear_sprites
 	JSR L_17_9443
 	JSR L_17_9474
@@ -2747,7 +2747,7 @@ L_17_94E2:
 	JSR set_palette_fade_to_in
 	LDA #$01
 	STA $0700
-	JSR L_D10E
+	JSR clear_nametables
 	JSR clear_sprites
 	RTS
 
@@ -4096,7 +4096,7 @@ L_17_9DFA:
 	LDA $43
 	LDX #$07 ; BANK8
 	JSR L_C3A2
-	JMP L_D10E
+	JMP clear_nametables
 
 L_17_9E0D:
 	JSR L_17_9E47
@@ -4323,7 +4323,7 @@ L_17_9FBB:	.BYTE $1A, $12, $14, $16, $18, $12, $14, $16, $18, $1A
 L_17_A000:
 	JSR L_17_A4A2
 	BCS L_17_A053
-	JSR L_D10E
+	JSR clear_nametables
 	JSR L_17_A891
 	LDA #$10
 	STA $45
@@ -4505,7 +4505,7 @@ L_17_A053:
 	LDA #$00
 	STA $8C
 	STA $8D
-	JSR L_D10E
+	JSR clear_nametables
 	LDA #$12
 	STA $0B
 	LDY #<(L_19_8000-1)
@@ -7085,7 +7085,7 @@ L_17_B489:
 	STA $0307
 	STA $0308
 	STA $030B
-	JSR L_D10E
+	JSR clear_nametables
 	JMP clear_sprites
 
 L_17_B49D:

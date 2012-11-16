@@ -714,7 +714,7 @@ L_26_851B:
 	JMP @Loop4
 @Loop3:
 	BPL @Loop2
-	JSR L_D78E
+	JSR xymenu_get_spot
 	JSR L_26_85AA
 	TAX
 	LDA #$80

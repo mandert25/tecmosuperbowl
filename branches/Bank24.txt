@@ -421,7 +421,7 @@ L_24_836D:
 	JMP L_24_8C48
 
 L_24_837A:
-	JSR L_D10E
+	JSR clear_nametables
 	LDA #$01
 	JMP L_24_8C48
 
@@ -431,7 +431,7 @@ L_24_8382:
 	JMP L_24_8C48
 
 L_24_838A:
-	JSR L_D10E
+	JSR clear_nametables
 	JSR clear_sprites
 	LDA #$01
 	JMP L_24_8C48

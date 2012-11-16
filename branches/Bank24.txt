@@ -881,7 +881,7 @@ L_24_86A0:
 
 L_24_86AB:
 	JSR L_24_8D06
-	JSR L_D194
+	JSR palette_fade_out
 	LDA #$01
 	JMP L_24_8C48
 

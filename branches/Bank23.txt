@@ -166,13 +166,13 @@ L_23_8130:
 L_23_8138:
 	LDA #$11
 	STA $031F
-	JSR L_D1FD
+	JSR buffer_palette
 	JMP L_23_80C3
 
 L_24_8143:
 	LDA #$1A
 	STA $031F
-	JSR L_D1FD
+	JSR buffer_palette
 	JMP L_23_80C3
 
 L_23_814E:

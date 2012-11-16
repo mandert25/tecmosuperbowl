@@ -1224,7 +1224,7 @@ L_27_87E6:
 	LDY #$31
 	LDX #$22
 	JSR L_D5DB
-	JSR L_D286
+	JSR set_palette_fade_to_out
 @Loop3:
 	LDA $3A
 	AND #$C0

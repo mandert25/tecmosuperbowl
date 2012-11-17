@@ -521,7 +521,7 @@ default_nfc_starters:
 L_26_83C6:
 	LDA #$1A
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA $6E
 	JSR L_DEDE
 	LDY #$B2
@@ -549,7 +549,7 @@ L_26_83FD:
 	STA $030B
 	LDA #$1D
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA $6E
 	CLC
 	ADC #$40

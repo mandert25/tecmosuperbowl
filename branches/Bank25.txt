@@ -74,14 +74,14 @@ L_25_8009:
 	STA $3F
 	LDX #$26
 	JSR L_25_892E
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDA #<L_25_9258
 	STA $3E
 	LDA #>L_25_9258
 	STA $3F
 	LDX #$20
 	JSR L_25_893B
-	JSR L_CCFC
+	JSR set_vram_controls
 	JSR L_25_88C0
 	BCC @Loop11
 	JMP @Loop12
@@ -188,9 +188,9 @@ L_25_8009:
 	STA $3E
 	LDA L_25_9265-1,X
 	STA $3F
-	LDY #$80
-	LDX #$20
-	JSR L_CCFC
+	LDY #<$2080
+	LDX #>$2080
+	JSR set_vram_controls
 	LDA #$00
 	STA $A8
 @Loop18:
@@ -238,7 +238,7 @@ L_25_8009:
 	STA $3F
 	LDX #$2C
 	JSR L_25_892E
-	JSR L_CCFC
+	JSR set_vram_controls
 	JSR L_25_88C0
 	BCC @Loop24
 	JMP @Loop30
@@ -370,9 +370,9 @@ L_25_8009:
 	STA $3E
 	LDA L_25_9418-1,X
 	STA $3F
-	LDY #$80
-	LDX #$20
-	JSR L_CCFC
+	LDY #<$2080
+	LDX #>$2080
+	JSR set_vram_controls
 @Loop37:
 	JSR L_25_8953
 	JMP @Loop34
@@ -404,7 +404,7 @@ L_25_8009:
 	STA $3F
 	LDX #$30
 	JSR L_25_892E
-	JSR L_CCFC
+	JSR set_vram_controls
 	JSR L_25_88C0
 	BCS @Loop42
 	LDX #$15
@@ -474,9 +474,9 @@ L_25_8009:
 	STA $3E
 	LDA L_25_94EC-1,X
 	STA $3F
-	LDY #$80
-	LDX #$20
-	JSR L_CCFC
+	LDY #<$2080
+	LDX #>$2080
+	JSR set_vram_controls
 @Loop47:
 	JSR L_25_8953
 	JMP @Loop44
@@ -508,7 +508,7 @@ L_25_8009:
 	STA $3F
 	LDX #$2F
 	JSR L_25_892E
-	JSR L_CCFC
+	JSR set_vram_controls
 	JSR L_25_88C0
 	BCS @Loop52
 	LDX #$0E
@@ -580,9 +580,9 @@ L_25_8009:
 	STA $3E
 	LDA L_25_953C-1,X
 	STA $3F
-	LDY #$80
-	LDX #$20
-	JSR L_CCFC
+	LDY #<$2080
+	LDX #>$2080
+	JSR set_vram_controls
 @Loop58:
 	JSR L_25_8953
 	JMP @Loop55
@@ -614,7 +614,7 @@ L_25_8009:
 	STA $3F
 	LDX #$2E
 	JSR L_25_892E
-	JSR L_CCFC
+	JSR set_vram_controls
 	JSR L_25_88C0
 	BCS @Loop63
 	LDX #$08
@@ -686,9 +686,9 @@ L_25_8009:
 	STA $3E
 	LDA L_25_9333-1,X
 	STA $3F
-	LDY #$80
-	LDX #$20
-	JSR L_CCFC
+	LDY #<$2080
+	LDX #>$2080
+	JSR set_vram_controls
 @Loop69:
 	JSR L_25_8948
 	JMP @Loop66
@@ -720,7 +720,7 @@ L_25_8009:
 	STA $3F
 	LDX #$2D
 	JSR L_25_892E
-	JSR L_CCFC
+	JSR set_vram_controls
 	JSR L_25_88C0
 	BCS @Loop75
 	LDX $A8
@@ -821,9 +821,9 @@ L_25_8009:
 	STA $3E
 	LDA L_25_93A3-1,X
 	STA $3F
-	LDY #$80
-	LDX #$20
-	JSR L_CCFC
+	LDY #<$2080
+	LDX #>$2080
+	JSR set_vram_controls
 @Loop82:
 	JSR L_25_8953
 	JMP @Loop79
@@ -855,7 +855,7 @@ L_25_8009:
 	STA $3F
 	LDX #$31
 	JSR L_25_892E
-	JSR L_CCFC
+	JSR set_vram_controls
 	JSR L_25_88C0
 	BCS @Loop87
 	LDX #$1C
@@ -919,9 +919,9 @@ L_25_8009:
 	STA $3E
 	LDA #>L_25_94A9
 	STA $3F
-	LDY #$80
-	LDX #$20
-	JSR L_CCFC
+	LDY #<$2080
+	LDX #>$2080
+	JSR set_vram_controls
 @Loop93:
 	JSR L_25_8953
 	JMP @Loop90
@@ -939,9 +939,9 @@ L_25_8009:
 	STA $3E
 	LDA #>L_25_9524
 	STA $3F
-	LDY #$B6
-	LDX #$20
-	JSR L_CCFC
+	LDY #<$20B6
+	LDX #>$20B6
+	JSR set_vram_controls
 @Loop95:
 	JSR L_25_8953
 @Loop96:
@@ -1000,7 +1000,7 @@ L_25_8009:
 	STA $3F
 	LDX #$2F
 	JSR L_25_892E
-	JSR L_CCFC
+	JSR set_vram_controls
 	JSR L_25_88C0
 	BCS @Loop103
 	LDX #$0B
@@ -1072,9 +1072,9 @@ L_25_8009:
 	STA $3E
 	LDA L_25_953C-1,X
 	STA $3F
-	LDY #$80
-	LDX #$20
-	JSR L_CCFC
+	LDY #<$2080
+	LDX #>$2080
+	JSR set_vram_controls
 @Loop109:
 	JSR L_25_8953
 	JMP @Loop106
@@ -1169,9 +1169,9 @@ L_25_8953:
 	LDA #>L_25_95C5
 	STA $3F
 L_25_895B:
-	LDY #$C8
-	LDX #$23
-	JSR L_CCFC
+	LDY #<$23C8
+	LDX #>$23C8
+	JSR set_vram_controls
 	LDA #$E0
 	STA $A6
 	LDA #$20
@@ -1306,9 +1306,9 @@ L_25_8A38:
 L_25_8A40:
 	STY $3E
 	STX $3F
-	LDY #$C8
-	LDX #$23
-	JMP L_CCFC
+	LDY #<$23C8
+	LDX #>$23C8
+	JMP set_vram_controls
 
 L_25_8A4B:
 	JSR set_palette_fade_to_in
@@ -1749,9 +1749,9 @@ L_25_8DC7:
 	JSR L_25_8FDB
 	LDA $9D
 	JSR L_25_8EAD
-	LDY #$F6
-	LDX #$20
-	JSR L_CCFC
+	LDY #<$20F6
+	LDX #>$20F6
+	JSR set_vram_controls
 	LDA $45
 	CLC
 	ADC #<L_25_91F4
@@ -1759,9 +1759,9 @@ L_25_8DC7:
 	LDA #$00
 	ADC #>L_25_91F4
 	STA $3F
-	LDY #$CD
-	LDX #$23
-	JSR L_CCFC
+	LDY #<$23CD
+	LDX #>$23CD
+	JSR set_vram_controls
 	RTS
 
 L_25_8E3E:

@@ -2454,110 +2454,126 @@ L_CCE2:
 	RTS
 
 L_CCFC:
-	LDA $52
-	ORA $53
+	LDA BG_PALETTE_FADE
+	ORA SPRITE_PALETTE_FADE
 	BNE L_CD05
 	JMP L_CDBF
 L_CD05:
 	JSR L_D2D3
-	LDA $65
-	STA $67
-@Loop1:
+; Store Beginning Column
+	LDA TEMP65
+	STA TEMP67
+@next:
 	LDY #$00
-	LDA ($3E),Y
-	BMI @Loop3
-	LDY $65
-	LDX $66
+	LDA (TEMP3E),Y
+	BMI @control
+	LDY TEMP65_LO
+	LDX TEMP65_HI
 	JSR buffer_add
+; Store Buffer Length
 	AND #$3F
-	STA $68
+	STA TEMP68
+; Store into Buffer
 	LDY #$01
-@Loop2:
-	LDA ($3E),Y
-	STA $033A,X
+@more:
+	LDA (TEMP3E),Y
+	STA BUFFER,X
 	INY
 	INX
-	INC $65
-	DEC $68
-	BNE @Loop2
+	INC TEMP65_LO
+	DEC TEMP68
+	BNE @more
+; Update Data Location
 	TYA
 	CLC
-	ADC $3E
-	STA $3E
-	LDA $3F
+	ADC TEMP3E_LO
+	STA TEMP3E_LO
+	LDA TEMP3E_HI
 	ADC #$00
-	STA $3F
+	STA TEMP3E_HI
+; Set end of buffer
 	JSR buffer_end
-	JMP @Loop1
-@Loop3:
-	CMP #$FF
-	BEQ @Loop11
-	CMP #$FE
+	JMP @next
+@control:
+	CMP #$FF ; Finished
+	BEQ @exit
+	CMP #$FE ; Wait
 	BEQ @Loop9
-	CMP #$FD
+	CMP #$FD ; Set New Data Location
 	BEQ @Loop8
-	CMP #$E0
+	CMP #$E0 ; Skip Ahead
 	BCS @Loop7
-	CMP #$C0
+	CMP #$C0 ; Skip Ahead and New Column
 	BCS @Loop6
-	CMP #$A0
+	CMP #$A0 ; Set Below Original Column
 	BCS @Loop5
+; Repeat A - x80
 	SEC
 	SBC #$80
-	LDY $65
-	LDX $66
+	LDY TEMP65_LO
+	LDX TEMP65_HI
 	JSR buffer_add
-	STA $68
+; Store Buffer Length
+	STA TEMP68
+; Store into Buffer
 	LDY #$01
-	LDA ($3E),Y
-@Loop4:
-	STA $033A,X
+	LDA (TEMP3E),Y
+@repeat:
+	STA BUFFER,X
 	INX
-	INC $65
-	DEC $68
-	BNE @Loop4
+	INC TEMP65_LO
+	DEC TEMP68
+	BNE @repeat
+; Set end of buffer
 	JSR buffer_end
-	LDA $3E
+; Update Data Location
+	LDA TEMP3E_LO
 	CLC
 	ADC #$02
-	STA $3E
-	LDA $3F
+	STA TEMP3E_LO
+	LDA TEMP3E_HI
 	ADC #$00
-	STA $3F
-	JMP @Loop1
+	STA TEMP3E_HI
+	JMP @next
 @Loop5:
+; Set A - xA0 Lines Below Original Column
 	JSR L_CE83
-	JMP @Loop1
+	JMP @next
 @Loop6:
+; Set Location Ahead A - xC0 and Set New Column
 	SEC
 	SBC #$C0
 	JSR L_CEA7
-	LDA $65
-	STA $67
-	JMP @Loop1
+; Store New Column
+	LDA TEMP65
+	STA TEMP67
+	JMP @next
 @Loop7:
+; Set Location Ahead A - xE0
 	SEC
 	SBC #$E0
 	JSR L_CEA7
-	JMP @Loop1
+	JMP @next
 @Loop8:
+; Set New Data Location
 	LDY #$02
-	LDA ($3E),Y
+	LDA (TEMP3E),Y
 	TAX
 	DEY
-	LDA ($3E),Y
-	STA $3E
-	STX $3F
-	JMP @Loop1
+	LDA (TEMP3E),Y
+	STA TEMP3E_LO
+	STX TEMP3E_HI
+	JMP @next
 @Loop9:
+; Wait
 	LDA $C8
 	JSR switch_thread
-	INC $3E
+	INC TEMP3E_LO
 	BNE @Loop10
-	INC $3F
+	INC TEMP3E_HI
 @Loop10:
-	JMP @Loop1
-@Loop11:
+	JMP @next
+@exit:
 	JMP L_D2EA
 
 L_CDBF:
@@ -2673,37 +2689,40 @@ L_CDBF:
 L_CE83:
 	SEC
 	SBC #$A0
-	STA $68
+	STA TEMP67_HI
+; Update VRAM Location
 	LDA #$00
-	LSR $68
+	LSR TEMP67_HI
 	ROR
-	LSR $68
+	LSR TEMP67_HI
 	ROR
-	LSR $68
+	LSR TEMP67_HI
 	ROR
 	CLC
-	ADC $67
-	STA $67
-	STA $65
-	LDA $68
-	ADC $66
-	STA $66
-	INC $3E
+	ADC TEMP67_LO
+	STA TEMP67_LO
+	STA TEMP65_LO
+	LDA TEMP67_HI
+	ADC TEMP65_HI
+	STA TEMP65_HI
+; Update Data Location
+	INC TEMP3E_LO
 	BNE @Loop1
-	INC $3F
+	INC TEMP3E_HI
 @Loop1:
 	RTS
 
 L_CEA7:
 	CLC
-	ADC $65
-	STA $65
+	ADC TEMP65_LO
+	STA TEMP65_LO
 	LDA #$00
-	ADC $66
-	STA $66
-	INC $3E
+	ADC TEMP65_HI
+	STA TEMP65_HI
+; Update Data Location
+	INC TEMP3E_LO
 	BNE @Loop1
-	INC $3F
+	INC TEMP3E_HI
 @Loop1:
 	RTS
 

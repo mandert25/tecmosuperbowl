@@ -1895,7 +1895,7 @@ L_24_8DDE:
 L_24_8DDF:
 	ROR $3F
 	PHA
-	JSR L_D2D3
+	JSR vram_transfer_start
 	PLA
 	ASL
 	STA $67

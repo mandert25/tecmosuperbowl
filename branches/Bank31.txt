@@ -2483,7 +2483,7 @@ L_CD05:
 	INC TEMP65_LO
 	DEC TEMP68
 	BNE @more
-; Update Data Location
+; Update Data Address
 	TYA
 	CLC
 	ADC TEMP3E_LO
@@ -2498,15 +2498,15 @@ L_CD05:
 	CMP #$FF ; Finished
 	BEQ @exit
 	CMP #$FE ; Wait
-	BEQ @Loop9
+	BEQ @wait
 	CMP #$FD ; Set New Data Location
-	BEQ @Loop8
+	BEQ @set_data
 	CMP #$E0 ; Skip Ahead
-	BCS @Loop7
+	BCS @column
 	CMP #$C0 ; Skip Ahead and New Column
-	BCS @Loop6
+	BCS @column_new
 	CMP #$A0 ; Set Below Original Column
-	BCS @Loop5
+	BCS @row
 ; Repeat A - x80
 	SEC
 	SBC #$80
@@ -2526,7 +2526,7 @@ L_CD05:
 	BNE @repeat
 ; Set end of buffer
 	JSR buffer_end
-; Update Data Location
+; Update Data Address
 	LDA TEMP3E_LO
 	CLC
 	ADC #$02
@@ -2535,11 +2535,11 @@ L_CD05:
 	ADC #$00
 	STA TEMP3E_HI
 	JMP @next
-@Loop5:
-; Set A - xA0 Lines Below Original Column
+@row:
+; Set A - xA0 Rows Below Original Column
 	JSR L_CE83
 	JMP @next
-@Loop6:
+@column_new:
 ; Set Location Ahead A - xC0 and Set New Column
 	SEC
 	SBC #$C0
@@ -2548,13 +2548,13 @@ L_CD05:
 	LDA TEMP65
 	STA TEMP67
 	JMP @next
-@Loop7:
+@column:
 ; Set Location Ahead A - xE0
 	SEC
 	SBC #$E0
 	JSR L_CEA7
 	JMP @next
-@Loop8:
+@set_data:
 ; Set New Data Location
 	LDY #$02
 	LDA (TEMP3E),Y
@@ -2564,14 +2564,14 @@ L_CD05:
 	STA TEMP3E_LO
 	STX TEMP3E_HI
 	JMP @next
-@Loop9:
-; Wait
+@wait:
 	LDA $C8
 	JSR switch_thread
+; Update Data Address
 	INC TEMP3E_LO
-	BNE @Loop10
+	BNE @no_inc_hi
 	INC TEMP3E_HI
-@Loop10:
+@no_inc_hi:
 	JMP @next
 @exit:
 	JMP L_D2EA
@@ -2580,113 +2580,123 @@ L_CDBF:
 	JSR L_D2D3
 	JSR disable_nmi
 	LDA PPUSTATUS
-	LDA $65
-	STA $67
-@Loop1:
+	LDA TEMP65
+	STA TEMP67
+@next:
 	LDY #$00
-	LDA ($3E),Y
-	BMI @Loop3
+	LDA (TEMP3E),Y
+	BMI @control
 	AND #$40
 	LSR
 	LSR
 	LSR
 	LSR
 	STA PPUCTRL
-	LDA $66
+; Set to VRAM Address
+	LDA TEMP65_HI
 	STA PPUADDR
-	LDA $65
+	LDA TEMP65_LO
 	STA PPUADDR
-	LDA ($3E),Y
+; Get Length
+	LDA (TEMP3E),Y
 	AND #$3F
 	TAX
+; Store in VRAM
 	INY
-@Loop2:
-	LDA ($3E),Y
+@more:
+	LDA (TEMP3E),Y
 	STA PPUDATA
 	INY
-	INC $65
+	INC TEMP65_LO
 	DEX
-	BNE @Loop2
+	BNE @more
+; Update Data Address
 	TYA
 	CLC
-	ADC $3E
-	STA $3E
-	LDA $3F
+	ADC TEMP3E_LO
+	STA TEMP3E_LO
+	LDA TEMP3E_HI
 	ADC #$00
-	STA $3F
-	JMP @Loop1
-@Loop3:
-	CMP #$FF
-	BEQ @Loop11
-	CMP #$FE
-	BEQ @Loop9
-	CMP #$FD
-	BEQ @Loop8
-	CMP #$E0
-	BCS @Loop7
-	CMP #$C0
-	BCS @Loop6
-	CMP #$A0
-	BCS @Loop5
+	STA TEMP3E_HI
+	JMP @next
+@control:
+	CMP #$FF ; Finished
+	BEQ @exit
+	CMP #$FE ; Wait
+	BEQ @wait
+	CMP #$FD ; Set New Data Location
+	BEQ @set_data
+	CMP #$E0 ; Skip Ahead
+	BCS @column
+	CMP #$C0 ; Skip Ahead and New Column
+	BCS @column_new
+	CMP #$A0 ; Set Below Original Column
+	BCS @row
 	SEC
 	SBC #$80
 	AND #$3F
 	TAX
-	LDA $66
+	LDA TEMP65_HI
 	STA PPUADDR
-	LDA $65
+	LDA TEMP65_LO
 	STA PPUADDR
 	INY
-	LDA ($3E),Y
-@Loop4:
+	LDA (TEMP3E),Y
+@repeat:
 	STA PPUDATA
 	INY
-	INC $65
+	INC TEMP65_LO
 	DEX
-	BNE @Loop4
-	LDA $3E
+	BNE @repeat
+	LDA TEMP3E_LO
 	CLC
 	ADC #$02
-	STA $3E
-	LDA $3F
+	STA TEMP3E_LO
+	LDA TEMP3E_HI
 	ADC #$00
-	STA $3F
-	JMP @Loop1
-@Loop5:
+	STA TEMP3E_HI
+	JMP @next
+@row:
+; Set A - xA0 Rows Below Original Column
 	JSR L_CE83
-	JMP @Loop1
-@Loop6:
+	JMP @next
+@column_new:
+; Set Location Ahead A - xC0 and Set New Column
 	SEC
 	SBC #$C0
 	JSR L_CEA7
-	LDA $65
-	STA $67
-	JMP @Loop1
-@Loop7:
+	LDA TEMP65
+	STA TEMP67
+	JMP @next
+@column:
+; Set Location Ahead A - xE0
 	SEC
 	SBC #$E0
 	JSR L_CEA7
-	JMP @Loop1
-@Loop8:
+	JMP @next
+@set_data:
+; Set New Data Location
 	LDY #$02
-	LDA ($3E),Y
+	LDA (TEMP3E),Y
 	TAX
 	DEY
-	LDA ($3E),Y
-	STA $3E
-	STX $3F
-	JMP @Loop1
-@Loop9:
-	INC $3E
-	BNE @Loop10
-	INC $3F
-@Loop10:
-	JMP @Loop1
-@Loop11:
+	LDA (TEMP3E),Y
+	STA TEMP3E_LO
+	STX TEMP3E_HI
+	JMP @next
+@wait:
+; Update Data Address
+	INC TEMP3E_LO
+	BNE @no_inc_hi
+	INC TEMP3F_HI
+@no_inc_hi:
+	JMP @next
+@exit:
 	JSR enable_nmi
 	JMP L_D2EA
 
 L_CE83:
+; Get rows below original column
 	SEC
 	SBC #$A0
 	STA TEMP67_HI
@@ -2707,12 +2717,12 @@ L_CE83:
 	STA TEMP65_HI
 ; Update Data Location
 	INC TEMP3E_LO
-	BNE @Loop1
+	BNE :+
 	INC TEMP3E_HI
-@Loop1:
-	RTS
+:	RTS
 
 L_CEA7:
+; Update VRAM Address
 	CLC
 	ADC TEMP65_LO
 	STA TEMP65_LO
@@ -2721,10 +2731,9 @@ L_CEA7:
 	STA TEMP65_HI
 ; Update Data Location
 	INC TEMP3E_LO
-	BNE @Loop1
+	BNE :+
 	INC TEMP3E_HI
-@Loop1:
-	RTS
+: 	RTS
 
 L_CEB9:
 	JSR L_D2D3

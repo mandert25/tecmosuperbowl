@@ -19,7 +19,7 @@ L_27_802D:
 	JSR palette_fade_out
 	LDA #$6F
 	LDX #$06 ; BANK7
-	JSR L_C390
+	JSR set_draw_controls_thread
 	LDA #$00
 	STA $E1
 @Loop1:

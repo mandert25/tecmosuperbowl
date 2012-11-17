@@ -52,7 +52,7 @@ L_25_8009:
 @Loop7:
 	LDA #$01
 	LDX #$07 ; BANK8
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$0F
 	STA $4D
 @Loop8:
@@ -180,7 +180,7 @@ L_25_8009:
 	JSR L_25_95F9
 	LDA #$03
 	LDX #$07 ; BANK8
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA $E1
 	ASL
 	TAX
@@ -208,12 +208,12 @@ L_25_8009:
 	BNE @Loop17
 	LDA #$02
 	LDX #$07 ; BANK8
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	JMP @Loop8
 @Loop20:
 	LDA #$06
 	LDX #$07 ; BANK8
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$0F
 	STA $4D
 @Loop21:
@@ -379,7 +379,7 @@ L_25_8009:
 @Loop38:
 	LDA #$08
 	LDX #$07 ; BANK8
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$0F
 	STA $4D
 @Loop39:
@@ -483,7 +483,7 @@ L_25_8009:
 @Loop48:
 	LDA #$0A
 	LDX #$07 ; BANK8
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$0F
 	STA $4D
 @Loop49:
@@ -589,7 +589,7 @@ L_25_8009:
 @Loop59:
 	LDA #$04
 	LDX #$07 ; BANK8
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$0F
 	STA $4D
 @Loop60:
@@ -695,7 +695,7 @@ L_25_8009:
 @Loop70:
 	LDA #$05
 	LDX #$07 ; BANK8
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$0F
 	STA $4D
 @Loop71:
@@ -830,7 +830,7 @@ L_25_8009:
 @Loop83:
 	LDA #$07
 	LDX #$07 ; BANK8
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$0F
 	STA $4D
 @Loop84:
@@ -928,7 +928,7 @@ L_25_8009:
 @Loop94:
 	LDA #$09
 	LDX #$07 ; BANK8
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$0F
 	STA $4D
 	LDA #$19
@@ -975,7 +975,7 @@ L_25_8009:
 @Loop99:
 	LDA #$0B
 	LDX #$07 ; BANK8
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$0F
 	STA $4D
 @Loop100:

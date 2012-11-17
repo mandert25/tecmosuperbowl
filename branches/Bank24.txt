@@ -133,7 +133,7 @@ L_24_8165:
 	STA $3F
 	LDY $C6
 	LDX $C7
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDA #$04
 	JMP L_24_8C48
 
@@ -1459,7 +1459,7 @@ L_24_8ACC:
 	LDY L_24_92A7,X
 	LDA L_24_92A7+1,X
 	TAX
-	JSR L_CCFC
+	JSR set_vram_controls
 	JMP L_24_8B2E
 L_24_8B08:
 	JSR L_24_8B4E
@@ -1476,7 +1476,7 @@ L_24_8B08:
 	LDY L_24_92A7+2,X
 	LDA L_24_92A7+3,X
 	TAX
-	JSR L_CCFC
+	JSR set_vram_controls
 L_24_8B2E:
 	LDA $8F
 	CLC

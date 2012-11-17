@@ -1171,13 +1171,13 @@ L_27_87E6:
 	STA $030B
 	LDA #$18
 	STA $0309
-	LDY #$0A
-	LDX #$21
+	LDY #<$210A
+	LDX #>$210A
 	LDA #<L_27_8892
 	STA $3E
 	LDA #>L_27_8892
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDA A:$6F
 	LDY #$73
 	LDX #$21
@@ -1201,13 +1201,13 @@ L_27_87E6:
 	BMI @Loop1
 	JMP @Loop2
 @Loop1:
-	LDY #$30
-	LDX #$22
+	LDY #<$2230
+	LDX #>$2230
 	LDA #<L_27_88BE
 	STA $3E
 	LDA #>L_27_88BE
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDA #$00
 	SEC
 	SBC $06FE

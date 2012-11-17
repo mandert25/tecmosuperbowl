@@ -2459,7 +2459,7 @@ set_vram_controls:
 	BNE vram_buffer_controls
 	JMP vram_direct_controls
 vram_buffer_controls:
-	JSR L_D2D3
+	JSR vram_transfer_start
 ; Store Beginning Column
 	LDA TEMP65
 	STA TEMP67
@@ -2574,10 +2574,10 @@ vram_buffer_controls:
 @no_inc_hi:
 	JMP @next
 @exit:
-	JMP L_D2EA
+	JMP vram_transfer_finished
 
 vram_direct_controls:
-	JSR L_D2D3
+	JSR vram_transfer_start
 	JSR disable_nmi
 	LDA PPUSTATUS
 ; Store Beginning Column
@@ -2701,7 +2701,7 @@ vram_direct_controls:
 	JMP @next
 @exit:
 	JSR enable_nmi
-	JMP L_D2EA
+	JMP vram_transfer_finished
 
 vram_row_control:
 ; Get rows below original column
@@ -2744,7 +2744,7 @@ vram_column_control:
 : 	RTS
 
 L_CEB9:
-	JSR L_D2D3
+	JSR vram_transfer_start
 	LDY #$00
 	LDA ($3E),Y
 	STA $67
@@ -2782,11 +2782,11 @@ L_CEB9:
 	LDA $68
 	DEC $67
 	BNE @Loop1
-	JMP L_D2EA
+	JMP vram_transfer_finished
 
 L_CF03:
 	PHA
-	JSR L_D2D3
+	JSR vram_transfer_start
 	PLA
 	STA $67
 	LDA #$00
@@ -2800,7 +2800,7 @@ L_CF03:
 	STA $66
 	LDA #$76
 	JSR L_CF24
-	JMP L_D2EA
+	JMP vram_transfer_finished
 
 L_CF24:
 	STA $68
@@ -2839,7 +2839,7 @@ L_CF24:
 
 L_CF61:
 	PHA
-	JSR L_D2D3
+	JSR vram_transfer_start
 	PLA
 	ASL
 	TAY
@@ -2867,7 +2867,7 @@ L_CF61:
 	DEC $3E
 	BNE @Loop1
 	JSR buffer_end
-	JSR L_D2EA
+	JSR vram_transfer_finished
 	LDX $3F
 	JMP bank_swap_A000
 
@@ -2878,7 +2878,7 @@ L_CFA2:
 @Loop1:
 	ROR $3F
 	PHA
-	JSR L_D2D3
+	JSR vram_transfer_start
 	PLA
 	ASL
 	TAY
@@ -2929,7 +2929,7 @@ L_CFA2:
 	BNE @Loop4
 	LDX $40
 	JSR buffer_end
-	JSR L_D2EA
+	JSR vram_transfer_finished
 	LDA $3F
 	AND #$7F
 	TAX
@@ -3020,7 +3020,7 @@ set_vram_size:
 	ORA SPRITE_PALETTE_FADE
 	BEQ @direct
 ; Write to Buffer
-	JSR L_D2D3
+	JSR vram_transfer_start
 @next:
 	LDA TEMP3E
 	LDY TEMP65_LO
@@ -3051,10 +3051,10 @@ set_vram_size:
 ; Check for another buffer
 	DEC TEMP3F
 	BNE @next
-	JMP L_D2EA
+	JMP vram_transfer_finished
 ; Direct Write to PPU
 @direct:
-	JSR L_D2D3
+	JSR vram_transfer_start
 	JSR disable_nmi
 @direct_next:
 	LDA PPUSTATUS
@@ -3082,7 +3082,7 @@ set_vram_size:
 	DEC TEMP3F
 	BNE @direct_next
 	JSR enable_nmi
-	JMP L_D2EA
+	JMP vram_transfer_finished
 
 clear_nametables:
 ; Clear $2000-$2BFF
@@ -3390,14 +3390,14 @@ buffer_end:
 	LSR $2B
 	RTS
 
-L_D2D3:
+vram_transfer_start:
 ; Check for ready
 	LDA $64
 	BPL @ready
 ; wait
 	LDA #$01
 	JSR switch_thread
-	JMP L_D2D3
+	JMP vram_transfer_start
 @ready:
 ; Set to Not Ready
 	ORA #$80
@@ -3408,14 +3408,14 @@ L_D2D3:
 	STX TEMP65_HI
 	RTS
 
-L_D2EA:
+vram_transfer_finished:
 	LDA $64
 	AND #$40
 	STA $64
 	RTS
 
 L_D2F1:
-	JSR L_D2D3
+	JSR vram_transfer_start
 @Loop1:
 	BIT $2B
 	BMI @Loop2
@@ -3502,7 +3502,7 @@ L_D2F1:
 	LDY #$00
 	STA ($40),Y
 	STY $037D
-	JMP L_D2EA
+	JMP vram_transfer_finished
 
 L_D38E:
 	STY $40

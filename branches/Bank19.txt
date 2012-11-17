@@ -5005,11 +5005,11 @@ L_19_A4F8:
 	SBC #$20
 	TAY
 	LDX $3F
-	LDA #$F2
+	LDA #<$06F2
 	STA $3E
-	LDA #$06
+	LDA #>$06F2
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	RTS
 L_19_A588:
 	.BYTE $03,$02,$14,$15,$16,$17,$1C,$1D

@@ -2840,35 +2840,43 @@ L_CF24:
 L_CF61:
 	PHA
 	JSR vram_transfer_start
+; Get Y Index
 	PLA
 	ASL
 	TAY
-	LDA $2F
-	STA $3F
+; Store and Swap A000 Bank
+	LDA BANK_A000
+	STA TEMP3F
 	LDX #$0F ; BANK16
 	JSR bank_swap_A000
-	LDA TEAM_NAME_POINTERS,Y
-	STA $67
+; Get Team Initial Pointer
+	LDA TEAM_NAME_POINTERS+0,Y
+	STA TEMP67_LO
 	LDA TEAM_NAME_POINTERS+1,Y
-	STA $68
+	STA TEMP67_HI
+; Get Length
 	LDA TEAM_NAME_POINTERS+2,Y
 	SEC
-	SBC $67
-	STA $3E
-	LDY $65
-	LDX $66
+	SBC TEMP67_LO
+	STA TEMP3E
+; Store VRAM Address and Length in Buffer
+	LDY TEMP65_LO
+	LDX TEMP65_HI
 	JSR buffer_add
+; Store Initials into Buffer
 	LDY #$00
-@Loop1:
-	LDA ($67),Y
-	STA $033A,X
+@more:
+	LDA (TEMP67),Y
+	STA BUFFER,X
 	INY
 	INX
-	DEC $3E
-	BNE @Loop1
+	DEC TEMP3E
+	BNE @more
+; Set End of Buffer
 	JSR buffer_end
 	JSR vram_transfer_finished
-	LDX $3F
+; Return A000 Bank
+	LDX TEMP3F
 	JMP bank_swap_A000
 
 L_CFA2:
@@ -3793,23 +3801,26 @@ clear_sprites:
 	RTS
 
 L_D57F:
-	STA $40
+	STA TEMP40
 	JSR buffer_add
-	LDA $40
+; Set Length
+	LDA TEMP40
 	AND #$3F
-	STA $40
+	STA TEMP40
+; Write Data to Buffer
 	LDY #$00
-@Loop1:
-	LDA ($3E),Y
+@more:
+	LDA (TEMP3E),Y
 	CMP #$20
-	BNE @Loop2
+	BNE @buffer
+; Set as clear tile
 	LDA #$00
-@Loop2:
-	STA $033A,X
+@buffer:
+	STA BUFFER,X
 	INY
 	INX
-	DEC $40
-	BNE @Loop1
+	DEC TEMP40
+	BNE @more
 	JMP buffer_end
 
 L_D5A0:

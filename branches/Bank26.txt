@@ -120,7 +120,7 @@ L_26_80E4:
 	STA $3E
 	LDA #>L_26_8738
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDA $43
 	ASL
 	ASL
@@ -136,7 +136,7 @@ L_26_80E4:
 	ADC #$17
 	TAY
 	LDX $41
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDA $43
 	CLC
 	ADC #$01

@@ -260,13 +260,13 @@ L_20_8825:
 	STA PLAYER1_PLAY_CALL
 	LDA #$1D
 	JSR L_C41F
-	LDY #$63
-	LDX #$20
+	LDY #<$2063
+	LDX #>$2063
 	LDA #<L_20_94C8
 	STA $3E
 	LDA #>L_20_94C8
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDA #$00
 	STA CLOCK
 @Loop24:
@@ -286,13 +286,13 @@ L_20_8825:
 @Loop25:
 	STA PLAYER1_PLAY_CALL
 	JSR L_20_9307
-	LDY #$63
-	LDX #$20
+	LDY #<$2063
+	LDX #>$2063
 	LDA #<L_20_94C8
 	STA $3E
 	LDA #>L_20_94C8
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDA #$1D
 	JSR L_C41F
 	LDA #$00
@@ -410,13 +410,13 @@ L_20_8825:
 	LDA #$00
 	STA $E1
 	JSR L_20_92F4
-	LDY #$64
-	LDX #$21
-	LDA #$03
+	LDY #<$2164
+	LDX #>$2164
+	LDA #<$6103
 	STA $3E
-	LDA #$61
+	LDA #>$6103
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDX #$1B
 	JSR L_CC8F
 	JMP @Loop32
@@ -424,13 +424,13 @@ L_20_8825:
 	STA PLAYER1_PLAY_CALL
 	LDA #$1D
 	JSR L_C41F
-	LDY #$63
-	LDX #$20
+	LDY #<$2063
+	LDX #>$2063
 	LDA #<L_20_94C8
 	STA $3E
 	LDA #>L_20_94C8
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	JMP destroy_thread
 @Loop41:
 	LDA $75
@@ -595,13 +595,13 @@ L_20_8825:
 	STA PLAYER2_PLAY_CALL
 	LDA #$1D
 	JSR L_C41F
-	LDY #$76
-	LDX #$20
+	LDY #<$2076
+	LDX #>$2076
 	LDA #<L_20_94C8
 	STA $3E
 	LDA #>L_20_94C8
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDA #$00
 	STA CLOCK
 @Loop63:
@@ -621,13 +621,13 @@ L_20_8825:
 @Loop64:
 	STA PLAYER2_PLAY_CALL
 	JSR L_20_9307
-	LDY #$76
-	LDX #$20
+	LDY #<$2076
+	LDX #>$2076
 	LDA #<L_20_94C8
 	STA $3E
 	LDA #>L_20_94C8
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDA #$1D
 	JSR L_C41F
 	LDA #$00
@@ -748,13 +748,13 @@ L_20_8D34:
 	JSR L_20_916B
 	JMP @Loop6
 	JSR L_20_92F4
-	LDY #$72
-	LDX #$21
-	LDA #$03
+	LDY #<$2172
+	LDX #>$2172
+	LDA #<$6303
 	STA $3E
-	LDA #$63
+	LDA #>$6303
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDX #$1B
 	JSR L_CC8F
 	JMP @Loop6
@@ -762,13 +762,13 @@ L_20_8D34:
 	STA PLAYER2_PLAY_CALL
 	LDA #$1D
 	JSR L_C41F
-	LDY #$76
-	LDX #$20
+	LDY #<$2076
+	LDX #>$2076
 	LDA #<L_20_94C8
 	STA $3E
 	LDA #>L_20_94C8
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	JMP destroy_thread
 
 L_20_8E30:
@@ -875,7 +875,7 @@ L_20_8EC2:
 	STA $3E
 	LDA #>L_20_94C0
 	STA $3F
-	JMP L_CCFC
+	JMP set_vram_controls
 @Loop1:
 	LDA #$01
 	STA $3F
@@ -965,13 +965,13 @@ L_20_8F7E:
 	LDA #$F0
 	STA $0200
 	JSR L_20_92F4
-	LDY #$A3
-	LDX #$20
-	LDA #$03
+	LDY #<$20A3
+	LDX #>$20A3
+	LDA #<$6003
 	STA $3E
-	LDA #$60
+	LDA #>$6003
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDX #$1B
 	JSR L_CC8F
 	RTS
@@ -1038,13 +1038,13 @@ L_20_8FDA:
 
 L_20_9019:
 	JSR L_20_92F4
-	LDY #$24
-	LDX #$21
-	LDA #$03
+	LDY #<$2124
+	LDX #>$2124
+	LDA #<$6103
 	STA $3E
-	LDA #$61
+	LDA #>$6103
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDX #$1B
 	JSR L_CC8F
 	RTS
@@ -1131,13 +1131,13 @@ L_20_90D0:
 	LDA #$F0
 	STA $0204
 	JSR L_20_92F4
-	LDY #$B1
-	LDX #$20
-	LDA #$03
+	LDY #<$20B1
+	LDX #>$20B1
+	LDA #<$6203
 	STA $3E
-	LDA #$62
+	LDA #>$6203
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDX #$1B
 	JSR L_CC8F
 	RTS
@@ -1204,13 +1204,13 @@ L_20_912C:
 
 L_20_916B:
 	JSR L_20_92F4
-	LDY #$32
-	LDX #$21
-	LDA #$03
+	LDY #<$2132
+	LDX #>$2132
+	LDA #<$6303
 	STA $3E
-	LDA #$63
+	LDA #>$6303
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDX #$1B
 	JSR L_CC8F
 	RTS

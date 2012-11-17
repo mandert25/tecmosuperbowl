@@ -8,17 +8,22 @@ L_24_800F:	JMP L_24_9DB0
 L_24_8012:	JMP L_24_8CF2
 
 L_24_8015:
+; Set Stack Pointer
 	LDX #$AB
 	TXS
+;
 	LDX #$1B
 	JSR L_CCDD
 	LDX #$16
 	JSR L_CCDD
 	LDX #$11
 	JSR L_CCDD
-	LDA $C2
-	LDX $C3
+; Get Index and A000 Bank
+	LDA TEMPC2
+	LDX TEMPC3
+;
 	JSR L_24_8040
+;
 	LDX #$1B
 	JSR L_CCDD
 	LDX #$16
@@ -28,25 +33,31 @@ L_24_8015:
 	JMP destroy_thread
 
 L_24_8040:
-	STA $C2
+; Swap A000 Bank
+	STA TEMPC2
 	JSR bank_swap_A000
+;
 	LDA $2D
 	AND #$DF
 	STA $2D
-	LDA $C2
+; Get Data Address
+	LDA TEMPC2
 	ASL
 	TAX
-	LDA $A000,X ; xC010, x1E010
-	STA $C2
-	LDA $A001,X ; xC011, x1E011
-	STA $C3
-	LDA #$82
-	STA $C6
-	LDA #$20
-	STA $C7
+	LDA $A000,X ; Based on Swap Bank Above
+	STA TEMPC2_LO
+	LDA $A001,X ; Based on Swap Bank Above
+	STA TEMPC2_HI
+;
+	LDA #<$2082
+	STA TEMPC6_LO
+	LDA #>$2082
+	STA TEMPC6_HI
+;
 	LDA $64
 	AND #$BF
 	STA $64
+;
 	LDA #$00
 	STA $06E3
 	STA $06E4
@@ -54,8 +65,9 @@ L_24_8040:
 	STA $06E6
 	STA $C8
 L_24_8077:
+; Read Data
 	LDY #$00
-	LDA ($C2),Y
+	LDA (TEMPC2),Y
 	BMI @Loop1
 	JMP L_24_8131
 @Loop1:
@@ -67,7 +79,7 @@ L_24_8077:
 	TAX
 	LDA L_24_80A1+1,X
 	PHA
-	LDA L_24_80A1,X
+	LDA L_24_80A1+0,X
 	PHA
 	RTS
 @Loop2:
@@ -78,7 +90,7 @@ L_24_8077:
 	TAX
 	LDA L_24_80B1+1,X
 	PHA
-	LDA L_24_80B1,X
+	LDA L_24_80B1+0,X
 	PHA
 	RTS
 
@@ -97,20 +109,24 @@ L_24_80B1:
 
 L_24_8131:
 	INY
-	LDA ($C2),Y
+	LDA (TEMPC2),Y
 	BPL L_24_8131
-	LDA $C2
-	STA $3E
-	LDA $C3
-	STA $3F
+; Store Data Address
+	LDA TEMPC2_LO
+	STA TEMP3E_LO
+	LDA TEMPC2_HI
+	STA TEMP3E_HI
+; Store Length
 	TYA
-	STA $45
+	STA TEMP45
+;
 	BIT $64
 	BVS @Loop1
-	LDY $C6
-	LDX $C7
+; Get VRAM Address
+	LDY TEMPC6_LO
+	LDX TEMPC6_HI
 	JSR L_D57F
-	JMP @Loop2
+	JMP @exit
 @Loop1:
 	LDY $C6
 	LDX $C7
@@ -120,8 +136,9 @@ L_24_8131:
 	STA $3F
 	LDA $45
 	JSR L_CF03
-@Loop2:
-	LDA $45
+@exit:
+; Get Length
+	LDA TEMP45
 	JMP L_24_8C48
 
 L_24_8165:
@@ -137,7 +154,8 @@ L_24_8165:
 	LDA #$04
 	JMP L_24_8C48
 
-L_24_817D:
+L_24_817D: ; #$80-87
+; Set VRAM Address
 	JSR L_24_8C56
 	LDA #$02
 	JMP L_24_8C48
@@ -197,24 +215,27 @@ L_24_81D4:
 	LDA #$03
 	JMP L_24_8C48
 
-L_24_81EB:
-	LDA ($C2),Y
+L_24_81EB: #$B0-B7
+; Get Rows
+	LDA (TEMPC2),Y
 	SEC
 	SBC #$AF
-	STA $45
+	STA TEMP45
+; Set VRAM Address # - xAF Rows Below
 	LDA #$00
-	LSR $45
+	LSR TEMP45
 	ROR
-	LSR $45
+	LSR TEMP45
 	ROR
-	LSR $45
+	LSR TEMP45
 	ROR
 	CLC
-	ADC $C6
-	STA $C6
-	LDA $45
-	ADC $C7
-	STA $C7
+	ADC TEMPC6_LO
+	STA TEMPC6_LO
+	LDA TEMP45
+	ADC TEMPC6_HI
+	STA TEMPC6_HI
+; Exit
 	LDA #$01
 	JMP L_24_8C48
 
@@ -404,7 +425,7 @@ L_24_834E:
 	LDA #$02
 	JMP L_24_8C48
 
-L_24_835C:
+L_24_835C: ; #$C8
 	LDA #$00
 	STA $0307
 	STA $0308
@@ -430,7 +451,8 @@ L_24_8382:
 	LDA #$01
 	JMP L_24_8C48
 
-L_24_838A:
+L_24_838A: ; #$CC
+; Clear Screen
 	JSR clear_nametables
 	JSR clear_sprites
 	LDA #$01
@@ -514,11 +536,12 @@ L_24_8395:
 	LDA $45
 	JMP set_vram_size
 
-L_24_8424:
-	LDA ($C2),Y
+L_24_8424: ; #$D0
+; Set Background CHAR Banks
+	LDA (TEMPC2),Y
 	STA $0309
 	INY
-	LDA ($C2),Y
+	LDA (TEMPC2),Y
 	STA $030A
 	LDA #$03
 	JMP L_24_8C48
@@ -655,10 +678,11 @@ L_24_8517:
 	LDA #$01
 	JMP L_24_8C48
 
-L_24_8523:
-	LDA ($C2),Y
-	LDY $C6
-	LDX $C7
+L_24_8523: ; #$D6
+; Buffer Team Initials
+	LDA (TEMPC2),Y
+	LDY TEMPC6_LO
+	LDX TEMPC6_HI
 	JSR L_CF61
 	LDA #$02
 	JMP L_24_8C48
@@ -1612,50 +1636,54 @@ L_24_8C0E:
 	JMP L_24_8C48
 
 L_24_8C18:
-	LDA ($C2),Y
+; Set to New Data Address
+	LDA (TEMPC2),Y
 	TAX
 	INY
-	LDA ($C2),Y
-	STA $C3
-	STX $C2
+	LDA (TEMPC2),Y
+	STA TEMPC2_HI
+	STX TEMPC2_LO
 	JMP L_24_8077
 
-L_24_8C25:
-	LDA $C2
-	STA $C4
-	LDA $C3
-	STA $C5
+L_24_8C25: ; #$FD
+; Store Address
+	LDA TEMPC2_LO
+	STA TEMPC4_LO
+	LDA TEMPC2_HI
+	STA TEMPC4_HI
 	JMP L_24_8C18
 
-L_24_8C30:
-	LDA $C4
+L_24_8C30: ; #$FE
+; Set to Old Address
+	LDA TEMPC4_LO
 	CLC
 	ADC #$03
-	STA $C2
-	LDA $C5
+	STA TEMPC2_LO
+	LDA TEMPC4_HI
 	ADC #$00
-	STA $C3
+	STA TEMPC2_HI
 	JMP L_24_8077
 
-L_24_8C40:
+L_24_8C40: ; #$FF
 	LDA #$00
-	STA $C8
+	STA TEMPC8
 	RTS
 
 L_24_8C45:
 	JMP L_24_8C45
 
 L_24_8C48:
+; Update Data Address
 	CLC
-	ADC $C2
-	STA $C2
-	LDA $C3
+	ADC TEMPC2_LO
+	STA TEMPC2_LO
+	LDA TEMPC2_HI
 	ADC #$00
-	STA $C3
+	STA TEMPC2_HI
 	JMP L_24_8077
 
 L_24_8C56:
-	LDA ($C2),Y
+	LDA (TEMPC2),Y
 	AND #$07
 	CMP #$04
 	BCC L_24_8C65
@@ -1664,11 +1692,12 @@ L_24_8C56:
 	CLC
 	ADC #$04
 L_24_8C65:
+; Store VRAM Address
 	ORA #$20
-	STA $C7
+	STA TEMPC6_HI
 	INY
-	LDA ($C2),Y
-	STA $C6
+	LDA (TEMPC2),Y
+	STA TEMPC6_LO
 	INY
 	RTS
 

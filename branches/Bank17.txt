@@ -295,7 +295,7 @@ L_17_8242:
 	JSR set_palette_fade_to_in
 	LDA #$04
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDY #<MINI_HELMETS_TEAM_CONTROL
 	LDX #>MINI_HELMETS_TEAM_CONTROL
 	JSR L_17_A83D
@@ -320,10 +320,10 @@ L_17_8272:
 	JSR clear_sprites
 	LDA #$00
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$03
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$20
 	JSR L_17_ACEF
 	RTS
@@ -337,7 +337,7 @@ L_17_828F:
 	JSR set_palette_fade_to_in
 	LDA #$05
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$5A
 	STA $8E
 	LDA #$67
@@ -409,7 +409,7 @@ L_17_828F:
 	JSR L_17_94D4
 	LDA #$06
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 @Loop6:
 	LDY #<SCHEDULE_MENU_SELECT
 	LDX #>SCHEDULE_MENU_SELECT
@@ -448,7 +448,7 @@ L_17_828F:
 	JSR L_17_94D4
 	LDA #$09
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDX $6758
 	CPX #$11
 	BCS @Loop16
@@ -533,7 +533,7 @@ L_17_828F:
 	JSR L_17_94D4
 	LDA #$07
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 @Loop18:
 	LDY #<SCHEDULE_RESET_MENU_SELECT
 	LDX #>SCHEDULE_RESET_MENU_SELECT
@@ -567,7 +567,7 @@ L_17_828F:
 	JSR L_17_94D4
 	LDA #$08
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDY #<SCHEDULE_RESET_VERIFY_SELECT
 	LDX #>SCHEDULE_RESET_VERIFY_SELECT
 	LDA #$02
@@ -659,7 +659,7 @@ L_17_8507:
 	JSR L_17_94D4
 	LDA #$0A
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$01
 	JSR L_17_8768
 	LDA #$00
@@ -704,7 +704,7 @@ L_17_8507:
 	JSR L_17_8272
 	LDA #$0A
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$60
 	STA $57
 	LDA #$00
@@ -770,7 +770,7 @@ L_17_85E0:
 	JSR L_17_94D4
 	LDA #$0C
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$00
 	STA $E1
 	STA $E2
@@ -795,7 +795,7 @@ L_17_85E0:
 	JSR L_17_8272
 	LDA #$0C
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA $EB
 	STA $E1
 	LDA $EC
@@ -832,7 +832,7 @@ L_17_8674:
 @Loop1:
 	LDA #$00
 	LDX #$07 ; BANK8
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$0F
 	STA $4B
 	LDY #<LEADERS_MENU_SELECT
@@ -1142,7 +1142,7 @@ L_17_88AF:
 @Loop1:
 	LDA #$19
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDY #<MINI_HELMETS_TEAM_DATA
 	LDX #>MINI_HELMETS_TEAM_DATA
 	JSR L_17_A83D
@@ -1688,7 +1688,7 @@ L_17_88AF:
 	STA $E2
 	LDA #$22
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	JMP @Loop32
 @Loop65:
 	JSR L_17_8FD0
@@ -1753,7 +1753,7 @@ L_17_8D62:
 	STA $6C
 	LDA #$21
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	JSR L_17_8E6B
 	LDA #$0F
 	STA $4B
@@ -1788,7 +1788,7 @@ L_17_8D9A:
 	STA $6E
 	LDA #$23
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$81
 	STA $90
 	LDA #$20
@@ -2112,7 +2112,7 @@ L_17_8FD0:
 @Loop1:
 	LDA #$1E
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$13 ; BANK20
 	LDY #<L_20_8803
 	LDX #>L_20_8803
@@ -2217,7 +2217,7 @@ L_17_8FD0:
 	JSR L_C481
 	LDA #$1F
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA $E2
 	JSR L_17_91E5
 	LDA #$24
@@ -2245,7 +2245,7 @@ L_17_8FD0:
 	JSR L_C481
 	LDA #$20
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA $E2
 	CLC
 	ADC #$04
@@ -2576,7 +2576,7 @@ L_17_9294:
 	LDA #$3A
 @Loop10:
 	LDX #$06 ; BANK7
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	JSR L_17_B489
 	JMP @Loop13
 @Loop11:
@@ -2591,7 +2591,7 @@ L_17_9294:
 	JSR L_17_B489
 	LDA #$3B
 	LDX #$06 ; BANK7
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	JSR L_17_B489
 	LDA #$80
 	STA PRG_RAM_PROTECT
@@ -2655,10 +2655,10 @@ L_17_9404:
 L_17_9443:
 	LDA #$03
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$00
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$B0
 	JMP L_17_ACEF
 
@@ -2676,7 +2676,7 @@ L_17_9456:
 	JSR L_17_94D4
 	LDA #$01
 	LDX #$0F ; BANK16
-	JMP L_C3A2
+	JMP do_draw_controls_thread
 
 L_17_9474:
 	LDA #$C5
@@ -2692,7 +2692,7 @@ L_17_9474:
 	JSR L_17_94D4
 	LDA #$17
 	LDX #$0F ; BANK16
-	JMP L_C3A2
+	JMP do_draw_controls_thread
 
 L_17_9492:
 	LDA $6759
@@ -4095,7 +4095,7 @@ L_17_9DFA:
 	JSR L_C481
 	LDA $43
 	LDX #$07 ; BANK8
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	JMP clear_nametables
 
 L_17_9E0D:
@@ -4391,7 +4391,7 @@ L_17_A053:
 	JSR L_17_B489
 	LDA #$11
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	JSR L_17_B4B3
 	LDA #$78
 	JSR switch_thread
@@ -4541,7 +4541,7 @@ L_17_A053:
 	JSR L_C481
 	LDA #$1C
 	LDX #$07 ; BANK8
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$0A
 	JSR switch_thread
 	LDA $2D
@@ -4588,7 +4588,7 @@ L_17_A053:
 @Loop18:
 	TYA
 	LDX #$07 ; BANK8
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	RTS
 @Loop19:
 	JSR L_17_9E47
@@ -4946,7 +4946,7 @@ L_17_A495:
 	BCS @Loop1
 	LDA #$26
 	LDX #$07 ; BANK8
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 @Loop1:
 	RTS
 
@@ -5114,7 +5114,7 @@ L_17_A4B4:
 	JSR L_17_B1DA
 	LDA #$6F
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$00
 	JSR L_17_A64A
 	LDA #$01
@@ -5129,7 +5129,7 @@ L_17_A4B4:
 	JSR L_17_A64A
 	LDA #$11
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	JSR L_17_B4B3
 	LDA #$F0
 	JSR switch_thread
@@ -5827,7 +5827,7 @@ L_17_AB44:
 	STA $4B
 	LDA #$02
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDY #<MINI_HELMETS_TEAM_CONTROL
 	LDX #>MINI_HELMETS_TEAM_CONTROL
 	JSR L_17_A83D
@@ -5914,7 +5914,7 @@ L_17_ABC9:
 L_17_ABF7:
 	LDA #$18
 	LDX #$0F ; BANK16
-	JMP L_C3A2
+	JMP do_draw_controls_thread
 
 L_17_ABFE:
 	TAX
@@ -6325,7 +6325,7 @@ L_17_AE5D:
 	STA PRG_RAM_PROTECT
 	LDA #$56
 	LDX #$06 ; BANK7
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	JSR L_17_B489
 @Loop6:
 	INC $90
@@ -6349,7 +6349,7 @@ L_17_AF2A:
 	CLC
 	ADC #$2A
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA $45
 	ASL
 	TAY
@@ -6427,7 +6427,7 @@ L_17_AF2A:
 	CLC
 	ADC #$2C
 	LDX #$0F ; BANK16
-	JMP L_C3A2
+	JMP do_draw_controls_thread
 
 L_17_AFCC:
 	STA $91
@@ -6824,7 +6824,7 @@ L_17_B2A4:
 	STA PRG_RAM_PROTECT
 	LDA #$56
 	LDX #$06 ; BANK7
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	JMP L_17_B489
 @Loop1:
 	RTS
@@ -6902,7 +6902,7 @@ L_17_B34C:
 	BCS @Loop1
 	LDA #$10
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$14
 	LDX #$23
 	JSR new_palette_no_fade
@@ -6910,7 +6910,7 @@ L_17_B34C:
 @Loop1:
 	LDA #$11
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	JSR L_17_B4B3
 @Loop2:
 	LDA #$01
@@ -7225,7 +7225,7 @@ L_17_B573:
 	CLC
 	ADC #$3A
 	LDX #$0F ; BANK16
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDY #$FC
 @Loop1:
 	LDA RANKINGS_POINTER_START-$FC,Y

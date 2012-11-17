@@ -19,7 +19,7 @@ L_17_8012:
 	JSR switch_thread
 	LDA #$00
 	LDX #$06 ; BANK7
-	JSR L_C390
+	JSR set_draw_controls_thread
 	LDA #$04
 	JSR switch_thread
 @Loop1:
@@ -37,7 +37,7 @@ L_17_8012:
 	JSR L_17_94E2
 	LDA #$01
 	LDX #$06 ; BANK7
-	JSR L_C390
+	JSR set_draw_controls_thread
 	LDA #$08
 	JSR switch_thread
 @Loop4:
@@ -52,7 +52,7 @@ L_17_8012:
 	JSR L_17_94F4
 	LDA #$57
 	LDX #$06 ; BANK7
-	JSR L_C390
+	JSR set_draw_controls_thread
 	LDA #$78
 	JSR switch_thread
 	JSR L_17_94E2
@@ -7064,7 +7064,7 @@ L_17_B44E:
 	RTS
 
 L_17_B472:
-	JSR L_C390
+	JSR set_draw_controls_thread
 @Loop1:
 	LDA #$01
 	JSR switch_thread

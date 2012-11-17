@@ -2453,12 +2453,12 @@ L_CCE2:
 @Loop2:
 	RTS
 
-L_CCFC:
+set_vram_controls:
 	LDA BG_PALETTE_FADE
 	ORA SPRITE_PALETTE_FADE
-	BNE L_CD05
-	JMP L_CDBF
-L_CD05:
+	BNE vram_buffer_controls
+	JMP vram_direct_controls
+vram_buffer_controls:
 	JSR L_D2D3
 ; Store Beginning Column
 	LDA TEMP65
@@ -2537,13 +2537,13 @@ L_CD05:
 	JMP @next
 @row:
 ; Set A - xA0 Rows Below Original Column
-	JSR L_CE83
+	JSR vram_row_control
 	JMP @next
 @column_new:
 ; Set Location Ahead A - xC0 and Set New Column
 	SEC
 	SBC #$C0
-	JSR L_CEA7
+	JSR vram_column_control
 ; Store New Column
 	LDA TEMP65
 	STA TEMP67
@@ -2552,7 +2552,7 @@ L_CD05:
 ; Set Location Ahead A - xE0
 	SEC
 	SBC #$E0
-	JSR L_CEA7
+	JSR vram_column_control
 	JMP @next
 @set_data:
 ; Set New Data Location
@@ -2576,16 +2576,18 @@ L_CD05:
 @exit:
 	JMP L_D2EA
 
-L_CDBF:
+vram_direct_controls:
 	JSR L_D2D3
 	JSR disable_nmi
 	LDA PPUSTATUS
+; Store Beginning Column
 	LDA TEMP65
 	STA TEMP67
 @next:
 	LDY #$00
 	LDA (TEMP3E),Y
 	BMI @control
+; Set VRAM increment
 	AND #$40
 	LSR
 	LSR
@@ -2632,14 +2634,18 @@ L_CDBF:
 	BCS @column_new
 	CMP #$A0 ; Set Below Original Column
 	BCS @row
+; Repeat A - x80
+; Get Length
 	SEC
 	SBC #$80
 	AND #$3F
 	TAX
+; Set to VRAM Address
 	LDA TEMP65_HI
 	STA PPUADDR
 	LDA TEMP65_LO
 	STA PPUADDR
+; Store into VRAM
 	INY
 	LDA (TEMP3E),Y
 @repeat:
@@ -2648,6 +2654,7 @@ L_CDBF:
 	INC TEMP65_LO
 	DEX
 	BNE @repeat
+; Update Data Address
 	LDA TEMP3E_LO
 	CLC
 	ADC #$02
@@ -2658,13 +2665,14 @@ L_CDBF:
 	JMP @next
 @row:
 ; Set A - xA0 Rows Below Original Column
-	JSR L_CE83
+	JSR vram_row_control
 	JMP @next
 @column_new:
 ; Set Location Ahead A - xC0 and Set New Column
 	SEC
 	SBC #$C0
-	JSR L_CEA7
+	JSR vram_column_control
+; Store New Column
 	LDA TEMP65
 	STA TEMP67
 	JMP @next
@@ -2672,7 +2680,7 @@ L_CDBF:
 ; Set Location Ahead A - xE0
 	SEC
 	SBC #$E0
-	JSR L_CEA7
+	JSR vram_column_control
 	JMP @next
 @set_data:
 ; Set New Data Location
@@ -2695,7 +2703,7 @@ L_CDBF:
 	JSR enable_nmi
 	JMP L_D2EA
 
-L_CE83:
+vram_row_control:
 ; Get rows below original column
 	SEC
 	SBC #$A0
@@ -2721,7 +2729,7 @@ L_CE83:
 	INC TEMP3E_HI
 :	RTS
 
-L_CEA7:
+vram_column_control:
 ; Update VRAM Address
 	CLC
 	ADC TEMP65_LO
@@ -3604,11 +3612,11 @@ L_D44A:
 	LDX $41
 	BIT $64
 	BVS @Loop1
-	LDA #$7F
+	LDA #<$037F
 	STA $3E
-	LDA #$03
+	LDA #>$037F
 	STA $3F
-	JSR L_CD05
+	JSR vram_buffer_controls
 	JMP @Loop2
 @Loop1:
 	LDA #$80

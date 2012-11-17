@@ -4079,7 +4079,7 @@ L_19_9EB8:
 	JSR L_19_9F75
 	LDA #$1C
 	LDX #$07 ; BANK8
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	LDA #$10 ; BANK17
 	LDY #<L_17_800F
 	LDX #>L_17_800F
@@ -4369,7 +4369,7 @@ L_19_A000:
 	CMP #$FC
 	BCS @Loop9
 	LDX #$06 ; BANK7
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	INC $44
 	BNE @Loop8
 	INC $45
@@ -4516,7 +4516,7 @@ L_19_A1C5:
 	JSR clear_sprites
 	LDA $C2
 	LDX #$06 ; BANK7
-	JSR L_C3A2
+	JSR do_draw_controls_thread
 	JSR set_palette_fade_to_in
 	JSR clear_nametables
 	JSR clear_sprites

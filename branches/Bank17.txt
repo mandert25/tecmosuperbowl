@@ -232,13 +232,13 @@ preseason_menu:
 @previous:
 	LDA #$F0
 	STA $0200
-	LDY #$45
-	LDX #$25
-	LDA #$03
+	LDY #<$2545
+	LDX #>$2545
+	LDA #<$6003
 	STA $3E
-	LDA #$60
+	LDA #>$6003
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDA #$00
 	STA Y_MENU_OPTION
 	JMP L_17_80B2
@@ -509,13 +509,13 @@ L_17_828F:
 	JSR switch_thread
 @Loop16:
 	JSR L_17_84DD
-	LDY #$C3
-	LDX #$20
-	LDA #$03
+	LDY #<$20C3
+	LDX #>$20C3
+	LDA #<$6103
 	STA $3E
-	LDA #$61
+	LDA #>$6103
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	JMP @Loop6
 	.BYTE $12
 @Loop17:
@@ -606,13 +606,13 @@ L_17_828F:
 @Loop26:
 	LDA #$01
 	JSR L_17_84DF
-	LDY #$82
-	LDX #$20
-	LDA #$03
+	LDY #<$2082
+	LDX #>$2082
+	LDA #<$6003
 	STA $3E
-	LDA #$60
+	LDA #>$6003
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	JMP @Loop2
 
 L_17_84DD:
@@ -624,23 +624,23 @@ L_17_84DF:
 	RTS
 
 L_17_84E7:
-	LDY #$43
-	LDX #$21
-	LDA #$A3
+	LDY #<$2143
+	LDX #>$2143
+	LDA #<$60A3
 	STA $3E
-	LDA #$60
+	LDA #>$60A3
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	RTS
 
 L_17_84F7:
-	LDY #$4D
-	LDX #$22
-	LDA #$03
+	LDY #<$224D
+	LDX #>$224D
+	LDA #<$6203
 	STA $3E
-	LDA #$62
+	LDA #>$6203
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	RTS
 
 L_17_8507:
@@ -725,20 +725,20 @@ L_17_8507:
 	LDA #$00
 	JSR L_17_8768
 	JSR set_vertical_mirroring
-	LDY #$00
-	LDX #$24
-	LDA #$03
+	LDY #<$2400
+	LDX #>$2400
+	LDA #<$6103
 	STA $3E
-	LDA #$61
+	LDA #>$6103
 	STA $3F
-	JSR L_CCFC
-	LDY #$C2
-	LDX #$27
+	JSR set_vram_controls
+	LDY #<$27C2
+	LDX #>$27C2
 	LDA #<@Loop8
 	STA $3E
 	LDA #>@Loop8
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDA #$03
 	STA $E1
 	JMP L_17_8207
@@ -814,13 +814,13 @@ L_17_85E0:
 	LDA #$0B
 	STA $3E
 	JSR clear_vram_size
-	LDY #$4D
-	LDX #$22
-	LDA #$03
+	LDY #<$224D
+	LDX #>$224D
+	LDA #<$6103
 	STA $3E
-	LDA #$61
+	LDA #>$6103
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDA #$04
 	STA $E1
 	JMP L_17_8207
@@ -1107,13 +1107,13 @@ pro_bowl_menu:
 @previous:
 	LDA #$F0
 	STA $0200
-	LDY #$C5
-	LDX #$25
-	LDA #$03
+	LDY #<$25C5
+	LDX #>$25C5
+	LDA #<$6003
 	STA $3E
-	LDA #$60
+	LDA #>$6003
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDA #$02
 	STA Y_MENU_OPTION
 	JMP L_17_80B2
@@ -1470,9 +1470,9 @@ L_17_88AF:
 	STA $3E
 	LDA #>PRO_BOWL_RESET_WORDS
 	STA $3F
-	LDY #$E7
-	LDX #$20
-	JSR L_CCFC
+	LDY #<$20E7
+	LDX #>$20E7
+	JSR set_vram_controls
 	LDA #$00
 	STA $E1
 	STA $E2
@@ -3101,13 +3101,13 @@ L_17_9632:
 @Loop13:
 	JSR L_17_8ED5
 @Loop14:
-	LDY #$42
-	LDX #$21
-	LDA #$03
+	LDY #<$2142
+	LDX #>$2142
+	LDA #<$6003
 	STA $3E
-	LDA #$60
+	LDA #>$6003
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	LDA #$00
 	STA $E1
 	JSR L_17_9961
@@ -5411,20 +5411,20 @@ L_17_A7C1:
 	RTS
 
 L_17_A81E:
-	LDY #$C0
-	LDX #$23
-	LDA #$03
+	LDY #<$23C0
+	LDX #>$23C0
+	LDA #<$6003
 	STA $3E
-	LDA #$60
+	LDA #>$6003
 	STA $3F
-	JSR L_CCFC
-	LDY #$C0
-	LDX #$27
-	LDA #$83
+	JSR set_vram_controls
+	LDY #<$27C0
+	LDX #>$27C0
+	LDA #<$6083
 	STA $3E
-	LDA #$60
+	LDA #>$6083
 	STA $3F
-	JSR L_CCFC
+	JSR set_vram_controls
 	RTS
 
 L_17_A83D:
@@ -5904,7 +5904,7 @@ L_17_ABC9:
 	TAY
 	LDA @Loop5+1,X
 	TAX
-	JMP L_CCFC
+	JMP set_vram_controls
 @Loop1:	.WORD @Loop2, @Loop3, @Loop4
 @Loop2:	.BYTE $03, $31, $20, $50, $FF
 @Loop3:	.BYTE $03, $32, $20, $50, $FF
@@ -6599,7 +6599,7 @@ L_17_AFCC:
 	STA $3E
 	LDA #>@Loop7
 	STA $3F
-	JMP L_CCFC
+	JMP set_vram_controls
 @Loop7:
 	.BYTE $14
 	.BYTE $3B

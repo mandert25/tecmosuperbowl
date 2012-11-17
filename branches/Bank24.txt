@@ -1966,7 +1966,7 @@ L_24_8E5D:
 	DEC $40
 	BNE L_24_8E5D
 	JSR buffer_end
-	JSR L_D2EA
+	JSR vram_transfer_finished
 	LDA $3F
 	AND #$7F
 	TAX

@@ -479,9 +479,9 @@ enable_nmi:
 	STA PPUCTRL
 	RTS
 
-L_C390:
-	STA $C2
-	STX $C3
+set_draw_controls_thread:
+	STA TEMPC2
+	STX TEMPC3
 	LDA #$17 ; BANK24
 	STA $10
 	LDY #<(L_24_8003-1)
@@ -490,13 +490,14 @@ L_C390:
 	JSR create_thread
 	RTS
 
-L_C3A2:
-	JSR L_C390
-@Loop1:
-	LDA #$01
+do_draw_controls_thread:
+; Create Draw Screen Controls Thread
+	JSR set_draw_controls_thread
+; Continue until thread destroyed
+:  LDA #$01
 	JSR switch_thread
 	LDA $0C
-	BNE @Loop1
+	BNE :-
 	RTS
 
 L_C3AF:

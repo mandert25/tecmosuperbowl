@@ -2716,6 +2716,7 @@ L_24_92EA:
 	STA TEMP43
 @Loop9:
 	JSR L_24_9417
+; Write Block to PPU
 	JSR L_C431
 ;
 	DEC $44

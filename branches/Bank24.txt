@@ -989,7 +989,7 @@ L_24_8728:
 	LDA #$01
 	JMP L_24_8C48
 
-L_24_8742:
+L_24_8742: ; #$F1
 	JSR set_horizontal_mirroring
 	LDA #$01
 	JMP L_24_8C48
@@ -1019,8 +1019,8 @@ L_24_8767:
 	LDA #$01
 	JMP L_24_8C48
 
-L_24_8772:
-	LDA ($C2),Y
+L_24_8772: ; $#F7
+	LDA (TEMPC2),Y
 	LDX #$00
 	JSR L_24_92D3
 	LDA #$02
@@ -2550,7 +2550,7 @@ L_24_92A7:
 L_24_92D3:
 	STA $D4
 	STX $D7
-	LDA #$17
+	LDA #BANK24
 	STA $15
 	LDY #<(L_24_92EA-1)
 	LDA #>(L_24_92EA-1)
@@ -2561,58 +2561,66 @@ L_24_92D3:
 	RTS
 
 L_24_92EA:
+; Set Stack Pointer
 	LDX #$8B
 	TXS
+;
 	LDA #$00
 	STA $57
 	STA $59
 	STA $5A
-	LDX #$02 ; BANK3
+; Swap Bank
+	LDX #BANK3
 	JSR bank_swap_A000
-	ASL $D4
+; Get Pointer Location
+	ASL TEMPD4
 	LDA #$00
 	ROL
 	TAX
-	LDA $D4
+	LDA TEMPD4
 	CLC
 	ADC #<L_3_B000
-	STA $D4
+	STA TEMPD4_LO
 	TXA
 	ADC #>L_3_B000
-	STA $D5
+	STA TEMPD4_HI
+; Get Data Location
 	LDY #$00
-	LDA ($D4),Y
+	LDA (TEMPD4),Y
 	TAX
 	INY
-	LDA ($D4),Y
-	STA $D5
-	STX $D4
+	LDA (TEMPD4),Y
+	STA TEMPD4_HI
+	STX TEMPD4_LO
+; Set CHAR 0000 Bank
 	LDY #$00
-	LDA ($D4),Y
+	LDA (TEMPD4),Y
 	CMP #$FF
 	BEQ @Loop1
 	STA $0309
 @Loop1:
+; Set CHAR 0800 Bank
 	INY
-	LDA ($D4),Y
+	LDA (TEMPD4),Y
 	CMP #$FF
 	BEQ @Loop2
 	STA $030A
 @Loop2:
+;
 	INY
-	LDA ($D4),Y
+	LDA (TEMPD4),Y
 	STA $D3
 	INY
-	LDA ($D4),Y
+	LDA (TEMPD4),Y
 	STA $50
 	INY
-	LDA ($D4),Y
+	LDA (TEMPD4),Y
 	STA $D8
 	INY
-	LDA ($D4),Y
+	LDA (TEMPD4),Y
 	STA $D9
 	INY
-	LDA ($D4),Y
+	LDA (TEMPD4),Y
 	AND #$F8
 	STA $D6
 	LDA #$02
@@ -2621,7 +2629,7 @@ L_24_92EA:
 	ROL $45
 	ASL $D6
 	ROL $45
-	LDA ($D4),Y
+	LDA (TEMPD4),Y
 	AND #$07
 	ORA $D6
 	STA $D6
@@ -2645,15 +2653,18 @@ L_24_92EA:
 	ASL
 	ORA $45
 	STA $D7
-	LDA $D4
+; Update Data Address
+	LDA TEMPD4_LO
 	CLC
 	ADC #$07
-	STA $D4
-	LDA $D5
+	STA TEMPD4_LO
+	LDA TEMPD4_HI
 	ADC #$00
-	STA $D5
+	STA TEMPD4_HI
+;
 	LDA $D9
 	STA $45
+;
 	LDA $52
 	ORA $53
 	BEQ @Loop7
@@ -2677,17 +2688,21 @@ L_24_92EA:
 	BNE @Loop5
 	JMP @Loop11
 @Loop7:
+; Stop $0C Thread
 	LDA $0C
 	AND #$0F
 	STA $0C
 	JSR disable_nmi
+;
 	LDA #$18
 	STA $44
 @Loop8:
+; Store VRAM Address
 	LDA $D6
-	STA $5E
+	STA TEMP5E_LO
 	LDA $D7
-	STA $5F
+	STA TEMP5E_HI
+;
 	LDA $D8
 	STA $42
 	LDA #$00
@@ -2730,7 +2745,7 @@ L_24_9417:
 	LDA #$00
 	STA $61
 	LDY $43
-	LDA ($D4),Y
+	LDA (TEMPD4),Y
 	STA $60
 	ASL
 	ROL $61
@@ -2751,33 +2766,34 @@ L_24_9417:
 	BCS @Loop1
 	LDA $60
 	CLC
-	ADC #$00
-	STA $60
+	ADC #<$A000
+	STA TEMP60_LO
 	LDA $61
-	ADC #$A0
-	STA $61
+	ADC #>$A000
+	STA TEMP60_HI
 	JMP @Loop2
 @Loop1:
 	LDA $60
 	CLC
-	ADC #$00
-	STA $60
+	ADC #<$B000
+	STA TEMP60_LO
 	LDA $61
-	ADC #$B0
-	STA $61
+	ADC #>$B000
+	STA TEMP60_HI
 @Loop2:
-	LDA $5E
+; Store VRAM Address
+	LDA TEMP5E_LO
 	AND #$9C
 	LSR
 	LSR
-	STA $5C
+	STA TEMP5C
 	AND #$20
 	LSR
 	LSR
-	ORA $5C
+	ORA TEMP5C
 	AND #$0F
-	STA $5C
-	LDA $5F
+	STA TEMP5C
+	LDA TEMP5E_HI
 	ASL
 	ASL
 	ASL
@@ -2785,20 +2801,23 @@ L_24_9417:
 	AND #$30
 	CLC
 	ADC #$C0
-	ORA $5C
-	STA $5C
-	LDA $5F
+	ORA TEMP5C
+	STA TEMP5C_LO
+	LDA TEMP5E_HI
 	AND #$FC
 	ADC #$03
-	STA $5D
+	STA TEMP5C_HI
+; Store Row Amount
 	LDA #$04
-	STA $5B
+	STA TEMP5B
+; Store Bank
 	LDA $D3
 	LSR
 	AND #$01
 	CLC
 	ADC #$0A
-	STA $62
+	STA TEMP62
+;
 	LDA $43
 	CLC
 	ADC $D9

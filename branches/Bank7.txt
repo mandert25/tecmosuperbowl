@@ -12,7 +12,8 @@ L_07_A0F0:
 	.BYTE $C8
 	.BYTE $F1
 	.BYTE $F7, $25
-	.BYTE $F9, $01, $C2, $FB, $1E, $E5, $1A, $4A, $FB, $B4
+	.BYTE $F9, $01, $C2
+	.BYTE $FB, $1E, $E5, $1A, $4A, $FB, $B4
 	.BYTE $E8
 	.BYTE $FB
 	.BYTE $3C

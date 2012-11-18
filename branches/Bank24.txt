@@ -1019,7 +1019,8 @@ L_24_8767:
 	LDA #$01
 	JMP L_24_8C48
 
-L_24_8772: ; $#F7
+L_24_8772: ; #$F7
+; Draw 4x4 Block and Attribute
 	LDA (TEMPC2),Y
 	LDX #$00
 	JSR L_24_92D3
@@ -1033,7 +1034,7 @@ L_24_877E:
 	LDA #$02
 	JMP L_24_8C48
 
-L_24_878A:
+L_24_878A: ; #$F9
 	JSR L_24_961C
 	JMP L_24_8077
 
@@ -2548,8 +2549,9 @@ L_24_92A7:
 	.BYTE $3B, $22, $20, $26
 
 L_24_92D3:
-	STA $D4
-	STX $D7
+	STA TEMPD4
+	STX TEMPD6_HI
+; Create Thread
 	LDA #BANK24
 	STA $15
 	LDY #<(L_24_92EA-1)
@@ -3069,59 +3071,67 @@ L_24_961C:
 	LDA #$00
 	LDY #$A0
 @Loop1:
-	STA $05E3,Y
+	STA $0683-$A0,Y
 	INY
 	BNE @Loop1
+; Store Length
 	LDY #$01
-	LDA ($C2),Y
+	LDA (TEMPC2),Y
 	AND #$07
-	STA $44
+	STA TEMP44
 	TAX
 @Loop2:
 	INY
-	LDA ($C2),Y
+	LDA (TEMPC2),Y
 	STA A:$CC,X
 	DEX
 	BNE @Loop2
+; Update Data Address
 	INY
 	TYA
 	CLC
-	ADC $C2
-	STA $C2
-	LDA $C3
+	ADC TEMPC2_LO
+	STA TEMPC2_LO
+	LDA TEMPC2_HI
 	ADC #$00
-	STA $C3
-	LDA $2F
-	STA $45
-	LDA #$83
-	STA $CB
-	LDA #$06
-	STA $CC
+	STA TEMPC2_HI
+; Store Bank
+	LDA BANK_A000
+	STA TEMP45
+;
+	LDA #<$0683
+	STA TEMPCB_LO
+	LDA #>$0683
+	STA TEMPCB_HI
 @Loop3:
-	LDX $44
+; Get A000 Bank and Swap
+	LDX TEMP44
 	LDA A:$CC,X
 	ASL
 	LDA #$08
 	ADC #$00
 	TAX
 	JSR bank_swap_A000
-	LDX $44
+; Get Data Address
+	LDX TEMP44
 	LDA A:$CC,X
 	ASL
 	CLC
 	ADC #$00
-	STA $C9
+	STA TEMPC9_LO
 	LDA #$A0
 	ADC #$00
-	STA $CA
+	STA TEMPC9_HI
+; Store Data Address from Pointer
 	LDY #$00
-	LDA ($C9),Y
+	LDA (TEMPC9),Y
 	TAX
 	INY
-	LDA ($C9),Y
-	STA $CA
-	STX $C9
-	LDX $44
+	LDA (TEMPC9),Y
+	STA TEMPC9_HI
+	STX TEMPC9_LO
+;
+	LDX TEMP44
 	LDA A:$CC,X
 	ROL
 	LDA $2D
@@ -3129,38 +3139,46 @@ L_24_961C:
 	AND #$60
 	ROL
 	LDY #$00
-	STA ($CB),Y
+	STA (TEMPCB),Y
+;
 	INY
 	LDA #$01
-	STA ($CB),Y
+	STA (TEMPCB),Y
+; Store Data Address
 	LDY #$02
-	LDA $C9
-	STA ($CB),Y
+	LDA TEMPC9_LO
+	STA (TEMPCB),Y
 	INY
-	LDA $CA
-	STA ($CB),Y
-	LDA $CB
+	LDA TEMPC9_HI
+	STA (TEMPCB),Y
+; Set Buffer Address to Row Down
+	LDA TEMPCB_LO
 	CLC
 	ADC #$20
-	STA $CB
-	LDA $CC
+	STA TEMPCB_LO
+	LDA TEMPCB_HI
 	ADC #$00
-	STA $CC
-	DEC $44
+	STA TEMPCB_HI
+; Check for End
+	DEC TEMP44
 	BNE @Loop3
-	LDA #$17
+; Create Thread
+	LDA #BANK24
 	STA $1A
 	LDY #<(L_24_96C4-1)
 	LDA #>(L_24_96C4-1)
 	LDX #$16
 	JSR create_thread
-	LDX $45
+; Return to A000 Bank
+	LDX TEMP45
 	JSR bank_swap_A000
 	RTS
 
 L_24_96C4:
+; Set Stack Pointer
 	LDX #$6B
 	TXS
+;
 	LDA #$00
 	STA $D2
 	STA $CD

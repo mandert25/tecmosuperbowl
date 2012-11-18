@@ -3185,9 +3185,10 @@ L_24_96C4:
 	STA $D0
 	LDA #$FF
 	STA $D1
-	LDA $31
-	AND #$DF
-	STA $31
+; Set Sprites to 8x8
+	LDA SOFT_PPUCTRL
+	AND #%11011111
+	STA SOFT_PPUCTRL
 @Loop1:
 	LDA #$01
 	JSR switch_thread
@@ -3242,42 +3243,47 @@ L_24_96C4:
 @Loop7:
 	JSR L_24_9D8C
 @Loop8:
-	LDA #$83
-	STA $CB
-	LDA #$06
-	STA $CC
+; Set To Data Address
+	LDA #<$0683
+	STA TEMPCB_LO
+	LDA #>$0683
+	STA TEMPCB_HI
+;
 	LDA #$03
 	STA $CF
 @Loop9:
 	LDY #$00
-	LDA ($CB),Y
+	LDA (TEMPCB),Y
 	BMI @Loop10
 	JMP @Loop57
 @Loop10:
 	LDY #$01
-	LDA ($CB),Y
+	LDA (TEMPCB),Y
 	SEC
 	SBC #$01
-	STA ($CB),Y
+	STA (TEMPCB),Y
 	BEQ @Loop11
 	JMP @Loop52
 @Loop11:
+; Get Bank and Swap
 	LDY #$00
-	LDA ($CB),Y
+	LDA (TEMPCB),Y
 	LSR
 	LDA #$08
 	ADC #$00
 	TAX
 	JSR bank_swap_A000
+; Get Data Address
 	LDY #$02
-	LDA ($CB),Y
-	STA $C9
+	LDA (TEMPCB),Y
+	STA TEMPC9_LO
 	INY
-	LDA ($CB),Y
-	STA $CA
+	LDA (TEMPCB),Y
+	STA TEMPC9_HI
 @Loop12:
+; Read Data Command
 	LDY #$00
-	LDA ($C9),Y
+	LDA (TEMPC9),Y
 	BMI @Loop13
 	INY
 	ASL
@@ -3303,22 +3309,24 @@ L_24_96C4:
 	BCS @Loop16
 	CMP #$A0
 	BCS @Loop15
+; Store Address from Pointer
 	CLC
 	ADC #$20
 	LDY #$10
-	STA ($CB),Y
+	STA (TEMPCB),Y
 	LDY #$01
-	LDA ($C9),Y
+	LDA (TEMPC9),Y
 	LDY #$0F
-	STA ($CB),Y
+	STA (TEMPCB),Y
 	LDA #$02
 	JMP @Loop50
 @Loop15:
+; Set New Data Pointer Address
 	TAX
 	LDY #$01
-	LDA ($C9),Y
-	STA $C9
-	STX $CA
+	LDA (TEMPC9),Y
+	STA TEMPC9_LO
+	STX TEMPC9_HI
 	JMP @Loop12
 @Loop16:
 	STA $3F
@@ -3394,7 +3402,7 @@ L_24_96C4:
 	TAX
 	LDA @Loop21+1,X
 	PHA
-	LDA @Loop21,X
+	LDA @Loop21+0,X
 	PHA
 	RTS
 
@@ -3433,11 +3441,11 @@ L_24_96C4:
 	LDA #$01
 	JMP @Loop50
 
-@Loop26:
+@Loop26: ; Sprite #$F3
 	LDY #$00
-	LDA ($CB),Y
+	LDA (TEMPCB),Y
 	ORA #$02
-	STA ($CB),Y
+	STA (TEMPCB),Y
 	LDA #$01
 	JMP @Loop50
 
@@ -3461,13 +3469,14 @@ L_24_96C4:
 	LDA #$01
 	JMP @Loop50
 
-@Loop29:
+@Loop29: ; Sprite #$F6
+; Set Sprite CHAR Banks
 	LDY #$01
 @Loop30:
-	LDA ($C9),Y
+	LDA (TEMPC9),Y
 	CMP #$FF
 	BEQ @Loop31
-	STA $004A,Y
+	STA $4A,Y
 @Loop31:
 	INY
 	CPY #$05
@@ -3512,13 +3521,13 @@ L_24_96C4:
 
 @Loop35:
 	LDY #$01
-	LDA ($C9),Y
+	LDA (TEMPC9),Y
 	ASL
 	LDY #$08
-	STA ($CB),Y
+	STA (TEMPCB),Y
 	PHP
 	LDY #$02
-	LDA ($C9),Y
+	LDA (TEMPC9),Y
 	TAX
 	LDA $2D
 	AND #$20
@@ -3532,13 +3541,13 @@ L_24_96C4:
 	TXA
 	ASL
 	LDY #$0D
-	STA ($CB),Y
+	STA (TEMPCB),Y
 	INY
 	LDA #$00
 	ROL
 	PLP
 	ROL
-	STA ($CB),Y
+	STA (TEMPCB),Y
 	LDA #$03
 	JMP @Loop50
 
@@ -3573,7 +3582,7 @@ L_24_96C4:
 	LDA #$00
 	STA $45
 	LDY #$01
-	LDA ($C9),Y
+	LDA (TEMPC9),Y
 	PHP
 	LSR
 	ROR $45
@@ -3588,15 +3597,15 @@ L_24_96C4:
 	ORA #$F0
 @Loop40:
 	LDY #$06
-	STA ($CB),Y
+	STA (TEMPCB),Y
 	TAX
 	DEY
 	LDA $45
-	STA ($CB),Y
+	STA (TEMPCB),Y
 	LDY #$03
 	TXA
 	BMI @Loop41
-	LDA ($C9),Y
+	LDA (TEMPC9),Y
 	JMP @Loop42
 @Loop41:
 	LDA #$00
@@ -3604,11 +3613,11 @@ L_24_96C4:
 	SBC ($C9),Y
 @Loop42:
 	LDY #$04
-	STA ($CB),Y
+	STA (TEMPCB),Y
 	LDA #$00
 	STA $45
 	LDY #$02
-	LDA ($C9),Y
+	LDA (TEMPC9),Y
 	PHP
 	LSR
 	ROR $45
@@ -3623,15 +3632,15 @@ L_24_96C4:
 	ORA #$F0
 @Loop43:
 	LDY #$0B
-	STA ($CB),Y
+	STA (TEMPCB),Y
 	TAX
 	DEY
 	LDA $45
-	STA ($CB),Y
+	STA (TEMPCB),Y
 	LDY #$04
 	TXA
 	BMI @Loop44
-	LDA ($C9),Y
+	LDA (TEMPC9),Y
 	JMP @Loop45
 @Loop44:
 	LDA #$00
@@ -3639,18 +3648,19 @@ L_24_96C4:
 	SBC ($C9),Y
 @Loop45:
 	LDY #$09
-	STA ($CB),Y
+	STA (TEMPCB),Y
 	LDY #$00
-	LDA ($CB),Y
+	LDA (TEMPCB),Y
 	ORA #$20
-	STA ($CB),Y
+	STA (TEMPCB),Y
 	LDA #$05
 	JMP @Loop50
 
-@Loop46:
+@Loop46: ; Sprite #$FC
+; Set Sprite Fade
 	LDY #$01
-	LDA ($C9),Y
-	STA $51
+	LDA (TEMPC9),Y
+	STA SPRITE_PALETTE
 	LDA #$02
 	JMP @Loop50
 
@@ -3683,12 +3693,13 @@ L_24_96C4:
 	JMP @Loop12
 
 @Loop50:
+; Update Data Address
 	CLC
-	ADC $C9
-	STA $C9
-	LDA $CA
+	ADC TEMPC9_LO
+	STA TEMPC9_LO
+	LDA TEMPC9_HI
 	ADC #$00
-	STA $CA
+	STA TEMPC9_HI
 	JMP @Loop12
 
 @Loop51:

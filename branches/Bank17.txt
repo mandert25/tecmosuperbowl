@@ -17,8 +17,9 @@ L_17_8012:
 	JSR clear_sprites
 	LDA #$01
 	JSR switch_thread
+;
 	LDA #$00
-	LDX #$06 ; BANK7
+	LDX #BANK7
 	JSR set_draw_controls_thread
 	LDA #$04
 	JSR switch_thread

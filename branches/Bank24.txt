@@ -2623,38 +2623,38 @@ L_24_92EA:
 	INY
 	LDA (TEMPD4),Y
 	AND #$F8
-	STA $D6
+	STA TEMPD6_LO
 	LDA #$02
-	STA $45
-	ASL $D6
-	ROL $45
-	ASL $D6
-	ROL $45
+	STA TEMP45
+	ASL TEMPD6_LO
+	ROL TEMP45
+	ASL TEMPD6_LO
+	ROL TEMP45
 	LDA (TEMPD4),Y
 	AND #$07
-	ORA $D6
-	STA $D6
-	ASL $D6
-	ROL $45
-	ASL $D6
-	ROL $45
+	ORA TEMPD6_LO
+	STA TEMPD6_LO
+	ASL TEMPD6_LO
+	ROL TEMP45
+	ASL TEMPD6_LO
+	ROL TEMP45
 ; Check for Mirroring
 	BIT $2D
 	BVS @Loop3
-	LDA $D7
+	LDA TEMPD6_HI
 	EOR $0308
 	AND #$01
 	JMP @Loop4
 @Loop3:
-	LDA $D7
+	LDA TEMPD6_HI
 	EOR $58
 	AND #$01
 	ASL
 @Loop4:
 	ASL
 	ASL
-	ORA $45
-	STA $D7
+	ORA TEMP45
+	STA TEMPD6_HI
 ; Update Data Address
 	LDA TEMPD4_LO
 	CLC
@@ -2665,20 +2665,23 @@ L_24_92EA:
 	STA TEMPD4_HI
 ;
 	LDA TEMPD9
-	STA $45
+	STA TEMP45
 ;
-	LDA $52
-	ORA $53
+	LDA BG_PALETTE_FADE
+	ORA SPRITE_PALETTE_FADE
 	BEQ @Loop7
 @Loop5:
-	LDA $D6
-	STA $5E
-	LDA $D7
-	STA $5F
+; Store VRAM Address
+	LDA TEMPD6_LO
+	STA TEMP5E_LO
+	LDA TEMPD6_HI
+	STA TEMP5E_HI
+;
 	LDA $D8
 	STA $42
+;
 	LDA #$00
-	STA $43
+	STA TEMP43
 @Loop6:
 	JSR L_24_9417
 	LDA #$01
@@ -2686,9 +2689,10 @@ L_24_92EA:
 	DEC $42
 	BNE @Loop6
 	JSR L_24_949E
-	DEC $45
+; Check for More Blocks
+	DEC TEMP45
 	BNE @Loop5
-	JMP @Loop11
+	JMP @exit
 @Loop7:
 ; Stop $0C Thread
 	LDA $0C
@@ -2700,9 +2704,9 @@ L_24_92EA:
 	STA $44
 @Loop8:
 ; Store VRAM Address
-	LDA $D6
+	LDA TEMPD6_LO
 	STA TEMP5E_LO
-	LDA $D7
+	LDA TEMPD6_HI
 	STA TEMP5E_HI
 ;
 	LDA $D8
@@ -2713,9 +2717,11 @@ L_24_92EA:
 @Loop9:
 	JSR L_24_9417
 	JSR L_C431
+;
 	DEC $44
 	BNE @Loop10
-	LDA $45
+;
+	LDA TEMP45
 	PHA
 	LDA #$1B ; BANK28
 	LDY #<L_28_8000
@@ -2724,20 +2730,23 @@ L_24_92EA:
 	LDX #$02 ; BANK3
 	JSR bank_swap_A000
 	PLA
-	STA $45
+	STA TEMP45
 	LDA #$18
 	STA $44
 @Loop10:
+;
 	DEC $42
 	BNE @Loop9
+;
 	JSR L_24_949E
-	DEC $45
+; Check for more Blocks
+	DEC TEMP45
 	BNE @Loop8
 	JSR enable_nmi
 ; Start Thread
 	LDX #$0C
 	JSR L_CC8F
-@Loop11:
+@exit:
 ; Clear Address
 	LDA #$00
 	STA TEMPD4_LO
@@ -2833,22 +2842,23 @@ L_24_9417:
 	RTS
 
 L_24_949E:
-	INC $D4
-	BNE @Loop1
-	INC $D5
-@Loop1:
-	LDA $D6
+; Update Data Address
+	INC TEMPD4_LO
+	BNE :+
+	INC TEMPD4_HI
+:	LDA TEMPD6_LO
 	CLC
 	ADC #$04
-	STA $D6
+	STA TEMPD6_LO
+;
 	AND #$20
 	BEQ @Loop2
-	LDA $D6
+	LDA TEMPD6_LO
 	AND #$DF
-	STA $D6
-	LDA $D7
+	STA TEMPD6_LO
+	LDA TEMPD6_HI
 	EOR #$04
-	STA $D7
+	STA TEMPD6_HI
 @Loop2:
 	RTS
 

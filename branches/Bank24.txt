@@ -456,7 +456,7 @@ L_24_835C: ; #$C8
 	LDA #$01
 	JMP L_24_8C48
 
-L_24_836D:
+L_24_836D: ; #$C9
 	LDA #$00
 	STA $0307
 	LDA #$01
@@ -1016,7 +1016,7 @@ L_24_8742: ; #$F1
 	LDA #$01
 	JMP L_24_8C48
 
-L_24_874A:
+L_24_874A: ; #$F2
 	JSR set_vertical_mirroring
 	LDA #$01
 	JMP L_24_8C48

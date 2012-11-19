@@ -38,7 +38,7 @@ L_24_8040:
 	JSR bank_swap_A000
 ;
 	LDA $2D
-	AND #$DF
+	AND #%11011111
 	STA $2D
 ; Get Data Address
 	LDA TEMPC2
@@ -53,9 +53,9 @@ L_24_8040:
 	STA TEMPC6_LO
 	LDA #>$2082
 	STA TEMPC6_HI
-;
+; Set to 8x8 Text
 	LDA $64
-	AND #$BF
+	AND #%10111111
 	STA $64
 ;
 	LDA #$00
@@ -119,98 +119,120 @@ L_24_8131:
 ; Store Length
 	TYA
 	STA TEMP45
-;
+; Check for Text Size
 	BIT $64
-	BVS @Loop1
+	BVS @large
 ; Get VRAM Address
 	LDY TEMPC6_LO
 	LDX TEMPC6_HI
 	JSR L_D57F
 	JMP @exit
-@Loop1:
-	LDY $C6
-	LDX $C7
-	LDA $C2
-	STA $3E
-	LDA $C3
-	STA $3F
-	LDA $45
-	JSR L_CF03
+@large:
+; Get VRAM Address
+	LDY TEMPC6_LO
+	LDX TEMPC6_HI
+; Store Data Address
+	LDA TEMPC2_LO
+	STA TEMP3E_LO
+	LDA TEMPC2_HI
+	STA TEMP3E_HI
+; Get Length
+	LDA TEMP45
+	JSR buffer_large_text
 @exit:
 ; Get Length
 	LDA TEMP45
 	JMP L_24_8C48
 
-L_24_8165:
+L_24_8165: ; #$80-87
+; Set VRAM Address
 	JSR L_24_8C56
-	LDA ($C2),Y
-	STA $3E
+; Store Data Address
+	LDA (TEMPC2),Y
+	STA TEMP3E_LO
 	INY
-	LDA ($C2),Y
-	STA $3F
-	LDY $C6
-	LDX $C7
+	LDA (TEMPC2),Y
+	STA TEMP3E_HI
+; Write to VRAM with Controls
+	LDY TEMPC6_LO
+	LDX TEMPC6_HI
 	JSR set_vram_controls
 	LDA #$04
 	JMP L_24_8C48
 
-L_24_817D: ; #$80-87
+L_24_817D: ; #$88-8F
 ; Set VRAM Address
 	JSR L_24_8C56
 	LDA #$02
 	JMP L_24_8C48
 
-L_24_8185:
+L_24_8185: ; #$90-97
+; Set VRAM Address
 	JSR L_24_8C56
-	LDA ($C2),Y
-	STA $3F
+; Get Amount
+	LDA (TEMPC2),Y
+	STA TEMP3F
+; Set Length
 	LDA #$01
-	STA $3E
+	STA TEMP3E
+; Write to VRAM with Size
 	INY
-	LDA ($C2),Y
-	LDY $C6
-	LDX $C7
+	LDA (TEMPC2),Y
+	LDY TEMPC6_LO
+	LDX TEMPC6_HI
 	JSR set_vram_size
 	LDA #$04
 	JMP L_24_8C48
 
-L_24_819F:
+L_24_819F: ; #$98-9F
+; Set VRAM Address
 	JSR L_24_8C56
-	LDA ($C2),Y
-	STA $3E
+; Get Length
+	LDA (TEMPC2),Y
+	STA TEMP3E
+; Set Amount
 	LDA #$01
-	STA $3F
+	STA TEMP3F
+; Write to VRAM with Size
 	INY
-	LDA ($C2),Y
-	LDY $C6
-	LDX $C7
+	LDA (TEMPC2),Y
+	LDY TEMPC6_LO
+	LDX TEMPC6_HI
 	JSR set_vram_size
 	LDA #$04
 	JMP L_24_8C48
 
-L_24_81B9:
+L_24_81B9: ; #$A0-A7
+; Set to VRAM Address
 	JSR L_24_8C56
-	LDA ($C2),Y
-	STA $3F
+; Get Amount
+	LDA (TEMPC2),Y
+	STA TEMP3F
+; Get Length
 	INY
-	LDA ($C2),Y
-	STA $3E
+	LDA (TEMPC2),Y
+	STA TEMP3E
+; Write to VRAM with Size
 	INY
-	LDA ($C2),Y
-	LDY $C6
-	LDX $C7
+	LDA (TEMPC2),Y
+	LDY TEMPC6_LO
+	LDX TEMPC6_HI
 	JSR set_vram_size
 	LDA #$05
 	JMP L_24_8C48
 
-L_24_81D4:
+L_24_81D4: ; #$A8-AF
+; Set to VRAM Address
 	JSR L_24_8C56
+; Set Amount
 	LDA #$01
-	STA $3F
-	STA $3E
-	LDA ($C2),Y
-	LDY $C6
-	LDX $C7
+	STA TEMP3F
+; Set Length
+	STA TEMP3E
+; Write to VRAM with Size
+	LDA (TEMPC2),Y
+	LDY TEMPC6_LO
+	LDX TEMPC6_HI
 	JSR set_vram_size
 	LDA #$03
 	JMP L_24_8C48
@@ -1005,16 +1027,18 @@ L_24_8752:
 	LDA #$02
 	JMP L_24_8C48
 
-L_24_875C:
+L_24_875C: ; #$F5
+; Set to 8x8 Text
 	LDA $64
-	AND #$BF
+	AND #%10111111
 	STA $64
 	LDA #$01
 	JMP L_24_8C48
 
-L_24_8767:
+L_24_8767: ; #$F6
+; Set to 16x16 Text
 	LDA $64
-	ORA #$40
+	ORA #%01000000
 	STA $64
 	LDA #$01
 	JMP L_24_8C48
@@ -1423,7 +1447,7 @@ L_24_8A73:
 	LDA #$03
 	STA $3F
 	LDA #$05
-	JSR L_CF03
+	JSR buffer_large_text
 	JSR L_D553
 	LDA #$02
 	JMP L_24_8C48
@@ -1916,7 +1940,7 @@ L_24_8DC3:
 	LDA #$00
 	STA $3F
 	LDA #$02
-	JMP L_CF03
+	JMP buffer_large_text
 	CLC
 	JMP L_24_8DDF
 

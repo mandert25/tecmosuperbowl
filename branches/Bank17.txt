@@ -82,7 +82,7 @@ L_17_809C:
 	JSR set_vertical_mirroring
 	JSR clear_nametables
 	JSR clear_sprites
-	JSR L_17_9443
+	JSR draw_main_menu
 	LDA #$13
 	LDX #$24
 	JSR new_palette_no_fade
@@ -248,7 +248,7 @@ preseason_menu:
 	JSR set_palette_fade_to_in
 	JSR clear_nametables
 	JSR clear_sprites
-	JSR L_17_9443
+	JSR draw_main_menu
 	JSR L_17_9456
 	LDA #$13
 	LDX #$24
@@ -326,7 +326,7 @@ L_17_8272:
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
 	LDA #$20
-	JSR L_17_ACEF
+	JSR draw_menu_nfl_logo
 	RTS
 
 L_17_828F:
@@ -936,7 +936,7 @@ L_17_86EA:
 	LDA $41
 	ADC L_17_8761,X
 	STA $41
-	JSR L_17_ACEF
+	JSR draw_menu_nfl_logo
 	DEC $3E
 	BNE @Loop2
 	LDA #$00
@@ -1123,7 +1123,7 @@ pro_bowl_menu:
 	JSR set_palette_fade_to_in
 	JSR clear_nametables
 	JSR clear_sprites
-	JSR L_17_9443
+	JSR draw_main_menu
 	JSR L_17_9474
 	LDA #$13
 	LDX #$24
@@ -2653,15 +2653,18 @@ L_17_9404:
 	STA $E2
 	JMP L_17_8089
 
-L_17_9443:
+draw_main_menu:
+; Draw Season Menu Screen
 	LDA #$03
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
+; Draw Main Menu Screen
 	LDA #$00
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
+; Draw NFL Logo
 	LDA #$B0
-	JMP L_17_ACEF
+	JMP draw_menu_nfl_logo
 
 L_17_9456:
 	LDA #$45
@@ -6035,51 +6038,63 @@ L_17_ACC7:
 	BEQ L_17_ACB7
 	RTS
 
-L_17_ACEF:
-	STA $44
+draw_menu_nfl_logo:
+; Store Sprite X
+	STA TEMP44
+; Set CHAR Banks
 	LDA #$0F
-	STA $4B
+	STA CHAR_1000
 	LDA #$1D
-	STA $4C
+	STA CHAR_1400
+; Store Sprite Y
 	LDA #$40
-	STA $42
+	STA TEMP42
+; Set to Sprite 3
 	LDY #$08
+; Set to first tile
 	LDX #$00
-@Loop1:
+@next:
+; Store First on Row
 	LDA #$00
-	STA $43
-@Loop2:
+	STA TEMP43
+@more:
+; Check for Blank
 	LDA NFL_SHIELD,X
-	BMI @Loop3
-	LDA $42
-	STA $0200,Y
+	BMI @end
+; Store Sprite
+	LDA TEMP42
+	STA SPRITE_Y,Y
 	LDA NFL_SHIELD+1,X
-	STA $0201,Y
-	LDA NFL_SHIELD,X
-	STA $0202,Y
-	LDA $43
+	STA SPRITE_TILE,Y
+	LDA NFL_SHIELD+0,X
+	STA SPRITE_ATTRIBUTES,Y
+	LDA TEMP43
 	CLC
-	ADC $44
-	STA $0203,Y
+	ADC TEMP44
+	STA SPRITE_X,Y
+; Next Sprite Location
 	INY
 	INY
 	INY
 	INY
-@Loop3:
+@end:
+; Set to next tile
 	INX
 	INX
-	LDA $43
+; Check for end of row
+	LDA TEMP43
 	CLC
 	ADC #$08
-	STA $43
+	STA TEMP43
 	CMP #$38
-	BCC @Loop2
-	LDA $42
+	BCC @more
+; Check for end
+	LDA TEMP42
 	CLC
 	ADC #$08
-	STA $42
+	STA TEMP42
 	CPX #$8C
-	BCC @Loop1
+	BCC @next
 	RTS
 
 L_17_AD40:

@@ -2785,57 +2785,71 @@ L_CEB9:
 	BNE @Loop1
 	JMP vram_transfer_finished
 
-L_CF03:
+buffer_large_text:
 	PHA
 	JSR vram_transfer_start
+; Store Length
 	PLA
-	STA $67
+	STA TEMP67
+; Set to Upper Half
 	LDA #$00
-	JSR L_CF24
-	LDA $65
+	JSR buffer_large_text_half
+; Update VRAM Address
+	LDA TEMP65_LO
 	CLC
 	ADC #$20
-	STA $65
-	LDA $66
+	STA TEMP65_LO
+	LDA TEMP65_HI
 	ADC #$00
-	STA $66
+	STA TEMP65_HI
+; Set to Lower Half
 	LDA #$76
-	JSR L_CF24
+	JSR buffer_large_text_half
 	JMP vram_transfer_finished
 
-L_CF24:
-	STA $68
-	LDA $67
+buffer_large_text_half:
+; Store Letter Half
+	STA TEMP68
+; Store Buffer Length and Address
+	LDA TEMP67
 	ASL
-	LDY $65
-	LDX $66
+	LDY TEMP65_LO
+	LDX TEMP65_HI
 	JSR buffer_add
-	LDA $67
-	STA $41
+; Store Length
+	LDA TEMP67
+	STA TEMP41
+; Set Length Read
 	LDA #$00
-	STA $40
-@Loop1:
-	LDY $40
-	LDA ($3E),Y
+	STA TEMP40
+@more:
+	LDY TEMP40
+	LDA (TEMP3E),Y
+; Check for small letters
 	CMP #$61
-	BCC @Loop2
+	BCC @store
+; Change to capital letter
 	AND #$DF
-@Loop2:
+@store:
+; Get Letter Index
 	SEC
 	SBC #$20
 	ASL
 	CLC
-	ADC $68
+	ADC TEMP68
+; Store Letter Half
 	TAY
-	LDA L_D981,Y
-	STA $033A,X
+	LDA LARGE_TEXT+0,Y
+	STA BUFFER,X
 	INX
-	LDA L_D982,Y
-	STA $033A,X
+	LDA LARGE_TEXT+1,Y
+	STA BUFFER,X
 	INX
-	INC $40
-	DEC $41
-	BNE @Loop1
+; Update Length Read
+	INC TEMP40
+; Check for end
+	DEC TEMP41
+	BNE @more
 	JMP buffer_end
 
 L_CF61:
@@ -2961,7 +2975,7 @@ L_D012:
 	SEC
 	SBC $3E
 	LDX $41
-	JSR L_CF03
+	JSR buffer_large_text
 	PLA
 	TAX
 	JMP bank_swap_A000
@@ -3014,7 +3028,7 @@ L_D081:
 	ADC #$00
 	TAX
 	LDA $43
-	JSR L_CF03
+	JSR buffer_large_text
 	PLA
 	TAX
 	JMP bank_swap_A000
@@ -3633,7 +3647,7 @@ L_D44A:
 	LDA #$03
 	STA $3F
 	LDA $037F
-	JSR L_CF03
+	JSR buffer_large_text
 @Loop2:
 	JSR L_D553
 	LDX $43
@@ -4471,242 +4485,127 @@ PALETTE_FADE:
 	.BYTE $0F, $00, $00, $00, $00, $00, $10, $10, $10, $10, $10, $10, $20, $20, $20, $20
 	.BYTE $0F, $00, $00, $00, $10, $10, $10, $10, $20, $20, $20, $20, $30, $30, $30, $30
 
-L_D981:	.BYTE $00
-L_D982:	.BYTE $00
-	.BYTE $85
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $90
-	.BYTE $91
-	.BYTE $AE
-	.BYTE $A8
-	.BYTE $9C
-	.BYTE $CD
-	.BYTE $9C
-	.BYTE $CD
-	.BYTE $B0
-	.BYTE $B1
-	.BYTE $C0
-	.BYTE $AC
-	.BYTE $D0
-	.BYTE $9D
-	.BYTE $D4
-	.BYTE $D5
-	.BYTE $CC
-	.BYTE $CD
-	.BYTE $CC
-	.BYTE $D1
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $90
-	.BYTE $91
-	.BYTE $C0
-	.BYTE $CD
-	.BYTE $90
-	.BYTE $A5
-	.BYTE $94
-	.BYTE $91
-	.BYTE $C0
-	.BYTE $C1
-	.BYTE $C0
-	.BYTE $C1
-	.BYTE $90
-	.BYTE $A5
-	.BYTE $C8
-	.BYTE $C9
-	.BYTE $C4
-	.BYTE $C5
-	.BYTE $00
-	.BYTE $89
-	.BYTE $C8
-	.BYTE $A1
-	.BYTE $84
-	.BYTE $00
-	.BYTE $8C
-	.BYTE $8D
-	.BYTE $8C
-	.BYTE $99
-	.BYTE $90
-	.BYTE $91
-	.BYTE $94
-	.BYTE $A9
-	.BYTE $90
-	.BYTE $91
-	.BYTE $94
-	.BYTE $A9
-	.BYTE $CC
-	.BYTE $9D
-	.BYTE $D8
-	.BYTE $D9
-	.BYTE $84
-	.BYTE $85
-	.BYTE $DC
-	.BYTE $DD
-	.BYTE $98
-	.BYTE $99
-	.BYTE $A0
-	.BYTE $A1
-	.BYTE $A0
-	.BYTE $A1
-	.BYTE $D4
-	.BYTE $D5
-	.BYTE $00
-	.BYTE $00
-	.BYTE $A6
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $B4
-	.BYTE $B5
-	.BYTE $81
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $92
-	.BYTE $93
-	.BYTE $C6
-	.BYTE $C7
-	.BYTE $82
-	.BYTE $83
-	.BYTE $9E
-	.BYTE $CF
-	.BYTE $B2
-	.BYTE $B3
-	.BYTE $9F
-	.BYTE $CF
-	.BYTE $D2
-	.BYTE $CF
-	.BYTE $DA
-	.BYTE $DB
-	.BYTE $CE
-	.BYTE $CF
-	.BYTE $9E
-	.BYTE $D3
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $86
-	.BYTE $87
-	.BYTE $C2
-	.BYTE $CF
-	.BYTE $92
-	.BYTE $A7
-	.BYTE $96
-	.BYTE $93
-	.BYTE $C2
-	.BYTE $C3
-	.BYTE $CA
-	.BYTE $A4
-	.BYTE $92
-	.BYTE $95
-	.BYTE $CA
-	.BYTE $CB
-	.BYTE $C6
-	.BYTE $C7
-	.BYTE $8A
-	.BYTE $8B
-	.BYTE $CA
-	.BYTE $A3
-	.BYTE $96
-	.BYTE $AA
-	.BYTE $8E
-	.BYTE $8F
-	.BYTE $8E
-	.BYTE $9B
-	.BYTE $92
-	.BYTE $93
-	.BYTE $86
-	.BYTE $AB
-	.BYTE $92
-	.BYTE $AD
-	.BYTE $86
-	.BYTE $88
-	.BYTE $9E
-	.BYTE $CF
-	.BYTE $DA
-	.BYTE $DB
-	.BYTE $92
-	.BYTE $93
-	.BYTE $DE
-	.BYTE $DF
-	.BYTE $9A
-	.BYTE $9B
-	.BYTE $A2
-	.BYTE $A3
-	.BYTE $DA
-	.BYTE $DB
-	.BYTE $D6
-	.BYTE $D7
+LARGE_TEXT:
+; Upper Half of Large Text
+	.BYTE $00, $00
+	.BYTE $85, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $90, $91 ; 0
+	.BYTE $AE, $A8 ; 1
+	.BYTE $9C, $CD ; 2
+	.BYTE $9C, $CD ; 3
+	.BYTE $B0, $B1 ; 4
+	.BYTE $C0, $AC ; 5
+	.BYTE $D0, $9D ; 6
+	.BYTE $D4, $D5 ; 7
+	.BYTE $CC, $CD ; 8
+	.BYTE $CC, $D1 ; 9
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $90, $91 ; A
+	.BYTE $C0, $CD ; B
+	.BYTE $90, $A5 ; C
+	.BYTE $94, $91 ; D
+	.BYTE $C0, $C1 ; E
+	.BYTE $C0, $C1 ; F
+	.BYTE $90, $A5 ; G
+	.BYTE $C8, $C9 ; H
+	.BYTE $C4, $C5 ; I
+	.BYTE $00, $89 ; J
+	.BYTE $C8, $A1 ; K
+	.BYTE $84, $00 ; L
+	.BYTE $8C, $8D ; M
+	.BYTE $8C, $99 ; N
+	.BYTE $90, $91 ; O
+	.BYTE $94, $A9 ; P
+	.BYTE $90, $91 ; Q
+	.BYTE $94, $A9 ; R
+	.BYTE $CC, $9D ; S
+	.BYTE $D8, $D9 ; T
+	.BYTE $84, $85 ; U
+	.BYTE $DC, $DD ; V
+	.BYTE $98, $99 ; W
+	.BYTE $A0, $A1 ; X
+	.BYTE $A0, $A1 ; Y
+	.BYTE $D4, $D5 ; Z
+; Lower Half of Large Text
+	.BYTE $00, $00
+	.BYTE $A6, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $B4, $B5
+	.BYTE $81, $00
+	.BYTE $00, $00
+	.BYTE $92, $93 ; 0
+	.BYTE $C6, $C7 ; 1
+	.BYTE $82, $83 ; 2
+	.BYTE $9E, $CF ; 3
+	.BYTE $B2, $B3 ; 4
+	.BYTE $9F, $CF ; 5
+	.BYTE $D2, $CF ; 6
+	.BYTE $DA, $DB ; 7
+	.BYTE $CE, $CF ; 8
+	.BYTE $9E, $D3 ; 9
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $00, $00
+	.BYTE $86, $87 ; A
+	.BYTE $C2, $CF ; B
+	.BYTE $92, $A7 ; C
+	.BYTE $96, $93 ; D
+	.BYTE $C2, $C3 ; E
+	.BYTE $CA, $A4 ; F
+	.BYTE $92, $95 ; G
+	.BYTE $CA, $CB ; H
+	.BYTE $C6, $C7 ; I
+	.BYTE $8A, $8B ; J
+	.BYTE $CA, $A3 ; K
+	.BYTE $96, $AA ; L
+	.BYTE $8E, $8F ; M
+	.BYTE $8E, $9B ; N
+	.BYTE $92, $93 ; O
+	.BYTE $86, $AB ; P
+	.BYTE $92, $AD ; Q
+	.BYTE $86, $88 ; R
+	.BYTE $9E, $CF ; S
+	.BYTE $DA, $DB ; T
+	.BYTE $92, $93 ; U
+	.BYTE $DE, $DF ; V
+	.BYTE $9A, $9B ; W
+	.BYTE $A2, $A3 ; X
+	.BYTE $DA, $DB ; Y
+	.BYTE $D6, $D7 ; Z
 
 L_DA6D:
 	LDX #$39

@@ -2672,7 +2672,7 @@ L_17_9456:
 	STA TEMP3E_LO
 	LDA #>$2545
 	STA TEMP3E_HI
-;
+; Set to Store
 	LDA #<$6003
 	STA TEMP40_LO
 	LDA #>$6003
@@ -2687,17 +2687,21 @@ L_17_9456:
 	JMP do_draw_controls_thread
 
 L_17_9474:
-	LDA #$C5
-	STA $3E
-	LDA #$25
-	STA $3F
-	LDA #$03
-	STA $40
-	LDA #$60
-	STA $41
+; Store VRAM Address
+	LDA #<$25C5
+	STA TEMP3E_LO
+	LDA #>$25C5
+	STA TEMP3E_HI
+; Set to Store
+	LDA #<$6003
+	STA TEMP40_LO
+	LDA #>$6003
+	STA TEMP40_HI
+;
 	LDX #$0F
 	LDY #$0F
 	JSR L_17_94D4
+; Draw Pro Bowl Menu
 	LDA #$17
 	LDX #$0F ; BANK16
 	JMP do_draw_controls_thread

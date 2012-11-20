@@ -2667,17 +2667,21 @@ draw_main_menu:
 	JMP draw_menu_nfl_logo
 
 L_17_9456:
-	LDA #$45
-	STA $3E
-	LDA #$25
-	STA $3F
-	LDA #$03
-	STA $40
-	LDA #$60
-	STA $41
+; Store VRAM Address
+	LDA #<$2545
+	STA TEMP3E_LO
+	LDA #>$2545
+	STA TEMP3E_HI
+;
+	LDA #<$6003
+	STA TEMP40_LO
+	LDA #>$6003
+	STA TEMP40_HI
+;
 	LDX #$0F
 	LDY #$0F
 	JSR L_17_94D4
+; Draw Preseason Menu
 	LDA #$01
 	LDX #$0F ; BANK16
 	JMP do_draw_controls_thread

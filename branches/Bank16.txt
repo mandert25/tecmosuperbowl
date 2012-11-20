@@ -12,8 +12,25 @@
 	.WORD STANDINGS_MENU_SCREEN             ; 0A
 	.WORD RANKINGS_MENU_SCREEN              ; 0B
 	.WORD RANKINGS_MENU_SCREEN              ; 0C
-	.WORD $A634, $A634, $A634
-	.WORD $A634, $A6F2, PRO_BOWL_MENU_SCREEN, PRO_BOWL_MENU_SCREEN, PRO_BOWL_MENU_SCREEN, PRO_BOWL_MENU_SCREEN, PRO_BOWL_MENU_SCREEN, PRO_BOWL_MENU_SCREEN, $A8B2, $A8F1, $A95C, $AA29, $AA29, $AA29, $AB07, $AB24
+	.WORD $A634                             ; 0D
+	.WORD $A634                             ; 0E
+	.WORD $A634                             ; 0F
+	.WORD $A634                             ; 10
+	.WORD $A6F2                             ; 11
+	.WORD PRO_BOWL_MENU_SCREEN              ; 12
+	.WORD PRO_BOWL_MENU_SCREEN              ; 13
+	.WORD PRO_BOWL_MENU_SCREEN              ; 14
+	.WORD PRO_BOWL_MENU_SCREEN              ; 15
+	.WORD PRO_BOWL_MENU_SCREEN              ; 16
+	.WORD PRO_BOWL_MENU_SCREEN              ; 17
+	.WORD $A8B2                             ; 18
+	.WORD TEAM_DATA_SCREEN                  ; 19
+	.WORD $A95C                             ; 1A
+	.WORD $AA29                             ; 1B
+	.WORD $AA29                             ; 1C
+	.WORD $AA29                             ; 1D
+	.WORD $AB07                             ; 1E
+	.WORD $AB24                             ; 1F
 	.WORD $AB59, $ABDD, $AC10, $ACA6, $ACDC, $AD79, $AE00, $AE05, $AE5C, $AE78, $AFAF, $AFB5, $AFBB, $AFC1, $AFC7, $AFCD
 	.WORD $AFFD, $B004, $B12B, $B138, $B145, $B152, $B15F, $B16C, $B271, $B2C4, $B2C4, $B2CD, $B2D6, $B2E8, $B2F1, $B2FA
 	.WORD $B337, $B491, $B49B, $B4A2, $B4A2, $B4AC, $B4B3, $B4B3, $B4BD, $B4C4, $B4C5, $B4CF, $B4D6, $B4D6, $B629, $B63C
@@ -1202,18 +1219,11 @@ PRO_BOWL_MENU:
 L_16_A8B2:
 	.BYTE $CC
 	.BYTE $C8
-	.BYTE $D0
-	.BYTE $18
-	.BYTE $00
+	.BYTE $D0, $18, $00
 	.BYTE $88, $8D
 	.BYTE      "SELECT"
-	.BYTE $80, $C4
-	.BYTE $EC
-	.BYTE $A8
-	.BYTE $80
-	.BYTE $D8
-	.BYTE $EC
-	.BYTE $A8
+	.BYTE $80, $C4, <L_16_A8EC, >L_16_A8EC
+	.BYTE $80, $D8, <L_16_A8EC, >L_16_A8EC
 	.BYTE $88, $C8
 	.BYTE      "YOUR CONFERENCE"
 	.BYTE $8A, $29
@@ -1230,118 +1240,42 @@ L_16_A8B2:
 	.BYTE $06
 	.BYTE $00
 	.BYTE $FF
-	.BYTE $03
-	.BYTE $1B
-	.BYTE $1C
-	.BYTE $19
+
+L_16_A8EC:
+	.BYTE $03, $1B, $1C, $19
 	.BYTE $FF
+
+TEAM_DATA_SCREEN:
 	.BYTE $ED
 	.BYTE $CC
-	.BYTE $D0
-	.BYTE $18
-	.BYTE $7A
+	.BYTE $D0, $18, $7A
 	.BYTE $C8
-	.BYTE $88
-	.BYTE $47
-	.BYTE $19
-	.BYTE $1C
-	.BYTE $19
-	.BYTE $20
-	.BYTE $54
-	.BYTE $45
-	.BYTE $41
-	.BYTE $4D
-	.BYTE $20
-	.BYTE $44
-	.BYTE $41
-	.BYTE $54
-	.BYTE $41
-	.BYTE $20
-	.BYTE $19
-	.BYTE $1C
-	.BYTE $19
-	.BYTE $88
-	.BYTE $85
-	.BYTE $41
-	.BYTE $46
-	.BYTE $43
-	.BYTE $20
-	.BYTE $41
-	.BYTE $4C
-	.BYTE $4C
-	.BYTE $20
-	.BYTE $53
-	.BYTE $54
-	.BYTE $41
-	.BYTE $52
-	.BYTE $53
-	.BYTE $20
-	.BYTE $53
-	.BYTE $45
-	.BYTE $4C
-	.BYTE $45
-	.BYTE $43
-	.BYTE $54
-	.BYTE $20
-	.BYTE $54
-	.BYTE $45
-	.BYTE $41
-	.BYTE $4D
+	.BYTE $88, $47
+	.BYTE      $19, $1C, $19, " TEAM DATA ", $19, $1C, $19
+	.BYTE $88, $85
+	.BYTE      "AFC ALL STARS SELECT TEAM"
 	.BYTE $B1
-	.BYTE $4E
-	.BYTE $46
-	.BYTE $43
-	.BYTE $20
-	.BYTE $41
-	.BYTE $4C
-	.BYTE $4C
-	.BYTE $20
-	.BYTE $53
-	.BYTE $54
-	.BYTE $41
-	.BYTE $52
-	.BYTE $53
-	.BYTE $89
-	.BYTE $25
-	.BYTE $FD
-	.BYTE $A5
-	.BYTE $B8
-	.BYTE $89
-	.BYTE $2F
-	.BYTE $FD
-	.BYTE $B4
-	.BYTE $B8
-	.BYTE $89
-	.BYTE $39
-	.BYTE $FD
-	.BYTE $C1
-	.BYTE $B8
-	.BYTE $8A
-	.BYTE $65
-	.BYTE $FD
-	.BYTE $D1
-	.BYTE $B8
-	.BYTE $8A
-	.BYTE $6F
-	.BYTE $FD
-	.BYTE $E0
-	.BYTE $B8
-	.BYTE $8A
-	.BYTE $B9
-	.BYTE $FD
-	.BYTE $EF
-	.BYTE $B8
-	.BYTE $83
-	.BYTE $CC
-	.BYTE $56
-	.BYTE $A9
+	.BYTE      "NFC ALL STARS"
+	.BYTE $89, $25
+	.BYTE $FD, <AFC_EAST_INITIALS, >AFC_EAST_INITIALS
+	.BYTE $89, $2F
+	.BYTE $FD, <AFC_CENTRAL_INITIALS, >AFC_CENTRAL_INITIALS
+	.BYTE $89, $39
+	.BYTE $FD, <AFC_WEST_INITIALS, >AFC_WEST_INITIALS
+	.BYTE $8A, $65
+	.BYTE $FD, <NFC_EAST_INITIALS, >NFC_EAST_INITIALS
+	.BYTE $8A, $6F
+	.BYTE $FD, <NFC_CENTRAL_INITIALS, >NFC_CENTRAL_INITIALS
+	.BYTE $8A, $B9
+	.BYTE $FD, <NFC_WEST_INITIALS, >NFC_WEST_INITIALS
+	.BYTE $83, $CC, <TEAM_DATA_SCREEN_ATTRIBUTES, >TEAM_DATA_SCREEN_ATTRIBUTES
 	.BYTE $FF
-	.BYTE $04
-	.BYTE $08
-	.BYTE $0A
-	.BYTE $0A
-	.BYTE $02
+
+TEAM_DATA_SCREEN_ATTRIBUTES:
+	.BYTE $04, $08, $0A, $0A, $02
 	.BYTE $FF
+
+L_16_A95C:
 	.BYTE $ED
 	.BYTE $CA
 	.BYTE $C8

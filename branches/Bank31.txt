@@ -3439,92 +3439,102 @@ vram_transfer_finished:
 
 L_D2F1:
 	JSR vram_transfer_start
-@Loop1:
+@check:
+; Check for Buffer Ready
 	BIT $2B
-	BMI @Loop2
-	LDA $037D
-	BEQ @Loop3
-@Loop2:
+	BMI @wait
+	LDA BUFFER_SIZE
+	BEQ @ready
+@wait:
 	LDA #$01
 	JSR switch_thread
-	JMP @Loop1
-@Loop3:
+	JMP @check
+@ready:
+; Set to Not Ready
 	SEC
 	ROR $2B
+; Store Buffer Size
 	LDA #$80
-	STA $037D
+	STA BUFFER_SIZE
+;
 	LDX #$00
 @Loop4:
+; Check for End of Buffer
 	TXA
 	CLC
 	ADC #$03
 	CLC
-	ADC $66
+	ADC TEMP66
 	CMP #$3F
 	BCS @Loop5
 	TAY
-	LDA $3E
-	STA $033B,X
-	LDA $3F
-	STA $033C,X
-	LDA $66
-	STA $033A,X
-	LDA $3E
+	LDA TEMP3E_LO
+	STA BUFFER_LO,X
+	LDA TEMP3E_HI
+	STA BUFFER_HI,X
+; Store Buffer Length
+	LDA TEMP66
+	STA BUFFER_LENGTH,X
+; Update VRAM Address
+	LDA TEMP3E_LO
 	CLC
 	ADC #$20
-	STA $3E
-	LDA $3F
+	STA TEMP3E_LO
+	LDA TEMP3E_HI
 	ADC #$00
-	STA $3F
+	STA TEMP3E_HI
+;
 	TYA
 	TAX
+; Store Buffer End
 	LDA #$00
-	STA $033A,Y
-	DEC $65
+	STA BUFFER,Y
+	DEC TEMP65
 	BNE @Loop4
 @Loop5:
+; Set to Ready
 	LSR $2B
-@Loop6:
+@wait_buffer:
 	LDA #$01
 	JSR switch_thread
-	BIT $037D
-	BVC @Loop6
+	BIT BUFFER_SIZE
+	BVC @wait_buffer
 	LDX #$00
 	LDY #$00
 @Loop7:
 	LDA $033A,X
 	BEQ @Loop9
-	STA $67
-	STA ($40),Y
+	STA TEMP67
+	STA (TEMP40),Y
 	INY
 	INX
 	INX
 	INX
 @Loop8:
 	LDA $033A,X
-	STA ($40),Y
+	STA (TEMP40),Y
 	INX
 	INY
-	DEC $67
+	DEC TEMP67
 	BNE @Loop8
 	LDA #$A1
-	STA ($40),Y
+	STA (TEMP40),Y
 	INY
 	JMP @Loop7
 @Loop9:
 	TYA
 	CLC
-	ADC $40
-	STA $40
-	LDA $41
+	ADC TEMP40_LO
+	STA TEMP40_LO
+	LDA TEMP40_HI
 	ADC #$00
-	STA $41
-	LDA $65
-	BNE @Loop3
+	STA TEMP40_HI
+	LDA TEMP65
+	BNE @ready
 	LDA #$FF
 	LDY #$00
-	STA ($40),Y
-	STY $037D
+	STA (TEMP40),Y
+	STY BUFFER_SIZE
 	JMP vram_transfer_finished
 
 L_D38E:

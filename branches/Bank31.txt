@@ -242,24 +242,26 @@ NMI:
 	STA PPUADDR
 	JMP @Loop12
 @Loop8:
-	BIT $037D
+	BIT BUFFER_SIZE
 	BVS @Loop12
-	LDA $033A
+	LDA BUFFER
 	BEQ @Loop12
 	LDA #%00001000
 	STA PPUCTRL
 	LDX #$00
 @Loop9:
-	LDY $033A,X
+	LDY BUFFER_LENGTH,X
 	BEQ @Loop11
-	LDA $033C,X
+; Set to VRAM Address
+	LDA BUFFER_HI,X
 	STA PPUADDR
-	LDA $033B,X
+	LDA BUFFER_LO,X
 	STA PPUADDR
 	LDA PPUDATA
 @Loop10:
+; Store VRAM Data into Buffer
 	LDA PPUDATA
-	STA $033D,X
+	STA BUFFER_DATA,X
 	INX
 	DEY
 	BNE @Loop10
@@ -269,7 +271,7 @@ NMI:
 	BNE @Loop9
 @Loop11:
 	LDA #$C0
-	STA $037D
+	STA BUFFER_SIZE
 @Loop12:
 	LDA SOFT_PPUCTRL
 	STA PPUCTRL
@@ -3453,20 +3455,22 @@ L_D2F1:
 ; Set to Not Ready
 	SEC
 	ROR $2B
-; Store Buffer Size
+; Set to Read VRAM
 	LDA #$80
 	STA BUFFER_SIZE
-;
+; Set to store read length and address
 	LDX #$00
 @Loop4:
-; Check for End of Buffer
+; Set to next buffer
 	TXA
 	CLC
 	ADC #$03
 	CLC
 	ADC TEMP66
+; Check for End of Buffer
 	CMP #$3F
 	BCS @Loop5
+; Store VRAM Address
 	TAY
 	LDA TEMP3E_LO
 	STA BUFFER_LO,X
@@ -3494,16 +3498,18 @@ L_D2F1:
 @Loop5:
 ; Set to Ready
 	LSR $2B
-@wait_buffer:
+@read_buffer:
 	LDA #$01
 	JSR switch_thread
 	BIT BUFFER_SIZE
-	BVC @wait_buffer
+	BVC @read_buffer
 	LDX #$00
 	LDY #$00
 @Loop7:
-	LDA $033A,X
+; Check for End of Buffer
+	LDA BUFFER,X
 	BEQ @Loop9
+; Store Buffer Length
 	STA TEMP67
 	STA (TEMP40),Y
 	INY
@@ -3511,12 +3517,15 @@ L_D2F1:
 	INX
 	INX
 @Loop8:
-	LDA $033A,X
+; Store Buffer Data
+	LDA BUFFER,X
 	STA (TEMP40),Y
 	INX
 	INY
+; Check for end
 	DEC TEMP67
 	BNE @Loop8
+; Store Next Line
 	LDA #$A1
 	STA (TEMP40),Y
 	INY
@@ -3531,6 +3540,7 @@ L_D2F1:
 	STA TEMP40_HI
 	LDA TEMP65
 	BNE @ready
+; Store End
 	LDA #$FF
 	LDY #$00
 	STA (TEMP40),Y

@@ -3012,6 +3012,7 @@ L_17_9632:
 	DEY
 @Loop1:
 	STY $8F
+; Draw OF Starters Screen
 	LDA $8E
 	ASL
 	CLC
@@ -3020,7 +3021,7 @@ L_17_9632:
 	ADC #$32
 	CLC
 	ADC $8F
-	LDX #$0F
+	LDX #$0F ; BANK16
 	JSR L_C3AF
 	LDA $6E
 	CLC
@@ -3092,8 +3093,9 @@ L_17_9632:
 	LDX #$0A
 	LDY #$08
 	JSR L_17_94D4
+; Draw OF Starter Reset Menu
 	LDA #$38
-	LDX #$0F
+	LDX #$0F ; BANK16
 	JSR L_C3AF
 	LDX #$11 ; BANK18
 	JSR bank_swap_A000

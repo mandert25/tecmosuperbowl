@@ -2037,8 +2037,9 @@ L_19_9087:
 	JSR L_19_9886
 	LDA #$02
 	JSR switch_thread
+; Draw Touchback Text
 	LDA #$5C
-	LDX #$0F
+	LDX #$0F ; BANK16
 	JSR L_C3AF
 	JMP @Loop2
 @Loop1:
@@ -2499,8 +2500,9 @@ L_19_93B4:
 	JSR L_19_9332
 	LDA #$08
 	JSR switch_thread
+; Draw Recover Text
 	LDA #$5F
-	LDX #$0F
+	LDX #$0F ; BANK16
 	JSR L_C3AF
 	LDX #$13 ; BANK20
 	JSR bank_swap_A000

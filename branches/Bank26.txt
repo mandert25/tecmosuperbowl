@@ -519,6 +519,7 @@ default_nfc_starters:
 	RTS
 
 L_26_83C6:
+; Draw Team Screen
 	LDA #$1A
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -547,6 +548,7 @@ L_26_83C6:
 L_26_83FD:
 	LDA #$00
 	STA $030B
+; Draw DF Starters Screen
 	LDA #$1D
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread

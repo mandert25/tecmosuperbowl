@@ -1666,7 +1666,7 @@ L_24_8C0E: ; #$FB
 	LDA #$02
 	JMP L_24_8C48
 
-L_24_8C18:
+L_24_8C18: ; #$FC
 ; Set to New Data Address
 	LDA (TEMPC2),Y
 	TAX

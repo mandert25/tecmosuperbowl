@@ -1358,7 +1358,7 @@ L_25_8A78:
 	BCC @Loop5
 	JMP @Loop8
 @Loop5:
-; Draw OF Starters Screen
+; Draw QB Data Screen
 	LDA #$24
 	JSR L_25_8DC7
 	LDA #$86
@@ -1454,6 +1454,7 @@ L_25_8A78:
 	JSR L_25_8F82
 	JMP @Loop13
 @Loop8:
+; Draw Offensive Data Screen
 	LDA #$25
 	JSR L_25_8DC7
 	LDA #$86
@@ -1550,10 +1551,12 @@ L_25_8A78:
 	JSR L_25_8F82
 	JMP @Loop13
 @Loop9:
+; Draw Lineman Data Screen
 	LDA #$26
 	JSR L_25_8DC7
 	JMP @Loop13
 @Loop10:
+; Draw Defensive Data Screen
 	LDA #$27
 	JSR L_25_8DC7
 	LDA #$86
@@ -1592,6 +1595,7 @@ L_25_8A78:
 	JSR L_25_8F82
 	JMP @Loop13
 @Loop11:
+; Draw Kicker Data Screen
 	LDA #$28
 	JSR L_25_8DC7
 	LDA #$86
@@ -1654,6 +1658,7 @@ L_25_8A78:
 	JSR L_25_8F82
 	JMP @Loop13
 @Loop12:
+; Draw Punter Data Screen
 	LDA #$29
 	JSR L_25_8DC7
 	LDA #$86
@@ -1709,7 +1714,7 @@ L_25_8A78:
 	RTS
 
 L_25_8DC7:
-	LDX #$0F
+	LDX #$0F ; BANK16
 	JSR L_C3AF
 	LDA $9D
 	STA $44

@@ -22,8 +22,9 @@ L_20_8825:
 	LDY #<L_20_94E1
 	LDX #>L_20_94E1
 	JSR L_C481
+; Draw Play Select Screen
 	LDA #$40
-	LDX #$0F
+	LDX #$0F ; BANK16
 	JSR L_C3AF
 	LDA #$09
 	JSR L_20_9370
@@ -924,8 +925,9 @@ L_20_8F02:
 	JSR L_D2F1
 	LDA #$C0
 	STA PRG_RAM_PROTECT
+; Draw Player 1 Offensive Menu
 	LDA #$41
-	LDX #$0F
+	LDX #$0F ; BANK16
 	JSR L_C3AF
 	JSR L_20_931E
 	LDX #$1B
@@ -953,8 +955,9 @@ L_20_8F40:
 	JSR L_D2F1
 	LDA #$C0
 	STA PRG_RAM_PROTECT
+; Draw Player 1 Defensive Menu
 	LDA #$44
-	LDX #$0F
+	LDX #$0F ; BANK16
 	JSR L_C3AF
 	JSR L_20_931E
 	LDX #$1B
@@ -999,8 +1002,9 @@ L_20_8F9B:
 	STA PRG_RAM_PROTECT
 	LDA #$F0
 	STA $0200
+; Draw Player 1 Offensive Timeout Menu
 	LDA #$42
-	LDX #$0F
+	LDX #$0F ; BANK16
 	JSR L_C3AF
 	LDX #$1B
 	JSR L_CC8F
@@ -1029,8 +1033,9 @@ L_20_8FDA:
 	STA PRG_RAM_PROTECT
 	LDA #$F0
 	STA $0200
+; Draw Player 1 Defensive Timeout Menu
 	LDA #$45
-	LDX #$0F
+	LDX #$0F ; BANK16
 	JSR L_C3AF
 	LDX #$1B
 	JSR L_CC8F
@@ -1090,8 +1095,9 @@ L_20_9054:
 	JSR L_D2F1
 	LDA #$C0
 	STA PRG_RAM_PROTECT
+; Draw Player 2 Offensive Menu
 	LDA #$47
-	LDX #$0F
+	LDX #$0F ; BANK16
 	JSR L_C3AF
 	JSR L_20_9327
 	LDX #$1B
@@ -1119,8 +1125,9 @@ L_20_9092:
 	JSR L_D2F1
 	LDA #$C0
 	STA PRG_RAM_PROTECT
+; Draw Player 2 Defensive Menu
 	LDA #$4A
-	LDX #$0F
+	LDX #$0F ; BANK16
 	JSR L_C3AF
 	JSR L_20_9327
 	LDX #$1B
@@ -1165,8 +1172,9 @@ L_20_90ED:
 	STA PRG_RAM_PROTECT
 	LDA #$F0
 	STA $0204
+; Draw Player 2 Offensive Timeout Menu
 	LDA #$48
-	LDX #$0F
+	LDX #$0F ; BANK16
 	JSR L_C3AF
 	LDX #$1B
 	JSR L_CC8F
@@ -1195,8 +1203,9 @@ L_20_912C:
 	STA PRG_RAM_PROTECT
 	LDA #$F0
 	STA $0204
+; Draw Player 2 Defensive Timeout Menu
 	LDA #$4B
-	LDX #$0F
+	LDX #$0F ; BANK16
 	JSR L_C3AF
 	LDX #$1B
 	JSR L_CC8F

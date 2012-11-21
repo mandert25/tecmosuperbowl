@@ -25,7 +25,7 @@
 	.WORD PRO_BOWL_MENU_SCREEN              ; 17
 	.WORD PRO_BOWL_SELECT_SCREEN            ; 18
 	.WORD TEAM_DATA_SCREEN                  ; 19
-	.WORD $A95C                             ; 1A
+	.WORD TEAM_SCREEN                       ; 1A
 	.WORD $AA29                             ; 1B
 	.WORD $AA29                             ; 1C
 	.WORD $AA29                             ; 1D
@@ -813,212 +813,99 @@ TEAM_DATA_SCREEN_ATTRIBUTES:
 	.BYTE $04, $08, $0A, $0A, $02
 	.BYTE $FF
 
-L_16_A95C:
+TEAM_SCREEN:
 	.BYTE $ED
 	.BYTE $CA
 	.BYTE $C8
-	.BYTE $D0
-	.BYTE $18
-	.BYTE $7A
-	.BYTE $88
-	.BYTE $42
-	.BYTE $FA
-	.BYTE $08
-	.BYTE $88
-	.BYTE $57
-	.BYTE $FA
-	.BYTE $02
-	.BYTE $88
-	.BYTE $78
-	.BYTE $FA
-	.BYTE $05
-	.BYTE $88
-	.BYTE $AE
-	.BYTE $52
-	.BYTE $45
-	.BYTE $53
-	.BYTE $55
-	.BYTE $4C
-	.BYTE $54
-	.BYTE $53
-	.BYTE $20
-	.BYTE $20
-	.BYTE $57
-	.BYTE $4F
-	.BYTE $4E
-	.BYTE $98
-	.BYTE $CE
-	.BYTE $07
-	.BYTE $75
-	.BYTE $88
-	.BYTE $D6
-	.BYTE $4C
-	.BYTE $4F
-	.BYTE $53
-	.BYTE $54
+	.BYTE $D0, $18, $7A
+	.BYTE $88, $42
+	.BYTE $FA, $08
+	.BYTE $88, $57
+	.BYTE $FA, $02
+	.BYTE $88, $78
+	.BYTE $FA, $05
+	.BYTE $88, $AE
+	.BYTE      "RESULTS  WON"
+	.BYTE $98, $CE, $07, $75
+	.BYTE $88, $D6
+	.BYTE      "LOST"
 	.BYTE $B0
-	.BYTE $54
-	.BYTE $49
-	.BYTE $45
-	.BYTE $44
-	.BYTE $89
-	.BYTE $51
-	.BYTE $50
-	.BYTE $4C
-	.BYTE $41
-	.BYTE $59
-	.BYTE $45
-	.BYTE $52
-	.BYTE $53
-	.BYTE $20
-	.BYTE $44
-	.BYTE $41
-	.BYTE $54
-	.BYTE $41
+	.BYTE      "TIED"
+	.BYTE $89, $51
+	.BYTE      "PLAYERS DATA"
 	.BYTE $B0
-	.BYTE $4F
-	.BYTE $46
-	.BYTE $20
-	.BYTE $53
-	.BYTE $54
-	.BYTE $41
-	.BYTE $52
-	.BYTE $54
-	.BYTE $45
-	.BYTE $52
-	.BYTE $53
+	.BYTE      "OF STARTERS"
 	.BYTE $B0
-	.BYTE $44
-	.BYTE $46
-	.BYTE $20
-	.BYTE $53
-	.BYTE $54
-	.BYTE $41
-	.BYTE $52
-	.BYTE $54
-	.BYTE $45
-	.BYTE $52
-	.BYTE $53
+	.BYTE      "DF STARTERS"
 	.BYTE $B0
-	.BYTE $50
-	.BYTE $4C
-	.BYTE $41
-	.BYTE $59
-	.BYTE $20
-	.BYTE $42
-	.BYTE $4F
-	.BYTE $4F
-	.BYTE $4B
-	.BYTE $99
-	.BYTE $E0
-	.BYTE $20
-	.BYTE $5D
-	.BYTE $89
-	.BYTE $E2
-	.BYTE $52
-	.BYTE $4F
-	.BYTE $53
-	.BYTE $54
-	.BYTE $45
-	.BYTE $52
-	.BYTE $C0
-	.BYTE $11
-	.BYTE $80
-	.BYTE $00
-	.BYTE $8A
-	.BYTE $25
-	.BYTE $DB
-	.BYTE $00
+	.BYTE      "PLAY BOOK"
+	.BYTE $99, $E0, $20, $5D
+	.BYTE $89, $E2
+	.BYTE      "ROSTER"
+	.BYTE $C0, $11, $80, $00
+	.BYTE $8A, $25
+	.BYTE $DB, $00
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $01
+	.BYTE $DB, $01
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $02
+	.BYTE $DB, $02
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $03
+	.BYTE $DB, $03
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $04
+	.BYTE $DB, $04
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $05
+	.BYTE $DB, $05
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $06
+	.BYTE $DB, $06
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $07
+	.BYTE $DB, $07
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $08
+	.BYTE $DB, $08
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $09
+	.BYTE $DB, $09
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $0A
-	.BYTE $8A
-	.BYTE $39
-	.BYTE $DB
-	.BYTE $0B
+	.BYTE $DB, $0A
+	.BYTE $8A, $39
+	.BYTE $DB, $0B
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $0C
+	.BYTE $DB, $0C
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $0D
+	.BYTE $DB, $0D
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $0E
+	.BYTE $DB, $0E
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $0F
+	.BYTE $DB, $0F
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $10
+	.BYTE $DB, $10
 	.BYTE $B2
-	.BYTE $DB
-	.BYTE $1C
+	.BYTE $DB, $1C
 	.BYTE $B1
-	.BYTE $DB
-	.BYTE $1D
-	.BYTE $8E
-	.BYTE $2F
-	.BYTE $DB
-	.BYTE $11
+	.BYTE $DB, $1D
+	.BYTE $8E, $2F
+	.BYTE $DB, $11
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $12
+	.BYTE $DB, $12
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $13
+	.BYTE $DB, $13
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $14
+	.BYTE $DB, $14
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $15
+	.BYTE $DB, $15
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $16
+	.BYTE $DB, $16
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $17
+	.BYTE $DB, $17
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $18
+	.BYTE $DB, $18
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $19
+	.BYTE $DB, $19
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $1A
+	.BYTE $DB, $1A
 	.BYTE $B0
-	.BYTE $DB
-	.BYTE $1B
+	.BYTE $DB, $1B
 	.BYTE $FF
+
+L_16_AA29:
 	.BYTE $ED
 	.BYTE $CC
 	.BYTE $C8

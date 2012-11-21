@@ -294,6 +294,7 @@ L_17_8207:
 
 L_17_8242:
 	JSR set_palette_fade_to_in
+; Draw Team Control Screen
 	LDA #$04
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -319,9 +320,11 @@ L_17_8272:
 	JSR set_palette_fade_to_in
 	JSR clear_nametables
 	JSR clear_sprites
+; Draw Main Menu
 	LDA #$00
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
+; Draw Season Menu
 	LDA #$03
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -336,6 +339,7 @@ L_17_828F:
 	JMP @Loop23
 @Loop1:
 	JSR set_palette_fade_to_in
+; Draw Schedule Header
 	LDA #$05
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -408,6 +412,7 @@ L_17_828F:
 	LDX #$0D
 	LDY #$09
 	JSR L_17_94D4
+; Draw Schedule Menu
 	LDA #$06
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -447,6 +452,7 @@ L_17_828F:
 	LDX #$0D
 	LDY #$05
 	JSR L_17_94D4
+; Draw Auto Skip Menu
 	LDA #$09
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -532,6 +538,7 @@ L_17_828F:
 	LDX #$1C
 	LDY #$0B
 	JSR L_17_94D4
+; Draw Schedule Reset Menu
 	LDA #$07
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -566,6 +573,7 @@ L_17_828F:
 	LDX #$1C
 	LDY #$0B
 	JSR L_17_94D4
+; Draw Schedule Reset Verify Menu
 	LDA #$08
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -658,6 +666,7 @@ L_17_8507:
 	LDX #$20
 	LDY #$0C
 	JSR L_17_94D4
+; Draw Standings Menu
 	LDA #$0A
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -703,6 +712,7 @@ L_17_8507:
 	LDA #$00
 	STA $E2
 	JSR L_17_8272
+; Draw Standings Menu
 	LDA #$0A
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -769,6 +779,7 @@ L_17_85E0:
 	LDX #$11
 	LDY #$0A
 	JSR L_17_94D4
+; Draw Team Rankings Menu
 	LDA #$0C
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -794,6 +805,7 @@ L_17_85E0:
 	STA $EC
 	JSR L_17_B573
 	JSR L_17_8272
+; Draw Rankings Menu
 	LDA #$0C
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -1141,6 +1153,7 @@ L_17_88AF:
 	STA Y_MENU_OPTION
 	STA X_MENU_OPTION
 @Loop1:
+; Draw Team Data Screen
 	LDA #$19
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -1687,6 +1700,7 @@ L_17_88AF:
 	STA $E1
 	LDA #$00
 	STA $E2
+; Draw Pro Bowl Team Header
 	LDA #$22
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -1752,6 +1766,7 @@ L_17_88AF:
 L_17_8D62:
 	LDA $6E
 	STA $6C
+; Draw Pro Bowl Team Screen
 	LDA #$21
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -1787,6 +1802,7 @@ L_17_8D9A:
 	STA $6F
 	JSR L_17_8F7C
 	STA $6E
+; Draw Pro Bowl Change Players Header
 	LDA #$23
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -2111,6 +2127,7 @@ L_17_8FD0:
 	STA $E1
 	STA $E2
 @Loop1:
+; Draw Team Data Playbook Screen
 	LDA #$1E
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -2216,6 +2233,7 @@ L_17_8FD0:
 	LDY #<L_17_BB8A
 	LDX #>L_17_BB8A
 	JSR L_C481
+; Draw Team Data Playbook Run Change
 	LDA #$1F
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -2244,6 +2262,7 @@ L_17_8FD0:
 	LDY #<L_17_BB94
 	LDX #>L_17_BB94
 	JSR L_C481
+; Draw Team Data Playbook Pass Change
 	LDA #$20
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -4401,6 +4420,7 @@ L_17_A053:
 	CMP #$11
 	BCC @Loop6
 	JSR L_17_B489
+; Draw Playoff Bracket
 	LDA #$11
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -5139,6 +5159,7 @@ L_17_A4B4:
 	JSR L_17_A64A
 	LDA #$05
 	JSR L_17_A64A
+; Draw Playoff Bracket
 	LDA #$11
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -5837,6 +5858,7 @@ L_17_AB1F:
 L_17_AB44:
 	LDA #$0F
 	STA $4B
+; Draw Preseason Select Screen
 	LDA #$02
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -5924,6 +5946,7 @@ L_17_ABC9:
 @Loop5:	.WORD $2269, $2274
 
 L_17_ABF7:
+; Draw Pro Bowl Select Screen
 	LDA #$18
 	LDX #$0F ; BANK16
 	JMP do_draw_controls_thread
@@ -6924,6 +6947,7 @@ L_17_B34C:
 	LDA $6758
 	CMP #$11
 	BCS @Loop1
+; Draw Playoff Bracket (Non-Playoff)
 	LDA #$10
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -6932,6 +6956,7 @@ L_17_B34C:
 	JSR new_palette_no_fade
 	JMP @Loop2
 @Loop1:
+; Draw Playoff Bracket
 	LDA #$11
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
@@ -7248,6 +7273,7 @@ L_17_B573:
 	STA $8E
 	CLC
 	ADC #$3A
+; Draw Playoff Bracket (Non-Playoff)
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
 	LDY #$FC

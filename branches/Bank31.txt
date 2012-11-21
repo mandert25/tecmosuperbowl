@@ -503,15 +503,18 @@ do_draw_controls_thread:
 	RTS
 
 L_C3AF:
-	STA $C2
-	STX $C3
+	STA TEMPC2
+	STX TEMPC3
+; Store 8000 Bank and Swap
 	LDA BANK_8000
 	PHA
 	LDX #$17 ; BANK24
 	JSR bank_swap_8000
-	LDA $C2
-	LDX $C3
+; Draw Controls
+	LDA TEMPC2
+	LDX TEMPC3
 	JSR L_24_8000
+; Return 8000 Bank
 	PLA
 	TAX
 	JMP bank_swap_8000

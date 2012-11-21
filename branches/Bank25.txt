@@ -1358,6 +1358,7 @@ L_25_8A78:
 	BCC @Loop5
 	JMP @Loop8
 @Loop5:
+; Draw OF Starters Screen
 	LDA #$24
 	JSR L_25_8DC7
 	LDA #$86

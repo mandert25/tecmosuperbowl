@@ -3674,38 +3674,42 @@ L_D44A:
 	JMP bank_swap_8000
 
 L_D47C:
-	STA $3F
-	STX $3E
-	LDA $2E
-	STA $43
+; Store Team and Player
+	STA TEMP3F
+	STX TEMP3E
+; Store 8000 Bank and Swap
+	LDA BANK_8000
+	STA TEMP43
 	LDX #$00 ; BANK1
 	JSR bank_swap_8000
 	LDX #$01 ; BANK2
 	JSR bank_swap_A000
-	LDX $3E
-	LDA $3F
+; Get Team Address
+	LDX TEMP3E
+	LDA TEMP3F
 	ASL
 	TAY
-	LDA PLAYER_NAME_LIST,Y
-	STA $3E
+	LDA PLAYER_NAME_LIST+0,Y
+	STA TEMP3E_LO
 	LDA PLAYER_NAME_LIST+1,Y
-	STA $3F
+	STA TEMP3E_HI
+; Get Player Address and Length
 	TXA
 	ASL
 	TAY
-	LDA ($3E),Y
+	LDA (TEMP3E),Y
 	TAX
 	INY
-	LDA ($3E),Y
+	LDA (TEMP3E),Y
 	PHA
 	INY
-	LDA ($3E),Y
-	STX $3E
+	LDA (TEMP3E),Y
+	STX TEMP3E_LO
 	SEC
-	SBC $3E
+	SBC TEMP3E_LO
 	TAY
 	PLA
-	STA $3F
+	STA TEMP3E_HI
 	DEY
 	TYA
 	RTS
@@ -3736,48 +3740,63 @@ L_D4D4:
 	LDY #$01
 	STX $037F
 @Loop1:
-	LDA ($3E),Y
+	LDA (TEMP3E),Y
+; Check for Space
 	CMP #$20
 	BEQ @Loop4
+; Check for Period
 	CMP #$2E
 	BEQ @Loop3
+; Check for small letter
 	CMP #$61
 	BCS @Loop2
+; Check for end of first name
 	BIT $037F
 	BMI @Loop2
+; Store Space Between First and Last Name
 	LDA #$20
 	STA $0380,X
 	INX
+; Set end of first name
 	LDA #$FF
 	STA $037F
 @Loop2:
-	LDA ($3E),Y
+; Change to Capital letter
+	LDA (TEMP3E),Y
 	AND #$DF
 	JMP @Loop4
 @Loop3:
 	LDA #$FF
 	STA $037F
-	LDA ($3E),Y
+	LDA (TEMP3E),Y
 @Loop4:
 	STA $0380,X
 	INY
 	INX
-	DEC $42
+; Check for End
+	DEC TEMP42
 	BNE @Loop1
+; Store End of Name
 	LDA #$FF
 	STA $0380,X
+; Store Name Length
 	STX $037F
 	RTS
 
 L_D519:
 	JSR L_D47C
-	STA $42
+; Store Player Name Length
+	STA TEMP42
+; Store Player Number
 	LDY #$00
-	LDA ($3E),Y
-	STA $45
+	LDA (TEMP3E),Y
+	STA TEMP45
+;
 	JSR L_D53E
+; Store Player Name
 	JSR L_D4D4
-	LDX $43
+; Return to 8000 Bank
+	LDX TEMP43
 	JMP bank_swap_8000
 
 L_D52F:

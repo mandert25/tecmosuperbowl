@@ -1172,9 +1172,9 @@ L_16_ACDC:
 	.BYTE $89, $35
 	.BYTE      "RUSHING"
 	.BYTE $99, $55, $07, $C7
-	.BYTE $81, $61, <$60, >$AF
+	.BYTE $81, $61, <ATT._TEXT, >ATT._TEXT
 	.BYTE $81, $69, <$65, >$AF
-	.BYTE $81, $75, <$60, >$AF
+	.BYTE $81, $75, <ATT._TEXT, >ATT._TEXT
 	.BYTE $81, $81, <$6A, >$AF
 	.BYTE $81, $89, <$6F, >$AF
 	.BYTE $81, $95, <$65, >$AF
@@ -1216,7 +1216,7 @@ L_16_AD79:
 	.BYTE $99, $49, $07, $C7
 	.BYTE $99, $53, $02, $C7
 	.BYTE $99, $5A, $02, $C7
-	.BYTE $81, $61, <$60, >$AF
+	.BYTE $81, $61, <ATT._TEXT, >ATT._TEXT
 	.BYTE $81, $6A, <$92, >$AF
 	.BYTE $81, $72, <$92, >$AF
 	.BYTE $81, $79, <$92, >$AF
@@ -1348,7 +1348,7 @@ L_16_AF3E:
 	.BYTE $05, $00, $01, $01, $01, $01
 	.BYTE $FF
 
-L_16_AF60:
+ATT._TEXT:
 	.BYTE $03, $C8, $C9, $CA
 	.BYTE $FF
 

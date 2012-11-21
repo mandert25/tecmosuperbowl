@@ -1350,8 +1350,9 @@ L_23_926A:
 	JSR L_23_9465
 	LDA #$08
 	JSR switch_thread
+; Draw Recover Text
 	LDA #$5F
-	LDX #$0F
+	LDX #$0F ; BANK16
 	JSR L_C3AF
 	LDA #$1E
 	JSR switch_thread
@@ -1386,8 +1387,9 @@ L_23_92BC:
 	JSR L_23_9465
 	LDA #$08
 	JSR switch_thread
+; Draw Recover Text
 	LDA #$5F
-	LDX #$0F
+	LDX #$0F ; BANK16
 	JSR L_C3AF
 	LDA #$1E
 	JSR switch_thread
@@ -1444,8 +1446,9 @@ L_23_9328:
 
 L_23_9335:
 	JSR L_23_9460
+; Draw Clock Background
 	LDA #$4E
-	LDX #$0F
+	LDX #$0F ; BANK16
 	JSR L_C3AF
 	JSR L_23_94D5
 	JSR L_C51C
@@ -1494,8 +1497,9 @@ L_23_9386:
 	JMP L_23_9414
 
 L_23_9393:
+; Draw Clock Background
 	LDA #$4E
-	LDX #$0F
+	LDX #$0F ; BANK16
 	JSR L_C3AF
 	JSR L_23_94D5
 	JSR L_C51C

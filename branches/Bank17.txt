@@ -6395,6 +6395,7 @@ L_17_AF18:
 	ADC $E2
 L_17_AF2A:
 	STA $45
+; Draw Division Standings Screen
 	CLC
 	ADC #$2A
 	LDX #$0F ; BANK16
@@ -6472,6 +6473,7 @@ L_17_AF2A:
 	JSR L_17_A81E
 	LDA #$01
 	JSR switch_thread
+; Draw Standings
 	LDA $90
 	CLC
 	ADC #$2C
@@ -7275,7 +7277,7 @@ L_17_B573:
 	STA $8E
 	CLC
 	ADC #$3A
-; Draw Playoff Bracket (Non-Playoff)
+; Draw Team Rankings Screen
 	LDX #$0F ; BANK16
 	JSR do_draw_controls_thread
 	LDY #$FC

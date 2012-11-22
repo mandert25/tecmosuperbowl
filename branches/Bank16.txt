@@ -66,7 +66,7 @@
 	.WORD P2_DEFENSIVE_TIMEOUT_MENU_SCREEN  ; 4B
 	.WORD OFFENSIVE_MENU                    ; 4C
 	.WORD OFFENSIVE_MENU                    ; 4D
-	.WORD $B629                             ; 4E
+	.WORD CLOCK_SCREEN                      ; 4E
 	.WORD $B63C                             ; 4F
 	.WORD $B653, $B665, $B672, $B680, $B692, $B69F, $B6B5, $B6F2, $B72F, $B73F, $B750, $B75D
 	.WORD TOUCHBACK_SCREEN                  ; 5C
@@ -2381,333 +2381,105 @@ DEFENSIVE_TIMEOUT_MENU:
 	.BYTE $01, $0B
 	.BYTE $FF
 
-L_16_B629:
-	.BYTE $88
-	.BYTE $4C
-	.BYTE $3C
-	.BYTE $00
-	.BYTE $00
-	.BYTE $3A
-	.BYTE $00
-	.BYTE $00
-	.BYTE $3D
-	.BYTE $88
-	.BYTE $6C
-	.BYTE $3E
-	.BYTE $00
-	.BYTE $00
-	.BYTE $3B
-	.BYTE $00
-	.BYTE $00
-	.BYTE $3F
+CLOCK_SCREEN:
+	.BYTE $88, $4C
+	.BYTE $3C, $00, $00, $3A, $00, $00, $3D
+	.BYTE $88, $6C
+	.BYTE $3E, $00, $00, $3B, $00, $00, $3F
 	.BYTE $FF
+
+L_16_B63C:
 	.BYTE $E2
-	.BYTE $8C
-	.BYTE $47
-	.BYTE $18
-	.BYTE $8C
-	.BYTE $57
-	.BYTE $18
-	.BYTE $8C
-	.BYTE $67
-	.BYTE $1A
-	.BYTE $8C
-	.BYTE $6E
-	.BYTE $44
-	.BYTE $4F
-	.BYTE $57
-	.BYTE $4E
-	.BYTE $8C
-	.BYTE $73
+	.BYTE $8C, $47
+	.BYTE      $18
+	.BYTE $8C, $57
+	.BYTE      $18
+	.BYTE $8C, $67
+	.BYTE      $1A
+	.BYTE $8C, $6E
+	.BYTE      "DOWN"
+	.BYTE $8C, $73
 	.BYTE $D3
-	.BYTE $8C
-	.BYTE $77
-	.BYTE $1A
+	.BYTE $8C, $77
+	.BYTE      $1A
 	.BYTE $FF
+   
+L_16_B653:
 	.BYTE $E2
-	.BYTE $8C
-	.BYTE $49
-	.BYTE $16
-	.BYTE $16
-	.BYTE $16
-	.BYTE $20
-	.BYTE $46
-	.BYTE $55
-	.BYTE $4D
-	.BYTE $42
-	.BYTE $4C
-	.BYTE $45
-	.BYTE $20
-	.BYTE $17
-	.BYTE $17
-	.BYTE $17
+	.BYTE $8C, $49
+	.BYTE      $16, $16, $16, " FUMBLE ", $17, $17, $17
 	.BYTE $FF
+
+L_16_B665:
 	.BYTE $E2
-	.BYTE $8C
-	.BYTE $4B
-	.BYTE $50
-	.BYTE $55
-	.BYTE $4E
-	.BYTE $54
-	.BYTE $20
-	.BYTE $4B
-	.BYTE $49
-	.BYTE $43
-	.BYTE $4B
+	.BYTE $8C, $4B
+	.BYTE      "PUNT KICK"
 	.BYTE $FF
+
+L_16_B672:
 	.BYTE $E2
-	.BYTE $8C
-	.BYTE $4B
-	.BYTE $46
-	.BYTE $49
-	.BYTE $45
-	.BYTE $4C
-	.BYTE $44
-	.BYTE $20
-	.BYTE $47
-	.BYTE $4F
-	.BYTE $41
-	.BYTE $4C
+	.BYTE $8C, $4B
+	.BYTE      "FIELD GOAL"
 	.BYTE $FF
+
+L_16_B680:
 	.BYTE $E2
-	.BYTE $8C
-	.BYTE $49
-	.BYTE $53
-	.BYTE $55
-	.BYTE $43
-	.BYTE $43
-	.BYTE $45
-	.BYTE $53
-	.BYTE $53
-	.BYTE $46
-	.BYTE $55
-	.BYTE $4C
-	.BYTE $20
-	.BYTE $54
-	.BYTE $52
-	.BYTE $59
+	.BYTE $8C, $49
+	.BYTE      "SUCCESSFUL TRY"
 	.BYTE $FF
+
+L_16_B692:
 	.BYTE $E2
-	.BYTE $8C
-	.BYTE $4C
-	.BYTE $4E
-	.BYTE $4F
-	.BYTE $20
-	.BYTE $47
-	.BYTE $4F
-	.BYTE $4F
-	.BYTE $44
-	.BYTE $20
-	.BYTE $21
+	.BYTE $8C, $4C
+	.BYTE      "NO GOOD !"
 	.BYTE $FF
+
+L_16_B69F:
 	.BYTE $E2
-	.BYTE $8C
-	.BYTE $47
-	.BYTE $19
-	.BYTE $1C
-	.BYTE $1B
-	.BYTE $00
-	.BYTE $1D
-	.BYTE $1E
-	.BYTE $1F
-	.BYTE $5E
-	.BYTE $22
-	.BYTE $00
-	.BYTE $23
-	.BYTE $24
-	.BYTE $25
-	.BYTE $26
-	.BYTE $00
-	.BYTE $19
-	.BYTE $1C
-	.BYTE $1B
+	.BYTE $8C, $47
+	.BYTE      $19, $1C, $1B, $00, $1D, $1E, $1F, $5E, $22, $00, $23, $24, $25, $26, $00, $19, $1C, $1B
 	.BYTE $FF
+
+L_16_B6B5:
 	.BYTE $E2
-	.BYTE $8C
-	.BYTE $43
-	.BYTE $19
-	.BYTE $1C
-	.BYTE $1B
-	.BYTE $19
-	.BYTE $1C
-	.BYTE $1B
-	.BYTE $20
-	.BYTE $53
-	.BYTE $49
-	.BYTE $44
-	.BYTE $45
-	.BYTE $20
-	.BYTE $43
-	.BYTE $48
-	.BYTE $41
-	.BYTE $4E
-	.BYTE $47
-	.BYTE $45
-	.BYTE $20
-	.BYTE $19
-	.BYTE $1C
-	.BYTE $1B
-	.BYTE $19
-	.BYTE $1C
-	.BYTE $1B
-	.BYTE $8C
-	.BYTE $61
-	.BYTE $4E
-	.BYTE $45
-	.BYTE $58
-	.BYTE $54
-	.BYTE $20
-	.BYTE $4F
-	.BYTE $46
-	.BYTE $46
-	.BYTE $45
-	.BYTE $4E
-	.BYTE $53
-	.BYTE $45
-	.BYTE $20
-	.BYTE $20
-	.BYTE $20
-	.BYTE $20
-	.BYTE $20
-	.BYTE $20
-	.BYTE $4E
-	.BYTE $45
-	.BYTE $58
-	.BYTE $54
-	.BYTE $20
-	.BYTE $44
-	.BYTE $45
-	.BYTE $46
-	.BYTE $45
-	.BYTE $4E
-	.BYTE $53
-	.BYTE $45
+	.BYTE $8C, $43
+	.BYTE      $19, $1C, $1B, $19, $1C, $1B, " SIDE CHANGE ", $19, $1C, $1B, $19, $1C, $1B
+	.BYTE $8C, $61
+	.BYTE      "NEXT OFFENSE      NEXT DEFENSE"
 	.BYTE $FF
+
+L_16_B6F2:
 	.BYTE $E2
-	.BYTE $8C
-	.BYTE $43
-	.BYTE $19
-	.BYTE $1C
-	.BYTE $1B
-	.BYTE $19
-	.BYTE $1C
-	.BYTE $1B
-	.BYTE $20
-	.BYTE $53
-	.BYTE $49
-	.BYTE $44
-	.BYTE $45
-	.BYTE $20
-	.BYTE $43
-	.BYTE $48
-	.BYTE $41
-	.BYTE $4E
-	.BYTE $47
-	.BYTE $45
-	.BYTE $20
-	.BYTE $19
-	.BYTE $1C
-	.BYTE $1B
-	.BYTE $19
-	.BYTE $1C
-	.BYTE $1B
-	.BYTE $8C
-	.BYTE $61
-	.BYTE $4E
-	.BYTE $45
-	.BYTE $58
-	.BYTE $54
-	.BYTE $20
-	.BYTE $44
-	.BYTE $45
-	.BYTE $46
-	.BYTE $45
-	.BYTE $4E
-	.BYTE $53
-	.BYTE $45
-	.BYTE $20
-	.BYTE $20
-	.BYTE $20
-	.BYTE $20
-	.BYTE $20
-	.BYTE $20
-	.BYTE $4E
-	.BYTE $45
-	.BYTE $58
-	.BYTE $54
-	.BYTE $20
-	.BYTE $4F
-	.BYTE $46
-	.BYTE $46
-	.BYTE $45
-	.BYTE $4E
-	.BYTE $53
-	.BYTE $45
+	.BYTE $8C, $43
+	.BYTE      $19, $1C, $1B, $19, $1C, $1B, " SIDE CHANGE ", $19, $1C, $1B, $19, $1C, $1B
+	.BYTE $8C, $61
+	.BYTE      " NEXT DEFENSE      NEXT OFFENSE"
 	.BYTE $FF
+
+L_16_B72F:
 	.BYTE $E2
 	.BYTE $F6
-	.BYTE $8C
-	.BYTE $44
-	.BYTE $54
-	.BYTE $4F
-	.BYTE $55
-	.BYTE $43
-	.BYTE $48
-	.BYTE $44
-	.BYTE $4F
-	.BYTE $57
-	.BYTE $4E
-	.BYTE $20
-	.BYTE $21
+	.BYTE $8C, $44
+	.BYTE      "TOUCHDOWN !"
 	.BYTE $FF
+
+L_16_B73F:
 	.BYTE $E2
-	.BYTE $8C
-	.BYTE $49
-	.BYTE $54
-	.BYTE $52
-	.BYTE $59
-	.BYTE $20
-	.BYTE $46
-	.BYTE $4F
-	.BYTE $52
-	.BYTE $20
-	.BYTE $50
-	.BYTE $4F
-	.BYTE $49
-	.BYTE $4E
-	.BYTE $54
+	.BYTE $8C, $49
+	.BYTE      "TRY FOR POINT"
 	.BYTE $FF
+
+L_16_B750:
 	.BYTE $E2
 	.BYTE $F6
-	.BYTE $8C
-	.BYTE $48
-	.BYTE $53
-	.BYTE $41
-	.BYTE $46
-	.BYTE $45
-	.BYTE $54
-	.BYTE $59
-	.BYTE $20
-	.BYTE $21
+	.BYTE $8C, $48
+	.BYTE      "SAFETY !"
 	.BYTE $FF
+
+L_16_B75D:
 	.BYTE $E2
-	.BYTE $8C
-	.BYTE $49
-	.BYTE $49
-	.BYTE $4E
-	.BYTE $43
-	.BYTE $4F
-	.BYTE $4D
-	.BYTE $50
-	.BYTE $4C
-	.BYTE $45
-	.BYTE $54
-	.BYTE $45
-	.BYTE $20
-	.BYTE $50
-	.BYTE $41
-	.BYTE $53
-	.BYTE $53
+	.BYTE $8C, $49
+	.BYTE      "INCOMPLETE PASS"
 	.BYTE $FF
 
 TOUCHBACK_SCREEN:
@@ -2736,245 +2508,86 @@ RECOVER_SCREEN:
 
 L_16_B7AE:
 	.BYTE $E2
-	.BYTE $8C
-	.BYTE $4B
-	.BYTE $51
-	.BYTE $42
-	.BYTE $20
-	.BYTE $53
-	.BYTE $41
-	.BYTE $43
-	.BYTE $4B
-	.BYTE $20
-	.BYTE $21
+	.BYTE $8C, $4B
+	.BYTE      "QB SACK !"
 	.BYTE $FF
+
+L_16_B7BB:
 	.BYTE $E2
-	.BYTE $8C
-	.BYTE $47
-	.BYTE $16
-	.BYTE $16
-	.BYTE $16
-	.BYTE $20
-	.BYTE $4B
-	.BYTE $49
-	.BYTE $43
-	.BYTE $4B
-	.BYTE $20
-	.BYTE $42
-	.BYTE $4C
-	.BYTE $4F
-	.BYTE $43
-	.BYTE $4B
-	.BYTE $20
-	.BYTE $17
-	.BYTE $17
-	.BYTE $17
+	.BYTE $8C, $47
+	.BYTE      $16, $16, $16, " KICK BLOCK ", $17, $17, $17
 	.BYTE $FF
+
+L_16_B7D1:
 	.BYTE $E2
-	.BYTE $8C
-	.BYTE $46
-	.BYTE $16
-	.BYTE $16
-	.BYTE $16
-	.BYTE $20
-	.BYTE $42
-	.BYTE $4C
-	.BYTE $4F
-	.BYTE $43
-	.BYTE $4B
-	.BYTE $45
-	.BYTE $44
-	.BYTE $20
-	.BYTE $50
-	.BYTE $55
-	.BYTE $4E
-	.BYTE $54
-	.BYTE $20
-	.BYTE $17
-	.BYTE $17
-	.BYTE $17
+	.BYTE $8C, $46
+	.BYTE      $16, $16, $16, " BLOCKED PUNT ", $17, $17, $17
 	.BYTE $FF
+
+L_16_B7E9:
 	.BYTE $E2
-	.BYTE $8C
-	.BYTE $47
-	.BYTE $16
-	.BYTE $16
-	.BYTE $16
-	.BYTE $20
-	.BYTE $50
-	.BYTE $41
-	.BYTE $53
-	.BYTE $53
-	.BYTE $20
-	.BYTE $42
-	.BYTE $4C
-	.BYTE $4F
-	.BYTE $43
-	.BYTE $4B
-	.BYTE $20
-	.BYTE $17
-	.BYTE $17
-	.BYTE $17
+	.BYTE $8C, $47
+	.BYTE      $16, $16, $16, " PASS BLOCK ", $17, $17, $17
 	.BYTE $FF
+
+L_16_B7FF:
 	.BYTE $E2
-	.BYTE $8C
-	.BYTE $46
-	.BYTE $16
-	.BYTE $16
-	.BYTE $16
-	.BYTE $20
-	.BYTE $4F
-	.BYTE $4E
-	.BYTE $53
-	.BYTE $49
-	.BYTE $44
-	.BYTE $45
-	.BYTE $20
-	.BYTE $4B
-	.BYTE $49
-	.BYTE $43
-	.BYTE $4B
-	.BYTE $20
-	.BYTE $17
-	.BYTE $17
-	.BYTE $17
+	.BYTE $8C, $46
+	.BYTE      $16, $16, $16, " ONSIDE KICK ", $17, $17, $17
 	.BYTE $FF
+
+L_16_B816:
 	.BYTE $E2
-	.BYTE $8C
-	.BYTE $4B
-	.BYTE $50
-	.BYTE $45
-	.BYTE $4E
-	.BYTE $41
-	.BYTE $4C
-	.BYTE $54
-	.BYTE $59
-	.BYTE $20
-	.BYTE $21
+	.BYTE $8C, $4B
+	.BYTE      "PENALTY !"
 	.BYTE $FF
+
+L_16_B823:
 	.BYTE $E2
-	.BYTE $8C
-	.BYTE $49
-	.BYTE $4F
-	.BYTE $55
-	.BYTE $54
-	.BYTE $20
-	.BYTE $4F
-	.BYTE $46
-	.BYTE $20
-	.BYTE $42
-	.BYTE $4F
-	.BYTE $55
-	.BYTE $4E
-	.BYTE $44
-	.BYTE $53
+	.BYTE $8C, $49
+	.BYTE      "OUT OF BOUNDS"
 	.BYTE $FF
-	.BYTE $A0
-	.BYTE $40
-	.BYTE $02
-	.BYTE $20
-	.BYTE $00
-	.BYTE $88
-	.BYTE $49
-	.BYTE $4F
-	.BYTE $55
-	.BYTE $54
-	.BYTE $20
-	.BYTE $4F
-	.BYTE $46
-	.BYTE $20
-	.BYTE $42
-	.BYTE $4F
-	.BYTE $55
-	.BYTE $4E
-	.BYTE $44
-	.BYTE $53
+
+L_16_B834:
+	.BYTE $A0, $40, $02, $20, $00
+	.BYTE $88, $49
+	.BYTE      "OUT OF BOUNDS"
 	.BYTE $FF
+
+L_16_B849:
 	.BYTE $CC
-	.BYTE $D0
-	.BYTE $20
-	.BYTE $1A
+	.BYTE $D0, $20, $1A
 	.BYTE $F6
-	.BYTE $89
-	.BYTE $A6
-	.BYTE $50
-	.BYTE $52
-	.BYTE $45
-	.BYTE $53
-	.BYTE $45
-	.BYTE $41
-	.BYTE $53
-	.BYTE $4F
-	.BYTE $4E
+	.BYTE $89, $A6
+	.BYTE      "PRESEASON"
 	.BYTE $FF
+
+L_16_B85A:
 	.BYTE $CC
-	.BYTE $D0
-	.BYTE $20
-	.BYTE $1A
+	.BYTE $D0, $20, $1A
 	.BYTE $F6
-	.BYTE $89
-	.BYTE $A2
-	.BYTE $52
-	.BYTE $45
-	.BYTE $47
-	.BYTE $55
-	.BYTE $4C
-	.BYTE $41
-	.BYTE $52
-	.BYTE $20
-	.BYTE $53
-	.BYTE $45
-	.BYTE $41
-	.BYTE $53
-	.BYTE $4F
-	.BYTE $4E
+	.BYTE $89, $A2
+	.BYTE      "REGULAR SEASON"
 	.BYTE $FF
+
+L_16_B870:
 	.BYTE $CC
-	.BYTE $D0
-	.BYTE $20
-	.BYTE $1A
+	.BYTE $D0, $20, $1A
 	.BYTE $F6
-	.BYTE $89
-	.BYTE $A8
-	.BYTE $50
-	.BYTE $52
-	.BYTE $4F
-	.BYTE $20
-	.BYTE $42
-	.BYTE $4F
-	.BYTE $57
-	.BYTE $4C
+	.BYTE $89, $A8
+	.BYTE      "PRO BOWL"
 	.BYTE $FF
+
+L_16_B880:
 	.BYTE $CC
-	.BYTE $D0
-	.BYTE $20
-	.BYTE $1A
-	.BYTE $FB
-	.BYTE $1E
-	.BYTE $F3
-	.BYTE $32
+	.BYTE $D0, $20, $1A
+	.BYTE $FB, $1E
+	.BYTE $F3, $32
 	.BYTE $F6
-	.BYTE $89
-	.BYTE $6C
-	.BYTE $31
-	.BYTE $39
-	.BYTE $39
-	.BYTE $31
-	.BYTE $89
-	.BYTE $C3
-	.BYTE $4E
-	.BYTE $46
-	.BYTE $4C
-	.BYTE $20
-	.BYTE $53
-	.BYTE $54
-	.BYTE $41
-	.BYTE $4E
-	.BYTE $44
-	.BYTE $49
-	.BYTE $4E
-	.BYTE $47
-	.BYTE $53
+	.BYTE $89, $6C
+	.BYTE      "1991"
+	.BYTE $89, $C3
+	.BYTE      "NFL STANDINGS"
 	.BYTE $E5
 	.BYTE $00
 	.BYTE $00

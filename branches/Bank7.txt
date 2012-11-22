@@ -13,621 +13,264 @@ L_07_A0F0:
 	.BYTE $F1
 	.BYTE $F7, $25
 	.BYTE $F9, $01, $C2
-	.BYTE $FB, $1E, $E5, $1A, $4A, $FB, $B4
+	.BYTE $FB, $1E
+	.BYTE $E5, $1A, $4A
+	.BYTE $FB, $B4
 	.BYTE $E8
-	.BYTE $FB
-	.BYTE $3C
-	.BYTE $F7
-	.BYTE $13
-	.BYTE $F9
-	.BYTE $01
-	.BYTE $12
-	.BYTE $E5
-	.BYTE $0E
-	.BYTE $01
-	.BYTE $FB
-	.BYTE $B4
+	.BYTE $FB, $3C
+	.BYTE $F7, $13
+	.BYTE $F9, $01, $12
+	.BYTE $E5, $0E, $01
+	.BYTE $FB, $B4
 	.BYTE $E8
 	.BYTE $CC
-	.BYTE $FB
-	.BYTE $3C
-	.BYTE $F7
-	.BYTE $12
-	.BYTE $F9
-	.BYTE $01
-	.BYTE $7F
+	.BYTE $FB, $3C
+	.BYTE $F7, $12
+	.BYTE $F9, $01, $7F
 	.BYTE $F5
-	.BYTE $89
-	.BYTE $AD
-	.BYTE $40
-	.BYTE " 1991"
-	.BYTE $89
-	.BYTE $E3
-	.BYTE " NATIONAL FOOTBALL LEAGUE"
+	.BYTE $89, $AD
+	.BYTE      $40, " 1991"
+	.BYTE $89, $E3
+	.BYTE      " NATIONAL FOOTBALL LEAGUE"
 	.BYTE $B1
-	.BYTE "   PLAYERS ASSOCIATION"
+	.BYTE      "   PLAYERS ASSOCIATION"
 	.BYTE $B2
-	.BYTE "OFFICIALLY LICENSED PRODUCT"
+	.BYTE      "OFFICIALLY LICENSED PRODUCT"
 	.BYTE $B1
-	.BYTE " OF THE NATIONAL FOOTBALL"
+	.BYTE      " OF THE NATIONAL FOOTBALL"
 	.BYTE $B1
-	.BYTE "LEAGUE PLAYERS ASSOCIATION"
-	.BYTE $E5
-	.BYTE $0E
-	.BYTE $00
-	.BYTE $FB
-	.BYTE $B4
+	.BYTE      "LEAGUE PLAYERS ASSOCIATION"
+	.BYTE $E5, $0E, $00
+	.BYTE $FB, $B4
 	.BYTE $E8
-	.BYTE $FB
-	.BYTE $3C
-	.BYTE $F7
-	.BYTE $0F
-	.BYTE $F8
-	.BYTE $10
-	.BYTE $C0
-	.BYTE $41
-	.BYTE $EF
-	.BYTE $40
-	.BYTE $29
-	.BYTE $78
-	.BYTE $00
-	.BYTE $83
-	.BYTE $80
-	.BYTE $1C
-	.BYTE $A4
-	.BYTE $83
-	.BYTE $F8
-	.BYTE $60
-	.BYTE $A4
-	.BYTE $F9
-	.BYTE $03
-	.BYTE $24
-	.BYTE $25
-	.BYTE $26
-	.BYTE $E5
-	.BYTE $0C
-	.BYTE $3C
-	.BYTE $F3
-	.BYTE $3A
-	.BYTE $FB
-	.BYTE $3C
-	.BYTE $C3
-	.BYTE $F8
-	.BYTE $00
-	.BYTE $13
-	.BYTE $FB
-	.BYTE $8F
-	.BYTE $F3
-	.BYTE $1C
-	.BYTE $C0
-	.BYTE $51
-	.BYTE $F0
-	.BYTE $50
-	.BYTE $FB
-	.BYTE $B4
-	.BYTE $FB
-	.BYTE $B4
+	.BYTE $FB, $3C
+	.BYTE $F7, $0F
+	.BYTE $F8, $10
+	.BYTE $C0, $41, $EF, $40, $29, $78, $00
+	.BYTE $83, $80, <L_7_A41C, >L_7_A41C
+	.BYTE $83, $F8, <L_7_A460, >L_7_A460
+	.BYTE $F9, $03, $24, $25, $26
+	.BYTE $E5, $0C, $3C
+	.BYTE $F3, $3A
+	.BYTE $FB, $3C
+	.BYTE $C3, $F8, $00, $13
+	.BYTE $FB, $8F
+	.BYTE $F3, $1C
+	.BYTE $C0, $51, $F0, $50
+	.BYTE $FB, $B4
+	.BYTE $FB, $B4
 	.BYTE $E8
 	.BYTE $CC
 	.BYTE $C1
 	.BYTE $EF
-	.BYTE $FB
-	.BYTE $78
-	.BYTE $F9
-	.BYTE $01
-	.BYTE $80
-	.BYTE $D0
-	.BYTE $18
-	.BYTE $1A
-	.BYTE $81
-	.BYTE $8A
-	.BYTE $03
-	.BYTE $A4
-	.BYTE $83
-	.BYTE $DA
-	.BYTE $17
-	.BYTE $A4
-	.BYTE $DD
-	.BYTE $00
-	.BYTE $FB
-	.BYTE $17
+	.BYTE $FB, $78
+	.BYTE $F9, $01, $80
+	.BYTE $D0, $18, $1A
+	.BYTE $81, $8A, <L_7_A403, >L_7_A403
+	.BYTE $83, $DA, <L_7_A417, >L_7_A417
+	.BYTE $DD, $00
+	.BYTE $FB, $17
 	.BYTE $ED
-	.BYTE $F3
-	.BYTE $3B
-	.BYTE $CD
-	.BYTE $04
-	.BYTE $01
-	.BYTE $F7
-	.BYTE $0B
-	.BYTE $F9
-	.BYTE $03
-	.BYTE $50
-	.BYTE $51
-	.BYTE $52
-	.BYTE $EB
-	.BYTE $09
-	.BYTE $1E
-	.BYTE $FB
-	.BYTE $37
-	.BYTE $C3
-	.BYTE $00
-	.BYTE $FC
-	.BYTE $01
-	.BYTE $C5
-	.BYTE $00
-	.BYTE $04
-	.BYTE $FB
-	.BYTE $46
+	.BYTE $F3, $3B
+	.BYTE $CD, $04, $01
+	.BYTE $F7, $0B
+	.BYTE $F9, $03, $50, $51, $52
+	.BYTE $EB, $09, $1E
+	.BYTE $FB, $37
+	.BYTE $C3, $00, $FC, $01
+	.BYTE $C5, $00, $04
+	.BYTE $FB, $46
 	.BYTE $ED
 	.BYTE $CC
 	.BYTE $EF
-	.BYTE $D0
-	.BYTE $18
-	.BYTE $30
-	.BYTE $F7
-	.BYTE $1C
-	.BYTE $C0
-	.BYTE $11
-	.BYTE $40
-	.BYTE $88
-	.BYTE $F9
-	.BYTE $02
-	.BYTE $18
-	.BYTE $17
-	.BYTE $EB
-	.BYTE $00
-	.BYTE $00
-	.BYTE $FB
-	.BYTE $14
+	.BYTE $D0, $18, $30
+	.BYTE $F7, $1C
+	.BYTE $C0, $11, $40, $88
+	.BYTE $F9, $02, $18, $17
+	.BYTE $EB, $00, $00
+	.BYTE $FB, $14
 	.BYTE $ED
 	.BYTE $C1
 	.BYTE $EF
-	.BYTE $F7
-	.BYTE $29
-	.BYTE $C0
-	.BYTE $01
-	.BYTE $80
-	.BYTE $18
-	.BYTE $1A
-	.BYTE $F9
-	.BYTE $01
-	.BYTE $9B
-	.BYTE $EB
-	.BYTE $32
-	.BYTE $1F
-	.BYTE $C3
-	.BYTE $00
-	.BYTE $08
-	.BYTE $10
-	.BYTE $DD
-	.BYTE $04
-	.BYTE $FB
-	.BYTE $28
-	.BYTE $C4
-	.BYTE $00
-	.BYTE $00
-	.BYTE $FB
-	.BYTE $1E
+	.BYTE $F7, $29
+	.BYTE $C0, $01, $80, $18, $1A
+	.BYTE $F9, $01, $9B
+	.BYTE $EB, $32, $1F
+	.BYTE $C3, $00, $08, $10
+	.BYTE $DD, $04
+	.BYTE $FB, $28
+	.BYTE $C4, $00, $00
+	.BYTE $FB, $1E
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $63
-	.BYTE "SAN FRANCISCO"
-	.BYTE $FB
-	.BYTE $28
-	.BYTE $8A
-	.BYTE $CB
-	.BYTE "49ERS"
-	.BYTE $FB
-	.BYTE $78
+	.BYTE $8A, $63
+	.BYTE      "SAN FRANCISCO"
+	.BYTE $FB, $28
+	.BYTE $8A, $CB
+	.BYTE      "49ERS"
+	.BYTE $FB, $78
 	.BYTE $ED
 	.BYTE $CC
 	.BYTE $C1
 	.BYTE $EF
-	.BYTE $F9
-	.BYTE $01
-	.BYTE $9F
-	.BYTE $EA
-	.BYTE $00
-	.BYTE $FB
-	.BYTE $3C
+	.BYTE $F9, $01, $9F
+	.BYTE $EA, $00
+	.BYTE $FB, $3C
 	.BYTE $ED
-	.BYTE $F7
-	.BYTE $16
-	.BYTE $C0
-	.BYTE $11
-	.BYTE $32
-	.BYTE $E0
-	.BYTE $C0
-	.BYTE $02
-	.BYTE $50
-	.BYTE $18
-	.BYTE $1A
-	.BYTE $F9
-	.BYTE $01
-	.BYTE $2A
-	.BYTE $C3
-	.BYTE $00
-	.BYTE $10
-	.BYTE $05
-	.BYTE $E5
-	.BYTE $10
-	.BYTE $3B
-	.BYTE $FB
-	.BYTE $1A
-	.BYTE $C0
-	.BYTE $61
-	.BYTE $00
-	.BYTE $FB
-	.BYTE $1E
-	.BYTE $8A
-	.BYTE $69
-	.BYTE "DETROIT"
-	.BYTE $FB
-	.BYTE $28
-	.BYTE $8A
-	.BYTE $CB
-	.BYTE "LIONS"
-	.BYTE $FB
-	.BYTE $78
+	.BYTE $F7, $16
+	.BYTE $C0, $11, $32, $E0
+	.BYTE $C0, $02, $50, $18, $1A
+	.BYTE $F9, $01, $2A
+	.BYTE $C3, $00, $10, $05
+	.BYTE $E5, $10, $3B
+	.BYTE $FB, $1A
+	.BYTE $C0, $61, $00
+	.BYTE $FB, $1E
+	.BYTE $8A, $69
+	.BYTE      "DETROIT"
+	.BYTE $FB, $28
+	.BYTE $8A, $CB
+	.BYTE      "LIONS"
+	.BYTE $FB, $78
 	.BYTE $E8
 	.BYTE $CC
 	.BYTE $C1
 	.BYTE $EF
 	.BYTE $F2
-	.BYTE $CD
-	.BYTE $04
-	.BYTE $01
-	.BYTE $F7
-	.BYTE $0A
-	.BYTE $F9
-	.BYTE $01
-	.BYTE $D0
-	.BYTE $EB
-	.BYTE $08
-	.BYTE $20
-	.BYTE $C3
-	.BYTE $00
-	.BYTE $78
-	.BYTE $30
-	.BYTE $FB
-	.BYTE $0A
-	.BYTE $FD
-	.BYTE $6A
-	.BYTE $A4
-	.BYTE $FD
-	.BYTE $6A
-	.BYTE $A4
-	.BYTE $FD
-	.BYTE $6A
-	.BYTE $A4
-	.BYTE $FD
-	.BYTE $6A
-	.BYTE $A4
-	.BYTE $FB
-	.BYTE $28
+	.BYTE $CD, $04, $01
+	.BYTE $F7, $0A
+	.BYTE $F9, $01, $D0
+	.BYTE $EB, $08, $20
+	.BYTE $C3, $00, $78, $30
+	.BYTE $FB, $0A
+	.BYTE $FD, <L_7_A46A, >L_7_A46A
+	.BYTE $FD, <L_7_A46A, >L_7_A46A
+	.BYTE $FD, <L_7_A46A, >L_7_A46A
+	.BYTE $FD, <L_7_A46A, >L_7_A46A
+	.BYTE $FB, $28
 	.BYTE $ED
 	.BYTE $C1
 	.BYTE $EF
 	.BYTE $F1
-	.BYTE $CD
-	.BYTE $04
-	.BYTE $01
-	.BYTE $F7
-	.BYTE $37
-	.BYTE $F8
-	.BYTE $09
-	.BYTE $C0
-	.BYTE $41
-	.BYTE $60
-	.BYTE $20
-	.BYTE $29
-	.BYTE $18
-	.BYTE $44
-	.BYTE $F9
-	.BYTE $03
-	.BYTE $56
-	.BYTE $61
-	.BYTE $55
-	.BYTE $EB
-	.BYTE $07
-	.BYTE $21
-	.BYTE $FB
-	.BYTE $3C
-	.BYTE $C3
-	.BYTE $F0
-	.BYTE $00
-	.BYTE $07
-	.BYTE $FB
-	.BYTE $96
+	.BYTE $CD, $04, $01
+	.BYTE $F7, $37
+	.BYTE $F8, $09
+	.BYTE $C0, $41, $60, $20, $29, $18, $44
+	.BYTE $F9, $03, $56, $61, $55
+	.BYTE $EB, $07, $21
+	.BYTE $FB, $3C
+	.BYTE $C3, $F0, $00, $07
+	.BYTE $FB, $96
 	.BYTE $ED
 	.BYTE $CC
 	.BYTE $EF
-	.BYTE $F7
-	.BYTE $29
-	.BYTE $C0
-	.BYTE $01
-	.BYTE $80
-	.BYTE $18
-	.BYTE $1A
-	.BYTE $F9
-	.BYTE $01
-	.BYTE $BB
-	.BYTE $EB
-	.BYTE $32
-	.BYTE $22
-	.BYTE $C3
-	.BYTE $00
-	.BYTE $08
-	.BYTE $10
-	.BYTE $C5
-	.BYTE $00
-	.BYTE $FF
-	.BYTE $DD
-	.BYTE $04
-	.BYTE $FB
-	.BYTE $39
-	.BYTE $C4
-	.BYTE $00
-	.BYTE $00
-	.BYTE $C5
-	.BYTE $00
-	.BYTE $00
-	.BYTE $FB
-	.BYTE $1E
-	.BYTE $8A
-	.BYTE $68
-	.BYTE "NEW YORK"
-	.BYTE $FB
-	.BYTE $28
-	.BYTE $8A
-	.BYTE $CA
-	.BYTE "GIANTS"
-	.BYTE $FB
-	.BYTE $78
+	.BYTE $F7, $29
+	.BYTE $C0, $01, $80, $18, $1A
+	.BYTE $F9, $01, $BB
+	.BYTE $EB, $32, $22
+	.BYTE $C3, $00, $08, $10
+	.BYTE $C5, $00, $FF
+	.BYTE $DD, $04
+	.BYTE $FB, $39
+	.BYTE $C4, $00, $00
+	.BYTE $C5, $00, $00
+	.BYTE $FB, $1E
+	.BYTE $8A, $68
+	.BYTE      "NEW YORK"
+	.BYTE $FB, $28
+	.BYTE $8A, $CA
+	.BYTE     "GIANTS"
+	.BYTE $FB, $78
 	.BYTE $E8
 	.BYTE $CC
 	.BYTE $C1
 	.BYTE $EF
 	.BYTE $F2
-	.BYTE $FB
-	.BYTE $1E
-	.BYTE $F7
-	.BYTE $21
-	.BYTE $F9
-	.BYTE $01
-	.BYTE $7F
-	.BYTE $EB
-	.BYTE $0A
-	.BYTE $00
-	.BYTE $EE
-	.BYTE $0A
-	.BYTE $00
-	.BYTE $0F
-	.BYTE $0F
-	.BYTE $C3
-	.BYTE $00
-	.BYTE $90
-	.BYTE $20
-	.BYTE $FB
-	.BYTE $3C
-	.BYTE $C4
-	.BYTE $00
-	.BYTE $00
-	.BYTE $EB
-	.BYTE $0E
-	.BYTE $00
-	.BYTE $C3
-	.BYTE $00
-	.BYTE $E0
-	.BYTE $60
-	.BYTE $FB
-	.BYTE $78
-	.BYTE $EE
-	.BYTE $0E
-	.BYTE $00
-	.BYTE $0F
-	.BYTE $15
-	.BYTE $FB
-	.BYTE $87
-	.BYTE $EB
-	.BYTE $0A
-	.BYTE $00
-	.BYTE $EE
-	.BYTE $0A
-	.BYTE $00
-	.BYTE $09
-	.BYTE $15
-	.BYTE $FB
-	.BYTE $50
+	.BYTE $FB, $1E
+	.BYTE $F7, $21
+	.BYTE $F9, $01, $7F
+	.BYTE $EB, $0A, $00
+	.BYTE $EE, $0A, $00, $0F, $0F
+	.BYTE $C3, $00, $90, $20
+	.BYTE $FB, $3C
+	.BYTE $C4, $00, $00
+	.BYTE $EB, $0E, $00
+	.BYTE $C3, $00, $E0, $60
+	.BYTE $FB, $78
+	.BYTE $EE, $0E, $00, $0F, $15
+	.BYTE $FB, $87
+	.BYTE $EB, $0A, $00
+	.BYTE $EE, $0A, $00, $09, $15
+	.BYTE $FB, $50
 	.BYTE $E8
 	.BYTE $CC
 	.BYTE $EF
-	.BYTE $FD
-	.BYTE $7F
-	.BYTE $A4
-	.BYTE $F9
-	.BYTE $01
-	.BYTE $9D
-	.BYTE $E4
-	.BYTE $35
-	.BYTE $FB
-	.BYTE $FF
-	.BYTE $FB
-	.BYTE $FF
-	.BYTE $FB
-	.BYTE $FF
-	.BYTE $FB
-	.BYTE $64
-	.BYTE $DD
-	.BYTE $09
-	.BYTE $FB
-	.BYTE $B4
+	.BYTE $FD, <L_7_A47F, >L_7_A47F
+	.BYTE $F9, $01, $9D
+	.BYTE $E4, $35
+	.BYTE $FB, $FF
+	.BYTE $FB, $FF
+	.BYTE $FB, $FF
+	.BYTE $FB, $64
+	.BYTE $DD, $09
+	.BYTE $FB, $B4
 	.BYTE $E8
 	.BYTE $CC
 	.BYTE $C1
 	.BYTE $EF
-	.BYTE $FB
-	.BYTE $3C
-	.BYTE $D0
-	.BYTE $18
-	.BYTE $1A
+	.BYTE $FB, $3C
+	.BYTE $D0, $18, $1A
 	.BYTE $F5
-	.BYTE $89
-	.BYTE $44
-	.BYTE "TECMO IS A TRADEMARK OF"
-	.BYTE $89
-	.BYTE $82
-	.BYTE "TECMO INC. SUPER BOWL AND NFL"
-	.BYTE $89
-	.BYTE $C2
-	.BYTE "SHIELD DESIGN ARE TRADEMARKS"
-	.BYTE $8A
-	.BYTE $04
-	.BYTE "OF THE NATIONAL FOOTBALL"
-	.BYTE $8A
-	.BYTE $45
-	.BYTE "LEAGUE PROPERTIES INC."
-	.BYTE $F9
-	.BYTE $01
-	.BYTE $7F
-	.BYTE $E5
-	.BYTE $00
-	.BYTE $00
-	.BYTE $FB
-	.BYTE $F0
-	.BYTE $FB
-	.BYTE $F0
+	.BYTE $89, $44
+	.BYTE      "TECMO IS A TRADEMARK OF"
+	.BYTE $89, $82
+	.BYTE      "TECMO INC. SUPER BOWL AND NFL"
+	.BYTE $89, $C2
+	.BYTE      "SHIELD DESIGN ARE TRADEMARKS"
+	.BYTE $8A, $04
+	.BYTE      "OF THE NATIONAL FOOTBALL"
+	.BYTE $8A, $45
+	.BYTE      "LEAGUE PROPERTIES INC."
+	.BYTE $F9, $01, $7F
+	.BYTE $E5, $00, $00
+	.BYTE $FB, $F0
+	.BYTE $FB, $F0
 	.BYTE $E8
 	.BYTE $CC
-	.BYTE $FB
-	.BYTE $3C
-	.BYTE $FC
-	.BYTE $F0
-	.BYTE $A0
-	.BYTE $08
-	.BYTE $94
-	.BYTE $A9
-	.BYTE $C0
-	.BYTE $C1
-	.BYTE $90
-	.BYTE $91
-	.BYTE $94
-	.BYTE $91
+	.BYTE $FB, $3C
+	.BYTE $FC <L_07_A0F0, >L_07_A0F0
+
+L_7_A403:
+	.BYTE $08, $94, $A9, $C0, $C1, $90, $91, $94, $91
 	.BYTE $A1
-	.BYTE $08
-	.BYTE $86
-	.BYTE $88
-	.BYTE $C2
-	.BYTE $C3
-	.BYTE $86
-	.BYTE $87
-	.BYTE $96
-	.BYTE $93
+	.BYTE $08, $86, $88, $C2, $C3, $86, $87, $96, $93
 	.BYTE $FF
-	.BYTE $03
-	.BYTE $00
-	.BYTE $09
-	.BYTE $03
+
+L_7_A417:
+	.BYTE $03, $00, $09, $03
 	.BYTE $FF
-	.BYTE $20
-	.BYTE $8D
-	.BYTE $87
-	.BYTE $85
-	.BYTE $00
-	.BYTE $AD
-	.BYTE $98
-	.BYTE $2A
-	.BYTE $00
-	.BYTE $B8
-	.BYTE $91
-	.BYTE $94
-	.BYTE $00
-	.BYTE $00
-	.BYTE $3C
-	.BYTE $3C
-	.BYTE $3C
-	.BYTE $3F
-	.BYTE $81
-	.BYTE $C4
-	.BYTE $CC
-	.BYTE $D2
-	.BYTE $00
-	.BYTE $86
-	.BYTE $A5
-	.BYTE $90
-	.BYTE $98
-	.BYTE $DA
-	.BYTE $00
-	.BYTE $00
-	.BYTE $E4
-	.BYTE $E5
-	.BYTE $00
+
+L_7_A41C:
+	.BYTE $20, $8D, $87, $85, $00, $AD, $98, $2A, $00, $B8, $91, $94, $00, $00, $3C, $3C, $3C, $3F, $81, $C4, $CC, $D2, $00, $86, $A5, $90, $98, $DA, $00, $00, $E4, $E5, $00
 	.BYTE $A1
-	.BYTE $20
-	.BYTE $8A
-	.BYTE $8B
-	.BYTE $8E
-	.BYTE $AE
-	.BYTE $00
-	.BYTE $9A
-	.BYTE $00
-	.BYTE $00
-	.BYTE $00
-	.BYTE $93
-	.BYTE $94
-	.BYTE $95
-	.BYTE $00
-	.BYTE $78
-	.BYTE $3C
-	.BYTE $3D
-	.BYTE $3C
-	.BYTE $81
-	.BYTE $00
-	.BYTE $00
-	.BYTE $A2
-	.BYTE $A1
-	.BYTE $A6
-	.BYTE $AF
-	.BYTE $90
-	.BYTE $B0
-	.BYTE $DA
-	.BYTE $00
-	.BYTE $00
-	.BYTE $E6
-	.BYTE $ED
-	.BYTE $8F
+	.BYTE $20, $8A, $8B, $8E, $AE, $00, $9A, $00, $00, $00, $93, $94, $95, $00, $78, $3C, $3D, $3C, $81, $00, $00, $A2, $A1, $A6, $AF, $90, $B0, $DA, $00, $00, $E6, $ED, $8F
 	.BYTE $FF
-	.BYTE $08
-	.BYTE $05
-	.BYTE $05
-	.BYTE $05
-	.BYTE $0F
-	.BYTE $07
-	.BYTE $05
-	.BYTE $05
-	.BYTE $05
+
+L_7_A460:
+	.BYTE $08, $05, $05, $05, $0F, $07, $05, $05, $05
 	.BYTE $FF
-	.BYTE $EB
-	.BYTE $19
-	.BYTE $3E
-	.BYTE $FB
-	.BYTE $01
-	.BYTE $EB
-	.BYTE $08
-	.BYTE $20
-	.BYTE $FB
-	.BYTE $01
-	.BYTE $EB
-	.BYTE $19
-	.BYTE $3E
-	.BYTE $FB
-	.BYTE $01
-	.BYTE $EB
-	.BYTE $08
-	.BYTE $20
-	.BYTE $FB
-	.BYTE $01
+
+L_7_A46A:
+	.BYTE $EB, $19, $3E
+	.BYTE $FB, $01
+	.BYTE $EB, $08, $20
+	.BYTE $FB, $01
+	.BYTE $EB, $19, $3E
+	.BYTE $FB, $01
+	.BYTE $EB, $08, $20
+	.BYTE $FB, $01
 	.BYTE $FE
+   
+L_7_A47F:
 	.BYTE $F8
 	.BYTE $23
 	.BYTE $E9
@@ -669,6 +312,8 @@ L_07_A0F0:
 	.BYTE $62
 	.BYTE $00
 	.BYTE $FE
+
+L_7_A4A8:
 	.BYTE $FD
 	.BYTE $0D
 	.BYTE $A5

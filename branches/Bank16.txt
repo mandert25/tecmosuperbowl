@@ -1,116 +1,116 @@
 .segment "BANK_16_A"
-	.WORD MAIN_MENU_SCREEN                  ; 00
-	.WORD PRESEASON_MENU_SCREEN             ; 01
-	.WORD PRESEASON_SELECT_SCREEN           ; 02
-	.WORD SEASON_MENU_SCREEN                ; 03
-	.WORD TEAM_CONTROL_SCREEN               ; 04
-	.WORD SCHEDULE_SCREEN                   ; 05
-	.WORD SCHEDULE_MENU_SCREEN              ; 06
-	.WORD SCHEDULE_RESET_MENU_SCREEN        ; 07
-	.WORD SCHEDULE_RESET_VERIFY_MENU_SCREEN ; 08
-	.WORD AUTO_SKIP_MENU_SCREEN             ; 09
-	.WORD STANDINGS_MENU_SCREEN             ; 0A
-	.WORD RANKINGS_MENU_SCREEN              ; 0B
-	.WORD RANKINGS_MENU_SCREEN              ; 0C
-	.WORD NON_PLAYOFF_BRACKET_SCREEN        ; 0D
-	.WORD NON_PLAYOFF_BRACKET_SCREEN        ; 0E
-	.WORD NON_PLAYOFF_BRACKET_SCREEN        ; 0F
-	.WORD NON_PLAYOFF_BRACKET_SCREEN        ; 10
-	.WORD PLAYOFF_BRACKET_SCREEN            ; 11
-	.WORD PRO_BOWL_MENU_SCREEN              ; 12
-	.WORD PRO_BOWL_MENU_SCREEN              ; 13
-	.WORD PRO_BOWL_MENU_SCREEN              ; 14
-	.WORD PRO_BOWL_MENU_SCREEN              ; 15
-	.WORD PRO_BOWL_MENU_SCREEN              ; 16
-	.WORD PRO_BOWL_MENU_SCREEN              ; 17
-	.WORD PRO_BOWL_SELECT_SCREEN            ; 18
-	.WORD TEAM_DATA_SCREEN                  ; 19
-	.WORD TEAM_SCREEN                       ; 1A
-	.WORD DF_STARTERS_SCREEN                ; 1B
-	.WORD DF_STARTERS_SCREEN                ; 1C
-	.WORD DF_STARTERS_SCREEN                ; 1D
-	.WORD TEAM_DATA_PLAYBOOK_SCREEN         ; 1E
-	.WORD TEAM_DATA_PLAYBOOK_RUN_CHANGE     ; 1F
-	.WORD TEAM_DATA_PLAYBOOK_PASS_CHANGE    ; 20
-	.WORD PRO_BOWL_TEAM_SCREEN              ; 21
-	.WORD PRO_BOWL_TEAM_HEADER_RESTORE      ; 22
-	.WORD PRO_BOWL_CHANGE_PLAYERS_HEADER    ; 23
-	.WORD QB_DATA_SCREEN                    ; 24
-	.WORD OFFENSIVE_DATA_SCREEN             ; 25
-	.WORD LINEMAN_DATA_SCREEN               ; 26
-	.WORD DEFENSIVE_DATA_SCREEN             ; 27
-	.WORD KICKER_DATA_SCREEN                ; 28
-	.WORD PUNTER_DATA_SCREEN                ; 29
-	.WORD AFC_EAST_STANDINGS_SCREEN         ; 2A
-	.WORD AFC_CENTRAL_STANDINGS_SCREEN      ; 2B
-	.WORD AFC_WEST_STANDINGS_SCREEN         ; 2C
-	.WORD NFC_EAST_STANDINGS_SCREEN         ; 2D
-	.WORD NFC_CENTRAL_STANDINGS_SCREEN      ; 2E
-	.WORD NFC_WEST_STANDINGS_SCREEN         ; 2F
-	.WORD FOUR_DIVISION_STANDINGS_SCREEN    ; 30
-	.WORD FIVE_DIVISION_STANDINGS_SCREEN    ; 31
-	.WORD OF_STARTERS_TWO_WIDE_SCREEN       ; 32
-	.WORD OF_STARTERS_RUN_N_SHOOT_SCREEN    ; 33
-	.WORD OF_STARTERS_THREE_WIDE_SCREEN     ; 34
-	.WORD PLAYER_CHANGE_TWO_WIDE_SCREEN     ; 35
-	.WORD PLAYER_CHANGE_RUN_N_SHOOT_SCREEN  ; 36
-	.WORD PLAYER_CHANGE_THREE_WIDE_SCREEN   ; 37
-	.WORD OF_STARTER_RESET_MENU_SCREEN      ; 38
-	.WORD $B2C4                             ; 39
-	.WORD $B2C4                             ; 3A
-	.WORD $B2CD                             ; 3B
-	.WORD $B2D6                             ; 3C
-	.WORD $B2E8                             ; 3D
-	.WORD $B2F1                             ; 3E
-	.WORD $B2FA                             ; 3F
-	.WORD PLAY_SELECT_SCREEN                ; 40
-	.WORD P1_OFFENSIVE_MENU_SCREEN          ; 41
-	.WORD P1_OFFENSIVE_TIMEOUT_MENU_SCREEN  ; 42
-	.WORD P1_DEFENSIVE_MENU_SCREEN          ; 43
-	.WORD P1_DEFENSIVE_MENU_SCREEN          ; 44
-	.WORD P1_DEFENSIVE_TIMEOUT_MENU_SCREEN  ; 45
-	.WORD P2_OFFENSIVE_MENU_SCREEN          ; 46
-	.WORD P2_OFFENSIVE_MENU_SCREEN          ; 47
-	.WORD P2_OFFENSIVE_TIMEOUT_MENU_SCREEN  ; 48
-	.WORD $B4C4                             ; 49
-	.WORD P2_DEFENSIVE_MENU_SCREEN          ; 4A
-	.WORD P2_DEFENSIVE_TIMEOUT_MENU_SCREEN  ; 4B
-	.WORD OFFENSIVE_MENU                    ; 4C
-	.WORD OFFENSIVE_MENU                    ; 4D
-	.WORD CLOCK_SCREEN                      ; 4E
-	.WORD $B63C                             ; 4F
-	.WORD $B653                             ; 50
-	.WORD $B665                             ; 51
-	.WORD $B672                             ; 52
-	.WORD $B680                             ; 53
-	.WORD $B692                             ; 54
-	.WORD $B69F                             ; 55
-	.WORD $B6B5                             ; 56
-	.WORD $B6F2                             ; 57
-	.WORD $B72F                             ; 58
-	.WORD $B73F                             ; 59
-	.WORD $B750                             ; 5A
-	.WORD $B75D                             ; 5B
-	.WORD TOUCHBACK_SCREEN                  ; 5C
-	.WORD $B77D                             ; 5D
-	.WORD $B795                             ; 5E
-	.WORD RECOVER_SCREEN                    ; 5F
-	.WORD $B7AE                             ; 60
-	.WORD $B7BB                             ; 61
-	.WORD $B7D1                             ; 62
-	.WORD $B7E9                             ; 63
-	.WORD $B7FF                             ; 64
-	.WORD $B816                             ; 65
-	.WORD $B823                             ; 66
-	.WORD $B834                             ; 67
-	.WORD $B849                             ; 68
-	.WORD $B85A                             ; 69
-	.WORD $B870                             ; 6A
-	.WORD $B880                             ; 6B
-	.WORD $B880                             ; 6C
-	.WORD $B880                             ; 6D
-	.WORD $B880                             ; 6E
-	.WORD $B880                             ; 6F
+	.WORD MAIN_MENU_SCREEN                   ; 00
+	.WORD PRESEASON_MENU_SCREEN              ; 01
+	.WORD PRESEASON_SELECT_SCREEN            ; 02
+	.WORD SEASON_MENU_SCREEN                 ; 03
+	.WORD TEAM_CONTROL_SCREEN                ; 04
+	.WORD SCHEDULE_SCREEN                    ; 05
+	.WORD SCHEDULE_MENU_SCREEN               ; 06
+	.WORD SCHEDULE_RESET_MENU_SCREEN         ; 07
+	.WORD SCHEDULE_RESET_VERIFY_MENU_SCREEN  ; 08
+	.WORD AUTO_SKIP_MENU_SCREEN              ; 09
+	.WORD STANDINGS_MENU_SCREEN              ; 0A
+	.WORD RANKINGS_MENU_SCREEN               ; 0B
+	.WORD RANKINGS_MENU_SCREEN               ; 0C
+	.WORD NON_PLAYOFF_BRACKET_SCREEN         ; 0D
+	.WORD NON_PLAYOFF_BRACKET_SCREEN         ; 0E
+	.WORD NON_PLAYOFF_BRACKET_SCREEN         ; 0F
+	.WORD NON_PLAYOFF_BRACKET_SCREEN         ; 10
+	.WORD PLAYOFF_BRACKET_SCREEN             ; 11
+	.WORD PRO_BOWL_MENU_SCREEN               ; 12
+	.WORD PRO_BOWL_MENU_SCREEN               ; 13
+	.WORD PRO_BOWL_MENU_SCREEN               ; 14
+	.WORD PRO_BOWL_MENU_SCREEN               ; 15
+	.WORD PRO_BOWL_MENU_SCREEN               ; 16
+	.WORD PRO_BOWL_MENU_SCREEN               ; 17
+	.WORD PRO_BOWL_SELECT_SCREEN             ; 18
+	.WORD TEAM_DATA_SCREEN                   ; 19
+	.WORD TEAM_SCREEN                        ; 1A
+	.WORD DF_STARTERS_SCREEN                 ; 1B
+	.WORD DF_STARTERS_SCREEN                 ; 1C
+	.WORD DF_STARTERS_SCREEN                 ; 1D
+	.WORD TEAM_DATA_PLAYBOOK_SCREEN          ; 1E
+	.WORD TEAM_DATA_PLAYBOOK_RUN_CHANGE      ; 1F
+	.WORD TEAM_DATA_PLAYBOOK_PASS_CHANGE     ; 20
+	.WORD PRO_BOWL_TEAM_SCREEN               ; 21
+	.WORD PRO_BOWL_TEAM_HEADER_RESTORE       ; 22
+	.WORD PRO_BOWL_CHANGE_PLAYERS_HEADER     ; 23
+	.WORD QB_DATA_SCREEN                     ; 24
+	.WORD OFFENSIVE_DATA_SCREEN              ; 25
+	.WORD LINEMAN_DATA_SCREEN                ; 26
+	.WORD DEFENSIVE_DATA_SCREEN              ; 27
+	.WORD KICKER_DATA_SCREEN                 ; 28
+	.WORD PUNTER_DATA_SCREEN                 ; 29
+	.WORD AFC_EAST_STANDINGS_SCREEN          ; 2A
+	.WORD AFC_CENTRAL_STANDINGS_SCREEN       ; 2B
+	.WORD AFC_WEST_STANDINGS_SCREEN          ; 2C
+	.WORD NFC_EAST_STANDINGS_SCREEN          ; 2D
+	.WORD NFC_CENTRAL_STANDINGS_SCREEN       ; 2E
+	.WORD NFC_WEST_STANDINGS_SCREEN          ; 2F
+	.WORD FOUR_DIVISION_STANDINGS_SCREEN     ; 30
+	.WORD FIVE_DIVISION_STANDINGS_SCREEN     ; 31
+	.WORD OF_STARTERS_TWO_WIDE_SCREEN        ; 32
+	.WORD OF_STARTERS_RUN_N_SHOOT_SCREEN     ; 33
+	.WORD OF_STARTERS_THREE_WIDE_SCREEN      ; 34
+	.WORD PLAYER_CHANGE_TWO_WIDE_SCREEN      ; 35
+	.WORD PLAYER_CHANGE_RUN_N_SHOOT_SCREEN   ; 36
+	.WORD PLAYER_CHANGE_THREE_WIDE_SCREEN    ; 37
+	.WORD OF_STARTER_RESET_MENU_SCREEN       ; 38
+	.WORD NFL_OFFENSIVE_TEAM_RANKINGS_SCREEN ; 39
+	.WORD NFL_OFFENSIVE_TEAM_RANKINGS_SCREEN ; 3A
+	.WORD AFC_OFFENSIVE_TEAM_RANKINGS_SCREEN ; 3B
+	.WORD NFC_OFFENSIVE_TEAM_RANKINGS_SCREEN ; 3C
+	.WORD NFL_DEFENSIVE_TEAM_RANKINGS_SCREEN ; 3D
+	.WORD AFC_DEFENSIVE_TEAM_RANKINGS_SCREEN ; 3E
+	.WORD NFC_DEFENSIVE_TEAM_RANKINGS_SCREEN ; 3F
+	.WORD PLAY_SELECT_SCREEN                 ; 40
+	.WORD P1_OFFENSIVE_MENU_SCREEN           ; 41
+	.WORD P1_OFFENSIVE_TIMEOUT_MENU_SCREEN   ; 42
+	.WORD P1_DEFENSIVE_MENU_SCREEN           ; 43
+	.WORD P1_DEFENSIVE_MENU_SCREEN           ; 44
+	.WORD P1_DEFENSIVE_TIMEOUT_MENU_SCREEN   ; 45
+	.WORD P2_OFFENSIVE_MENU_SCREEN           ; 46
+	.WORD P2_OFFENSIVE_MENU_SCREEN           ; 47
+	.WORD P2_OFFENSIVE_TIMEOUT_MENU_SCREEN   ; 48
+	.WORD $B4C4                              ; 49
+	.WORD P2_DEFENSIVE_MENU_SCREEN           ; 4A
+	.WORD P2_DEFENSIVE_TIMEOUT_MENU_SCREEN   ; 4B
+	.WORD OFFENSIVE_MENU                     ; 4C
+	.WORD OFFENSIVE_MENU                     ; 4D
+	.WORD CLOCK_SCREEN                       ; 4E
+	.WORD $B63C                              ; 4F
+	.WORD $B653                              ; 50
+	.WORD $B665                              ; 51
+	.WORD $B672                              ; 52
+	.WORD $B680                              ; 53
+	.WORD $B692                              ; 54
+	.WORD $B69F                              ; 55
+	.WORD $B6B5                              ; 56
+	.WORD $B6F2                              ; 57
+	.WORD $B72F                              ; 58
+	.WORD $B73F                              ; 59
+	.WORD $B750                              ; 5A
+	.WORD $B75D                              ; 5B
+	.WORD TOUCHBACK_SCREEN                   ; 5C
+	.WORD $B77D                              ; 5D
+	.WORD $B795                              ; 5E
+	.WORD RECOVER_SCREEN                     ; 5F
+	.WORD $B7AE                              ; 60
+	.WORD $B7BB                              ; 61
+	.WORD $B7D1                              ; 62
+	.WORD $B7E9                              ; 63
+	.WORD $B7FF                              ; 64
+	.WORD $B816                              ; 65
+	.WORD $B823                              ; 66
+	.WORD $B834                              ; 67
+	.WORD $B849                              ; 68
+	.WORD $B85A                              ; 69
+	.WORD $B870                              ; 6A
+	.WORD $B880                              ; 6B
+	.WORD $B880                              ; 6C
+	.WORD $B880                              ; 6D
+	.WORD $B880                              ; 6E
+	.WORD $B880                              ; 6F
 
 MAIN_MENU_SCREEN:
 	.BYTE $C9
@@ -1204,13 +1204,7 @@ PRO_BOWL_TEAM_HEADER:
 	.BYTE $FE
 
 L_16_AC9E:
-	.BYTE $06
-	.BYTE $19
-	.BYTE $1B
-	.BYTE $1C
-	.BYTE $19
-	.BYTE $1B
-	.BYTE $1C
+	.BYTE $06, $19, $1B, $1C, $19, $1B, $1C
 	.BYTE $FF
 
 PRO_BOWL_CHANGE_PLAYERS_HEADER:   
@@ -1611,7 +1605,7 @@ STANDINGS_GRID_BOTTOM:
 	.BYTE $FF
 
 STANDINGS_GRID_HEADER:
-	.BYTE $1E, $6A, "R", $6A, $00, $00, $00, $6A, $00, "W", $6A, $00, "L", $6A, $00, "T", $6A, $00, "PCT", $2E, $6A, "PTS", $6A, $00, "OP", $6A
+	.BYTE $1E, $6A, "R", $6A, $00, $00, $00, $6A, $00, "W", $6A, $00, "L", $6A, $00, "T", $6A, $00, "PCT.", $6A, "PTS", $6A, $00, "OP", $6A
 	.BYTE $FF
 
 OF_STARTERS_TWO_WIDE_SCREEN:
@@ -1789,44 +1783,44 @@ OF_STARTER_RESET_MENU:
 	.BYTE $01, $0B
 	.BYTE $FF
 
-L_16_B2C4:
-	.BYTE $FD, <$23, >$B3
+NFL_OFFENSIVE_TEAM_RANKINGS_SCREEN:
+	.BYTE $FD, <RANKINGS_HEADER, >RANKINGS_HEADER
 	.BYTE      "NFL"
-	.BYTE $FC, <$DC, >$B2
+	.BYTE $FC, <OFFENSE_TEXT, >OFFENSE_TEXT
 
-L_16_B2CD:
-	.BYTE $FD, <$23, >$B3
+AFC_OFFENSIVE_TEAM_RANKINGS_SCREEN:
+	.BYTE $FD, <RANKINGS_HEADER, >RANKINGS_HEADER
 	.BYTE      "AFC"
-	.BYTE $FC, <$DC, >$B2
+	.BYTE $FC, <OFFENSE_TEXT, >OFFENSE_TEXT
 
-L_16_B2D6:
-	.BYTE $FD, <$23, >$B3
+NFC_OFFENSIVE_TEAM_RANKINGS_SCREEN:
+	.BYTE $FD, <RANKINGS_HEADER, >RANKINGS_HEADER
 	.BYTE      "NFC"
 
-L_16_B2DC:
+OFFENSE_TEXT:
 	.BYTE $88, $51
 	.BYTE      "OFFENSE"
-	.BYTE $FC, <$09, >$B3
+	.BYTE $FC, <TOTAL_PASS_RUSH_TEXT, >TOTAL_PASS_RUSH_TEXT
 
-L_16_B2E8:
-	.BYTE $FD, <$23, >$B3
+NFL_DEFENSIVE_TEAM_RANKINGS_SCREEN:
+	.BYTE $FD, <RANKINGS_HEADER, >RANKINGS_HEADER
 	.BYTE      "NFL"
-	.BYTE $FC, <$00, >$B3
+	.BYTE $FC, <DEFENSE_TEXT, >DEFENSE_TEXT
 
-L_16_B2F1:
-	.BYTE $FD, <$23, >$B3
+AFC_DEFENSIVE_TEAM_RANKINGS_SCREEN:
+	.BYTE $FD, <RANKINGS_HEADER, >RANKINGS_HEADER
 	.BYTE      "AFC"
-	.BYTE $FC, <$00, >$B3
+	.BYTE $FC, <DEFENSE_TEXT, >DEFENSE_TEXT
 
-L_16_B2FA:
-	.BYTE $FD, <$23, >$B3
+NFC_DEFENSIVE_TEAM_RANKINGS_SCREEN:
+	.BYTE $FD, <RANKINGS_HEADER, >RANKINGS_HEADER
 	.BYTE      "NFC"
 
-L_16_B300:
+DEFENSE_TEXT:
 	.BYTE $88, $51
 	.BYTE      "DEFENSE"
 
-L_16_B309:
+TOTAL_PASS_RUSH_TEXT:
 	.BYTE $88, $59
 	.BYTE      $19, $1C, $19
 	.BYTE $88, $B0
@@ -1834,7 +1828,7 @@ L_16_B309:
 	.BYTE $A8, $A2, $52
 	.BYTE $FF
 
-L_16_B323:
+RANKINGS_HEADER:
 	.BYTE $ED
 	.BYTE $CC
 	.BYTE $D0, $18, $7A

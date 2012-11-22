@@ -2588,9 +2588,7 @@ L_16_B880:
 	.BYTE      "1991"
 	.BYTE $89, $C3
 	.BYTE      "NFL STANDINGS"
-	.BYTE $E5
-	.BYTE $00
-	.BYTE $00
+	.BYTE $E5, $00, $00
 	.BYTE $FB
 	.BYTE $F0
 	.BYTE $E8

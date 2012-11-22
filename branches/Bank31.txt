@@ -3881,13 +3881,13 @@ L_D57F:
 	JMP buffer_end
 
 L_D5A0:
-	STA $45
+	STA TEMP45
 	LDA #$02
 	JSR buffer_add
 	CLC
-	LDA $45
+	LDA TEMP45
 	JSR L_D5F8
-	LDA $45
+	LDA TEMP45
 	JSR L_D605
 	JMP buffer_end
 
@@ -3941,7 +3941,7 @@ L_D605:
 	AND #$0F
 	ORA #$30
 L_D609:
-	STA $033A,X
+	STA BUFFER,X
 	INX
 	RTS
 

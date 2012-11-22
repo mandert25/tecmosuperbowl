@@ -271,114 +271,64 @@ L_7_A46A:
 	.BYTE $FE
    
 L_7_A47F:
-	.BYTE $F8
-	.BYTE $23
-	.BYTE $E9
-	.BYTE $1A
-	.BYTE $C3
-	.BYTE $00
-	.BYTE $A0
-	.BYTE $20
-	.BYTE $C0
-	.BYTE $11
-	.BYTE $36
-	.BYTE $88
-	.BYTE $C0
-	.BYTE $12
-	.BYTE $24
-	.BYTE $78
-	.BYTE $C0
-	.BYTE $23
-	.BYTE $28
-	.BYTE $00
-	.BYTE $18
-	.BYTE $1A
-	.BYTE $FB
-	.BYTE $3C
-	.BYTE $E9
-	.BYTE $1F
-	.BYTE $FB
-	.BYTE $2C
-	.BYTE $C0
-	.BYTE $61
-	.BYTE $00
-	.BYTE $FB
-	.BYTE $28
-	.BYTE $E9
-	.BYTE $20
-	.BYTE $FB
-	.BYTE $1C
-	.BYTE $C0
-	.BYTE $62
-	.BYTE $00
+	.BYTE $F8, $23
+	.BYTE $E9, $1A
+	.BYTE $C3, $00, $A0, $20
+	.BYTE $C0, $11, $36, $88
+	.BYTE $C0, $12, $24, $78
+	.BYTE $C0, $23, $28, $00, $18, $1A
+	.BYTE $FB, $3C
+	.BYTE $E9, $1F
+	.BYTE $FB, $2C
+	.BYTE $C0, $61, $00
+	.BYTE $FB, $28
+	.BYTE $E9, $20
+	.BYTE $FB, $1C
+	.BYTE $C0, $62, $00
 	.BYTE $FE
 
 L_7_A4A8:
-	.BYTE $FD
-	.BYTE $0D
-	.BYTE $A5
-	.BYTE $8A
-	.BYTE $47
-	.BYTE $1B, $1C, $19, " START GAME ", $19, $1C, $1B
-	.BYTE $8A
-	.BYTE $C5
-	.BYTE "TM AND @ TECMO", $5C, "LTD.1991"
+	.BYTE $FD, <$0D, >$A5
+	.BYTE $8A, $47
+	.BYTE      $1B, $1C, $19, " START GAME ", $19, $1C, $1B
+	.BYTE $8A, $C5
+	.BYTE      "TM AND @ TECMO", $5C, "LTD.1991"
 	.BYTE $B2
-	.BYTE "NINTENDO OF AMERICA INC."
-	.BYTE $8B
-	.BYTE $0B
-	.BYTE "LICENSED BY"
-	.BYTE $F9
-	.BYTE $03
-	.BYTE $BE
-	.BYTE $BF
-	.BYTE $C0
-	.BYTE $EB
-	.BYTE $20
-	.BYTE $3F
-	.BYTE $DD
-	.BYTE $08
-	.BYTE $FB
-	.BYTE $F0
-	.BYTE $FC
-	.BYTE $08
-	.BYTE $A5
+	.BYTE      "NINTENDO OF AMERICA INC."
+	.BYTE $8B, $0B
+	.BYTE      "LICENSED BY"
+	.BYTE $F9, $03, $BE, $BF, $C0
+	.BYTE $EB, $20, $3F
+	.BYTE $DD, $08
+	.BYTE $FB, $F0
+	.BYTE $FC, <$08, >$A5
+
+L_7_A50D:
 	.BYTE $C8
 	.BYTE $F2
 	.BYTE $CC
-	.BYTE $F7
-	.BYTE $23
-	.BYTE $C0
-	.BYTE $01
-	.BYTE $90
-	.BYTE $18
-	.BYTE $1A
+	.BYTE $F7, $23
+	.BYTE $C0, $01, $90, $18, $1A
 	.BYTE $FE
+
+L_7_A518:
 	.BYTE $C8
 	.BYTE $F1
 	.BYTE $F0
-	.BYTE $F7
-	.BYTE $29
-	.BYTE $C0
-	.BYTE $01
-	.BYTE $80
-	.BYTE $18
-	.BYTE $1A
+	.BYTE $F7, $29
+	.BYTE $C0, $01, $80, $18, $1A
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $68
-	.BYTE "KICKOFF!"
-	.BYTE $F9
-	.BYTE $01
-	.BYTE $58
+	.BYTE $8A, $68
+	.BYTE      "KICKOFF!"
+	.BYTE $F9, $01, $58
 	.BYTE $D8
 	.BYTE $B2
-	.BYTE $DD
-	.BYTE $04
-	.BYTE $FB
-	.BYTE $50
+	.BYTE $DD, $04
+	.BYTE $FB, $50
 	.BYTE $E8
 	.BYTE $FF
+
+L_7_A538:
 	.BYTE $C8
 	.BYTE $F1
 	.BYTE $FD

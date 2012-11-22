@@ -41,7 +41,12 @@
 	.WORD DEFENSIVE_DATA_SCREEN             ; 27
 	.WORD KICKER_DATA_SCREEN                ; 28
 	.WORD PUNTER_DATA_SCREEN                ; 29
-	.WORD $AFAF, $AFB5, $AFBB, $AFC1, $AFC7, $AFCD
+	.WORD $AFAF                             ; 2A
+	.WORD $AFB5                             ; 2B
+	.WORD $AFBB                             ; 2C
+	.WORD $AFC1                             ; 2D
+	.WORD $AFC7                             ; 2E
+	.WORD $AFCD                             ; 2F
 	.WORD $AFFD                             ; 30
 	.WORD $B004                             ; 31
 	.WORD OF_STARTERS_TWO_WIDE_SCREEN       ; 32
@@ -1751,120 +1756,58 @@ OF_STARTER_RESET_MENU:
 	.BYTE $FF
 
 L_16_B2C4:
-	.BYTE $FD
-	.BYTE $23
-	.BYTE $B3
-	.BYTE $4E
-	.BYTE $46
-	.BYTE $4C
-	.BYTE $FC
-	.BYTE $DC
-	.BYTE $B2
-	.BYTE $FD
-	.BYTE $23
-	.BYTE $B3
-	.BYTE $41
-	.BYTE $46
-	.BYTE $43
-	.BYTE $FC
-	.BYTE $DC
-	.BYTE $B2
-	.BYTE $FD
-	.BYTE $23
-	.BYTE $B3
-	.BYTE $4E
-	.BYTE $46
-	.BYTE $43
-	.BYTE $88
-	.BYTE $51
-	.BYTE $4F
-	.BYTE $46
-	.BYTE $46
-	.BYTE $45
-	.BYTE $4E
-	.BYTE $53
-	.BYTE $45
-	.BYTE $FC
-	.BYTE $09
-	.BYTE $B3
-	.BYTE $FD
-	.BYTE $23
-	.BYTE $B3
-	.BYTE $4E
-	.BYTE $46
-	.BYTE $4C
-	.BYTE $FC
-	.BYTE $00
-	.BYTE $B3
-	.BYTE $FD
-	.BYTE $23
-	.BYTE $B3
-	.BYTE $41
-	.BYTE $46
-	.BYTE $43
-	.BYTE $FC
-	.BYTE $00
-	.BYTE $B3
-	.BYTE $FD
-	.BYTE $23
-	.BYTE $B3
-	.BYTE $4E
-	.BYTE $46
-	.BYTE $43
-	.BYTE $88
-	.BYTE $51
-	.BYTE $44
-	.BYTE $45
-	.BYTE $46
-	.BYTE $45
-	.BYTE $4E
-	.BYTE $53
-	.BYTE $45
-	.BYTE $88
-	.BYTE $59
-	.BYTE $19
-	.BYTE $1C
-	.BYTE $19
-	.BYTE $88
-	.BYTE $B0
-	.BYTE $54
-	.BYTE $4F
-	.BYTE $54
-	.BYTE $41
-	.BYTE $4C
-	.BYTE $20
-	.BYTE $50
-	.BYTE $41
-	.BYTE $53
-	.BYTE $53
-	.BYTE $20
-	.BYTE $52
-	.BYTE $55
-	.BYTE $53
-	.BYTE $48
-	.BYTE $A8
-	.BYTE $A2
-	.BYTE $52
+	.BYTE $FD, <$23, >$B3
+	.BYTE      "NFL"
+	.BYTE $FC, <$DC, >$B2
+
+L_16_B2CD:
+	.BYTE $FD, <$23, >$B3
+	.BYTE      "AFC"
+	.BYTE $FC, <$DC, >$B2
+
+L_16_B2D6:
+	.BYTE $FD, <$23, >$B3
+	.BYTE      "NFC"
+
+L_16_B2DC:
+	.BYTE $88, $51
+	.BYTE      "OFFENSE"
+	.BYTE $FC, <$09, >$B3
+
+L_16_B2E8:
+	.BYTE $FD, <$23, >$B3
+	.BYTE      "NFL"
+	.BYTE $FC, <$00, >$B3
+
+L_16_B2F1:
+	.BYTE $FD, <$23, >$B3
+	.BYTE      "AFC"
+	.BYTE $FC, <$00, >$B3
+
+L_16_B2FA:
+	.BYTE $FD, <$23, >$B3
+	.BYTE      "NFC"
+
+L_16_B300:
+	.BYTE $88, $51
+	.BYTE      "DEFENSE"
+
+L_16_B309:
+	.BYTE $88, $59
+	.BYTE      $19, $1C, $19
+	.BYTE $88, $B0
+	.BYTE      "TOTAL PASS RUSH"
+	.BYTE $A8, $A2, $52
 	.BYTE $FF
+
+L_16_B323:
 	.BYTE $ED
 	.BYTE $CC
-	.BYTE $D0
-	.BYTE $18
-	.BYTE $7A
-	.BYTE $88
-	.BYTE $43
-	.BYTE $19
-	.BYTE $1C
-	.BYTE $19
-	.BYTE $88
-	.BYTE $4B
-	.BYTE $54
-	.BYTE $4F
-	.BYTE $54
-	.BYTE $41
-	.BYTE $4C
-	.BYTE $88
-	.BYTE $47
+	.BYTE $D0, $18, $7A
+	.BYTE $88, $43
+	.BYTE      $19, $1C, $19
+	.BYTE $88, $4B
+	.BYTE      "TOTAL"
 	.BYTE $FE
 
 PLAY_SELECT_SCREEN:

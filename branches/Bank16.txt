@@ -56,7 +56,13 @@
 	.WORD PLAYER_CHANGE_RUN_N_SHOOT_SCREEN  ; 36
 	.WORD PLAYER_CHANGE_THREE_WIDE_SCREEN   ; 37
 	.WORD OF_STARTER_RESET_MENU_SCREEN      ; 38
-	.WORD $B2C4, $B2C4, $B2CD, $B2D6, $B2E8, $B2F1, $B2FA
+	.WORD $B2C4                             ; 39
+	.WORD $B2C4                             ; 3A
+	.WORD $B2CD                             ; 3B
+	.WORD $B2D6                             ; 3C
+	.WORD $B2E8                             ; 3D
+	.WORD $B2F1                             ; 3E
+	.WORD $B2FA                             ; 3F
 	.WORD PLAY_SELECT_SCREEN                ; 40
 	.WORD P1_OFFENSIVE_MENU_SCREEN          ; 41
 	.WORD P1_OFFENSIVE_TIMEOUT_MENU_SCREEN  ; 42
@@ -73,12 +79,38 @@
 	.WORD OFFENSIVE_MENU                    ; 4D
 	.WORD CLOCK_SCREEN                      ; 4E
 	.WORD $B63C                             ; 4F
-	.WORD $B653, $B665, $B672, $B680, $B692, $B69F, $B6B5, $B6F2, $B72F, $B73F, $B750, $B75D
+	.WORD $B653                             ; 50
+	.WORD $B665                             ; 51
+	.WORD $B672                             ; 52
+	.WORD $B680                             ; 53
+	.WORD $B692                             ; 54
+	.WORD $B69F                             ; 55
+	.WORD $B6B5                             ; 56
+	.WORD $B6F2                             ; 57
+	.WORD $B72F                             ; 58
+	.WORD $B73F                             ; 59
+	.WORD $B750                             ; 5A
+	.WORD $B75D                             ; 5B
 	.WORD TOUCHBACK_SCREEN                  ; 5C
 	.WORD $B77D                             ; 5D
 	.WORD $B795                             ; 5E
 	.WORD RECOVER_SCREEN                    ; 5F
-	.WORD $B7AE, $B7BB, $B7D1, $B7E9, $B7FF, $B816, $B823, $B834, $B849, $B85A, $B870, $B880, $B880, $B880, $B880, $B880
+	.WORD $B7AE                             ; 60
+	.WORD $B7BB                             ; 61
+	.WORD $B7D1                             ; 62
+	.WORD $B7E9                             ; 63
+	.WORD $B7FF                             ; 64
+	.WORD $B816                             ; 65
+	.WORD $B823                             ; 66
+	.WORD $B834                             ; 67
+	.WORD $B849                             ; 68
+	.WORD $B85A                             ; 69
+	.WORD $B870                             ; 6A
+	.WORD $B880                             ; 6B
+	.WORD $B880                             ; 6C
+	.WORD $B880                             ; 6D
+	.WORD $B880                             ; 6E
+	.WORD $B880                             ; 6F
 
 MAIN_MENU_SCREEN:
 	.BYTE $C9

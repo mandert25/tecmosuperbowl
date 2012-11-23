@@ -2752,42 +2752,50 @@ vram_column_control:
 L_CEB9:
 	JSR vram_transfer_start
 	LDY #$00
-	LDA ($3E),Y
-	STA $67
+	LDA (TEMP3E),Y
+	STA TEMP67
 	INY
-	LDA ($3E),Y
-	STA $68
+	LDA (TEMP3E),Y
+	STA TEMP68
+; Update Data Address
 	LDA #$02
 @Loop1:
 	CLC
-	ADC $3E
-	STA $3E
-	LDA $3F
+	ADC TEMP3E_LO
+	STA TEMP3E_LO
+	LDA TEMP3E_HI
 	ADC #$00
-	STA $3F
-	LDY $65
-	LDX $66
-	LDA $68
+	STA TEMP3E_HI
+; Set Buffer
+	LDY TEMP65_LO
+	LDX TEMP65_HI
+	LDA TEMP68
 	JSR buffer_add
+; Store in Buffer
 	LDY #$00
 @Loop2:
-	LDA ($3E),Y
-	STA $033A,X
+	LDA (TEMP3E),Y
+	STA BUFFER,X
 	INX
 	INY
-	CPY $68
+; Check for End
+	CPY TEMP68
 	BNE @Loop2
+; Set End of Buffer
 	JSR buffer_end
-	LDA $65
+; Set to Next Row
+	LDA TEMP65_LO
 	CLC
 	ADC #$20
-	STA $65
-	LDA $66
+	STA TEMP65_LO
+	LDA TEMP65_HI
 	ADC #$00
-	STA $66
-	LDA $68
-	DEC $67
+	STA TEMP65_HI
+; Check for another row
+	LDA TEMP68
+	DEC TEMP67
 	BNE @Loop1
+; Set to Finished
 	JMP vram_transfer_finished
 
 buffer_large_text:

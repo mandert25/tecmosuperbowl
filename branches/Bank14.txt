@@ -2292,7 +2292,7 @@
 
 .segment "BANK_14_C"
 L_14_AC00:
-	.WORD $AC20
+	.WORD L_14_AC20
 	.WORD $ACB0
 	.WORD $ACC6
 	.WORD $ACCD
@@ -2309,150 +2309,31 @@ L_14_AC00:
 	.WORD $AE6C
 	.WORD $AE70
 
-	.BYTE $03
-	.BYTE $00
-	.BYTE $07
-	.BYTE $0F
-	.BYTE $0B
-	.BYTE $0F
-	.BYTE $0F
-	.BYTE $0F
-	.BYTE $13
-	.BYTE $0F
-	.BYTE $17
-	.BYTE $0F
+L_14_AC20:
+	.BYTE $03, $00, $07, $0F, $0B, $0F, $0F, $0F, $13, $0F, $17, $0F
 	.BYTE $22
-	.BYTE $03
-	.BYTE $10
-	.BYTE $07
-	.BYTE $00
-	.BYTE $0B
-	.BYTE $0F
-	.BYTE $0F
-	.BYTE $0F
-	.BYTE $13
-	.BYTE $0F
-	.BYTE $17
-	.BYTE $0F
+	.BYTE $03, $10, $07, $00, $0B, $0F, $0F, $0F, $13, $0F, $17, $0F
 	.BYTE $22
-	.BYTE $03
-	.BYTE $30
-	.BYTE $07
-	.BYTE $10
-	.BYTE $0B
-	.BYTE $00
-	.BYTE $0F
-	.BYTE $0F
-	.BYTE $13
-	.BYTE $0F
-	.BYTE $17
-	.BYTE $0F
+	.BYTE $03, $30, $07, $10, $0B, $00, $0F, $0F, $13, $0F, $17, $0F
 	.BYTE $22
-	.BYTE $03
-	.BYTE $10
-	.BYTE $07
-	.BYTE $30
-	.BYTE $0B
-	.BYTE $10
-	.BYTE $0F
-	.BYTE $00
-	.BYTE $13
-	.BYTE $0F
-	.BYTE $17
-	.BYTE $0F
+	.BYTE $03, $10, $07, $30, $0B, $10, $0F, $00, $13, $0F, $17, $0F
 	.BYTE $22
-	.BYTE $03
-	.BYTE $00
-	.BYTE $07
-	.BYTE $10
-	.BYTE $0B
-	.BYTE $30
-	.BYTE $0F
-	.BYTE $10
-	.BYTE $13
-	.BYTE $00
-	.BYTE $17
-	.BYTE $0F
+	.BYTE $03, $00, $07, $10, $0B, $30, $0F, $10, $13, $00, $17, $0F
 	.BYTE $22
-	.BYTE $03
-	.BYTE $0F
-	.BYTE $07
-	.BYTE $00
-	.BYTE $0B
-	.BYTE $10
-	.BYTE $0F
-	.BYTE $30
-	.BYTE $13
-	.BYTE $10
-	.BYTE $17
-	.BYTE $00
+	.BYTE $03, $0F, $07, $00, $0B, $10, $0F, $30, $13, $10, $17, $00
 	.BYTE $22
-	.BYTE $03
-	.BYTE $0F
-	.BYTE $07
-	.BYTE $0F
-	.BYTE $0B
-	.BYTE $00
-	.BYTE $0F
-	.BYTE $10
-	.BYTE $13
-	.BYTE $30
-	.BYTE $17
-	.BYTE $10
+	.BYTE $03, $0F, $07, $0F, $0B, $00, $0F, $10, $13, $30, $17, $10
 	.BYTE $22
-	.BYTE $03
-	.BYTE $0F
-	.BYTE $07
-	.BYTE $0F
-	.BYTE $0B
-	.BYTE $0F
-	.BYTE $0F
-	.BYTE $00
-	.BYTE $13
-	.BYTE $10
-	.BYTE $17
-	.BYTE $30
+	.BYTE $03, $0F, $07, $0F, $0B, $0F, $0F, $00, $13, $10, $17, $30
 	.BYTE $22
-	.BYTE $03
-	.BYTE $0F
-	.BYTE $07
-	.BYTE $0F
-	.BYTE $0B
-	.BYTE $0F
-	.BYTE $0F
-	.BYTE $0F
-	.BYTE $13
-	.BYTE $00
-	.BYTE $17
-	.BYTE $10
+	.BYTE $03, $0F, $07, $0F, $0B, $0F, $0F, $0F, $13, $00, $17, $10
 	.BYTE $22
-	.BYTE $03
-	.BYTE $0F
-	.BYTE $07
-	.BYTE $0F
-	.BYTE $0B
-	.BYTE $0F
-	.BYTE $0F
-	.BYTE $0F
-	.BYTE $13
-	.BYTE $0F
-	.BYTE $17
-	.BYTE $00
+	.BYTE $03, $0F, $07, $0F, $0B, $0F, $0F, $0F, $13, $0F, $17, $00
 	.BYTE $22
-	.BYTE $03
-	.BYTE $0F
-	.BYTE $07
-	.BYTE $0F
-	.BYTE $0B
-	.BYTE $0F
-	.BYTE $0F
-	.BYTE $0F
-	.BYTE $13
-	.BYTE $0F
-	.BYTE $17
-	.BYTE $0F
+	.BYTE $03, $0F, $07, $0F, $0B, $0F, $0F, $0F, $13, $0F, $17, $0F
 	.BYTE $22
 	.BYTE $FF
+
 	.BYTE $05
 	.BYTE $1A
 	.BYTE $06

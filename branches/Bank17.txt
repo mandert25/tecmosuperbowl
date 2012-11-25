@@ -17,7 +17,7 @@ L_17_8012:
 	JSR clear_sprites
 	LDA #$01
 	JSR switch_thread
-;
+; Draw Intro
 	LDA #$00
 	LDX #BANK7
 	JSR set_draw_controls_thread
@@ -36,6 +36,7 @@ L_17_8012:
 	BEQ @Loop1
 @Loop3:
 	JSR L_17_94E2
+; Draw Start Screen
 	LDA #$01
 	LDX #$06 ; BANK7
 	JSR set_draw_controls_thread
@@ -51,6 +52,7 @@ L_17_8012:
 	AND #$90
 	BEQ @Loop4
 	JSR L_17_94F4
+; Draw Flashing Start Game
 	LDA #$57
 	LDX #$06 ; BANK7
 	JSR set_draw_controls_thread
@@ -2590,9 +2592,11 @@ L_17_9294:
 	BEQ @Loop9
 	CMP #$0A
 	BNE @Loop11
+; Draw NFC Champion Screen
 	LDA #$6B
 	JMP @Loop10
 @Loop9:
+; Draw AFC Champion Screen
 	LDA #$3A
 @Loop10:
 	LDX #$06 ; BANK7

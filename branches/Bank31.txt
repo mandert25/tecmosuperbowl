@@ -738,11 +738,11 @@ L_C51C:
 	LDY #$6D
 	LDX #$20
 	LDA $0399
-	JSR L_D5A0
+	JSR buffer_2_digit_number_r
 	LDY #$70
 	LDX #$20
 	LDA $039E
-	JSR L_D5A0
+	JSR buffer_2_digit_number_r
 	LDA $0338,X
 	BNE @Loop1
 	SEC
@@ -3888,68 +3888,85 @@ L_D57F:
 	BNE @more
 	JMP buffer_end
 
-L_D5A0:
+buffer_2_digit_number_r:
+; Store Number
 	STA TEMP45
+; Create Buffer
 	LDA #$02
 	JSR buffer_add
+; Write Number to Buffer
 	CLC
 	LDA TEMP45
-	JSR L_D5F8
+	JSR hi_digit_to_tile
 	LDA TEMP45
-	JSR L_D605
+	JSR lo_digit_to_tile
+; End Buffer
 	JMP buffer_end
 
-L_D5B5:
-	STA $45
+buffer_2_digit_number_l:
+; Store Number
+	STA TEMP45
+; Create Buffer
 	LDA #$02
 	JSR buffer_add
-	LDA $45
+; Check for Single Digit
+	LDA TEMP45
 	AND #$F0
-	BEQ @Loop1
-	JSR L_D5F8
-	LDA $45
-	JSR L_D605
+	BEQ @single
+; Write Number to Buffer
+	JSR hi_digit_to_tile
+	LDA TEMP45
+	JSR lo_digit_to_tile
+; End Buffer
 	JMP buffer_end
-@Loop1:
-	LDA $45
-	JSR L_D605
+@single:
+; Write Number to Buffer
+	LDA TEMP45
+	JSR lo_digit_to_tile
 	LDA #$00
-	STA $033A,X
+	STA BUFFER,X
 	INX
+; End Buffer
 	JMP buffer_end
 
-L_D5DB:
+buffer_4_digit_number_r:
+; Create Buffer
 	LDA #$04
 	JSR buffer_add
+; Write Number to Buffer
 	CLC
-	LDA $45
-	JSR L_D5F8
-	LDA $45
-	JSR L_D5FE
-	LDA $44
-	JSR L_D5F8
-	LDA $44
-	JSR L_D605
+	LDA TEMP44_HI
+	JSR hi_digit_to_tile
+	LDA TEMP44_HI
+	JSR mid_digit_to_tile
+	LDA TEMP44_LO
+	JSR hi_digit_to_tile
+	LDA TEMP44_LO
+	JSR lo_digit_to_tile
+; End Buffer
 	JMP buffer_end
 
-L_D5F8:
+hi_digit_to_tile:
+; Get Hi Nibble
 	PHP
 	LSR
 	LSR
 	LSR
 	LSR
 	PLP
-L_D5FE:
+mid_digit_to_tile:
+; Check for empty digit
 	AND #$0F
-	BEQ L_D603
+	BEQ :+
+; Set to confirm digit
 	SEC
-L_D603:
-	BCC L_D609
-L_D605:
+:	BCC :+
+lo_digit_to_tile:
+; Convert Nibble to Tile
 	AND #$0F
 	ORA #$30
-L_D609:
-	STA BUFFER,X
+; Store Tile in Buffer
+:	STA BUFFER,X
 	INX
 	RTS
 
@@ -4434,26 +4451,31 @@ L_D88A:
 	STA $40
 	RTS
 
-L_D8B7:
-	STA $45
+hex_to_decimal:
+; Get Lo Digit
+	STA TEMP45
 	LDA #$0A
-	STA $44
+	STA TEMP44
 	JSR divide_8
-	LDA $42
-	STA $43
+	LDA TEMP42
+	STA TEMP43
+; Get Mid Digit
 	JSR divide_8
-	LDA $42
+; Concatenate Bottom Digits
+	LDA TEMP42
 	ASL
 	ASL
 	ASL
 	ASL
-	ORA $43
-	STA $43
+	ORA TEMP43
+	STA TEMP43
+; Get Hi Digit
 	JSR divide_8
-	LDA $42
-	STA $45
-	LDA $43
-	STA $44
+; Store Decimal Number
+	LDA TEMP42
+	STA TEMP44_HI
+	LDA TEMP43
+	STA TEMP44_LO
 	RTS
 
 bank_swap_8000:

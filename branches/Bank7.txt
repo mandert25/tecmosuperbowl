@@ -2401,93 +2401,43 @@ L_7_AE01:
 L_7_AE0C:
 	.BYTE $C8
 	.BYTE $F1
-	.BYTE $F7
-	.BYTE $20
-	.BYTE $C0
-	.BYTE $01
-	.BYTE $88
-	.BYTE $18
-	.BYTE $1A
-	.BYTE $F9
-	.BYTE $02
-	.BYTE $B6
-	.BYTE $B7
+	.BYTE $F7, $20
+	.BYTE $C0, $01, $88, $18, $1A
+	.BYTE $F9, $02, $B6, $B7
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $42
-	.BYTE "SUPER CHAMPION"
-	.BYTE $FD
-	.BYTE $F9
-	.BYTE $AD
-	.BYTE $FA
-	.BYTE $1B
-	.BYTE $E5
-	.BYTE $FF
-	.BYTE $F3
-	.BYTE $44
-	.BYTE $FB
-	.BYTE $F0
-	.BYTE $FB
-	.BYTE $F0
-	.BYTE $F3
-	.BYTE $45
-	.BYTE $C3
-	.BYTE $F8
-	.BYTE $00
-	.BYTE $1F
-	.BYTE $C0
-	.BYTE $51
-	.BYTE $F8
-	.BYTE $02
-	.BYTE $FB
-	.BYTE $B4
+	.BYTE $8A, $42
+	.BYTE      "SUPER CHAMPION"
+	.BYTE $FD, <$F9, >$AD
+	.BYTE $FA, $1B
+	.BYTE $E5, $FF
+	.BYTE $F3, $44
+	.BYTE $FB, $F0
+	.BYTE $FB, F0
+	.BYTE $F3, $45
+	.BYTE $C3, $F8, $00, $1F
+	.BYTE $C0, $51, $F8, $02
+	.BYTE $FB, $B4
 	.BYTE $ED
 	.BYTE $C1
 	.BYTE $EF
-	.BYTE $F7
-	.BYTE $3E
-	.BYTE $F8
-	.BYTE $3D
-	.BYTE $F9
-	.BYTE $03
-	.BYTE $BE
-	.BYTE $BF
-	.BYTE $C0
-	.BYTE $E9
-	.BYTE $00
-	.BYTE $C0
-	.BYTE $41
-	.BYTE $EF
-	.BYTE $00
-	.BYTE $28
-	.BYTE $18
-	.BYTE $1A
-	.BYTE $C0
-	.BYTE $51
-	.BYTE $F8
-	.BYTE $60
-	.BYTE $EA
-	.BYTE $50
-	.BYTE $FB
-	.BYTE $0A
-	.BYTE $EA
-	.BYTE $51
-	.BYTE $FB
-	.BYTE $0A
-	.BYTE $EA
-	.BYTE $3F
-	.BYTE $FB
-	.BYTE $50
-	.BYTE $E6
-	.BYTE $CC
+	.BYTE $F7, $3E
+	.BYTE $F8, $3D
+	.BYTE $F9, $03, $BE, $BF, $C0
+	.BYTE $E9, $00
+	.BYTE $C0, $41, $EF, $00, $28, $18, $1A
+	.BYTE $C0, $51, $F8, $60
+	.BYTE $EA, $50
+	.BYTE $FB, $0A
+	.BYTE $EA, $51
+	.BYTE $FB, $0A
+	.BYTE $EA, $3F
+	.BYTE $FB, $50
+	.BYTE $E6, $CC
 	.BYTE $C1
 	.BYTE $EF
 	.BYTE $F2
 	.BYTE $F6
-	.BYTE $83
-	.BYTE $C8
-	.BYTE $41
-	.BYTE $B4
+	.BYTE $83, $C8, <$41, >$B4
 	.BYTE $88, $A4
 	.BYTE "QUARTERBACKS"
 	.BYTE $8D, $80
@@ -2497,8 +2447,7 @@ L_7_AE0C:
 	.BYTE $EB, $06, $3F
 	.BYTE $FD, $8C, $B0
 	.BYTE $FD, $9D, $B0
-	.BYTE $83, $C8
-	.BYTE $41, $B4
+	.BYTE $83, $C8, <$41, >$B4
 	.BYTE $88, $A3
 	.BYTE "RUNNING BACKS"
 	.BYTE $8D, $40

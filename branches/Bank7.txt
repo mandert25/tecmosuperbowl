@@ -2439,17 +2439,17 @@ L_7_AE0C:
 	.BYTE $F6
 	.BYTE $83, $C8, <$41, >$B4
 	.BYTE $88, $A4
-	.BYTE "QUARTERBACKS"
+	.BYTE      "QUARTERBACKS"
 	.BYTE $8D, $80
 	.BYTE $DC, $00
 	.BYTE $B5
 	.BYTE $DC, $01
 	.BYTE $EB, $06, $3F
-	.BYTE $FD, $8C, $B0
-	.BYTE $FD, $9D, $B0
+	.BYTE $FD, <$8C, >$B0
+	.BYTE $FD, <$9D, >$B0
 	.BYTE $83, $C8, <$41, >$B4
 	.BYTE $88, $A3
-	.BYTE "RUNNING BACKS"
+	.BYTE      "RUNNING BACKS"
 	.BYTE $8D, $40
 	.BYTE $DC, $02
 	.BYTE $B3
@@ -2459,12 +2459,11 @@ L_7_AE0C:
 	.BYTE $B3
 	.BYTE $DC, $05
 	.BYTE $EB, $00, $3F
-	.BYTE $FD, $8C, $B0
-	.BYTE $FD, $9D, $B0
-	.BYTE $83, $C8
-	.BYTE $41, $B4
+	.BYTE $FD, <$8C, >$B0
+	.BYTE $FD, <$9D, >$B0
+	.BYTE $83, $C8, <$41, >$B4
 	.BYTE $88, $A2
-	.BYTE "WIDE RECEIVERS"
+	.BYTE      "WIDE RECEIVERS"
 	.BYTE $8D, $40
 	.BYTE $DC, $06
 	.BYTE $B3
@@ -2475,150 +2474,93 @@ L_7_AE0C:
 	.BYTE $DC, $09
 	.BYTE $EB, $00, $3F
 	.BYTE $EE, $00, $3F, $07, $27
-	.BYTE $FD, $8C, $B0
-	.BYTE $FD, $9D, $B0
-	.BYTE $83, $C8
-	.BYTE $41, $B4
+	.BYTE $FD, <$8C, >$B0
+	.BYTE $FD, <$9D, >$B0
+	.BYTE $83, $C8, <$41, >$B4
 	.BYTE $88, $A6
-	.BYTE "TIGHT ENDS"
+	.BYTE      "TIGHT ENDS"
 	.BYTE $8D, $80
 	.BYTE $DC, $0A
 	.BYTE $B5
 	.BYTE $DC, $0B
 	.BYTE $EB, $00, $3F
 	.BYTE $EE, $00, $3F, $07, $21
-	.BYTE $FD, $8C, $B0
-	.BYTE $FD, $9D, $B0
-	.BYTE $83, $C8
-	.BYTE $41, $B4
+	.BYTE $FD, <$8C, >$B0
+	.BYTE $FD, <$9D, >$B0
+	.BYTE $83, $C8, <$41, >$B4
 	.BYTE $88, $AA
-	.BYTE "CENTER"
+	.BYTE      "CENTER"
 	.BYTE $8D, $20
 	.BYTE $DC, $0C
-	.BYTE $83, $E0
-	.BYTE $41, $B4
+	.BYTE $83, $E0, <$41, >$B4
 	.BYTE $8A, $0A
-	.BYTE "GUARDS"
+	.BYTE      "GUARDS"
 	.BYTE $8E, $80
 	.BYTE $DC, $0D
 	.BYTE $B3
 	.BYTE $DC, $0E
 	.BYTE $EB, $00, $3F
 	.BYTE $EE, $00, $3F, $07, $29
-	.BYTE $C0
-	.BYTE $11
-	.BYTE $38
-	.BYTE $6F
-	.BYTE $C0
-	.BYTE $12
-	.BYTE $30
-	.BYTE $00
-	.BYTE $C0
-	.BYTE $13
-	.BYTE $25
-	.BYTE $91
-	.BYTE $FB
-	.BYTE $26
-	.BYTE $C0
-	.BYTE $61
-	.BYTE $00
-	.BYTE $C0
-	.BYTE $62
-	.BYTE $00
-	.BYTE $C0
-	.BYTE $63
-	.BYTE $00
-	.BYTE $FD, $9D, $B0
-	.BYTE $83, $C8
-	.BYTE $41, $B4
+	.BYTE $C0, $11, $38, $6F
+	.BYTE $C0, $12, $30, $00
+	.BYTE $C0, $13, $25, $91
+	.BYTE $FB, $26
+	.BYTE $C0, $61, $00
+	.BYTE $C0, $62, $00
+	.BYTE $C0, $63, $00
+	.BYTE $FD, <$9D, >$B0
+	.BYTE $83, $C8, <$41, >$B4
 	.BYTE $88, $A9
-	.BYTE "TACKLES"
+	.BYTE      "TACKLES"
 	.BYTE $8D, $80
 	.BYTE $DC, $0F
 	.BYTE $B5
 	.BYTE $DC, $10
 	.BYTE $EB, $00, $3F
 	.BYTE $EE, $00, $3F, $07, $2C
-	.BYTE $FD, $8C, $B0
-	.BYTE $FD, $9D, $B0
-	.BYTE $83, $C8
-	.BYTE $41, $B4
+	.BYTE $FD, <$8C, >$B0
+	.BYTE $FD, <$9D, $>B0
+	.BYTE $83, $C8, <$41, >$B4
 	.BYTE $88, $AA
-	.BYTE "KICKER"
+	.BYTE      "KICKER"
 	.BYTE $8D, $20
 	.BYTE $DC, $1C
-	.BYTE $83, $E0
-	.BYTE $41, $B4
+	.BYTE $83, $E0, <$41, >$B4
 	.BYTE $8A, $0A
-	.BYTE "PUNTER"
+	.BYTE      "PUNTER"
 	.BYTE $8E, $80
 	.BYTE $DC, $1D
 	.BYTE $EB, $00, $3F
 	.BYTE $EE, $00, $3F, $07, $26
-	.BYTE $C0, $11
-	.BYTE $38
-	.BYTE $6F
-	.BYTE $C0
-	.BYTE $12
-	.BYTE $30
-	.BYTE $00
-	.BYTE $C0
-	.BYTE $13
-	.BYTE $25
-	.BYTE $91
-	.BYTE $FB
-	.BYTE $26
-	.BYTE $C0
-	.BYTE $61
-	.BYTE $00
-	.BYTE $C0
-	.BYTE $62
-	.BYTE $00
-	.BYTE $C0
-	.BYTE $63
-	.BYTE $00
-	.BYTE $FD, $9D, $B0
-	.BYTE $83, $C8
-	.BYTE $41, $B4
+	.BYTE $C0, $11, $38, $6F
+	.BYTE $C0, $12, $30, $00
+	.BYTE $C0, $13, $25, $91
+	.BYTE $FB, $26
+	.BYTE $C0, $61, $00
+	.BYTE $C0, $62, $00
+	.BYTE $C0, $63, $00
+	.BYTE $FD, <$9D, >$B0
+	.BYTE $83, $C8, <$41, >$B4
 	.BYTE $88, $A2
-	.BYTE "DEFENSIVE LINE"
+	.BYTE      "DEFENSIVE LINE"
 	.BYTE $8D, $40
 	.BYTE $DC, $11
 	.BYTE $B3
 	.BYTE $DC, $12
 	.BYTE $B3
 	.BYTE $DC, $13
-	.BYTE $EB
-	.BYTE $06
-	.BYTE $3F
-	.BYTE $C0
-	.BYTE $11
-	.BYTE $40
-	.BYTE $6F
-	.BYTE $C0
-	.BYTE $12
-	.BYTE $25
-	.BYTE $91
-	.BYTE $C0
-	.BYTE $13
-	.BYTE $20
-	.BYTE $6F
-	.BYTE $FB
-	.BYTE $26
-	.BYTE $C0
-	.BYTE $61
-	.BYTE $00
-	.BYTE $C0
-	.BYTE $62
-	.BYTE $00
-	.BYTE $C0
-	.BYTE $63
-	.BYTE $00
-	.BYTE $FD, $9D, $B0
-	.BYTE $83, $C8
-	.BYTE $41, $B4
+	.BYTE $EB, $06, $3F
+	.BYTE $C0, $11, $40, $6F
+	.BYTE $C0, $12, $25, $91
+	.BYTE $C0, $13, $20, $6F
+	.BYTE $FB, $26
+	.BYTE $C0, $61, $00
+	.BYTE $C0, $62, $00
+	.BYTE $C0, $63, $00
+	.BYTE $FD, <$9D, >$B0
+	.BYTE $83, $C8, <$41, >$B4
 	.BYTE $88, $A4
-	.BYTE "LINE BACKERS"
+	.BYTE      "LINE BACKERS"
 	.BYTE $8D, $40
 	.BYTE $DC, $14
 	.BYTE $B3
@@ -2629,12 +2571,11 @@ L_7_AE0C:
 	.BYTE $DC, $17
 	.BYTE $EB, $00, $3F
 	.BYTE $EE, $00, $3F, $07, $24
-	.BYTE $FD, $8C, $B0
-	.BYTE $FD, $9D, $B0
-	.BYTE $83, $C8
-	.BYTE $41, $B4
+	.BYTE $FD, <$8C, >$B0
+	.BYTE $FD, <$9D, >$B0
+	.BYTE $83, $C8, <$41, >$B4
 	.BYTE $88, $A1
-	.BYTE "DEFENSIVE BACKS"
+	.BYTE      "DEFENSIVE BACKS"
 	.BYTE $8D, $40
 	.BYTE $DC, $18
 	.BYTE $B3
@@ -2643,76 +2584,33 @@ L_7_AE0C:
 	.BYTE $DC, $1A
 	.BYTE $B3
 	.BYTE $DC, $1B
-	.BYTE $EB
-	.BYTE $00
-	.BYTE $3F
-	.BYTE $EE
-	.BYTE $00
-	.BYTE $3F
-	.BYTE $07
-	.BYTE $38
-	.BYTE $FD
-	.BYTE $8C
-	.BYTE $B0
-	.BYTE $FD
-	.BYTE $9D
-	.BYTE $B0
-	.BYTE $F8
-	.BYTE $23
-	.BYTE $E9
-	.BYTE $1A
-	.BYTE $C3
-	.BYTE $00
-	.BYTE $A0
-	.BYTE $20
-	.BYTE $C0
-	.BYTE $11
-	.BYTE $36
-	.BYTE $88
-	.BYTE $C0
-	.BYTE $12
-	.BYTE $24
-	.BYTE $78
-	.BYTE $C0
-	.BYTE $23
-	.BYTE $28
-	.BYTE $00
-	.BYTE $18
-	.BYTE $1A
-	.BYTE $FB
-	.BYTE $3E
-	.BYTE $E9
-	.BYTE $1F
-	.BYTE $FB
-	.BYTE $2A
-	.BYTE $C0
-	.BYTE $61
-	.BYTE $00
-	.BYTE $FB
-	.BYTE $26
-	.BYTE $E9
-	.BYTE $20
-	.BYTE $FB
-	.BYTE $1E
-	.BYTE $C0
-	.BYTE $62
-	.BYTE $00
+	.BYTE $EB, $00, $3F
+	.BYTE $EE, $00, $3F, $07, $38
+	.BYTE $FD, <$8C, >$B0
+	.BYTE $FD, <$9D, >$B0
+	.BYTE $F8, $23
+	.BYTE $E9, $1A
+	.BYTE $C3, $00, $A0, $20
+	.BYTE $C0, $11, $36, $88
+	.BYTE $C0, $12, $24, $78
+	.BYTE $C0, $23, $28, $00, $18, $1A
+	.BYTE $FB, $3E
+	.BYTE $E9, $1F
+	.BYTE $FB, $2A
+	.BYTE $C0, $61, $00
+	.BYTE $FB, $26
+	.BYTE $E9, $20
+	.BYTE $FB, $1E
+	.BYTE $C0, $62, $00
 	.BYTE $F5
-	.BYTE $8A
-	.BYTE $8B
-	.BYTE $6B
-	.BYTE " STAFF "
-	.BYTE $6B
-	.BYTE $FB
-	.BYTE $78
-	.BYTE $E8
-	.BYTE $CC
+	.BYTE $8A, $8B
+	.BYTE      $6B, " STAFF ", $6B
+	.BYTE $FB, $78
+	.BYTE $E8, $CC
 	.BYTE $EF
-	.BYTE $FB
-	.BYTE $1E
-	.BYTE $FC
-	.BYTE $91
-	.BYTE $B8
+	.BYTE $FB, $1E
+	.BYTE $FC, <$91, >$B8
+
 	.BYTE $C0
 	.BYTE $11
 	.BYTE $40

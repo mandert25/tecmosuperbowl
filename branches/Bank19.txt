@@ -363,6 +363,7 @@ L_19_82D0:
 	JSR L_19_8FBC
 	BCS L_19_831C
 	JSR L_19_9314
+; Draw QB Sack
 	LDA #$26
 	JSR L_19_A1C5
 	JSR L_19_9AD9
@@ -373,6 +374,7 @@ L_19_831C:
 	LDA #$00
 	STA $69
 	JSR L_19_9314
+; Draw QB Sack Side Change
 	LDA #$27
 	JSR L_19_A1C5
 	JSR L_19_9E63
@@ -386,6 +388,7 @@ L_19_832E:
 	STA $73
 	LDA SAFETY_POINTS
 	JSR L_19_9363
+; Draw QB Sack Safety
 	LDA #$28
 	JSR L_19_A1C5
 	JSR L_19_9E63
@@ -737,6 +740,7 @@ L_19_8602:
 	LDX #>L_4_B600
 	JSR L_19_979F
 	JSR L_19_8661
+; Draw Touchdown
 	LDX #$38
 	LDA $71
 	AND #$20
@@ -756,6 +760,7 @@ L_19_8602:
 	JSR L_19_8661
 	LDA #$00
 	STA $70
+; Draw Rushing Touchdown
 	LDA #$38
 	JSR L_19_A1C5
 	JMP L_19_8689
@@ -1264,6 +1269,7 @@ L_19_87A1:
 	JSR L_19_8FBC
 	BCS @Loop33
 	JSR L_19_9314
+; Draw QB Sack
 	LDA #$26
 	JSR L_19_A1C5
 	JSR L_19_9AD9
@@ -1274,6 +1280,7 @@ L_19_87A1:
 	LDA #$00
 	STA $69
 	JSR L_19_9314
+; Draw QB Sack Side Change
 	LDA #$27
 	JSR L_19_A1C5
 	JSR L_19_9E7B
@@ -1287,6 +1294,7 @@ L_19_87A1:
 	STA $73
 	LDA SAFETY_POINTS
 	JSR L_19_9342
+; Draw QB Sack Safety
 	LDA #$28
 	JSR L_19_A1C5
 	JSR L_19_9E7B
@@ -1643,6 +1651,7 @@ L_19_8D8A:
 	LDX #>L_4_B600
 	JSR L_19_975F
 	JSR L_19_8DE9
+; Draw Touchdown
 	LDX #$38
 	LDA $71
 	AND #$20
@@ -1662,6 +1671,7 @@ L_19_8D8A:
 	JSR L_19_8DE9
 	LDA #$C3
 	STA $70
+; Draw Rushing Touchdown
 	LDA #$38
 	JSR L_19_A1C5
 	JMP L_19_8E11
@@ -1852,6 +1862,7 @@ L_19_8F29:
 	CLC
 	RTS
 @Loop2:
+; Draw Player 1 Chains First Down
 	LDA #$70
 	JSR L_19_A1C5
 	CLC
@@ -1889,6 +1900,7 @@ L_19_8F74:
 	CLC
 	RTS
 @Loop1:
+; Draw Player 2 First Down Chains
 	LDA #$75
 	JSR L_19_A1C5
 	CLC
@@ -4803,6 +4815,7 @@ L_19_A2B7:
 	LDA #$3C
 	JSR switch_thread
 	JSR palette_fade_out
+; Draw Injury
 	LDA #$37
 	JSR L_19_A1C5
 	RTS
@@ -4813,6 +4826,7 @@ L_19_A2B7:
 	JSR palette_fade_out
 	LDA #$2B
 	JSR L_C41F
+; Draw Injury
 	LDA #$37
 	JSR L_19_A1C5
 @Loop14:

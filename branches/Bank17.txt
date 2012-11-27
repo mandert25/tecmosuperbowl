@@ -2613,6 +2613,7 @@ L_17_9294:
 	LDA $679E,X
 	STA $6E
 	JSR L_17_B489
+; Draw Ending Screens
 	LDA #$3B
 	LDX #$06 ; BANK7
 	JSR do_draw_controls_thread
@@ -6253,6 +6254,7 @@ L_17_AE0D:
 	CMP #$0A
 	BEQ @Loop2
 @Loop1:
+; Draw Halftime
 	JSR L_D8F7
 	AND #$03
 	CLC
@@ -6260,6 +6262,7 @@ L_17_AE0D:
 	LDX #$06 ; BANK7
 	JMP L_17_B472
 @Loop2:
+; Draw Special Halftime
 	LDA #$58
 	LDX #$06 ; BANK7
 	JMP L_17_B472
@@ -6376,6 +6379,7 @@ L_17_AE5D:
 	JSR store_sram_checksum
 	LDA #$C0
 	STA PRG_RAM_PROTECT
+; Draw Divison Champ Screen
 	LDA #$56
 	LDX #$06 ; BANK7
 	JSR do_draw_controls_thread
@@ -6877,6 +6881,7 @@ L_17_B2A4:
 	JSR store_sram_checksum
 	LDA #$C0
 	STA PRG_RAM_PROTECT
+; Draw Division Champ Screen
 	LDA #$56
 	LDX #$06 ; BANK7
 	JSR do_draw_controls_thread

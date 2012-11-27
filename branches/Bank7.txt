@@ -3926,24 +3926,14 @@ L_7_B66B:
 	.BYTE $FE
 
 L_7_B678:
-	.BYTE $FD
-	.BYTE $8A
-	.BYTE $B6
-	.BYTE $F7
-	.BYTE $03
-	.BYTE $FD
-	.BYTE $2D
-	.BYTE $B2
-	.BYTE $FD
-	.BYTE $59
-	.BYTE $B2
-	.BYTE $FD
-	.BYTE $D7
-	.BYTE $B2
-	.BYTE $FD
-	.BYTE $77
-	.BYTE $B4
+	.BYTE $FD, <$8A, >$B6
+	.BYTE $F7, $03
+	.BYTE $FD, <$2D, >$B2
+	.BYTE $FD, <$59, >$B2
+	.BYTE $FD, <$D7, >$B2
+	.BYTE $FD, <$77, >$B4
 	.BYTE $FF
+
 	.BYTE $C8
 	.BYTE $F1
 	.BYTE $F6

@@ -17,6 +17,7 @@ L_27_8024:	JMP L_27_8024
 
 L_27_802D:
 	JSR palette_fade_out
+; Draw Sound Mode
 	LDA #$6F
 	LDX #$06 ; BANK7
 	JSR set_draw_controls_thread

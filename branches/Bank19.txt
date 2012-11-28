@@ -4370,6 +4370,7 @@ L_19_A000:
 	JSR L_C481
 	JSR clear_nametables
 	JSR clear_sprites
+; Draw Situational Screens
 	LDA $B7
 	ASL
 	TAX

@@ -3986,158 +3986,59 @@ L_7_BC3E:
 	.BYTE $FE
 
 L_7_BC4C:
-	.BYTE $FD
-	.BYTE $1E
-	.BYTE $BC
-	.BYTE $C0
-	.BYTE $61
-	.BYTE $FC
-	.BYTE $FB
-	.BYTE $50
-	.BYTE $C0
-	.BYTE $61
-	.BYTE $00
-	.BYTE $FD
-	.BYTE $3E
-	.BYTE $BC
-	.BYTE $8A
-	.BYTE $64
-	.BYTE $53
-	.BYTE $45
-	.BYTE $43
-	.BYTE $4F
-	.BYTE $4E
-	.BYTE $44
-	.BYTE $20
-	.BYTE $44
-	.BYTE $4F
-	.BYTE $57
-	.BYTE $4E
-	.BYTE $21
-	.BYTE $F9
-	.BYTE $01
-	.BYTE $B5
-	.BYTE $FC
-	.BYTE $B1
-	.BYTE $BC
-	.BYTE $FD
-	.BYTE $1E
-	.BYTE $BC
-	.BYTE $C0
-	.BYTE $61
-	.BYTE $FC
-	.BYTE $FB
-	.BYTE $50
-	.BYTE $C0
-	.BYTE $61
-	.BYTE $00
-	.BYTE $FD
-	.BYTE $3E
-	.BYTE $BC
-	.BYTE $8A
-	.BYTE $66
-	.BYTE $54
-	.BYTE $48
-	.BYTE $49
-	.BYTE $52
-	.BYTE $44
-	.BYTE $20
-	.BYTE $44
-	.BYTE $4F
-	.BYTE $57
-	.BYTE $4E
-	.BYTE $21
-	.BYTE $F9
-	.BYTE $01
-	.BYTE $A0
-	.BYTE $FC
-	.BYTE $B1
-	.BYTE $BC
-	.BYTE $FD
-	.BYTE $1E
-	.BYTE $BC
-	.BYTE $C0
-	.BYTE $61
-	.BYTE $FC
-	.BYTE $FB
-	.BYTE $50
-	.BYTE $C0
-	.BYTE $61
-	.BYTE $00
-	.BYTE $FD
-	.BYTE $3E
-	.BYTE $BC
-	.BYTE $8A
-	.BYTE $64
-	.BYTE $46
-	.BYTE $4F
-	.BYTE $55
-	.BYTE $52
-	.BYTE $54
-	.BYTE $48
-	.BYTE $20
-	.BYTE $44
-	.BYTE $4F
-	.BYTE $57
-	.BYTE $4E
-	.BYTE $21
-	.BYTE $F9
-	.BYTE $01
-	.BYTE $A1
-	.BYTE $FC
-	.BYTE $B1
-	.BYTE $BC
-	.BYTE $EB
-	.BYTE $32
-	.BYTE $43
-	.BYTE $F3
-	.BYTE $01
-	.BYTE $DD
-	.BYTE $04
-	.BYTE $FB
-	.BYTE $06
-	.BYTE $FB
-	.BYTE $36
+	.BYTE $FD, <L_7_BC1E, >L_7_BC1E
+	.BYTE $C0, $61, $FC
+	.BYTE $FB, $50
+	.BYTE $C0, $61, $00
+	.BYTE $FD, <L_7_BC3E, >L_7_BC3E
+	.BYTE $8A, $64
+	.BYTE      "SECOND DOWN!"
+	.BYTE $F9, $01, $B5
+	.BYTE $FC, <L_7_BCB1, >L_7_BCB1
+
+L_7_BC6E:
+	.BYTE $FD, <L_7_BC1E, >L_7_BC1E
+	.BYTE $C0, $61, $FC
+	.BYTE $FB, $50
+	.BYTE $C0, $61, $00
+	.BYTE $FD, <L_7_BC3E, >L_7_BC3E
+	.BYTE $8A, $66
+	.BYTE      "THIRD DOWN!"
+	.BYTE $F9, $01, $A0
+	.BYTE $FC, <L_7_BCB1, >L_7_BCB1
+
+L_7_BC8F:
+	.BYTE $FD, <L_7_BC1E, >L_7_BC1E
+	.BYTE $C0, $61, $FC
+	.BYTE $FB, $50
+	.BYTE $C0, $61, $00
+	.BYTE $FD, <L_7_BC3E, >L_7_BC3E
+	.BYTE $8A, $64
+	.BYTE      "FOURTH DOWN!"
+	.BYTE $F9, $01, $A1
+	.BYTE $FC, <L_7_BCB1 >L_7_BCB1
+
+L_7_BCB1:
+	.BYTE $EB, $32, $43
+	.BYTE $F3, $01
+	.BYTE $DD, $04
+	.BYTE $FB, $06
+	.BYTE $FB, $36
 	.BYTE $FF
-	.BYTE $FD
-	.BYTE $1E
-	.BYTE $BC
-	.BYTE $C0
-	.BYTE $61
-	.BYTE $FC
-	.BYTE $FB
-	.BYTE $50
-	.BYTE $C0
-	.BYTE $61
-	.BYTE $00
-	.BYTE $FD
-	.BYTE $3E
-	.BYTE $BC
-	.BYTE $8A
-	.BYTE $65
-	.BYTE $43
-	.BYTE $48
-	.BYTE $41
-	.BYTE $4E
-	.BYTE $47
-	.BYTE $45
-	.BYTE $20
-	.BYTE $53
-	.BYTE $49
-	.BYTE $44
-	.BYTE $45
-	.BYTE $F9
-	.BYTE $01
-	.BYTE $B3
-	.BYTE $EB
-	.BYTE $32
-	.BYTE $43
-	.BYTE $F3
-	.BYTE $25
-	.BYTE $DD
-	.BYTE $04
-	.BYTE $FB
-	.BYTE $B4
+
+L_7_BCBD:
+	.BYTE $FD, <L_7_BC1E, >L_7_BC1E
+	.BYTE $C0, $61, $FC
+	.BYTE $FB, $50
+	.BYTE $C0, $61, $00
+	.BYTE $FD, <L_7_BC3E, >L_7_BC3E
+	.BYTE $8A, $65
+	.BYTE      "CHANGE SIDE"
+	.BYTE $F9, $01, $B3
+	.BYTE $EB, $32, $43
+	.BYTE $F3, $25
+	.BYTE $DD, $04
+	.BYTE $FB, $B4
 	.BYTE $FF
 
 P2_CHAINS_FIRST_DOWN_SCREEN:

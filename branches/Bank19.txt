@@ -1943,6 +1943,7 @@ L_19_8FC6:
 	AND #$03
 	BNE @Loop4
 	JSR L_19_9301
+; Draw Chains and Next Down
 	LDA $77
 	CLC
 	ADC #$71

@@ -1793,42 +1793,18 @@ L_7_B1F0:
 	.BYTE $FC, <L_7_B153, >L_7_B153
 
 L_7_B205:
-	.BYTE $FD
-	.BYTE $BD
-	.BYTE $AA
-	.BYTE $FD
-	.BYTE $CB
-	.BYTE $A5
-	.BYTE $FD
-	.BYTE $E5
-	.BYTE $AA
-	.BYTE $FD
-	.BYTE $00
-	.BYTE $AA
-	.BYTE $F3
-	.BYTE $24
+	.BYTE $FD, <L_7_AABD, >L_7_AABD
+	.BYTE $FD, <L_7_A5CB, >L_7_A5CB
+	.BYTE $FD, <L_7_AAE5, >L_7_AAE5
+L_7_B20E:
+	.BYTE $FD, <L_7_AA00, >L_7_AA00
+	.BYTE $F3, $24
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $63
-	.BYTE $49
-	.BYTE $4E
-	.BYTE $54
-	.BYTE $45
-	.BYTE $52
-	.BYTE $43
-	.BYTE $45
-	.BYTE $50
-	.BYTE $54
-	.BYTE $49
-	.BYTE $4F
-	.BYTE $4E
-	.BYTE $21
-	.BYTE $8A
-	.BYTE $E0
-	.BYTE $FA
-	.BYTE $1D
-	.BYTE $FB
-	.BYTE $14
+	.BYTE $8A, $63
+	.BYTE      "INTERCEPTION!"
+	.BYTE $8A, $E0
+	.BYTE $FA, $1D
+	.BYTE $FB, $14
 	.BYTE $ED
 	.BYTE $FF
 
@@ -2027,181 +2003,76 @@ L_7_B477:
 	.BYTE $FE
 
 L_7_B49A:
-	.BYTE $FD
-	.BYTE $C1
-	.BYTE $B4
-	.BYTE $F9
-	.BYTE $02
-	.BYTE $08
-	.BYTE $06
+	.BYTE $FD, <L_7_B4C1, >L_7_B4C1
+	.BYTE $F9, $02, $08, $06
 	.BYTE $D2
-	.BYTE $C0
-	.BYTE $20
-	.BYTE $00
-	.BYTE $20
-	.BYTE $18
-	.BYTE $26
-	.BYTE $C0
-	.BYTE $11
-	.BYTE $28
-	.BYTE $40
-	.BYTE $C0
-	.BYTE $22
-	.BYTE $58
-	.BYTE $00
-	.BYTE $18
-	.BYTE $1A
-	.BYTE $FD
-	.BYTE $D7
-	.BYTE $AA
-	.BYTE $FD
-	.BYTE $E5
-	.BYTE $AA
-	.BYTE $FD
-	.BYTE $00
-	.BYTE $AA
-	.BYTE $FD
-	.BYTE $30
-	.BYTE $AA
-	.BYTE $FC
-	.BYTE $EC
-	.BYTE $AA
+	.BYTE $C0, $20, $00, $20, $18, $26
+	.BYTE $C0, $11, $28, $40
+	.BYTE $C0, $22, $58, $00, $18, $1A
+L_7_B4B2:
+	.BYTE $FD, <L_7_AAD7, >L_7_AAD7
+	.BYTE $FD, <L_7_AAE5, >L_7_AAE5
+	.BYTE $FD, <L_7_AA00, >L_7_AA00
+	.BYTE $FD, <L_7_AA30, >L_7_AA30
+	.BYTE $FC, <L_7_AAEC, >L_7_AAEC
+
+L_7_B4C1:
 	.BYTE $C8
 	.BYTE $F1
 	.BYTE $F0
-	.BYTE $F7
-	.BYTE $39
-	.BYTE $C0
-	.BYTE $20
-	.BYTE $00
-	.BYTE $10
-	.BYTE $18
-	.BYTE $26
-	.BYTE $C0
-	.BYTE $11
-	.BYTE $28
-	.BYTE $08
-	.BYTE $C0
-	.BYTE $12
-	.BYTE $16
-	.BYTE $40
-	.BYTE $F8
-	.BYTE $36
-	.BYTE $F9
-	.BYTE $02
-	.BYTE $63
-	.BYTE $64
-	.BYTE $D8
-	.BYTE $80
-	.BYTE $FB
-	.BYTE $1E
+	.BYTE $F7, $39
+	.BYTE $C0, $20, $00, $10, $18, $26
+	.BYTE $C0, $11, $28, $08
+	.BYTE $C0, $12, $16, $40
+	.BYTE $F8, $36
+	.BYTE $F9, $02, $63, $64
+	.BYTE $D8, $80
+	.BYTE $FB, $1E
 	.BYTE $FE
-	.BYTE $FD
-	.BYTE $4E
-	.BYTE $AA
-	.BYTE $D8
-	.BYTE $85
-	.BYTE $FB
-	.BYTE $32
-	.BYTE $F9
-	.BYTE $02
-	.BYTE $08
-	.BYTE $06
+
+L_7_B4DF:
+	.BYTE $FD, <L_7_AA4E, >L_7_AA4E
+	.BYTE $D8, $85
+	.BYTE $FB, $32
+	.BYTE $F9, $02, $08, $06
 	.BYTE $D2
-	.BYTE $D0
-	.BYTE $18
-	.BYTE $26
-	.BYTE $C0
-	.BYTE $11
-	.BYTE $28
-	.BYTE $40
-	.BYTE $C0
-	.BYTE $22
-	.BYTE $58
-	.BYTE $00
-	.BYTE $18
-	.BYTE $1A
-	.BYTE $FC
-	.BYTE $B2
-	.BYTE $B4
-	.BYTE $FD
-	.BYTE $C1
-	.BYTE $B4
-	.BYTE $F9
-	.BYTE $02
-	.BYTE $07
-	.BYTE $5E
+	.BYTE $D0, $18, $26
+	.BYTE $C0, $11, $28, $40
+	.BYTE $C0, $22, $58, $00, $18, $1A
+	.BYTE $FC, <L_7_B4B2, >L_7_B4B2
+
+L_7_B4FB:
+	.BYTE $FD, <L_7_B4C1, >L_7_B4C1
+	.BYTE $F9, $02, $07, $5E
 	.BYTE $D2
-	.BYTE $C0
-	.BYTE $20
-	.BYTE $00
-	.BYTE $20
-	.BYTE $18
-	.BYTE $26
-	.BYTE $C0
-	.BYTE $11
-	.BYTE $28
-	.BYTE $40
-	.BYTE $FD
-	.BYTE $DE
-	.BYTE $AA
-	.BYTE $FD
-	.BYTE $E5
-	.BYTE $AA
-	.BYTE $FD
-	.BYTE $00
-	.BYTE $AA
-	.BYTE $FC
-	.BYTE $EC
-	.BYTE $AA
-	.BYTE $FD
-	.BYTE $4E
-	.BYTE $AA
-	.BYTE $D8
-	.BYTE $85
-	.BYTE $FB
-	.BYTE $32
-	.BYTE $F9
-	.BYTE $02
-	.BYTE $07
-	.BYTE $5E
+	.BYTE $C0, $20, $00, $20, $18, $26
+	.BYTE $C0, $11, $28, $40
+	.BYTE $FD, <L_7_AADE, >L_7_AADE
+	.BYTE $FD, <L_7_AAE5, >L_7_AAE5
+	.BYTE $FD, <L_7_AA00, >L_7_AA00
+	.BYTE $FC, <L_7_AAEC, >L_7_AAEC
+
+L_7_B519:
+	.BYTE $FD, <L_7_AA4E, >L_7_AA4E
+	.BYTE $D8, $85
+	.BYTE $FB, $32
+	.BYTE $F9, $02, $07, $5E
 	.BYTE $D2
-	.BYTE $D0
-	.BYTE $18
-	.BYTE $26
-	.BYTE $C0
-	.BYTE $11
-	.BYTE $28
-	.BYTE $40
-	.BYTE $FD
-	.BYTE $DE
-	.BYTE $AA
-	.BYTE $FD
-	.BYTE $E5
-	.BYTE $AA
-	.BYTE $FD
-	.BYTE $00
-	.BYTE $AA
-	.BYTE $FB
-	.BYTE $01
-	.BYTE $F8
-	.BYTE $02
-	.BYTE $FB
-	.BYTE $1E
-	.BYTE $FC
-	.BYTE $2B
-	.BYTE $AC
-	.BYTE $FD
-	.BYTE $74
-	.BYTE $AB
-	.BYTE $D8
-	.BYTE $80
-	.BYTE $FD
-	.BYTE $94
-	.BYTE $AB
-	.BYTE $FC
-	.BYTE $0E
-	.BYTE $B2
+	.BYTE $D0, $18, $26
+	.BYTE $C0, $11, $28, $40
+	.BYTE $FD, <L_7_AADE, >L_7_AADE
+	.BYTE $FD, <L_7_AAE5, >L_7_AAE5
+	.BYTE $FD, <L_7_AA00, >L_7_AA00
+	.BYTE $FB, $01
+	.BYTE $F8, $02
+	.BYTE $FB, $1E
+	.BYTE $FC, <L_7_AC2B, >L_7_AC2B
+
+L_7_B53E:
+	.BYTE $FD, <L_7_AB74, >L_7_AB74
+	.BYTE $D8, $80
+	.BYTE $FD, <L_7_AB94, >L_7_AB94
+	.BYTE $FC, <L_7_B20E, >L_7_B20E
 
 DIVISION_CHAMP_SCREEN:
 	.BYTE $CC
@@ -2855,7 +2726,8 @@ CREDITS_SCREENS:
 	.BYTE $C0, $01, $88, $18, $1A
 	.BYTE $CD, $01
 	.BYTE $F8, $38
-	.BYTE $D2, $F8, $36
+	.BYTE $D2
+	.BYTE $F8, $36
 	.BYTE $FB, $28
 	.BYTE $8E, $66
 	.BYTE      $6B, " GRAPHIC DESIGNER ", $6B

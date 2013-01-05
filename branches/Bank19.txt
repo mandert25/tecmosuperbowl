@@ -5048,167 +5048,168 @@ L_19_A598:
 	.WORD L_19_A7B4, L_19_A7B6, L_19_A7B8, L_19_A7BA, L_19_A7BC, L_19_A7BE, L_19_A7C0, L_19_A7C2
 	.WORD L_19_A7C4, L_19_A7C6, L_19_A7C8, L_19_A7CA, L_19_A7CC, L_19_A7CE, L_19_A7D0, L_19_A7D2
 	.WORD L_19_A7D4, L_19_A7D6, L_19_A7D8
-L_19_A66E:
+
+L_19_A66E: ; Draw Punt
 	.BYTE $03,$FE
-L_19_A670:
+L_19_A670: ; Draw Punt with Missed Block
 	.BYTE $03,$09,$FE
-L_19_A673:
+L_19_A673: ; Draw Punt with Block
 	.BYTE $03,$0A,$FE
-L_19_A676:
+L_19_A676: ; Draw Nothing
 	.BYTE $25,$FE
-L_19_A678:
+L_19_A678: ; Draw QB Sack
 	.BYTE $26,$FF
-L_19_A67A:
+L_19_A67A: ; Draw QB Sack with Side Change
 	.BYTE $27,$FF
-L_19_A67C:
+L_19_A67C: ; Draw QB Sack with Safety
 	.BYTE $28,$FF
-L_19_A67E:
+L_19_A67E: ; Draw Pass with Missed Block
 	.BYTE $29,$09,$FE
-L_19_A681:
+L_19_A681: ; Draw Pass with Block
 	.BYTE $29,$0D,$FE
-L_19_A684:
+L_19_A684: ; Draw Field Goal with Missed Block, Kick towards Uprights, P2 Kick through Uprights, FG Good
 	.BYTE $04,$09,$0E,$10,$11,$FF
-L_19_A68A:
+L_19_A68A: ; Draw Field Goal, Kick towards Uprights, P2 Kick through Uprights, FG Good
 	.BYTE $04,$0E,$10,$11,$FF
-L_19_A68F:
+L_19_A68F: ; Draw Field Goal with Missed Block, P2 Kick through Uprights, XP Good
 	.BYTE $04,$09,$10,$23,$FF
-L_19_A694:
+L_19_A694: ; Draw Field Goal, P2 Kick through Uprights, XP Good
 	.BYTE $04,$10,$23,$FF
-L_19_A698:
+L_19_A698: ; Draw Field Goal with Block
 	.BYTE $04,$0B,$FE
-L_19_A69B:
+L_19_A69B: ; Draw Field Goal with Missed Block, Kick towards uprights, P1 Kick through Uprights, FG Good
 	.BYTE $04,$09,$0E,$0F,$11,$FF
-L_19_A6A1:
+L_19_A6A1: ; Draw Field Goal with Missed Block, Kick towards uprights, P1 Left Upright Good, FG Good
 	.BYTE $04,$09,$0E,$14,$11,$FF
-L_19_A6A7:
+L_19_A6A7: ; Draw Field Goal with Missed Block, Kick towards uprights, P1 Right Upright Good, FG Good
 	.BYTE $04,$09,$0E,$15,$11,$FF
-L_19_A6AD:
+L_19_A6AD: ; Draw Field Goal with Missed Block, Kick towards uprights, P2 Right Upright Good, FG Good
 	.BYTE $04,$09,$0E,$1C,$11,$FF
-L_19_A6B3:
+L_19_A6B3: ; Draw Field Goal with Missed Block, Kick towards uprights, P2 Left Upright Good, FG Good
 	.BYTE $04,$09,$0E,$1D,$11,$FF
-L_19_A6B9:
+L_19_A6B9: ; Draw Field Goal with Missed Block, Kick towards uprights, P1 Left Upright Miss
 	.BYTE $04,$09,$0E,$16,$FF
-L_19_A6BE:
+L_19_A6BE: ; Draw Field Goal with Missed Block, Kick towards uprights, P1 Right Upright Miss
 	.BYTE $04,$09,$0E,$17,$FF
-L_19_A6C3:
+L_19_A6C3: ; Draw Field Goal with Missed Block, Kick towards uprights, P1 Left Upright Wide Miss
 	.BYTE $04,$09,$0E,$18,$FF
-L_19_A6C8:
+L_19_A6C8: ; Draw Field Goal with Missed Block, Kick towards uprights, P1 Right Upright Wide Miss
 	.BYTE $04,$09,$0E,$19,$FF
-L_19_A6CD:
+L_19_A6CD: ; Draw Field Goal with Missed Block, Kick towards uprights, P1 Short Upright Miss
 	.BYTE $04,$09,$0E,$1A,$FF
-L_19_A6D2:
+L_19_A6D2: ; Draw Field Goal with Missed Block, Kick towards uprights, P2 Right Upright Miss
 	.BYTE $04,$09,$0E,$1E,$FF
-L_19_A6D7:
+L_19_A6D7: ; Draw Field Goal with Missed Block, Kick towards uprights, P2 Left Upright Miss
 	.BYTE $04,$09,$0E,$1F,$FF
-L_19_A6DC:
+L_19_A6DC: ; Draw Field Goal with Missed Block, Kick towards uprights, P2 Right Upright Wide Miss
 	.BYTE $04,$09,$0E,$20,$FF
-L_19_A6E1:
+L_19_A6E1: ; Draw Field Goal with Missed Block, Kick towards uprights, P2 Left Upright Wide Miss
 	.BYTE $04,$09,$0E,$21,$FF
-L_19_A6E6:
+L_19_A6E6: ; Draw Field Goal with Missed Block, Kick towards uprights, P2 Short Upright Miss
 	.BYTE $04,$09,$0E,$22,$FF
-L_19_A6EB:
+L_19_A6EB: ; Draw Field Goal, Kick towards uprights, P1 Kick through Uprights, FG Good
 	.BYTE $04,$0E,$0F,$11,$FF
-L_19_A6F0:
+L_19_A6F0: ; Draw Field Goal, Kick towards uprights, P1 Left Upright Good, FG Good
 	.BYTE $04,$0E,$14,$11,$FF
-L_19_A6F5:
+L_19_A6F5: ; Draw Field Goal, Kick towards uprights, P1 Right Upright Good, FG Good
 	.BYTE $04,$0E,$15,$11,$FF
-L_19_A6FA:
+L_19_A6FA: ; Draw Field Goal, Kick towards uprights, P2 Right Upright Good, FG Good
 	.BYTE $04,$0E,$1C,$11,$FF
-L_19_A6FF:
+L_19_A6FF: ; Draw Field Goal, Kick towards uprights, P2 Left Upright Good, FG Good
 	.BYTE $04,$0E,$1D,$11,$FF
-L_19_A704:
+L_19_A704: ; Draw Field Goal, Kick towards uprights, P1 Left Upright Miss
 	.BYTE $04,$0E,$16,$FF
-L_19_A708:
+L_19_A708: ; Draw Field Goal, Kick towards uprights, P1 Right Upright Miss
 	.BYTE $04,$0E,$17,$FF
-L_19_A70C:
+L_19_A70C: ; Draw Field Goal, Kick towards uprights, P1 Left Upright Wide Miss
 	.BYTE $04,$0E,$18,$FF
-L_19_A710:
+L_19_A710: ; Draw Field Goal, Kick towards uprights, P1 Right Upright Wide Miss
 	.BYTE $04,$0E,$19,$FF
-L_19_A714:
+L_19_A714: ; Draw Field Goal, Kick towards uprights, P1 Short Upright Miss
 	.BYTE $04,$0E,$1A,$FF
-L_19_A718:
+L_19_A718: ; Draw Field Goal, Kick towards uprights, P2 Right Upright Miss
 	.BYTE $04,$0E,$1E,$FF
-L_19_A71C:
+L_19_A71C: ; Draw Field Goal, Kick towards uprights, P2 Left Upright Miss
 	.BYTE $04,$0E,$1F,$FF
-L_19_A720:
+L_19_A720: ; Draw Field Goal, Kick towards uprights, P2 Right Upright Wide Miss
 	.BYTE $04,$0E,$20,$FF
-L_19_A724:
+L_19_A724: ; Draw Field Goal, Kick towards uprights, P2 Left Upright Wide Miss
 	.BYTE $04,$0E,$21,$FF
-L_19_A728:
+L_19_A728: ; Draw Field Goal, Kick towards uprights, P2 Short Upright Miss
 	.BYTE $04,$0E,$22,$FF
-L_19_A72C:
+L_19_A72C: ; Draw Field Goal with XP Block
 	.BYTE $04,$0C,$FF
-L_19_A72F:
+L_19_A72F: ; Draw Field Goal with Missed Block, P1 Kick through Uprights, XP Good
 	.BYTE $04,$09,$0F,$23,$FF
-L_19_A734:
+L_19_A734: ; Draw Field Goal with Missed Block, P1 Left Upright Good, XP Good
 	.BYTE $04,$09,$14,$23,$FF
-L_19_A739:
+L_19_A739: ; Draw Field Goal with Missed Block, P1 Right Upright Good, XP Good
 	.BYTE $04,$09,$15,$23,$FF
-L_19_A73E:
+L_19_A73E: ; Draw Field Goal with Missed Block, P2 Right Upright Good, XP Good
 	.BYTE $04,$09,$1C,$23,$FF
-L_19_A743:
+L_19_A743: ; Draw Field Goal with Missed Block, P2 Left Upright Good, XP Good
 	.BYTE $04,$09,$1D,$23,$FF
-L_19_A748:
+L_19_A748: ; Draw Field Goal with Missed Block, P1 Left Upright Miss
 	.BYTE $04,$09,$16,$FF
-L_19_A74C:
+L_19_A74C: ; Draw Field Goal with Missed Block, P1 Right Upright Miss
 	.BYTE $04,$09,$17,$FF
-L_19_A750:
+L_19_A750: ; Draw Field Goal with Missed Block, P1 Left Upright Wide Miss
 	.BYTE $04,$09,$18,$FF
-L_19_A754:
+L_19_A754: ; Draw Field Goal with Missed Block, P1 Right Upright Wide Miss
 	.BYTE $04,$09,$19,$FF
-L_19_A758:
+L_19_A758: ; Draw Field Goal with Missed Block, P1 Short Upright Miss
 	.BYTE $04,$09,$1A,$FF
-L_19_A75C:
+L_19_A75C: ; Draw Field Goal with Missed Block, P2 Right Upright Miss
 	.BYTE $04,$09,$1E,$FF
-L_19_A760:
+L_19_A760: ; Draw Field Goal with Missed Block, P2 Left Upright Miss
 	.BYTE $04,$09,$1F,$FF
-L_19_A764:
+L_19_A764: ; Draw Field Goal with Missed Block, P2 Right Upright Wide Miss
 	.BYTE $04,$09,$20,$FF
-L_19_A768:
+L_19_A768: ; Draw Field Goal with Missed Block, P2 Left Upright Wide Miss
 	.BYTE $04,$09,$21,$FF
-L_19_A76C:
+L_19_A76C: ; Draw Field Goal with Missed Block, P2 Short Upright Miss
 	.BYTE $04,$09,$22,$FF
-L_19_A770:
+L_19_A770: ; Draw Field Goal, P1 Kick through Uprights, XP Good
 	.BYTE $04,$0F,$23,$FF
-L_19_A774:
+L_19_A774: ; Draw Field Goal, P1 Left Upright Good, XP Good
 	.BYTE $04,$14,$23,$FF
-L_19_A778:
+L_19_A778: ; Draw Field Goal, P1 Right Upright Good, XP Good
 	.BYTE $04,$15,$23,$FF
-L_19_A77C:
+L_19_A77C: ; Draw Field Goal, P2 Right Upright Good, XP Good
 	.BYTE $04,$1C,$23,$FF
-L_19_A780:
+L_19_A780: ; Draw Field Goal, P2 Left Upright Good, XP Good
 	.BYTE $04,$1D,$23,$FF
-L_19_A784:
+L_19_A784: ; Draw Field Goal, P1 Left Upright Miss
 	.BYTE $04,$16,$FF
-L_19_A787:
+L_19_A787: ; Draw Field Goal, P1 Right Upright Miss
 	.BYTE $04,$17,$FF
-L_19_A78A:
+L_19_A78A: ; Draw Field Goal, P1 Left Upright Wide Miss
 	.BYTE $04,$18,$FF
-L_19_A78D:
+L_19_A78D: ; Draw Field Goal, P1 Right Upright Wide Miss
 	.BYTE $04,$19,$FF
-L_19_A790:
+L_19_A790: ; Draw Field Goal, P1 Short Upright Miss
 	.BYTE $04,$1A,$FF
-L_19_A793:
+L_19_A793: ; Draw Field Goal, P2 Right Upright Miss
 	.BYTE $04,$1E,$FF
-L_19_A796:
+L_19_A796: ; Draw Field Goal, P2 Left Upright Miss
 	.BYTE $04,$1F,$FF
-L_19_A799:
+L_19_A799: ; Draw Field Goal, P2 Right Upright Wide Miss
 	.BYTE $04,$20,$FF
-L_19_A79C:
+L_19_A79C: ; Draw Field Goal, P2 Left Upright Wide Miss
 	.BYTE $04,$21,$FF
-L_19_A79F:
+L_19_A79F: ; Draw Field Goal, P2 Short Upright Miss
 	.BYTE $04,$22,$FF
-L_19_A7A2:
+L_19_A7A2: ; Offensive Jump Catch
 	.BYTE $2B,$FE
-L_19_A7A4:
+L_19_A7A4: ; Offensive Jump Miss
 	.BYTE $2C,$FE
-L_19_A7A6:
+L_19_A7A6: ; Offensive Jump Tipped
 	.BYTE $2D,$FE
-L_19_A7A8:
+L_19_A7A8: ; Defensive Jump Miss
 	.BYTE $05,$FE
-L_19_A7AA:
+L_19_A7AA: ; Defensive Jump Tipped
 	.BYTE $06,$FE
-L_19_A7AC:
+L_19_A7AC: ; Defensive Jump Interception
 	.BYTE $43,$FE
 L_19_A7AE:
 	.BYTE $44,$FE

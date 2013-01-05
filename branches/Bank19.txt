@@ -5211,47 +5211,47 @@ L_19_A7AA: ; Defensive Jump Tipped
 	.BYTE $06,$FE
 L_19_A7AC: ; Defensive Jump Interception
 	.BYTE $43,$FE
-L_19_A7AE:
+L_19_A7AE: ; Defended Jump Catch
 	.BYTE $44,$FE
-L_19_A7B0:
+L_19_A7B0: ; Defended Jump Miss
 	.BYTE $45,$FE
-L_19_A7B2:
+L_19_A7B2: ; Defended Jump Tipped
 	.BYTE $46,$FE
-L_19_A7B4:
+L_19_A7B4: ; Defended Jump Interception
 	.BYTE $47,$FE
-L_19_A7B6:
+L_19_A7B6: ; Offense Catch
 	.BYTE $2F,$FE
-L_19_A7B8:
+L_19_A7B8: ; Offense Tipped
 	.BYTE $30,$FE
-L_19_A7BA:
+L_19_A7BA: ; Defense Tipped
 	.BYTE $07,$FE
-L_19_A7BC:
+L_19_A7BC: ; Defense Interception
 	.BYTE $48,$FE
-L_19_A7BE:
+L_19_A7BE: ; Defense Dive Miss with Catch
 	.BYTE $51,$FE
-L_19_A7C0:
+L_19_A7C0: ; Defense Jump Miss with Catch
 	.BYTE $52,$FE
-L_19_A7C2:
+L_19_A7C2: ; Offense Dive Tipped
 	.BYTE $34,$FE
-L_19_A7C4:
+L_19_A7C4: ; Defense Dive Miss with Tipped
 	.BYTE $53,$FE
-L_19_A7C6:
+L_19_A7C6: ; Defense Jump Miss with Tipped
 	.BYTE $54,$FE
-L_19_A7C8:
+L_19_A7C8: ; Defense Jump Tipped
 	.BYTE $06,$FE
-L_19_A7CA:
+L_19_A7CA: ; Defended Jump Tipped
 	.BYTE $46,$FE
-L_19_A7CC:
+L_19_A7CC: ; Defense Interception
 	.BYTE $48,$FE
-L_19_A7CE:
+L_19_A7CE: ; Whiffed Incomplete Pass
 	.BYTE $31,$FE
-L_19_A7D0:
+L_19_A7D0: ; Offense Dive Catch
 	.BYTE $32,$FE
-L_19_A7D2:
+L_19_A7D2: ; Offense Dive Miss
 	.BYTE $33,$FE
-L_19_A7D4:
+L_19_A7D4: ; Defense Dive Interception
 	.BYTE $55,$FE
-L_19_A7D6:
+L_19_A7D6: ; Defense Dive Miss
 	.BYTE $08,$FE
 L_19_A7D8:
 	.BYTE $00,$00,$18,$1A,$00,$00,$00,$18,$1A,$00,$00,$00,$18,$1A,$00,$00,$00,$18,$1A,$FF

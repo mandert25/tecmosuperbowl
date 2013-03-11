@@ -52,30 +52,30 @@
     .WORD L_8_ACB5
     .WORD L_8_ACE9
     .WORD L_8_ACEA
-    .WORD $AD01
-    .WORD $AD1A
-    .WORD $AD24
-    .WORD $AD2E
-    .WORD $AD38
-    .WORD $AD42
-    .WORD $AD4C
-    .WORD $AD56
-    .WORD $AD60
-    .WORD $AD6A
-    .WORD $AD74
-    .WORD $AD7F
-    .WORD $AD8A
-    .WORD $AD95
-    .WORD $ADA0
-    .WORD $ADAB
-    .WORD $ADB6
-    .WORD $ADC1
-    .WORD $ADCC
-    .WORD $ADD4
-    .WORD $ADF4
-    .WORD $ADF4
-    .WORD $ADF4
-    .WORD $ADF5
+    .WORD L_8_AD01
+    .WORD L_8_AD1A
+    .WORD L_8_AD24
+    .WORD L_8_AD2E
+    .WORD L_8_AD38
+    .WORD L_8_AD42
+    .WORD L_8_AD4C
+    .WORD L_8_AD56
+    .WORD L_8_AD60
+    .WORD L_8_AD6A
+    .WORD L_8_AD74
+    .WORD L_8_AD7F
+    .WORD L_8_AD8A
+    .WORD L_8_AD95
+    .WORD L_8_ADA0
+    .WORD L_8_ADAB
+    .WORD L_8_ADB6
+    .WORD L_8_ADC1
+    .WORD L_8_ADCC
+    .WORD L_8_ADD4
+    .WORD L_8_ADF4
+    .WORD L_8_ADF4
+    .WORD L_8_ADF4
+    .WORD L_8_ADF5
     .WORD $ADFE
     .WORD $AE07
     .WORD $AE21
@@ -1099,272 +1099,166 @@ L_8_ACE9:
 
 L_8_ACEA:
 	.BYTE $CC
-	.BYTE $D0
-	.BYTE $20
-	.BYTE $1A
+	.BYTE $D0, $20, $1A
 	.BYTE $F6
-	.BYTE $89
-	.BYTE $A7
-	.BYTE $50
-	.BYTE $52
-	.BYTE $45
-	.BYTE $53
-	.BYTE $45
-	.BYTE $41
-	.BYTE $53
-	.BYTE $4F
-	.BYTE $4E
-	.BYTE $E5
-	.BYTE $00
-	.BYTE $00
-	.BYTE $FB
-	.BYTE $78
+	.BYTE $89, $A7
+	.BYTE      "PRESEASON"
+	.BYTE $E5, $00, $00
+	.BYTE $FB, $78
 	.BYTE $E8
 	.BYTE $FF
+
+L_8_AD01:
 	.BYTE $CC
-	.BYTE $D0
-	.BYTE $20
-	.BYTE $1A
+	.BYTE $D0, $20, $1A
 	.BYTE $F6
-	.BYTE $89
-	.BYTE $A8
-	.BYTE $50
-	.BYTE $52
-	.BYTE $4F
-	.BYTE $20
-	.BYTE $42
-	.BYTE $4F
-	.BYTE $57
-	.BYTE $4C
-	.BYTE $E5
-	.BYTE $00
-	.BYTE $00
-	.BYTE $E5
-	.BYTE $00
-	.BYTE $00
-	.BYTE $FB
-	.BYTE $78
+	.BYTE $89, $A8
+	.BYTE      "PRO BOWL"
+	.BYTE $E5, $00, $00
+	.BYTE $E5, $00, $00
+	.BYTE $FB, $78
 	.BYTE $E8
 	.BYTE $FF
+
+L_8_AD1A:
 	.BYTE $CC
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $28
-	.BYTE $31
-	.BYTE $53
-	.BYTE $54
-	.BYTE $FC
-	.BYTE $D4
-	.BYTE $AD
+	.BYTE $8A, $28
+	.BYTE      "1ST"
+	.BYTE $FC, L_8_ADD4
+
+L_8_AD24:
 	.BYTE $CC
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $28
-	.BYTE $32
-	.BYTE $4E
-	.BYTE $44
-	.BYTE $FC
-	.BYTE $D4
-	.BYTE $AD
+	.BYTE $8A, $28
+	.BYTE      "2ND"
+	.BYTE $FC, L_8_ADD4
+
+L_8_AD2E:
 	.BYTE $CC
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $28
-	.BYTE $33
-	.BYTE $52
-	.BYTE $44
-	.BYTE $FC
-	.BYTE $D4
-	.BYTE $AD
+	.BYTE $8A, $28
+	.BYTE      "3RD"
+	.BYTE $FC, L_8_ADD4
+
+L_8_AD38:
 	.BYTE $CC
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $28
-	.BYTE $34
-	.BYTE $54
-	.BYTE $48
-	.BYTE $FC
-	.BYTE $D4
-	.BYTE $AD
+	.BYTE $8A, $28
+	.BYTE      "4TH"
+	.BYTE $FC, L_8_ADD4
+
+L_8_AD42:
 	.BYTE $CC
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $28
-	.BYTE $35
-	.BYTE $54
-	.BYTE $48
-	.BYTE $FC
-	.BYTE $D4
-	.BYTE $AD
+	.BYTE $8A, $28
+	.BYTE      "5TH"
+	.BYTE $FC, L_8_ADD4
+
+L_8_AD4C:
 	.BYTE $CC
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $28
-	.BYTE $36
-	.BYTE $54
-	.BYTE $48
-	.BYTE $FC
-	.BYTE $D4
-	.BYTE $AD
+	.BYTE $8A, $28
+	.BYTE      "6TH"
+	.BYTE $FC, L_8_ADD4
+
+L_8_AD56:
 	.BYTE $CC
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $28
-	.BYTE $37
-	.BYTE $54
-	.BYTE $48
-	.BYTE $FC
-	.BYTE $D4
-	.BYTE $AD
+	.BYTE $8A, $28
+	.BYTE      "7TH"
+	.BYTE $FC, L_8_ADD4
+
+L_8_AD60:
 	.BYTE $CC
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $28
-	.BYTE $38
-	.BYTE $54
-	.BYTE $48
-	.BYTE $FC
-	.BYTE $D4
-	.BYTE $AD
+	.BYTE $8A, $28
+	.BYTE      "8TH"
+	.BYTE $FC, L_8_ADD4
+
+L_8_AD6A:
 	.BYTE $CC
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $28
-	.BYTE $39
-	.BYTE $54
-	.BYTE $48
-	.BYTE $FC
-	.BYTE $D4
-	.BYTE $AD
+	.BYTE $8A, $28
+	.BYTE      "9TH"
+	.BYTE $FC, L_8_ADD4
+
+L_8_AD74:
 	.BYTE $CC
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $26
-	.BYTE $31
-	.BYTE $30
-	.BYTE $54
-	.BYTE $48
-	.BYTE $FC
-	.BYTE $D4
-	.BYTE $AD
+	.BYTE $8A, $26
+	.BYTE      "10TH"
+	.BYTE $FC, L_8_ADD4
+
+L_8_AD7F:
 	.BYTE $CC
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $26
-	.BYTE $31
-	.BYTE $31
-	.BYTE $54
-	.BYTE $48
-	.BYTE $FC
-	.BYTE $D4
-	.BYTE $AD
+	.BYTE $8A, $26
+	.BYTE      "11TH"
+	.BYTE $FC, L_8_ADD4
+
+L_8_AD8A:
 	.BYTE $CC
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $26
-	.BYTE $31
-	.BYTE $32
-	.BYTE $54
-	.BYTE $48
-	.BYTE $FC
-	.BYTE $D4
-	.BYTE $AD
+	.BYTE $8A, $26
+	.BYTE      "12TH"
+	.BYTE $FC, L_8_ADD4
+
+L_8_AD95:
 	.BYTE $CC
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $26
-	.BYTE $31
-	.BYTE $33
-	.BYTE $54
-	.BYTE $48
-	.BYTE $FC
-	.BYTE $D4
-	.BYTE $AD
+	.BYTE $8A, $26
+	.BYTE      "13TH"
+	.BYTE $FC, L_8_ADD4
+
+L_8_ADA0:
 	.BYTE $CC
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $26
-	.BYTE $31
-	.BYTE $34
-	.BYTE $54
-	.BYTE $48
-	.BYTE $FC
-	.BYTE $D4
-	.BYTE $AD
+	.BYTE $8A, $26
+	.BYTE      "14TH"
+	.BYTE $FC, L_8_ADD4
+
+L_8_ADAB:
 	.BYTE $CC
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $26
-	.BYTE $31
-	.BYTE $35
-	.BYTE $54
-	.BYTE $48
-	.BYTE $FC
-	.BYTE $D4
-	.BYTE $AD
+	.BYTE $8A, $26
+	.BYTE      "15TH"
+	.BYTE $FC, L_8_ADD4
+
+L_8_ADB6:
 	.BYTE $CC
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $26
-	.BYTE $31
-	.BYTE $36
-	.BYTE $54
-	.BYTE $48
-	.BYTE $FC
-	.BYTE $D4
-	.BYTE $AD
+	.BYTE $8A, $26
+	.BYTE      "16TH"
+	.BYTE $FC, L_8_ADD4
+
+L_8_ADC1:
 	.BYTE $CC
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $26
-	.BYTE $31
-	.BYTE $37
-	.BYTE $54
-	.BYTE $48
-	.BYTE $FC
-	.BYTE $D4
-	.BYTE $AD
+	.BYTE $8A, $26
+	.BYTE      "17TH"
+	.BYTE $FC, L_8_ADD4
+
+L_8_ADCC:
 	.BYTE $CC
 	.BYTE $F6
-	.BYTE $8A
-	.BYTE $26
-	.BYTE $31
-	.BYTE $38
-	.BYTE $54
-	.BYTE $48
-	.BYTE $D0
-	.BYTE $20
-	.BYTE $1A
-	.BYTE $89
-	.BYTE $A2
-	.BYTE $52
-	.BYTE $45
-	.BYTE $47
-	.BYTE $55
-	.BYTE $4C
-	.BYTE $41
-	.BYTE $52
-	.BYTE $20
-	.BYTE $53
-	.BYTE $45
-	.BYTE $41
-	.BYTE $53
-	.BYTE $4F
-	.BYTE $4E
-	.BYTE $8A
-	.BYTE $30
-	.BYTE $57
-	.BYTE $45
-	.BYTE $45
-	.BYTE $4B
-	.BYTE $E5
-	.BYTE $00
-	.BYTE $00
-	.BYTE $FB
-	.BYTE $78
+	.BYTE $8A, $26
+	.BYTE      "18TH"
+L_8_ADD4:
+	.BYTE $D0, $20, $1A
+	.BYTE $89, $A2
+	.BYTE      "REGULAR SEASON"
+	.BYTE $8A, $30
+	.BYTE      "WEEK"
+	.BYTE $E5, $00, $00
+	.BYTE $FB, $78
 	.BYTE $E8
 	.BYTE $FF
+
+L_8_ADF4:
 	.BYTE $FF
+
+L_8_ADF5:
 	.BYTE $FD
 	.BYTE $9E
 	.BYTE $A7

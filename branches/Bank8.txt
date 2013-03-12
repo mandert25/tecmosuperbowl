@@ -112,27 +112,27 @@
     .WORD L_8_B01E
     .WORD L_8_B01E
     .WORD L_8_B01F
-    .WORD $B028
-    .WORD $B031
-    .WORD $B039
-    .WORD $B041
-    .WORD $B04A
-    .WORD $B053
-    .WORD $B05B
-    .WORD $B063
-    .WORD $B070
-    .WORD $B07D
-    .WORD $B088
-    .WORD $B093
-    .WORD $B0A0
-    .WORD $B0AD
-    .WORD $B0B8
-    .WORD $B0C3
-    .WORD $B0DC
-    .WORD $B0F9
-    .WORD $B110
-    .WORD $B127
-    .WORD $B12A
+    .WORD L_8_B028
+    .WORD L_8_B031
+    .WORD L_8_B039
+    .WORD L_8_B041
+    .WORD L_8_B04A
+    .WORD L_8_B053
+    .WORD L_8_B05B
+    .WORD L_8_B063
+    .WORD L_8_B070
+    .WORD L_8_B07D
+    .WORD L_8_B088
+    .WORD L_8_B093
+    .WORD L_8_B0A0
+    .WORD L_8_B0AD
+    .WORD L_8_B0B8
+    .WORD L_8_B0C3
+    .WORD L_8_B0DC
+    .WORD L_8_B0F9
+    .WORD L_8_B110
+    .WORD L_8_B127
+    .WORD L_8_B12A
 
 L_8_A10C:
 	.BYTE $ED
@@ -1489,272 +1489,225 @@ L_8_B01E:
 	.BYTE $FF
 
 L_8_B01F:
-	.BYTE $84
-	.BYTE $EF
-	.BYTE $01
-	.BYTE $F5
+	.BYTE $84, $EF
+	.BYTE $01, $F5
 	.BYTE $A1
 	.BYTE $E4
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $FF
+
+L_8_B028:
 	.BYTE $E4
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $84
-	.BYTE $EF
-	.BYTE $01
-	.BYTE $F7
+	.BYTE $84, $EF
+	.BYTE $01, $F7
 	.BYTE $FF
-	.BYTE $01
-	.BYTE $F4
-	.BYTE $84
-	.BYTE $EF
+
+L_8_B031:
+	.BYTE $01, $F4
+	.BYTE $84, $EF
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $FF
-	.BYTE $01
-	.BYTE $EE
+
+L_8_B039:
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $F6
-	.BYTE $84
-	.BYTE $EF
+	.BYTE $01, $F6
+	.BYTE $84, $EF
 	.BYTE $FF
+
+L_8_B041:
 	.BYTE $E4
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $84
-	.BYTE $EF
-	.BYTE $01
-	.BYTE $F7
+	.BYTE $84, $EF
+	.BYTE $01, $F7
 	.BYTE $FF
-	.BYTE $84
-	.BYTE $EF
-	.BYTE $01
-	.BYTE $F5
+
+L_8_B04A:
+	.BYTE $84, $EF
+	.BYTE $01, $F5
 	.BYTE $A1
 	.BYTE $E4
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $FF
-	.BYTE $01
-	.BYTE $EE
+
+L_8_B053:
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $F6
-	.BYTE $84
-	.BYTE $EF
+	.BYTE $01, $F6
+	.BYTE $84, $EF
 	.BYTE $FF
-	.BYTE $01
-	.BYTE $F4
-	.BYTE $84
-	.BYTE $EF
+
+L_8_B05B:
+	.BYTE $01, $F4
+	.BYTE $84, $EF
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $FF
-	.BYTE $88
-	.BYTE $EF
-	.BYTE $01
-	.BYTE $F5
+
+L_8_B063:
+	.BYTE $88, $EF
+	.BYTE $01, $F5
 	.BYTE $A1
 	.BYTE $E8
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
 	.BYTE $E8
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $FF
+
+L_8_B070:
 	.BYTE $E3
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
 	.BYTE $E3
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $83
-	.BYTE $EF
-	.BYTE $01
-	.BYTE $F7
+	.BYTE $83, $EF
+	.BYTE $01, $F7
 	.BYTE $FF
-	.BYTE $01
-	.BYTE $F4
-	.BYTE $88
-	.BYTE $EF
+
+L_8_B07D:
+	.BYTE $01, $F4
+	.BYTE $88, $EF
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $FF
-	.BYTE $01
-	.BYTE $EE
+
+L_8_B088:
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $F6
-	.BYTE $83
-	.BYTE $EF
+	.BYTE $01, $F6
+	.BYTE $83, $EF
 	.BYTE $FF
+
+L_8_B093:
 	.BYTE $E8
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
 	.BYTE $E8
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $88
-	.BYTE $EF
-	.BYTE $01
-	.BYTE $F7
+	.BYTE $88, $EF
+	.BYTE $01, $F7
 	.BYTE $FF
-	.BYTE $83
-	.BYTE $EF
-	.BYTE $01
-	.BYTE $F5
+
+L_8_B0A0:
+	.BYTE $83, $EF
+	.BYTE $01, $F5
 	.BYTE $A1
 	.BYTE $E3
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
 	.BYTE $E3
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $FF
-	.BYTE $01
-	.BYTE $EE
+
+L_8_B0AD:
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $F6
-	.BYTE $88
-	.BYTE $EF
+	.BYTE $01, $F6
+	.BYTE $88, $EF
 	.BYTE $FF
-	.BYTE $01
-	.BYTE $F4
-	.BYTE $83
-	.BYTE $EF
+
+L_8_B0B8:
+	.BYTE $01, $F4
+	.BYTE $83, $EF
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $FF
-	.BYTE $83
-	.BYTE $EF
-	.BYTE $01
-	.BYTE $F5
+
+L_8_B0C3:
+	.BYTE $83, $EF
+	.BYTE $01, $F5
 	.BYTE $A1
 	.BYTE $C3
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
 	.BYTE $FF
+
+L_8_B0DC:
 	.BYTE $E3
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
 	.BYTE $E3
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
 	.BYTE $E3
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
 	.BYTE $E3
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
 	.BYTE $E3
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
 	.BYTE $E3
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $83
-	.BYTE $EF
-	.BYTE $01
-	.BYTE $F7
+	.BYTE $83, $EF
+	.BYTE $01, $F7
 	.BYTE $FF
-	.BYTE $01
-	.BYTE $F4
-	.BYTE $83
-	.BYTE $EF
+
+L_8_B0F9:
+	.BYTE $01, $F4
+	.BYTE $83, $EF
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $FF
-	.BYTE $01
-	.BYTE $EE
+
+L_8_B110:
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $EE
+	.BYTE $01, $EE
 	.BYTE $A1
-	.BYTE $01
-	.BYTE $F6
-	.BYTE $83
-	.BYTE $EF
+	.BYTE $01, $F6
+	.BYTE $83, $EF
 	.BYTE $FF
-	.BYTE $85
-	.BYTE $EF
+
+L_8_B127:
+	.BYTE $85, $EF
 	.BYTE $FF
-	.BYTE $85
-	.BYTE $EF
+
+L_8_B12A:
+	.BYTE $85, $EF
+	.BYTE $FF

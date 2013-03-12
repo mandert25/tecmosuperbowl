@@ -95,7 +95,14 @@ L_24_8077:
 	RTS
 
 L_24_80A1:
-	.WORD L_24_8165-1, L_24_817D-1, L_24_8185-1, L_24_819F-1, L_24_81B9-1, L_24_81D4-1, L_24_81EB-1, L_24_820D-1
+	.WORD Set_To_VRAM_Address_Data_Controls_Command-1      ; $80-$87
+	.WORD Set_To_VRAM_Address_Command-1                    ; $88-$8F
+	.WORD Set_To_VRAM_Address_Repeat_Down_Command-1        ; $90-$97
+	.WORD Set_To_VRAM_Address_Repeat_Across_Command-1      ; $98-$9F
+	.WORD Set_To_VRAM_Address_Repeat_Across_Down_Command-1 ; $A0-$A7
+	.WORD Set_To_VRAM_Address_Write_Byte_Command-1         ; $A8-$AF
+	.WORD Set_VRAM_Address_Row_Below_Command-1             ; $B0-$B7
+	.WORD Set_To_VRAM_Address_Buffer_Data_Command-1        ; $B8-$BF
 
 L_24_80B1:
 	.WORD L_24_8225-1, L_24_82FC-1, L_24_8313-1, L_24_831C-1, L_24_8324-1, L_24_8340-1, L_24_8C45-1, L_24_834E-1
@@ -144,7 +151,7 @@ L_24_8131:
 	LDA TEMP45
 	JMP UpdateDataAddress
 
-L_24_8165: ; #$80-87 Set to VRAM Address then do VRAM Controls from Data Address
+.proc Set_To_VRAM_Address_Data_Controls_Command
 ; Set VRAM Address
 	JSR SetVRAMAddress
 ; Store Data Address
@@ -160,23 +167,25 @@ L_24_8165: ; #$80-87 Set to VRAM Address then do VRAM Controls from Data Address
 ; Exit
 	LDA #$04
 	JMP UpdateDataAddress
+.endproc
 
-L_24_817D: ; #$88-8F Set to VRAM Address
+.proc Set_To_VRAM_Address_Command
 ; Set VRAM Address
 	JSR SetVRAMAddress
 ; Exit
 	LDA #$02
 	JMP UpdateDataAddress
+.endproc
 
-L_24_8185: ; #$90-97 Set to VRAM Address and Repeat Data Downward
+.proc Set_To_VRAM_Address_Repeat_Down_Command
 ; Set VRAM Address
 	JSR SetVRAMAddress
 ; Set Length Down
 	LDA (C2_DATA_ADDRESS),Y
-	STA 3F_Size_Down
+	STA 3F_SIZE_DOWN
 ; Set Length Across
 	LDA #$01
-	STA 3E_Size_Across
+	STA 3E_SIZE_ACROSS
 ; Write to VRAM with Size
 	INY
 	LDA (C2_DATA_ADDRESS),Y
@@ -186,16 +195,17 @@ L_24_8185: ; #$90-97 Set to VRAM Address and Repeat Data Downward
 ; Exit
 	LDA #$04
 	JMP UpdateDataAddress
+.endproc
 
-L_24_819F: ; #$98-9F Set to VRAM Address and Repeat Data Across
+.proc Set_To_VRAM_Address_Repeat_Across_Command
 ; Set VRAM Address
 	JSR SetVRAMAddress
 ; Set Length Across
 	LDA (C2_DATA_ADDRESS),Y
-	STA 3E_Size_Across
+	STA 3E_SIZE_ACROSS
 ; Set Length Down
 	LDA #$01
-	STA 3F_Size_Down
+	STA 3F_SIZE_DOWN
 ; Write to VRAM with Size
 	INY
 	LDA (C2_DATA_ADDRESS),Y
@@ -205,17 +215,18 @@ L_24_819F: ; #$98-9F Set to VRAM Address and Repeat Data Across
 ; Exit
 	LDA #$04
 	JMP UpdateDataAddress
+.endproc
 
-L_24_81B9: ; #$A0-A7 Set to VRAM Address and Repeat Data Down and Across
+.proc Set_To_VRAM_Address_Repeat_Across_Down_Command
 ; Set to VRAM Address
 	JSR SetVRAMAddress
 ; Set Length Down
 	LDA (C2_DATA_ADDRESS),Y
-	STA 3F_Size_Down
+	STA 3F_SIZE_DOWN
 ; Set Length Across
 	INY
 	LDA (C2_DATA_ADDRESS),Y
-	STA 3E_Size_Across
+	STA 3E_SIZE_ACROSS
 ; Write to VRAM with Size
 	INY
 	LDA (C2_DATA_ADDRESS),Y
@@ -225,15 +236,16 @@ L_24_81B9: ; #$A0-A7 Set to VRAM Address and Repeat Data Down and Across
 ; Exit
 	LDA #$05
 	JMP UpdateDataAddress
+.endproc
 
-L_24_81D4: ; #$A8-AF Set to VRAM Address and Data Cell
+.proc Set_To_VRAM_Address_Write_Byte_Command
 ; Set to VRAM Address
 	JSR SetVRAMAddress
 ; Set Length Down
 	LDA #$01
-	STA 3F_Size_Down
+	STA 3F_SIZE_DOWN
 ; Set Length Across
-	STA 3E_Size_Across
+	STA 3E_SIZE_ACROSS
 ; Write to VRAM with Size
 	LDA (C2_DATA_ADDRESS),Y
 	LDY C6_VRAM_ADDRESS+0
@@ -242,43 +254,50 @@ L_24_81D4: ; #$A8-AF Set to VRAM Address and Data Cell
 ; Exit
 	LDA #$03
 	JMP UpdateDataAddress
+.endproc
 
-L_24_81EB: #$B0-B7
+.proc Set_VRAM_Address_Row_Below_Command
 ; Get Rows
-	LDA (TEMPC2),Y
+	LDA (C2_DATA_ADDRESS),Y
 	SEC
 	SBC #$AF
-	STA TEMP45
+	STA ROWS
 ; Set VRAM Address # - xAF Rows Below
 	LDA #$00
-	LSR TEMP45
+	LSR ROWS
 	ROR
-	LSR TEMP45
+	LSR ROWS
 	ROR
-	LSR TEMP45
+	LSR ROWS
 	ROR
 	CLC
-	ADC TEMPC6_LO
-	STA TEMPC6_LO
-	LDA TEMP45
-	ADC TEMPC6_HI
-	STA TEMPC6_HI
+	ADC C6_VRAM_ADDRESS+0
+	STA C6_VRAM_ADDRESS+0
+	LDA ROWS
+	ADC C6_VRAM_ADDRESS+1
+	STA C6_VRAM_ADDRESS+1
 ; Exit
 	LDA #$01
 	JMP UpdateDataAddress
+.endproc
 
-L_24_820D:
+.proc Set_To_VRAM_Address_Buffer_Data_Command
+; Set to VRAM Address
 	JSR SetVRAMAddress
-	LDA ($C2),Y
-	STA $3E
+; Store Data Address
+	LDA (C2_DATA_ADDRESS),Y
+	STA 3E_DATA_ADDRESS+0
 	INY
-	LDA ($C2),Y
-	STA $3F
-	LDY $C6
-	LDX $C7
+	LDA (C2_DATA_ADDRESS),Y
+	STA 3E_DATA_ADDRESS+1
+; Write to Buffer
+	LDY C6_VRAM_ADDRESS+0
+	LDX C6_VRAM_ADDRESS+1
 	JSR L_CEB9
+; Exit
 	LDA #$04
 	JMP UpdateDataAddress
+.endproc
 
 L_24_8225: ; #$C0
 	LDA (TEMPC2),Y

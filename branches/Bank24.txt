@@ -142,100 +142,106 @@ L_24_8131:
 @exit:
 ; Get Length
 	LDA TEMP45
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
-L_24_8165: ; #$80-87
+L_24_8165: ; #$80-87 Set to VRAM Address then do VRAM Controls from Data Address
 ; Set VRAM Address
-	JSR L_24_8C56
+	JSR SetVRAMAddress
 ; Store Data Address
-	LDA (TEMPC2),Y
-	STA TEMP3E_LO
+	LDA (C2_DATA_ADDRESS),Y
+	STA 3E_DATA_ADDRESS+0
 	INY
-	LDA (TEMPC2),Y
-	STA TEMP3E_HI
+	LDA (C2_DATA_ADDRESS),Y
+	STA 3E_DATA_ADDRESS+1
 ; Write to VRAM with Controls
-	LDY TEMPC6_LO
-	LDX TEMPC6_HI
+	LDY C6_VRAM_ADDRESS+0
+	LDX C6_VRAM_ADDRESS+1
 	JSR set_vram_controls
+; Exit
 	LDA #$04
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
-L_24_817D: ; #$88-8F
+L_24_817D: ; #$88-8F Set to VRAM Address
 ; Set VRAM Address
-	JSR L_24_8C56
+	JSR SetVRAMAddress
+; Exit
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
-L_24_8185: ; #$90-97
+L_24_8185: ; #$90-97 Set to VRAM Address and Repeat Data Downward
 ; Set VRAM Address
-	JSR L_24_8C56
-; Get Amount
-	LDA (TEMPC2),Y
-	STA TEMP3F
-; Set Length
+	JSR SetVRAMAddress
+; Set Length Down
+	LDA (C2_DATA_ADDRESS),Y
+	STA 3F_Size_Down
+; Set Length Across
 	LDA #$01
-	STA TEMP3E
+	STA 3E_Size_Across
 ; Write to VRAM with Size
 	INY
-	LDA (TEMPC2),Y
-	LDY TEMPC6_LO
-	LDX TEMPC6_HI
+	LDA (C2_DATA_ADDRESS),Y
+	LDY C6_VRAM_ADDRESS+0
+	LDX C6_VRAM_ADDRESS+1
 	JSR set_vram_size
+; Exit
 	LDA #$04
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
-L_24_819F: ; #$98-9F
+L_24_819F: ; #$98-9F Set to VRAM Address and Repeat Data Across
 ; Set VRAM Address
-	JSR L_24_8C56
-; Get Length
-	LDA (TEMPC2),Y
-	STA TEMP3E
-; Set Amount
+	JSR SetVRAMAddress
+; Set Length Across
+	LDA (C2_DATA_ADDRESS),Y
+	STA 3E_Size_Across
+; Set Length Down
 	LDA #$01
-	STA TEMP3F
+	STA 3F_Size_Down
 ; Write to VRAM with Size
 	INY
-	LDA (TEMPC2),Y
-	LDY TEMPC6_LO
-	LDX TEMPC6_HI
+	LDA (C2_DATA_ADDRESS),Y
+	LDY C6_VRAM_ADDRESS+0
+	LDX C6_VRAM_ADDRESS+1
 	JSR set_vram_size
+; Exit
 	LDA #$04
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
-L_24_81B9: ; #$A0-A7
+L_24_81B9: ; #$A0-A7 Set to VRAM Address and Repeat Data Down and Across
 ; Set to VRAM Address
-	JSR L_24_8C56
-; Get Amount
-	LDA (TEMPC2),Y
-	STA TEMP3F
-; Get Length
+	JSR SetVRAMAddress
+; Set Length Down
+	LDA (C2_DATA_ADDRESS),Y
+	STA 3F_Size_Down
+; Set Length Across
 	INY
-	LDA (TEMPC2),Y
-	STA TEMP3E
+	LDA (C2_DATA_ADDRESS),Y
+	STA 3E_Size_Across
 ; Write to VRAM with Size
 	INY
-	LDA (TEMPC2),Y
-	LDY TEMPC6_LO
-	LDX TEMPC6_HI
+	LDA (C2_DATA_ADDRESS),Y
+	LDY C6_VRAM_ADDRESS+0
+	LDX C6_VRAM_ADDRESS+1
 	JSR set_vram_size
+; Exit
 	LDA #$05
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
-L_24_81D4: ; #$A8-AF
+L_24_81D4: ; #$A8-AF Set to VRAM Address and Data Cell
 ; Set to VRAM Address
-	JSR L_24_8C56
-; Set Amount
+	JSR SetVRAMAddress
+; Set Length Down
 	LDA #$01
-	STA TEMP3F
-; Set Length
-	STA TEMP3E
+	STA 3F_Size_Down
+; Set Length Across
+	STA 3E_Size_Across
 ; Write to VRAM with Size
-	LDA (TEMPC2),Y
-	LDY TEMPC6_LO
-	LDX TEMPC6_HI
+	LDA (C2_DATA_ADDRESS),Y
+	LDY C6_VRAM_ADDRESS+0
+	LDX C6_VRAM_ADDRESS+1
 	JSR set_vram_size
+; Exit
 	LDA #$03
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_81EB: #$B0-B7
 ; Get Rows
@@ -259,10 +265,10 @@ L_24_81EB: #$B0-B7
 	STA TEMPC6_HI
 ; Exit
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_820D:
-	JSR L_24_8C56
+	JSR SetVRAMAddress
 	LDA ($C2),Y
 	STA $3E
 	INY
@@ -272,7 +278,7 @@ L_24_820D:
 	LDX $C7
 	JSR L_CEB9
 	LDA #$04
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8225: ; #$C0
 	LDA (TEMPC2),Y
@@ -337,7 +343,7 @@ L_24_8225: ; #$C0
 	LDA ($C2),Y
 	STA $0306,X
 	LDA $3F
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 @Loop8:
 	LDA #$00
@@ -373,13 +379,13 @@ L_24_8225: ; #$C0
 	EOR $45
 	BPL @Loop10
 	LDA #$04
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 @Loop11:
 	LDY #$02
 	JSR L_24_8C70
 	LDA #$03
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 @Loop12:
 	LDY #$02
@@ -389,7 +395,7 @@ L_24_8225: ; #$C0
 	LDA ($C2),Y
 	STA $0308,X
 	LDA #$04
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_82FC:
 	LDA #$00
@@ -400,18 +406,18 @@ L_24_82FC:
 	LDX #$1B
 	JSR L_CCDD
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8313:
 	LDA ($C2),Y
 	STA $57
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_831C:
 	JSR L_24_94BC
 	LDA #$04
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8324:
 	LDY #$01
@@ -428,7 +434,7 @@ L_24_8324:
 	STA $D8
 	STA $D9
 	LDA #$03
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8340:
 	LDA ($C2),Y
@@ -437,7 +443,7 @@ L_24_8340:
 	LDA ($C2),Y
 	STA $D7
 	LDA #$03
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_834E:
 	LDA ($C2),Y
@@ -445,7 +451,7 @@ L_24_834E:
 	LDX $C7
 	JSR L_CF61
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_835C: ; #$C8
 	LDA #$00
@@ -454,31 +460,31 @@ L_24_835C: ; #$C8
 	STA $57
 	STA $58
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_836D: ; #$C9
 	LDA #$00
 	STA $0307
 	LDA #$01
 	STA $0308
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_837A:
 	JSR clear_nametables
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8382:
 	JSR clear_sprites
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_838A: ; #$CC
 ; Clear Screen
 	JSR clear_nametables
 	JSR clear_sprites
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8395:
 	LDA ($C2),Y
@@ -495,7 +501,7 @@ L_24_8395:
 @Loop2:
 	JSR clear_2000_nametable
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 @Loop3:
 	LDA $2D
@@ -503,11 +509,11 @@ L_24_8395:
 	BNE @Loop4
 	JSR clear_2400_nametable
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 @Loop4:
 	JSR clear_2800_nametable
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 @Loop5:
 	LDA $0308
@@ -541,7 +547,7 @@ L_24_8395:
 	LDX #$2B
 	JSR @Loop9
 	LDA #$03
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 @Loop8:
 	LDA #$1E
@@ -566,7 +572,7 @@ L_24_8424: ; #$D0
 	LDA (TEMPC2),Y
 	STA $030A
 	LDA #$03
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8434: ; #$D1
 	LDA (TEMPC2),Y
@@ -581,7 +587,7 @@ L_24_8434: ; #$D1
 	LDA (TEMPC2),Y
 	STA A:$4E
 	LDA #$05
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8450:
 	LDA $11
@@ -605,7 +611,7 @@ L_24_8450:
 	STA $0307
 	STA $57
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_847D: ; #$D3
 	LDA $70
@@ -686,7 +692,7 @@ L_24_847D: ; #$D3
 	LDX $C7
 	JSR L_D5A0
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8510: ; #$D4
 	LDA $6C
@@ -698,7 +704,7 @@ L_24_8517:
 	LDX TEMPC6_HI
 	JSR L_CF61
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8523: ; #$D6
 ; Buffer Team Initials
@@ -707,7 +713,7 @@ L_24_8523: ; #$D6
 	LDX TEMPC6_HI
 	JSR L_CF61
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8531:
 	LDA #$00
@@ -730,11 +736,11 @@ L_24_8538:
 	BPL @Loop2
 	JSR set_palette_fade_to_out
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 @Loop2:
 	JSR palette_fade_in
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8564:
 	LDA $88
@@ -761,7 +767,7 @@ L_24_8564:
 	JSR get_background_palette
 	JSR set_palette_fade_to_out
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_859A:
 	LDA $2F
@@ -777,7 +783,7 @@ L_24_859A:
 	TAX
 	JSR bank_swap_A000
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_85B6: ; #$DB
 ; Store A000 Bank
@@ -797,7 +803,7 @@ L_24_85B6: ; #$DB
 	TAX
 	JSR bank_swap_A000
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_85D2:
 	LDA $2F
@@ -813,13 +819,13 @@ L_24_85D2:
 	TAX
 	JSR bank_swap_A000
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_85EE:
 	LDA ($C2),Y
 	JSR L_24_8CF2
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_85F8:
 	LDA ($C2),Y
@@ -834,7 +840,7 @@ L_24_8605:
 	LDX TEMPC6_HI
 	JSR L_D5A0
 	LDA #$03
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8611: ; #$DF
 	LDA (TEMPC2),Y
@@ -869,13 +875,13 @@ L_24_8624:
 	DEC $41
 	BNE @Loop1
 	LDA #$03
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8648: ; #$E1
 	LDA (TEMPC2),Y
 	STA $C8
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8651: ; #$E2
 	LDY #<$2440
@@ -886,19 +892,19 @@ L_24_8651: ; #$E2
 	STA TEMP3E
 	JSR clear_vram_size
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8665:
 	LDA ($C2),Y
 	JSR get_bg_palette_fade_in
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_866F:
 	LDA ($C2),Y
 	JSR get_sprite_palette_fade_in
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8679:
 	LDA (TEMPC2),Y
@@ -911,41 +917,41 @@ L_24_8679:
 	PLA
 	JSR get_palette_fade_in
 	LDA #$03
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 @Loop1:
 	JSR palette_fade_in
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8695:
 	JSR L_24_8D06
 	JSR bg_palette_fade_out
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_86A0:
 	JSR L_24_8D06
 	JSR sprite_palette_fade_out
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_86AB: ; #$E8
 	JSR L_24_8D06
 	JSR palette_fade_out
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_86B6:
 	LDA ($C2),Y
 	JSR get_bg_palette_no_fade
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_86C0:
 	LDA ($C2),Y
 	JSR get_sprite_palette_no_fade
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_86CA: ; #$EB
 	LDA (TEMPC2),Y
@@ -956,18 +962,18 @@ L_24_86CA: ; #$EB
 	PLA
 	JSR new_palette_no_fade
 	LDA #$03
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_86DA:
 	JSR set_palette_fade_to_out
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_86E2: ; #$ED
 	JSR L_24_8D06
 	JSR set_palette_fade_to_in
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_86ED:
 	LDA ($C2),Y
@@ -989,7 +995,7 @@ L_24_86ED:
 	STA $031A,X
 	JSR buffer_palette
 	LDA #$05
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8717:
 	LDA #$00
@@ -998,7 +1004,7 @@ L_24_8717:
 	STA $0307
 	STA $0308
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8728:
 	LDA $70
@@ -1007,29 +1013,29 @@ L_24_8728:
 	AND #$DF
 	STA $2D
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 @Loop1:
 	LDA $2D
 	ORA #$20
 	STA $2D
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8742: ; #$F1
 	JSR set_horizontal_mirroring
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_874A: ; #$F2
 	JSR set_vertical_mirroring
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8752: ; #$F3
 	LDA (TEMPC2),Y
 	JSR L_C41F
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_875C: ; #$F5
 ; Set to 8x8 Text
@@ -1037,7 +1043,7 @@ L_24_875C: ; #$F5
 	AND #%10111111
 	STA $64
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8767: ; #$F6
 ; Set to 16x16 Text
@@ -1045,7 +1051,7 @@ L_24_8767: ; #$F6
 	ORA #%01000000
 	STA $64
 	LDA #$01
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8772: ; #$F7
 ; Draw 4x4 Block and Attribute
@@ -1053,14 +1059,14 @@ L_24_8772: ; #$F7
 	LDX #$00
 	JSR L_24_92D3
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_877E: ; #$F8
 	LDA (TEMPC2),Y
 	LDX #$01
 	JSR L_24_92D3
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_878A: ; #$F9
 	JSR L_24_961C
@@ -1098,7 +1104,7 @@ L_24_87E5:
 	LDX TEMPC6_HI
 	JSR L_CF61
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_87F7:
 	LDX $6C
@@ -1114,7 +1120,7 @@ L_24_8803:
 	LDX TEMPC6_HI
 	JSR L_CF61
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 TEAM_DIVISIONS:
 	.BYTE $6A, $6A, $6A, $6A, $6A, $6B, $6B, $6B, $6B, $6C, $6C, $6C, $6C, $6C
@@ -1135,7 +1141,7 @@ L_24_883A:
 	LDX TEMPC6_HI
 	JSR L_24_8DDE
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_884A:
 	LDA $6758
@@ -1151,7 +1157,7 @@ L_24_884A:
 	LDX $C7
 	JSR L_D5A0
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8867:
 	LDA $6E
@@ -1169,7 +1175,7 @@ L_24_8874:
 	LDX $C7
 	JSR L_D03B
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8884:
 	LDA #$0D
@@ -1218,26 +1224,26 @@ L_24_8884:
 	LDX #$22
 	JSR L_CF61
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_88DF:
 	JSR L_24_8EEC
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_88E7:
 	LDA $2D
 	ORA #$20
 	STA $2D
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_88F2:
 	LDA $2D
 	AND #$DF
 	STA $2D
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_88FD:
 	LDA $6002
@@ -1261,7 +1267,7 @@ L_24_88FD:
 	BEQ @Loop1
 @Loop2:
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_892D:
 	LDA #$0F
@@ -1352,7 +1358,7 @@ L_24_89BC:
 	AND #$80
 	STA $70
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_89D5:
 	LDA $70
@@ -1397,7 +1403,7 @@ L_24_8A07:
 	TAX
 	JSR bank_swap_A000
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8A1F:
 	JSR L_D53E
@@ -1456,7 +1462,7 @@ L_24_8A73:
 	JSR buffer_large_text
 	JSR L_D553
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8A8C:
 	LDA $2F
@@ -1547,7 +1553,7 @@ L_24_8B40:
 	LDX $AD
 	JSR bank_swap_A000
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8B4A:
 	LDX $8F
@@ -1597,7 +1603,7 @@ L_24_8B7A:
 	STA $50
 	JSR get_background_palette
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8B9E:
 	LDY $C6
@@ -1607,7 +1613,7 @@ L_24_8B9E:
 	ADC #$6D
 	JSR L_CF61
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8BAF:
 	LDA #$1A ; BANK27
@@ -1615,7 +1621,7 @@ L_24_8BAF:
 	LDX #>L_27_8006
 	JSR bank_swap_8000_jump
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8BBD:
 	LDA #$1A ; BANK27
@@ -1623,7 +1629,7 @@ L_24_8BBD:
 	LDX #>L_27_8009
 	JSR bank_swap_8000_jump
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8BCB:
 	LDA #$1A ; BANK27
@@ -1631,7 +1637,7 @@ L_24_8BCB:
 	LDX #>L_27_800C
 	JSR bank_swap_8000_jump
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8BD9:
 	LDA $2F
@@ -1658,13 +1664,13 @@ L_24_8BD9:
 	TAX
 	JSR bank_swap_A000
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8C0E: ; #$FB
 	LDA (TEMPC2),Y
 	JSR switch_thread
 	LDA #$02
-	JMP L_24_8C48
+	JMP UpdateDataAddress
 
 L_24_8C18: ; #$FC
 ; Set to New Data Address
@@ -1703,34 +1709,37 @@ L_24_8C40: ; #$FF
 L_24_8C45:
 	JMP L_24_8C45
 
-L_24_8C48:
+.proc UpdateDataAddress
 ; Update Data Address
 	CLC
-	ADC TEMPC2_LO
-	STA TEMPC2_LO
-	LDA TEMPC2_HI
+	ADC C2_DATA_ADDRESS+0
+	STA C2_DATA_ADDRESS+0
+	LDA C2_DATA_ADDRESS+1
 	ADC #$00
-	STA TEMPC2_HI
+	STA C2_DATA_ADDRESS+1
 	JMP L_24_8077
+.endproc
 
-L_24_8C56:
-	LDA (TEMPC2),Y
+.proc SetVRAMAddress
+	LDA (C2_DATA_ADDRESS),Y
 	AND #$07
 	CMP #$04
-	BCC L_24_8C65
+	BCC @store
+; Check Mirroring
 	BIT $2D
-	BVC L_24_8C65
+	BVC @store
 	CLC
 	ADC #$04
-L_24_8C65:
+@store:
 ; Store VRAM Address
 	ORA #$20
-	STA TEMPC6_HI
+	STA C6_VRAM_ADDRESS+1
 	INY
-	LDA (TEMPC2),Y
-	STA TEMPC6_LO
+	LDA (C2_DATA_ADDRESS),Y
+	STA C6_VRAM_ADDRESS+0
 	INY
 	RTS
+.endproc
 
 L_24_8C70:
 	STY $3E

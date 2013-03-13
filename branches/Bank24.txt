@@ -106,7 +106,14 @@ L_24_80A1:
 
 L_24_80B1:
 	.WORD L_24_8225-1, L_24_82FC-1, L_24_8313-1, L_24_831C-1, L_24_8324-1, L_24_8340-1, L_24_8C45-1, L_24_834E-1
-	.WORD L_24_835C-1, L_24_836D-1, L_24_837A-1, L_24_8382-1, L_24_838A-1, L_24_8395-1, L_24_8C45-1, L_24_8C45-1
+	.WORD L_24_835C-1
+	.WORD L_24_836D-1
+	.WORD Clear_Nametables_Command-1         ; $CA
+	.WORD Clear_Sprites_Command-1            ; $CB
+	.WORD Clear_Nametables_Sprites_Command-1 ; $CC
+	.WORD L_24_8395-1
+	.WORD L_24_8C45-1
+	.WORD L_24_8C45-1
 	.WORD L_24_8424-1, L_24_8434-1, L_24_8450-1, L_24_847D-1, L_24_8510-1, L_24_8515-1, L_24_8523-1, L_24_8531-1
 	.WORD L_24_8536-1, L_24_8564-1, L_24_859A-1, L_24_85B6-1, L_24_85D2-1, L_24_85EE-1, L_24_85F8-1, L_24_8611-1
 	.WORD L_24_8624-1, L_24_8648-1, L_24_8651-1, L_24_8665-1, L_24_866F-1, L_24_8679-1, L_24_8695-1, L_24_86A0-1
@@ -300,19 +307,22 @@ L_24_8131:
 .endproc
 
 L_24_8225: ; #$C0
-	LDA (TEMPC2),Y
+; Multiply (Second Nibble && 7) by 5
+	LDA (C2_DATA_ADDRESS),Y
 	AND #$07
 	STA $3F
 	ASL
 	ASL
 	ADC $3F
 	TAX
-	LDA (TEMPC2),Y
+; First Nibble divided by 8
+	LDA (C2_DATA_ADDRESS),Y
 	AND #$F0
 	LSR
 	LSR
 	LSR
 	TAY
+;
 	LDA @Loop1+1,Y
 	PHA
 	LDA @Loop1+0,Y
@@ -323,44 +333,51 @@ L_24_8225: ; #$C0
 
 @Loop2:
 	LDY #$03
-	JSR L_24_8CBD
-	JSR L_24_8CE1
+	JSR Set_IRQ_CHAR
+	JSR Copy_Previous_IRQ_HScroll_Nametable
+; Exit
 	LDA #$05
 	JMP @Loop7
 
 @Loop3:
 	LDY #$03
 	JSR L_24_8C70
-	JSR L_24_8CCB
-	JSR L_24_8CE1
+	JSR Copy_Previous_IRQ_CHAR
+	JSR Copy_Previous_IRQ_HScroll_Nametable
+; Exit
 	LDA #$04
 	JMP @Loop7
 
 @Loop4:
 	LDY #$03
 	JSR L_24_8C70
-	JSR L_24_8CBD
-	JSR L_24_8CE1
+	JSR Set_IRQ_CHAR
+	JSR Copy_Previous_IRQ_HScroll_Nametable
+; Exit
 	LDA #$06
 	JMP @Loop7
 
 @Loop5:
 	LDY #$03
-	JSR L_24_8CB0
-	JSR L_24_8CCB
+	JSR Set_IRQ_HScroll_Nametable
+	JSR Copy_Previous_IRQ_CHAR
+; Exit
 	LDA #$05
 	JMP @Loop7
 
 @Loop6:
 	LDY #$03
-	JSR L_24_8CB0
-	JSR L_24_8CBD
+	JSR Set_IRQ_HScroll_Nametable
+	JSR Set_IRQ_CHAR
+; Exit
 	LDA #$07
+
 @Loop7:
 	STA $3F
 	LDY #$02
-	LDA ($C2),Y
-	STA $0306,X
+	LDA (C2_DATA_ADDRESS),Y
+	STA LATCH_IRQ,X
+; Exit
 	LDA $3F
 	JMP UpdateDataAddress
 
@@ -369,7 +386,7 @@ L_24_8225: ; #$C0
 	STA $45
 	STA $42
 	LDY #$02
-	LDA ($C2),Y
+	LDA (C2_DATA_ADDRESS),Y
 	BPL @Loop9
 	DEC $45
 @Loop9:
@@ -390,13 +407,14 @@ L_24_8225: ; #$C0
 	CLC
 	ADC $44
 	STA $42
-	LDA $0306,X
+	LDA LATCH_IRQ,X
 	ADC $45
-	STA $0306,X
-	CMP ($C2),Y
+	STA LATCH_IRQ,X
+	CMP (C2_DATA_ADDRESS),Y
 	ROR
 	EOR $45
 	BPL @Loop10
+; Exit
 	LDA #$04
 	JMP UpdateDataAddress
 
@@ -408,19 +426,22 @@ L_24_8225: ; #$C0
 
 @Loop12:
 	LDY #$02
-	LDA ($C2),Y
-	STA $0307,X
+	LDA (C2_DATA_ADDRESS),Y
+	STA IRQ_HSCROLL,X
 	INY
-	LDA ($C2),Y
-	STA $0308,X
+	LDA (C2_DATA_ADDRESS),Y
+	STA IRQ_NAMETABLE,X
+; Exit
 	LDA #$04
 	JMP UpdateDataAddress
 
 L_24_82FC:
+; Clear IRQs
 	LDA #$00
 	STA $030B
 	STA $0310
 	STA $0315
+;
 	STA $DA
 	LDX #$1B
 	JSR L_CCDD
@@ -488,22 +509,28 @@ L_24_836D: ; #$C9
 	STA $0308
 	JMP UpdateDataAddress
 
-L_24_837A:
+.proc Clear_Nametables_Command
 	JSR clear_nametables
+; Exit
 	LDA #$01
 	JMP UpdateDataAddress
+.endproc
 
-L_24_8382:
+.proc Clear_Sprites_Command
 	JSR clear_sprites
+; Exit
 	LDA #$01
 	JMP UpdateDataAddress
+.endproc
 
-L_24_838A: ; #$CC
+.proc Clear_Nametables_Sprites_Command
 ; Clear Screen
 	JSR clear_nametables
 	JSR clear_sprites
+; Exit
 	LDA #$01
 	JMP UpdateDataAddress
+.endproc
 
 L_24_8395:
 	LDA ($C2),Y
@@ -1760,81 +1787,94 @@ L_24_8C45:
 	RTS
 .endproc
 
-L_24_8C70:
+.proc L_24_8C70
 	STY $3E
 	STX $3F
+;
 	LDA $1B
 	BNE L_24_8C90
+;
 	LDA #$00
 	STA $030B
 	STA $0310
 	STA $0315
+;
 	LDA #$17
 	STA $1F
+;
 	LDY #<(L_24_8D5B-1)
 	LDA #>(L_24_8D5B-1)
 	LDX #$1B
 	JSR create_thread
 L_24_8C90:
 	LDY #$01
-	LDA ($C2),Y
+	LDA (C2_DATA_ADDRESS),Y
 	AND #$07
 	TAX
 	LDY $3E
 	LDA $2D
-	AND #$20
+	AND #%00100000
 	BNE L_24_8CA4
-	LDA ($C2),Y
+	LDA (C2_DATA_ADDRESS),Y
 	JMP L_24_8CA9
 L_24_8CA4:
 	LDA #$00
 	SEC
-	SBC ($C2),Y
+	SBC (C2_DATA_ADDRESS),Y
 L_24_8CA9:
 	STA $06E3,X
 	LDX $3F
 	INY
 	RTS
+.endproc
 
-L_24_8CB0:
-	LDA ($C2),Y
-	STA $0307,X
+.proc Set_IRQ_HScroll_Nametable
+	LDA (C2_DATA_ADDRESS),Y
+	STA IRQ_HSCROLL,X
 	INY
-	LDA ($C2),Y
-	STA $0308,X
+	LDA (C2_DATA_ADDRESS),Y
+	STA IRQ_NAMETABLE,X
 	INY
 	RTS
+.endproc
 
-L_24_8CBD:
-	LDA ($C2),Y
-	STA $0309,X
+.proc Set_IRQ_CHAR
+; Store CHAR Banks
+	LDA (C2_DATA_ADDRESS),Y
+	STA IRQ_CHAR_0000,X
 	INY
-	LDA ($C2),Y
-	STA $030A,X
-	JMP L_24_8CD7
+	LDA (C2_DATA_ADDRESS),Y
+	STA IRQ_CHAR_0800,X
+; Clear Following IRQs
+	JMP Clear_Following_IRQs
+.endproc
 
-L_24_8CCB:
-	LDA $0304,X
-	STA $0309,X
-	LDA $0305,X
-	STA $030A,X
-L_24_8CD7:
+.proc Copy_Previous_IRQ_CHAR
+	LDA PREV_IRQ_CHAR_0000,X
+	STA IRQ_CHAR_0000,X
+	LDA PREV_IRQ_CHAR_0800,X
+	STA IRQ_CHAR_0800,X
+.endproc
+
+.proc Clear_Following_IRQs
 	CPX #$0F
-	BCS L_24_8CE0
+	BCS @skip
 	LDA #$00
-	STA $030B,X
-L_24_8CE0:
+	STA LATCH_IRQ_END,X
+@skip:
 	RTS
+.endproc
 
-L_24_8CE1:
+.proc Copy_Previous_IRQ_HScroll_Nametable
 	CPX #$00
-	BEQ L_24_8CF1
-	LDA $0302,X
-	STA $0307,X
-	LDA $0303,X
-	STA $0308,X
-L_24_8CF1:
+	BEQ @skip
+	LDA PREV_IRQ_HSCROLL,X
+	STA IRQ_HSCROLL,X
+	LDA PREV_IRQ_NAMETABLE,X
+	STA IRQ_NAMETABLE,X
+@skip:
 	RTS
+.endproc
 
 L_24_8CF2:
 	CMP #$FF
@@ -1902,10 +1942,10 @@ L_24_8D5B:
 	TXS
 	LDA #$00
 	LDY #$F8
-L_24_8D62:
-	STA $FF46,Y
+@loop:
+	STA $1003E-$F8,Y ; RAM $3E
 	INY
-	BNE L_24_8D62
+	BNE @loop
 L_24_8D68:
 	LDA #$01
 	JSR switch_thread

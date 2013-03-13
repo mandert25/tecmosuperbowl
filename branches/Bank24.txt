@@ -114,12 +114,12 @@ L_24_80B1:
 	.WORD L_24_8395-1
 	.WORD L_24_8C45-1
 	.WORD L_24_8C45-1
-	.WORD L_24_8424-1, L_24_8434-1, L_24_8450-1, L_24_847D-1, L_24_8510-1, L_24_8515-1, L_24_8523-1, L_24_8531-1
+	.WORD Set_BG_Char_Banks_Command-1, Set_Sprite_Char_Banks_Command-1, L_24_8450-1, L_24_847D-1, L_24_8510-1, L_24_8515-1, L_24_8523-1, L_24_8531-1
 	.WORD L_24_8536-1, L_24_8564-1, L_24_859A-1, L_24_85B6-1, L_24_85D2-1, L_24_85EE-1, L_24_85F8-1, L_24_8611-1
 	.WORD L_24_8624-1, L_24_8648-1, L_24_8651-1, L_24_8665-1, L_24_866F-1, L_24_8679-1, L_24_8695-1, L_24_86A0-1
 	.WORD L_24_86AB-1, L_24_86B6-1, L_24_86C0-1, L_24_86CA-1, L_24_86DA-1, L_24_86E2-1, L_24_86ED-1, L_24_8717-1
 	.WORD L_24_8728-1, L_24_8742-1, L_24_874A-1, L_24_8752-1, L_24_8C45-1, L_24_875C-1, L_24_8767-1, L_24_8772-1
-	.WORD L_24_877E-1, L_24_878A-1, L_24_8790-1, L_24_8C0E-1, L_24_8C18-1, L_24_8C25-1, L_24_8C30-1, L_24_8C40-1
+	.WORD L_24_877E-1, L_24_878A-1, L_24_8790-1, L_24_8C0E-1, Goto_Address_Command-1, Goto_Address_With_Return_Command-1, Return_Address_Command-1, L_24_8C40-1
 
 L_24_8131:
 	INY
@@ -610,30 +610,34 @@ L_24_8395:
 	LDA $45
 	JMP set_vram_size
 
-L_24_8424: ; #$D0
+.proc Set_BG_Char_Banks_Command
 ; Set Background CHAR Banks
-	LDA (TEMPC2),Y
-	STA $0309
+	LDA (C2_DATA_ADDRESS),Y
+	STA CHAR_0000
 	INY
-	LDA (TEMPC2),Y
-	STA $030A
+	LDA (C2_DATA_ADDRESS),Y
+	STA CHAR_0800
+; Exit
 	LDA #$03
 	JMP UpdateDataAddress
+.endproc
 
-L_24_8434: ; #$D1
-	LDA (TEMPC2),Y
-	STA A:$4B
+.proc Set_Sprite_Char_Banks_Command
+	LDA (C2_DATA_ADDRESS),Y
+	STA A:CHAR_1000
 	INY
-	LDA (TEMPC2),Y
-	STA A:$4C
+	LDA (C2_DATA_ADDRESS),Y
+	STA A:CHAR_1400
 	INY
-	LDA (TEMPC2),Y
-	STA A:$4D
+	LDA (C2_DATA_ADDRESS),Y
+	STA A:CHAR_1800
 	INY
-	LDA (TEMPC2),Y
-	STA A:$4E
+	LDA (C2_DATA_ADDRESS),Y
+	STA A:CHAR_1C00
+; Exit
 	LDA #$05
 	JMP UpdateDataAddress
+.endproc
 
 L_24_8450:
 	LDA $11
@@ -930,13 +934,18 @@ L_24_8648: ; #$E1
 	JMP UpdateDataAddress
 
 L_24_8651: ; #$E2
+; Set VRAM Address
 	LDY #<$2440
 	LDX #>$2440
+; Set Length Down
 	LDA #$02
-	STA TEMP3F
+	STA 3F_SIZE_DOWN
+; Set Length Across
 	LDA #$20
-	STA TEMP3E
+	STA 3E_SIZE_ACROSS
+; Write to VRAM with Size
 	JSR clear_vram_size
+; Exit
 	LDA #$01
 	JMP UpdateDataAddress
 
@@ -1713,39 +1722,46 @@ L_24_8BD9:
 	JMP UpdateDataAddress
 
 L_24_8C0E: ; #$FB
-	LDA (TEMPC2),Y
+	LDA (C2_DATA_ADDRESS),Y
 	JSR switch_thread
+; Exit
 	LDA #$02
 	JMP UpdateDataAddress
 
-L_24_8C18: ; #$FC
+.proc Goto_Address_Command
 ; Set to New Data Address
-	LDA (TEMPC2),Y
+	LDA (C2_DATA_ADDRESS),Y
 	TAX
 	INY
-	LDA (TEMPC2),Y
-	STA TEMPC2_HI
-	STX TEMPC2_LO
+	LDA (C2_DATA_ADDRESS),Y
+	STA C2_DATA_ADDRESS+1
+	STX C2_DATA_ADDRESS+0
+; Next
 	JMP L_24_8077
+.endproc
 
-L_24_8C25: ; #$FD
+.proc Goto_Address_With_Return_Command
 ; Store Address
-	LDA TEMPC2_LO
-	STA TEMPC4_LO
-	LDA TEMPC2_HI
-	STA TEMPC4_HI
-	JMP L_24_8C18
+	LDA C2_DATA_ADDRESS+0
+	STA C4_DATA_ADDRESS+0
+	LDA C2_DATA_ADDRESS+1
+	STA C4_DATA_ADDRESS+1
+; Goto Data Address
+	JMP Goto_Address_Command
+.endproc
 
-L_24_8C30: ; #$FE
+.proc Return_Address_Command
 ; Set to Old Address
-	LDA TEMPC4_LO
+	LDA C4_DATA_ADDRESS+0
 	CLC
 	ADC #$03
-	STA TEMPC2_LO
-	LDA TEMPC4_HI
+	STA C2_DATA_ADDRESS+0
+	LDA C4_DATA_ADDRESS+1
 	ADC #$00
-	STA TEMPC2_HI
+	STA C2_DATA_ADDRESS+1
+; Next
 	JMP L_24_8077
+.endproc
 
 L_24_8C40: ; #$FF
 	LDA #$00
